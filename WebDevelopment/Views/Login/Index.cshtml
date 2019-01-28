@@ -1,0 +1,90 @@
+﻿@{
+    Layout = null;
+}
+<html lang="en">
+<head>
+    <title>Login V20</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <environment include="Development">
+        
+        <!--===============================================================================================-->
+        <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+        <!--===============================================================================================-->
+        <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <!--===============================================================================================-->
+        <link href="~/css/Login/font-awesome.min.css" rel="stylesheet" />
+        <!--===============================================================================================-->
+        <link href="~/css/Login/icon-font.min.css" rel="stylesheet" />
+        <!--===============================================================================================-->
+        <link href="~/css/Login/animate.css" rel="stylesheet" />
+        <!--===============================================================================================-->
+        <link href="~/css/Login/hamburgers.min.css" rel="stylesheet" />
+        <!--===============================================================================================-->
+        <link href="~/css/Login/animsition.min.css" rel="stylesheet" />
+        <!--===============================================================================================-->
+        <link href="~/css/Login/select2.min.css" rel="stylesheet" />
+        <!--===============================================================================================-->
+        <link href="~/css/Login/daterangepicker.css" rel="stylesheet" />
+        <!--===============================================================================================-->
+        <link href="~/css/Login/main.css" rel="stylesheet" />
+        <link href="~/css/Login/util.css" rel="stylesheet" />
+        <!--===============================================================================================-->
+    </environment>
+
+</head>
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-b-160 p-t-50">
+
+                @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "login100-form validate-form" }))
+                {
+                    <span class="login100-form-title p-b-43">
+                        CAS Login
+                    </span>
+
+                    <div class="wrap-input100 rs1 validate-input" data-validate="Username is required">
+                        @Html.TextBox("Login", "", new { @class = "input100" })
+                        <span class="label-input100">Username</span>
+                    </div>
+
+
+                    <div class="wrap-input100 rs2 validate-input" data-validate="Password is required">
+                        @Html.TextBox("Password", "", new { @class = "input100" })
+                        <span class="label-input100">Password</span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn">
+                            Login
+                        </button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--===============================================================================================-->
+    <script src="~/js/Login/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/js/Login/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/js/Login/popper.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/js/Login/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/js/Login/moment.min.js"></script>
+    <script src="~/js/Login/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/js/Login/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/js/Login/main.js"></script>
+
+</body>
+</html>
