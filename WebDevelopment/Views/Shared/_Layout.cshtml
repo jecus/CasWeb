@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using BusinessLayer.Views
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -13,14 +14,14 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
 
-        <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="~/css/Template/waves.min.css" type="text/css" media="all">
-        <link rel="stylesheet" type="text/css" href="~/css/Template/feather.css">
+        <link href="~/lib/bootstrap/dist/css/bootstrap.min.css"rel="stylesheet" type="text/css">
+        <link href="~/css/Template/waves.min.css" type="text/css" rel="stylesheet"  media="all">
+        <link href="~/css/Template/feather.css" rel="stylesheet" type="text/css">
         <link href="~/fonts/Template/font_o5hd5vvqpoqiwwmi.css" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" href="~/css/Template/font-awesome-n.min.css">
-        <link rel="stylesheet" href="~/css/Template/chartist.css" type="text/css" media="all">
-        <link rel="stylesheet" type="text/css" href="~/css/Template/style.css">
-        <link rel="stylesheet" type="text/css" href="~/css/Template/widget.css">
+        <link href="~/css/Login/font-awesome.min.css" rel="stylesheet" />
+        <link href="~/css/Template/chartist.css" rel="stylesheet"  type="text/css" media="all">
+        <link href="~/css/Template/style.css" rel="stylesheet" type="text/css">
+        <link href="~/css/Template/widget.css" rel="stylesheet" type="text/css">
 
     </environment>
     @*<environment exclude="Development">
@@ -43,7 +44,7 @@
                 <div class="navbar-wrapper">
                     <div class="navbar-logo">
                         <a href="index.html">
-                            <img class="img-fluid" src="~/images/logo.png" alt="Theme-Logo" />
+                            <img class="img-fluid" src="~/images/logocas.png" alt="Theme-Logo" />
                         </a>
                         <a class="mobile-menu" id="mobile-collapse" href="#!">
                             <i class="feather icon-menu icon-toggle-right"></i>
@@ -103,24 +104,78 @@
                     <nav class="pcoded-navbar">
                         <div class="nav-list">
                             <div class="pcoded-inner-navbar main-menu">
-                                <div class="pcoded-navigation-label">Aircrafts</div>
                                 <ul class="pcoded-item pcoded-left-item">
                                     <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon">
-                                                <i class="feather icon-box"></i>
+                                                <i class="fa fa-plane"></i>
                                             </span>
                                             <span class="pcoded-mtext">Aircraft</span>
                                         </a>
+                                        @foreach (var aircraft in (List<AircraftView>)@ViewData["Aircrafts"])
+                                        {
+                                            <ul class="pcoded-submenu">
+                                                <li class="">
+                                                    <a href="#!" class="waves-effect waves-dark">
+                                                        <span class="pcoded-mtext">@aircraft.RegistrationNumber</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        }
+                                    </li>
+                                </ul>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="feather icon-package"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Store</span>
+                                        </a>
+                                        @foreach (var store in (List<StoreView>)@ViewData["Stores"])
+                                        {
+                                            <ul class="pcoded-submenu">
+                                                <li class="">
+                                                    <a href="#!" class="waves-effect waves-dark">
+                                                        <span class="pcoded-mtext">@store.StoreName</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        }
+                                    </li>
+                                </ul>
+                                <ul class="pcoded-item pcoded-left-item">
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="feather icon-clipboard"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Product</span>
+                                        </a>
                                         <ul class="pcoded-submenu">
                                             <li class="">
-                                                <a href="alert.html" class="waves-effect waves-dark">
-                                                    <span class="pcoded-mtext">Aircraft</span>
+                                                <a href="#!" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Component Models</span>
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a href="#!" class="waves-effect waves-dark">
+                                                    <span class="pcoded-mtext">Equipment and Materials</span>
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
+                                    <li class="">
+                                        <a href="#!" class="waves-effect waves-dark">
+                                            <span class="pcoded-micon">
+                                                <i class="feather icon-menu"></i>
+                                            </span>
+                                            <span class="pcoded-mtext">Documents</span>
+                                        </a>
+                                    </li>
                                 </ul>
+                                
+
                             </div>
                         </div>
                     </nav>
@@ -132,7 +187,7 @@
                                         <i class="feather icon-home bg-c-blue"></i>
                                         <div class="d-inline">
                                             <h5>Main page</h5>
-                                            <span>test test</span>
+                                            <span>Continuing Airworthiness System</span>
                                         </div>
                                     </div>
                                 </div>
@@ -140,9 +195,9 @@
                                     <div class="page-header-breadcrumb">
                                         <ul class=" breadcrumb breadcrumb-title">
                                             <li class="breadcrumb-item">
-                                                <a href="index.html"><i class="feather icon-home"></i></a>
+                                                <a href="#!"><i class="feather icon-home"></i></a>
                                             </li>
-                                            <li class="breadcrumb-item"><a href="#!">Dashboard CRM</a> </li>
+                                            <li class="breadcrumb-item"><a href="#!">MAIN PAGE</a> </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -153,8 +208,11 @@
                                 <div class="page-wrapper">
                                     <div class="page-body">
                                         
-                                            @RenderBody()
                                         
+
+                                        
+                                        @RenderBody()
+
                                     </div>
                                 </div>
                             </div>

@@ -16,6 +16,7 @@ namespace WebDevelopment
 			var mappingConfig = new MapperConfiguration(mc =>
 			{
 				mc.AddProfile(new UserProfile());
+				mc.AddProfile(new AircraftProfile());
 			});
 
 			var mapper = mappingConfig.CreateMapper();
