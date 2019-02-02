@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="Infrastructure\" />
+    <Folder Include="Extentions\" />
   </ItemGroup>
 
   <ItemGroup>
