@@ -1,4 +1,5 @@
 ﻿@using BusinessLayer.Views
+@using WebDevelopment.Helper
 <!DOCTYPE html>
 <html>
 <head>
@@ -132,39 +133,46 @@
                                         }
                                     </li>
                                 </ul>
+
+                                @foreach (var item in (List<MainMenu>)@ViewData["MainMenu"])
+                                {
                                 <ul class="pcoded-item pcoded-left-item">
+                                    @if (item.SubMenu?.Count() > 0)
+                                    {
                                     <li class="pcoded-hasmenu">
                                         <a href="javascript:void(0)" class="waves-effect waves-dark">
                                             <span class="pcoded-micon">
                                                 <i class="feather icon-clipboard"></i>
                                             </span>
-                                            <span class="pcoded-mtext">Product</span>
+                                            <span class="pcoded-mtext">@item.Header</span>
                                         </a>
                                         <ul class="pcoded-submenu">
-                                            <li class="">
-                                                <a href="#!" class="waves-effect waves-dark">
-                                                    <span class="pcoded-mtext">Component Models</span>
-                                                </a>
-                                            </li>
-                                            <li class="">
-                                                <a href="#!" class="waves-effect waves-dark">
-                                                    <span class="pcoded-mtext">Equipment and Materials</span>
-                                                </a>
-                                            </li>
+                                            @foreach (var subItem in @item.SubMenu)
+                                            {
+                                                <li class="">
+                                                    <a href="@subItem.Url" class="waves-effect waves-dark">
+                                                        <span class="pcoded-mtext">@subItem.Header</span>
+                                                    </a>
+                                                </li>
+                                            }
                                         </ul>
                                     </li>
+                                    }
+                                    else
+                                    {
                                     <li class="">
-                                        <a href="#!" class="waves-effect waves-dark">
+                                        <a href="@item.Url" class="waves-effect waves-dark">
                                             <span class="pcoded-micon">
                                                 <i class="feather icon-menu"></i>
                                             </span>
-                                            <span class="pcoded-mtext">Documents</span>
+                                            <span class="pcoded-mtext">@item.Header</span>
                                         </a>
                                     </li>
+                                    }
                                 </ul>
-                                
+                                }
 
-                            </div>
+                                </div>
                         </div>
                     </nav>
                     <div class="pcoded-content">

@@ -9,6 +9,7 @@ using Entity.Infrastructure;
 using Entity.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebDevelopment.Helper;
 using WebDevelopment.Models;
 
 namespace WebDevelopment.Controllers
@@ -57,6 +58,7 @@ namespace WebDevelopment.Controllers
             ViewData["AircraftLast"] = $"Last created Aircraft {airctafts.OrderBy(i => i.ItemId)?.LastOrDefault()?.RegistrationNumber}" ;
             ViewData["StoreLast"] = $"Last created Store {stores.OrderBy(i => i.ItemId)?.LastOrDefault()?.StoreName}" ;
             ViewData["DocumentLast"] = $"Last added document {documents.OrderBy(i => i.ItemId)?.LastOrDefault()?.Description}" ;
+            ViewData["MainMenu"] = MainMenu.Items;
 
             
             return View();
