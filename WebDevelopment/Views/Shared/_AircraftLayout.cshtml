@@ -1,0 +1,213 @@
+﻿@using BusinessLayer.Views
+@using WebDevelopment.Helper
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewData["Title"] - WebDevelopment</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/css/Template/waves.min.css" type="text/css" rel="stylesheet" media="all">
+    <link href="~/css/Template/feather.css" rel="stylesheet" type="text/css">
+    <link href="~/fonts/Template/font_o5hd5vvqpoqiwwmi.css" rel="stylesheet" />
+    <link href="~/css/Login/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/css/Template/chartist.css" rel="stylesheet" type="text/css" media="all">
+    <link href="~/css/Template/style.css" rel="stylesheet" type="text/css">
+    <link href="~/css/Template/widget.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+    <partial name="_CookieConsentPartial" />
+
+    <div class="loader-bg">
+        <div class="loader-bar"></div>
+    </div>
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
+            <nav class="navbar header-navbar pcoded-header">
+                <div class="navbar-wrapper">
+                    <div class="navbar-logo">
+                        <a href="@Url.Action("Index","Home")">
+                            <img class="img-fluid" src="~/images/logocas.png" alt="Theme-Logo" />
+                        </a>
+                        <a class="mobile-menu" id="mobile-collapse" href="#!">
+                            <i class="feather icon-menu icon-toggle-right"></i>
+                        </a>
+                        <a class="mobile-options waves-effect waves-light">
+                            <i class="feather icon-more-horizontal"></i>
+                        </a>
+                    </div>
+                    <div class="navbar-container container-fluid">
+                        <ul class="nav-left">
+                            <li class="header-search">
+                                <div class="main-search morphsearch-search">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend search-close">
+                                            <i class="feather icon-x input-group-text"></i>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="Enter Keyword">
+                                        <span class="input-group-append search-btn">
+                                            <i class="feather icon-search input-group-text"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
+                                    <i class="full-screen feather icon-maximize"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav-right">
+                            <li class="user-profile header-notification">
+                                <div class="dropdown-primary dropdown">
+                                    <div class="dropdown-toggle" data-toggle="dropdown">
+                                        <span>casadmin</span>
+                                        <i class="feather icon-chevron-down"></i>
+                                    </div>
+                                    <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <li>
+                                            <a href="#!">
+                                                <i class="feather icon-settings"></i> Settings
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#!">
+                                                <i class="feather icon-log-out"></i> Logout
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
+                    <nav class="pcoded-navbar">
+                        <div class="nav-list">
+                            <div class="pcoded-inner-navbar main-menu">
+
+                                @foreach (var item in (List<AircraftMainMenu>)@ViewData["MainMenu"])
+                                {
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        @if (item.SubMenu?.Count() > 0)
+                                        {
+                                            <li class="pcoded-hasmenu">
+                                                <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon">
+                                                        <i class="feather icon-clipboard"></i>
+                                                    </span>
+                                                    <span class="pcoded-mtext">@item.Header</span>
+                                                </a>
+                                                <ul class="pcoded-submenu">
+                                                    @foreach (var subItem in @item.SubMenu)
+                                                    {
+                                                        <li class="">
+                                                            <a href="@subItem.Url" class="waves-effect waves-dark">
+                                                                <span class="pcoded-mtext">@subItem.Header</span>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="">
+                                                <a href="@item.Url" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon">
+                                                        <i class="feather icon-menu"></i>
+                                                    </span>
+                                                    <span class="pcoded-mtext">@item.Header</span>
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="pcoded-content">
+                        <div class="page-header card">
+                            <div class="row align-items-end">
+                                <div class="col-lg-8">
+                                    <div class="page-header-title">
+                                        <i class=""><img src="~/images/scatlogo.png" /></i>
+
+                                        <div class="d-inline">
+                                            <h5>Air Company SCAT JSC</h5>
+                                            <span>Continuing Airworthiness System</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="page-header-breadcrumb">
+                                        <ul class=" breadcrumb breadcrumb-title">
+                                            <li class="breadcrumb-item">
+                                                <a href="#!"><i class="feather icon-home"></i></a>
+                                            </li>
+                                            <li class="breadcrumb-item"><a href="#!">MAIN PAGE</a> </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pcoded-inner-content">
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <div class="page-body">
+
+
+
+
+                                        @RenderBody()
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/Template/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/js/Template/popper.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/Template/waves.min.js"></script>
+    <script type="text/javascript" src="~/js/Template/jquery.slimscroll.js"></script>
+    <script src="~/js/Template/jquery.flot.js"></script>
+    <script src="~/js/Template/jquery.flot.categories.js"></script>
+    <script src="~/js/Template/curvedLines.js"></script>
+    <script src="~/js/Template/jquery.flot.tooltip.min.js"></script>
+    <script src="~/js/Template/amcharts.js"></script>
+    <script src="~/js/Template/serial.js"></script>
+    <script src="~/js/Template/light.js"></script>
+    <script src="~/js/Template/pcoded.min.js"></script>
+    <script src="~/js/Template/vertical-layout.min.js"></script>
+    <script type="text/javascript" src="~/js/Template/crm-dashboard.min.js"></script>
+    <script type="text/javascript" src="~/js/Template/script.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-23581568-13');
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -32,7 +32,7 @@
             <nav class="navbar header-navbar pcoded-header">
                 <div class="navbar-wrapper">
                     <div class="navbar-logo">
-                        <a href="index.html">
+                        <a href="@Url.Action("Index","Home")">
                             <img class="img-fluid" src="~/images/logocas.png" alt="Theme-Logo" />
                         </a>
                         <a class="mobile-menu" id="mobile-collapse" href="#!">
@@ -105,7 +105,7 @@
                                         {
                                             <ul class="pcoded-submenu">
                                                 <li class="">
-                                                    <a href="#!" class="waves-effect waves-dark">
+                                                    <a href="@Url.Action("Index", "Aircraft", new {aircraftId = aircraft.ItemId})" class="waves-effect waves-dark">
                                                         <span class="pcoded-mtext">@aircraft.RegistrationNumber</span>
                                                     </a>
                                                 </li>
