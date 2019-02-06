@@ -1,10 +1,28 @@
 ﻿@using BusinessLayer.Views
+@using Entity.Models
 @{
     ViewData["Title"] = "Home Page";
+    var op = @ViewData["Operators"] as Operator;
 }
 
 <div class="row">
-
+    <div class="col-xl-4 col-md-6">
+        <div class="card prod-p-card card-blue">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h5 class="m-b-5 f-w-700">Name:<span class="m-l-10 text-white">@op.Name</span></h5>
+                        <h5 class="m-b-5 f-w-700">ICAO code:<span class="m-l-10 text-white">@op.ICAOCode</span></h5>
+                        <h5 class="m-b-5 f-w-700">Address:<span class="m-l-10 text-white">@op.Address</span></h5>
+                        <h5 class="m-b-5 f-w-700">Phone:<span class="m-l-10 text-white">@op.Phone</span></h5>
+                        <h5 class="m-b-5 f-w-700">Fax:<span class="m-l-10 text-white">@op.Fax</span></h5>
+                        <h5 class="m-b-5 f-w-700">Email:<span class="m-l-10 text-white">@op.Email</span></h5>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-xl-4 col-md-6">
         <div class="card prod-p-card card-red">
             <div class="card-body">
@@ -21,22 +39,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-4 col-md-6">
-        <div class="card prod-p-card card-blue">
-            <div class="card-body">
-                <div class="row align-items-center m-b-30">
-                    <div class="col">
-                        <h6 class="m-b-5 text-white">Total Stores</h6>
-                        <h3 class="m-b-0 f-w-700 text-white">@ViewData["StoreCount"]</h3>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fa fa-database text-c-blue f-18"></i>
-                    </div>
-                </div>
-                <p class="m-b-0 text-white"><span class="label label-primary m-r-10">@ViewData["StoreLast"]</span></p>
-            </div>
-        </div>
-    </div>
+    
     <div class="col-xl-4 col-md-6">
         <div class="card prod-p-card card-green">
             <div class="card-body">

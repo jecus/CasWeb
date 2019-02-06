@@ -49,6 +49,8 @@ namespace WebDevelopment.Controllers
             var doc = _mapper.MapToBlView<Document, DocumentView>(documents).ToList();
             var doccount = await _db.Documents.CountAsync();
 
+            var op = await _db.Operators.AsNoTracking().FirstOrDefaultAsync();
+
             ViewData["Aircrafts"] = res;
             ViewData["Stores"] = str;
             ViewData["Documents"] = doc;
@@ -59,8 +61,11 @@ namespace WebDevelopment.Controllers
             ViewData["StoreLast"] = $"Last created Store {stores.OrderBy(i => i.ItemId)?.LastOrDefault()?.StoreName}" ;
             ViewData["DocumentLast"] = $"Last added document {documents.OrderBy(i => i.ItemId)?.LastOrDefault()?.Description}" ;
             ViewData["MainMenu"] = MainMenu.Items;
+            ViewData["AircraftMainMenu"] = AircraftMainMenu.Items;
+            ViewData["Operators"] = op;
 
-            
+
+
             return View();
 		}
 
