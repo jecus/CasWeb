@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
+using BusinessLayer.Views;
 using Entity.Infrastructure;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -46,12 +48,10 @@ namespace WebDevelopment
 
 			services.AddDbContext<DatabaseContext>(builder => builder.UseSqlServer(Configuration.GetConnectionString("CORE_CONNECTION_STRING")));
 
-			//services.AddMvc().AddControllersAsServices();
 			services.AddMapping(Assembly.GetAssembly(typeof(BusinessLayer.Mapping.CommonProfile)));
 			services.AddRepositories();
 
-
-
+			//services.AddMvc().AddControllersAsServices();
 			// Был DI Autofac но на Core завезли встроенную реализацию оставил на всякий
 			//return new AutofacServiceProvider(DependencyInjectionConfig.Register(services, Assembly.GetAssembly(typeof(BusinessLayer.Mapping.CommonProfile))));
 		}

@@ -5,7 +5,9 @@ using AutoMapper;
 using BusinessLayer.Mapping;
 using BusinessLayer.Repositiry;
 using BusinessLayer.Repositiry.Interfaces;
+using BusinessLayer.Views;
 using Microsoft.Extensions.DependencyInjection;
+using WebDevelopment.Infrastructude;
 
 namespace WebDevelopment
 {
@@ -21,6 +23,13 @@ namespace WebDevelopment
 
 			var mapper = mappingConfig.CreateMapper();
 			services.AddSingleton(mapper);
+			return services;
+		}
+
+		public static IServiceCollection AddProviderModule(this IServiceCollection services)
+		{
+			services.AddSingleton<AuthenticationProvider>();
+			services.AddTransient(provider => (Identity)provider.GetService<AuthenticationProvider>().GetIdentity());
 			return services;
 		}
 

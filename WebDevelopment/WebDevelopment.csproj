@@ -29,10 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extentions\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="AppSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
