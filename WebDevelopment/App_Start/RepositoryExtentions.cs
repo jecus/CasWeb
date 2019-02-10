@@ -23,6 +23,8 @@ namespace WebDevelopment
 				mc.AddProfile(new StoreProfile());
 				mc.AddProfile(new OperatorProfile());
 				mc.AddProfile(new DocumentProfile());
+				mc.AddProfile(new TransferRecordProfile());
+				mc.AddProfile(new BaseComponentProfile());
 			});
 
 			var mapper = mappingConfig.CreateMapper();

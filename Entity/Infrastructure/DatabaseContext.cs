@@ -12,6 +12,8 @@ namespace Entity.Infrastructure
 		public DbSet<Document> Documents { get; set; }
 		public DbSet<Operator> Operators { get; set; }
 		public DbSet<AccessoryDescription> AccessoryDescriptions { get; set; }
+		public DbSet<Component> Components { get; set; }
+		public DbSet<TransferRecord> TransferRecords { get; set; }
 
 		public DatabaseContext(DbContextOptions<DatabaseContext> opt):base(opt)
 		{
@@ -24,6 +26,16 @@ namespace Entity.Infrastructure
 				.HasOne(a => a.Model)
 				.WithMany(b => b.Aircrafts)
 				.HasForeignKey(b => b.ModelId);
+
+			modelBuilder.Entity<Component>()
+				.HasOne(a => a.Model)
+				.WithMany(b => b.Components)
+				.HasForeignKey(b => b.ModelId);
+
+			modelBuilder.Entity<Component>()
+				.HasMany(a => a.TransferRecords)
+				.WithOne(b => b.Component)
+				.HasForeignKey(b => b.ParentID);
 		}
 	}
 }

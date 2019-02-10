@@ -19,6 +19,7 @@ namespace Entity.Models
 		#region Navigation
 
 		public ICollection<Aircraft> Aircrafts { get; set; }
+		public ICollection<Component> Components { get; set; }
 
 		#endregion
 	}

@@ -5,6 +5,7 @@ using BusinessLayer.Mapping;
 using BusinessLayer.Repositiry;
 using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
+using Entity.Extentions;
 using Entity.Infrastructure;
 using Entity.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -30,10 +31,20 @@ namespace WebDevelopment.Controllers
         public async Task<IActionResult> Index(int aircraftId)
         {
             var aircraft = await _aircraftRepository.GetById(aircraftId);
+            var bc = await _db.Components
+	            .AsNoTracking()
+	            .OnlyActive()
+	            .Where(i => i.IsBaseComponent && i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.ItemId).DestinationObjectID == aircraftId &&
+	                        i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.ItemId).DestinationObjectType == 7)
+	            .Include(i => i.TransferRecords)
+	            .Include(i => i.Model)
+	            .ToListAsync();
+
  
             ViewData["MainMenu"] = AircraftMainMenu.Items.OrderByDescending(i => i.SubMenu.Count() > 0).ThenBy(i => i.Header).ToList();
             ViewData["Aircraft"] = aircraft;
             ViewData["Operator"] = await _db.Operators.FirstOrDefaultAsync();
+            ViewData["BaseComponents"] = _mapper.MapToBlView<Component, BaseComponentView>(bc);
             return View();
         }
     }
