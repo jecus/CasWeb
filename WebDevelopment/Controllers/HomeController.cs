@@ -22,7 +22,7 @@ namespace WebDevelopment.Controllers
 		private readonly DatabaseContext _db;
         private readonly IMapper _mapper;
 
-        public HomeController(AircraftRepository aircraftRepository, DatabaseContext db, IMapper mapper)
+        public HomeController(IAircraftRepository aircraftRepository, DatabaseContext db, IMapper mapper)
         {
 	        _aircraftRepository = aircraftRepository;
 	        _db = db;

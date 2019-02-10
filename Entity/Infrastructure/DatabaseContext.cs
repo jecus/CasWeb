@@ -11,10 +11,19 @@ namespace Entity.Infrastructure
 		public DbSet<Store> Stores { get; set; }
 		public DbSet<Document> Documents { get; set; }
 		public DbSet<Operator> Operators { get; set; }
+		public DbSet<AccessoryDescription> AccessoryDescriptions { get; set; }
 
 		public DatabaseContext(DbContextOptions<DatabaseContext> opt):base(opt)
 		{
 			Database.SetCommandTimeout(610);
+		}
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<Aircraft>()
+				.HasOne(a => a.Model)
+				.WithMany(b => b.Aircrafts)
+				.HasForeignKey(b => b.ModelId);
 		}
 	}
 }

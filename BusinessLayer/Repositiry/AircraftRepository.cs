@@ -46,6 +46,7 @@ namespace BusinessLayer.Repositiry
 			var aircraft = await _db.Aircrafts
 				.AsNoTracking()
 				.OnlyActive()
+				.Include(i => i.Model)
 				.ToListAsync();
 			return (List<AircraftView>)_mapper.MapToBlView<Aircraft, AircraftView>(aircraft);
 		}

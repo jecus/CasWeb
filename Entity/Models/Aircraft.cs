@@ -186,5 +186,12 @@ namespace Entity.Models
 
         [Column("ApuUtizationPerFlightinMinutes")]
         public short? ApuUtizationPerFlightinMinutes { get; set; }
+
+
+		#region Relations
+
+		public virtual AccessoryDescription Model { get; set; }
+
+		#endregion
 	}
 }

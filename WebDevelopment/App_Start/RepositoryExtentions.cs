@@ -19,6 +19,10 @@ namespace WebDevelopment
 			{
 				mc.AddProfile(new UserProfile());
 				mc.AddProfile(new AircraftProfile());
+				mc.AddProfile(new ModelProfile());
+				mc.AddProfile(new StoreProfile());
+				mc.AddProfile(new OperatorProfile());
+				mc.AddProfile(new DocumentProfile());
 			});
 
 			var mapper = mappingConfig.CreateMapper();

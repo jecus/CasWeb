@@ -101,5 +101,7 @@ namespace BusinessLayer.Views
 		public bool Winglets { get; set; }
 
 		public short? ApuUtizationPerFlightinMinutes { get; set; }
+
+		public ModelView Model { get; set; }
 	}
 }
