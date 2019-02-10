@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using BusinessLayer.Mapping;
+using BusinessLayer.Repositiry;
+using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
@@ -16,23 +18,24 @@ namespace WebDevelopment.Controllers
 {
 	public class HomeController : Controller
 	{
-        private readonly DatabaseContext _db;
+		private readonly IAircraftRepository _aircraftRepository;
+		private readonly DatabaseContext _db;
         private readonly IMapper _mapper;
 
-        public HomeController(DatabaseContext db, IMapper mapper)
+        public HomeController(AircraftRepository aircraftRepository, DatabaseContext db, IMapper mapper)
         {
-            _db = db;
+	        _aircraftRepository = aircraftRepository;
+	        _db = db;
             _mapper = mapper;
         }
 
 
 		public async Task<IActionResult> Index()
-        {
-            var airctafts = await _db.Aircrafts
-                .OnlyActive()
-                .ToListAsync();
-            var res =  _mapper.MapToBlView<Aircraft,AircraftView>(airctafts)
-                .OrderBy(i => i.RegistrationNumber)
+		{
+			var airctafts = await _aircraftRepository.GetAll();
+
+			var res = airctafts
+				.OrderBy(i => i.RegistrationNumber)
                 .ToList();
 
             var stores = await _db.Stores
@@ -62,7 +65,6 @@ namespace WebDevelopment.Controllers
             ViewData["DocumentLast"] = $"Last added document {documents.OrderBy(i => i.ItemId)?.LastOrDefault()?.Description}" ;
             ViewData["MainMenu"] = MainMenu.Items.OrderByDescending(i => i.SubMenu.Count() > 0).ThenBy(i => i.Header).ToList(); 
             ViewData["Operators"] = op;
-
 
 
             return View();
