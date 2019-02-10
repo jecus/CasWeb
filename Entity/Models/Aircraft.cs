@@ -8,102 +8,183 @@ namespace Entity.Models
     [Table("Aircrafts", Schema = "dbo")]
     public class Aircraft : BaseEntity
     {
+        [Required]
+        [Column("AircraftTypeID")]
 		public int AircraftFrameId { get; set; }
 
+        [Column("APUFH")]
 		public double APUFH { get; set; }
 
+        [Required]
+        [Column("OperatorID")]
 		public int OperatorID { get; set; }
 
-		public int AircraftTypeID { get; set; }
+        [Required]
+        [Column("AircraftTypeID")]
+        public int AircraftTypeID { get; set; }
 
+        [Column("ModelId")]
 		public int? ModelId { get; set; }
 
+        [Column("TypeCertificateNumber")]
+        [MaxLength(75)]
 		public string TypeCertificateNumber { get; set; }
 
+        [Required]
+        [Column("ManufactureDate")]
 		public DateTime ManufactureDate { get; set; }
 
+        [Required]
+        [Column("RegistrationNumber")]
+        [MaxLength(50)]
 		public string RegistrationNumber { get; set; }
 
+        [Required]
+        [Column("SerialNumber")]
+        [MaxLength(25)]
 		public string SerialNumber { get; set; }
 
+        [Column("VariableNumber")]
+        [MaxLength(25)]
 		public string VariableNumber { get; set; }
 
+        [Column("LineNumber")]
+        [MaxLength(25)]
 		public string LineNumber { get; set; }
 
-		public string Owner { get; set; }
+        [Column("Owner")]
+        [MaxLength(125)]
+        public string Owner { get; set; }
 
-		public double? BasicEmptyWeight { get; set; }
+        [Column("BasicEmptyWeight")]
+        public double? BasicEmptyWeight { get; set; }
 
-		public double? BasicEmptyWeightCargoConfig { get; set; }
+        [Column("BasicEmptyWeightCargoConfig")]
+        public double? BasicEmptyWeightCargoConfig { get; set; }
 
-		public string CargoCapacityContainer { get; set; }
+        [Column("CargoCapacityContainer")]
+        [MaxLength(150)]
+        public string CargoCapacityContainer { get; set; }
 
-		public string Cruise { get; set; }
+        [Column("Cruise")]
+        [MaxLength(150)]
+        public string Cruise { get; set; }
 
-		public string CruiseFuelFlow { get; set; }
+        [Column("CruiseFuelFlow")]
+        [MaxLength(150)]
+        public string CruiseFuelFlow { get; set; }
 
-		public string FuelCapacity { get; set; }
+        [Column("FuelCapacity")]
+        [MaxLength(150)]
+        public string FuelCapacity { get; set; }
 
-		public string MaxCruiseAltitude { get; set; }
+        [Column("MaxCruiseAltitude")]
+        [MaxLength(150)]
+        public string MaxCruiseAltitude { get; set; }
 
-		public double? MaxLandingWeight { get; set; }
+        [Column("MaxLandingWeight")]
+        public double? MaxLandingWeight { get; set; }
 
-		public double? MaxPayloadWeight { get; set; }
+        [Column("MaxPayloadWeight")]
+        public double? MaxPayloadWeight { get; set; }
 
-		public double? MaxTakeOffCrossWeight { get; set; }
+        [Column("MaxTakeOffCrossWeight")]
+        public double? MaxTakeOffCrossWeight { get; set; }
 
-		public double? MaxTaxiWeight { get; set; }
+        [Column("MaxTaxiWeight")]
+        public double? MaxTaxiWeight { get; set; }
 
-		public double? MaxZeroFuelWeight { get; set; }
+        [Column("MaxZeroFuelWeight")]
+        public double? MaxZeroFuelWeight { get; set; }
 
-		public double? OperationalEmptyWeight { get; set; }
+        [Column("OperationalEmptyWeight")]
+        public double? OperationalEmptyWeight { get; set; }
 
-		public string CockpitSeating { get; set; }
+        [Column("CockpitSeating")]
+        [MaxLength(150)]
+        public string CockpitSeating { get; set; }
 
-		public string Galleys { get; set; }
+        [Column("Galleys")]
+        [MaxLength(150)]
+        public string Galleys { get; set; }
 
-		public string Lavatory { get; set; }
+        [Column("Lavatory")]
+        [MaxLength(150)]
+        public string Lavatory { get; set; }
 
-		public short? SeatingEconomy { get; set; }
+        [Column("SeatingEconomy")]
+        public short? SeatingEconomy { get; set; }
 
-		public short? SeatingBusiness { get; set; }
+        [Column("SeatingBusiness")]
+        public short? SeatingBusiness { get; set; }
 
-		public short? SeatingFirst { get; set; }
+        [Column("SeatingFirst")]
+        public short? SeatingFirst { get; set; }
 
-		public string Oven { get; set; }
+        [Column("Oven")]
+        [MaxLength(50)]
+        public string Oven { get; set; }
 
-		public string Boiler { get; set; }
+        [Column("Boiler")]
+        [MaxLength(50)]
+        public string Boiler { get; set; }
 
-		public string AirStairDoors { get; set; }
+        [Column("AirStairDoors")]
+        [MaxLength(50)]
+        public string AirStairDoors { get; set; }
 
-		public int? Tanks { get; set; }
+        [Column("Tanks")]
+        public int? Tanks { get; set; }
 
-		public string AircraftAddress24Bit { get; set; }
+        [Column("AircraftAddress24Bit")]
+        public string AircraftAddress24Bit { get; set; }
 
-		public string ELTIdHexCode { get; set; }
+        [Column("ELTIdHexCode")]
+        public string ELTIdHexCode { get; set; }
 
-		public DateTime? DeliveryDate { get; set; }
+        [Column("DeliveryDate")]
+        public DateTime? DeliveryDate { get; set; }
 
-		public DateTime? AcceptanceDate { get; set; }
+        [Column("AcceptanceDate")]
+        public DateTime? AcceptanceDate { get; set; }
 
-		public bool Schedule { get; set; }
+        [Required]
+        [Column("Schedule")]
+        public bool Schedule { get; set; }
 
-		public short MSG { get; set; }
+        [Required]
+        [Column("MSG")]
+        public short MSG { get; set; }
 
-		public bool CheckNaming { get; set; }
+        [Required]
+        [Column("CheckNaming")]
+        public bool CheckNaming { get; set; }
 
-		public int NoiceCategory { get; set; }
+        [Required]
+        [Column("NoiceCategory")]
+        public int NoiceCategory { get; set; }
 
-		public bool FADEC { get; set; }
+        [Required]
+        [Column("FADEC")]
+        public bool FADEC { get; set; }
 
-		public int LandingCategory { get; set; }
+        [Required]
+        [Column("LandingCategory")]
+        public int LandingCategory { get; set; }
 
-		public bool EFIS { get; set; }
+        [Required]
+        [Column("EFIS")]
+        public bool EFIS { get; set; }
 
-		public short Brakes { get; set; }
+        [Required]
+        [Column("Brakes")]
+        public short Brakes { get; set; }
 
-		public bool Winglets { get; set; }
+        [Required]
+        [Column("Winglets")]
+        public bool Winglets { get; set; }
 
-		public short? ApuUtizationPerFlightinMinutes { get; set; }
+        [Column("ApuUtizationPerFlightinMinutes")]
+        public short? ApuUtizationPerFlightinMinutes { get; set; }
 	}
 }
