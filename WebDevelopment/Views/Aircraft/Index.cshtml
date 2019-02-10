@@ -1,6 +1,11 @@
-﻿@{
+﻿@using BusinessLayer
+@using BusinessLayer.Views
+@using Entity.Models
+@{
     ViewBag.Title = "title";
     Layout = "_AircraftLayout";
+    var aircraft = (AircraftView)ViewData["Aircraft"];
+    var oper = (Operator)ViewData["Operator"];
 }
 
 <div class="row">
@@ -19,51 +24,54 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Aircraft Model</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" placeholder="Aircraft Model" readonly>
+                                        <input type="text" class="form-control" placeholder="@aircraft.Model.FullName" readonly>
                                     </div>
                                     <label class="col-sm-2 col-form-label">Owner</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" placeholder="Owner" readonly>
+                                        <input type="text" class="form-control" placeholder="@aircraft.Owner" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Serial Number</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" placeholder="Serial Number" readonly>
+                                        <input type="text" class="form-control" placeholder="@aircraft.SerialNumber" readonly>
                                     </div>
                                     <label class="col-sm-2 col-form-label">Operator</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" placeholder="Operator" readonly>
+                                        <input type="text" class="form-control" placeholder="@oper.Name" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Registration Number</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" placeholder="Registration Number" readonly>
+                                        <input type="text" class="form-control" placeholder="@aircraft.RegistrationNumber" readonly>
                                     </div>
                                     <label class="col-sm-2 col-form-label">Variable Number</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" placeholder="Variable Number" readonly>
+                                        <input type="text" class="form-control" placeholder="@aircraft.VariableNumber" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Aircraft Type Certificate №</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" placeholder="Aircraft Type Certificate №" readonly>
+                                        <input type="text" class="form-control" placeholder="@aircraft.TypeCertificateNumber" readonly>
                                     </div>
                                     <label class="col-sm-2 col-form-label">Line Number</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" placeholder="Line Number" readonly>
+                                        <input type="text" class="form-control" placeholder="@aircraft.LineNumber" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">MSG</label>
                                     <div class="col-sm-4">
                                         <select class="custom-select custom-select-sm">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                            <option selected>@aircraft.MSG</option>
+
+                                            @foreach (object o in Enum.GetValues(typeof(MSG)).Cast<MSG>().Where(msg => msg != MSG.Unknown).Distinct())
+                                            {
+                                                <option value="@o">@o</option>
+                                            }
+
                                         </select>
                                     </div>
                                     <label class="col-sm-2 col-form-label">APU Util.(FH/APUFH)</label>
@@ -76,7 +84,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Manufacture Date</label>
                                     <div class="col-sm-4">
-                                        <input class="form-control" type="date" />
+                                        <input class="form-control" type="date" value="@aircraft.ManufactureDate" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -102,7 +110,7 @@
                     <div class="accordion-desc">
                         <form>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="z-depth-top-4 p-t-30 m-r-20 col-sm-3">
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Engine Model</label>
                                         <div class="col-sm-8">
@@ -146,7 +154,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="z-depth-top-4 p-t-30 m-r-20 col-sm-3">
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Engine Model</label>
                                         <div class="col-sm-8">

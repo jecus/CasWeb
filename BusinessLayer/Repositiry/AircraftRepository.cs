@@ -27,6 +27,7 @@ namespace BusinessLayer.Repositiry
 		{
 			var aircraft = await _db.Aircrafts
 				.OnlyActive()
+                .Include(i => i.Model)
 				.FirstOrDefaultAsync(i => i.ItemId == id);
 			return _mapper.MapToBlView<Aircraft, AircraftView>(aircraft);
 		}
