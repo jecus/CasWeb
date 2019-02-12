@@ -1,12 +1,13 @@
 ﻿@using BusinessLayer.Views
 @using WebDevelopment.Helper
+@{ }
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>@ViewData["Title"] - WebDevelopment</title>
+    <title>Cas</title>
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
@@ -101,7 +102,7 @@
                                             </span>
                                             <span class="pcoded-mtext">Aircraft</span>
                                         </a>
-                                        @foreach (var aircraft in (List<AircraftView>)@ViewData["Aircrafts"])
+                                        @foreach (var aircraft in LayoutViewModel.AircraftViews)
                                         {
                                             <ul class="pcoded-submenu">
                                                 <li class="">
@@ -121,7 +122,7 @@
                                             </span>
                                             <span class="pcoded-mtext">Store</span>
                                         </a>
-                                        @foreach (var store in (List<StoreView>)@ViewData["Stores"])
+                                        @foreach (var store in LayoutViewModel.StoreViews)
                                         {
                                             <ul class="pcoded-submenu">
                                                 <li class="">
@@ -134,7 +135,7 @@
                                     </li>
                                 </ul>
 
-                                @foreach (var item in (List<MainMenu>)@ViewData["MainMenu"])
+                                @foreach (var item in LayoutViewModel.MainMenu)
                                 {
                                 <ul class="pcoded-item pcoded-left-item">
                                     @if (item.SubMenu?.Count() > 0)

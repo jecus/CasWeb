@@ -54,20 +54,21 @@ namespace WebDevelopment.Controllers
 
             var op = await _db.Operators.AsNoTracking().FirstOrDefaultAsync();
 
-            ViewData["Aircrafts"] = res;
-            ViewData["Stores"] = str;
-            ViewData["Documents"] = doc;
-            ViewData["AircraftsCount"] = res.Count;
-            ViewData["StoreCount"] = str.Count;
-            ViewData["DocumentCount"] = doccount;
-            ViewData["AircraftLast"] = $"Last created Aircraft {airctafts.OrderBy(i => i.ItemId)?.LastOrDefault()?.RegistrationNumber}" ;
-            ViewData["StoreLast"] = $"Last created Store {stores.OrderBy(i => i.ItemId)?.LastOrDefault()?.StoreName}" ;
-            ViewData["DocumentLast"] = $"Last added document {documents.OrderBy(i => i.ItemId)?.LastOrDefault()?.Description}" ;
+			ViewData["Documents"] = doc;
+			ViewData["AircraftsCount"] = res.Count;
+			ViewData["StoreCount"] = str.Count;
+			ViewData["DocumentCount"] = doccount;
+			ViewData["AircraftLast"] = $"Last created Aircraft {airctafts.OrderBy(i => i.ItemId)?.LastOrDefault()?.RegistrationNumber}";
+			ViewData["StoreLast"] = $"Last created Store {stores.OrderBy(i => i.ItemId)?.LastOrDefault()?.StoreName}";
+			ViewData["DocumentLast"] = $"Last added document {documents.OrderBy(i => i.ItemId)?.LastOrDefault()?.Description}";
+			ViewData["Operators"] = op;
 
+			var mainMenu = new MainMenu(Url);
+			LayoutViewModel.StoreViews = str;
+			LayoutViewModel.AircraftViews = res;
+			LayoutViewModel.Operator = op;
+			LayoutViewModel.MainMenu = mainMenu.Items.OrderByDescending(i => i.SubMenu.Count() > 0).ThenBy(i => i.Header).ToList(); ;
 
-            var mainMenu = new MainMenu(Url);
-            ViewData["MainMenu"] = mainMenu.Items.OrderByDescending(i => i.SubMenu.Count() > 0).ThenBy(i => i.Header).ToList(); 
-            ViewData["Operators"] = op;
 
 
             return View();
