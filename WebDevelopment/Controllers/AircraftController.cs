@@ -40,8 +40,9 @@ namespace WebDevelopment.Controllers
 	            .Include(i => i.Model)
 	            .ToListAsync();
 
- 
-            ViewData["MainMenu"] = AircraftMainMenu.Items.OrderByDescending(i => i.SubMenu.Count() > 0).ThenBy(i => i.Header).ToList();
+
+            var mainMenu = new AircraftMainMenu(Url);
+            ViewData["MainMenu"] = mainMenu.Items.OrderByDescending(i => i.SubMenu.Count() > 0).ThenBy(i => i.Header).ToList();
             ViewData["Aircraft"] = aircraft;
             ViewData["Operator"] = await _db.Operators.FirstOrDefaultAsync();
             ViewData["BaseComponents"] = _mapper.MapToBlView<Component, BaseComponentView>(bc);
