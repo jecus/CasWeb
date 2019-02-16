@@ -11,5 +11,10 @@ namespace Entity.Extentions
 		{
 			return queryable.Where(i => !i.IsDeleted);
 		}
+
+        public static string ToYesNo(this bool flag)
+        {
+            return flag ? "Yes" : "No";
+        }
 	}
 }

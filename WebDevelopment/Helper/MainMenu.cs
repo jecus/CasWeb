@@ -16,7 +16,7 @@ namespace WebDevelopment.Helper
             {
                 new MainMenu(1, "Documents", "#!", "feather icon-clipboard", subMenu: new List<MainMenu>()
                 {
-                    new MainMenu(1, "Registry", url.Action("Doc", "Home")),
+                    new MainMenu(1, "Registry", url.Action("Index", "Document")),
                     new MainMenu(2, "Correspondence", "#!"),
                     new MainMenu(3, "Internal Documents", "#!")
 

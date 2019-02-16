@@ -14,6 +14,13 @@ namespace Entity.Infrastructure
 		public DbSet<AccessoryDescription> AccessoryDescriptions { get; set; }
 		public DbSet<Component> Components { get; set; }
 		public DbSet<TransferRecord> TransferRecords { get; set; }
+		public DbSet<DocumentSubType> DocumentSubTypes { get; set; }
+		public DbSet<Supplier> Suppliers { get; set; }
+		public DbSet<Specialization> Specializations { get; set; }
+		public DbSet<Nomenclature> Nomenclatures { get; set; }
+		public DbSet<ServiceType> ServiceTypes { get; set; }
+		public DbSet<Department> Departments { get; set; }
+		public DbSet<Location> Locations { get; set; }
 
 		public DatabaseContext(DbContextOptions<DatabaseContext> opt):base(opt)
 		{
@@ -36,6 +43,41 @@ namespace Entity.Infrastructure
 				.HasMany(a => a.TransferRecords)
 				.WithOne(b => b.Component)
 				.HasForeignKey(b => b.ParentID);
-		}
+
+            modelBuilder.Entity<Document>()
+                .HasOne(a => a.DocumentSubType)
+                .WithMany(b => b.Documents)
+                .HasForeignKey(b => b.SubTypeId);
+
+            modelBuilder.Entity<Document>()
+                .HasOne(a => a.Supplier)
+                .WithMany(b => b.Documents)
+                .HasForeignKey(b => b.SupplierId);
+
+            modelBuilder.Entity<Document>()
+                .HasOne(a => a.ResponsibleOccupation)
+                .WithMany(b => b.Documents)
+                .HasForeignKey(b => b.ResponsibleOccupationId);
+
+            modelBuilder.Entity<Document>()
+                .HasOne(a => a.Nomenсlature)
+                .WithMany(b => b.Documents)
+                .HasForeignKey(b => b.NomenсlatureId);
+
+            modelBuilder.Entity<Document>()
+                .HasOne(a => a.ServiceType)
+                .WithMany(b => b.Documents)
+                .HasForeignKey(b => b.ServiceTypeId);
+
+            modelBuilder.Entity<Document>()
+                .HasOne(a => a.Department)
+                .WithMany(b => b.Documents)
+                .HasForeignKey(b => b.DepartmentId);
+
+            modelBuilder.Entity<Document>()
+                .HasOne(a => a.Location)
+                .WithMany(b => b.Documents)
+                .HasForeignKey(b => b.LocationId);
+        }
 	}
 }

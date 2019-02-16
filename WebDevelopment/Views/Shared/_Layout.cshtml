@@ -9,16 +9,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Cas</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
-        <link href="~/lib/bootstrap/dist/css/bootstrap.min.css"rel="stylesheet" type="text/css">
-        <link href="~/css/Template/waves.min.css" type="text/css" rel="stylesheet"  media="all">
-        <link href="~/css/Template/feather.css" rel="stylesheet" type="text/css">
-        <link href="~/fonts/Template/font_o5hd5vvqpoqiwwmi.css" rel="stylesheet" />
-        <link href="~/css/Login/font-awesome.min.css" rel="stylesheet" />
-        <link href="~/css/Template/chartist.css" rel="stylesheet"  type="text/css" media="all">
-        <link href="~/css/Template/style.css" rel="stylesheet" type="text/css">
-        <link href="~/css/Template/widget.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/css/Template/waves.min.css" type="text/css" rel="stylesheet" media="all">
+    <link href="~/css/Template/feather.css" rel="stylesheet" type="text/css">
+    <link href="~/fonts/Template/font_o5hd5vvqpoqiwwmi.css" rel="stylesheet" />
+    <link href="~/css/Login/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/css/Template/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/css/Template/buttons.dataTables.min.css" rel="stylesheet" />
+    <link href="~/css/Template/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/css/Template/chartist.css" rel="stylesheet" type="text/css" media="all">
+    <link href="~/css/Template/style.css" rel="stylesheet" type="text/css">
+    <link href="~/css/Template/widget.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -137,43 +140,43 @@
 
                                 @foreach (var item in LayoutViewModel.MainMenu)
                                 {
-                                <ul class="pcoded-item pcoded-left-item">
-                                    @if (item.SubMenu?.Count() > 0)
-                                    {
-                                        <li class="pcoded-hasmenu">
-                                            <a href="javascript:void(0)" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon">
-                                                    <i class="feather icon-clipboard"></i>
-                                                </span>
-                                                <span class="pcoded-mtext">@item.Header</span>
-                                            </a>
-                                            <ul class="pcoded-submenu">
-                                                @foreach (var subItem in @item.SubMenu)
-                                                {
-                                                    <li class="">
-                                                        <a href="@subItem.Url" class="waves-effect waves-dark">
-                                                            <span class="pcoded-mtext">@subItem.Header</span>
-                                                        </a>
-                                                    </li>
-                                                }
-                                            </ul>
-                                        </li>
-                                    }
-                                    else
-                                    {
-                                        <li class="">
-                                            <a href="@item.Url" class="waves-effect waves-dark">
-                                                <span class="pcoded-micon">
-                                                    <i class="feather icon-menu"></i>
-                                                </span>
-                                                <span class="pcoded-mtext">@item.Header</span>
-                                            </a>
-                                        </li>
-                                    }
-                                </ul>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        @if (item.SubMenu?.Count() > 0)
+                                        {
+                                            <li class="pcoded-hasmenu">
+                                                <a href="javascript:void(0)" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon">
+                                                        <i class="feather icon-clipboard"></i>
+                                                    </span>
+                                                    <span class="pcoded-mtext">@item.Header</span>
+                                                </a>
+                                                <ul class="pcoded-submenu">
+                                                    @foreach (var subItem in @item.SubMenu)
+                                                    {
+                                                        <li class="">
+                                                            <a href="@subItem.Url" class="waves-effect waves-dark">
+                                                                <span class="pcoded-mtext">@subItem.Header</span>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="">
+                                                <a href="@item.Url" class="waves-effect waves-dark">
+                                                    <span class="pcoded-micon">
+                                                        <i class="feather icon-menu"></i>
+                                                    </span>
+                                                    <span class="pcoded-mtext">@item.Header</span>
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
                                 }
 
-                                </div>
+                            </div>
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -182,7 +185,7 @@
                                 <div class="col-lg-8">
                                     <div class="page-header-title">
                                         <i class=""><img src="~/images/scatlogo.png" /></i>
-                                        
+
                                         <div class="d-inline">
                                             <h5>Air Company SCAT JSC</h5>
                                             <span>Continuing Airworthiness System</span>
@@ -205,10 +208,10 @@
                             <div class="main-body">
                                 <div class="page-wrapper">
                                     <div class="page-body">
-                                        
-                                        
 
-                                        
+
+
+
                                         @RenderBody()
 
                                     </div>
@@ -221,33 +224,41 @@
         </div>
     </div>
 
-        <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 
-        <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="~/js/Template/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="~/js/Template/popper.min.js"></script>
-        <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="~/js/Template/waves.min.js"></script>
-        <script type="text/javascript" src="~/js/Template/jquery.slimscroll.js"></script>
-        <script src="~/js/Template/jquery.flot.js"></script>
-        <script src="~/js/Template/jquery.flot.categories.js"></script>
-        <script src="~/js/Template/curvedLines.js"></script>
-        <script src="~/js/Template/jquery.flot.tooltip.min.js"></script>
-        <script src="~/js/Template/amcharts.js"></script>
-        <script src="~/js/Template/serial.js"></script>
-        <script src="~/js/Template/light.js"></script>
-        <script src="~/js/Template/pcoded.min.js"></script>
-        <script src="~/js/Template/vertical-layout.min.js"></script>
-        <script type="text/javascript" src="~/js/Template/crm-dashboard.min.js"></script>
-        <script type="text/javascript" src="~/js/Template/script.min.js"></script>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/Template/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/js/Template/popper.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
-            gtag('config', 'UA-23581568-13');
-        </script>
+    <script src="~/js/Template/jquery.dataTables.min.js"></script>
+    <script src="~/js/Template/dataTables.buttons.min.js"></script>
+    <script src="~/js/Template/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/Template/dataTables.responsive.min.js"></script>
+    <script src="~/js/Template/responsive.bootstrap4.min.js"></script>
+    <script src="~/js/Template/data-table-custom.js"></script>
+
+    <script src="~/js/Template/waves.min.js"></script>
+    <script type="text/javascript" src="~/js/Template/jquery.slimscroll.js"></script>
+    <script src="~/js/Template/jquery.flot.js"></script>
+    <script src="~/js/Template/jquery.flot.categories.js"></script>
+    <script src="~/js/Template/curvedLines.js"></script>
+    <script src="~/js/Template/jquery.flot.tooltip.min.js"></script>
+    <script src="~/js/Template/amcharts.js"></script>
+    <script src="~/js/Template/serial.js"></script>
+    <script src="~/js/Template/light.js"></script>
+    <script src="~/js/Template/pcoded.min.js"></script>
+    <script src="~/js/Template/vertical-layout.min.js"></script>
+    <script type="text/javascript" src="~/js/Template/crm-dashboard.min.js"></script>
+    <script type="text/javascript" src="~/js/Template/script.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-23581568-13');
+    </script>
 
     @RenderSection("Scripts", required: false)
 </body>
