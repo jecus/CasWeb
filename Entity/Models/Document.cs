@@ -9,40 +9,33 @@ namespace Entity.Models
     [Table("Documents", Schema = "dbo")]
     public class Document : BaseEntity
     {
-        [Required]
         [Column("ParentID")]
         public int ParentID { get; set; }
 
-        [Required]
         [Column("ParentTypeId")]
         public int ParentTypeId { get; set; }
 
-        [Required]
         [Column("DocTypeId")]
         public int DocTypeId { get; set; }
 
-        [Required]
         [Column("SubTypeId")]
-        public int SubTypeId { get; set; }
+        public int? SubTypeId { get; set; }
 
         [Column("Description")]
         public string Description { get; set; }
 
-        [Required]
         [Column("IssueDateValidFrom")]
         public DateTime IssueDateValidFrom { get; set; }
 
         [Column("IssueValidTo")]
         public bool? IssueValidTo { get; set; }
 
-        [Required]
         [Column("IssueDateValidTo")]
         public DateTime IssueDateValidTo { get; set; }
 
         [Column("IssueNotify")]
         public int? IssueNotify { get; set; }
 
-        [Required]
         [MaxLength(128)]
         [Column("ContractNumber")]
         public string ContractNumber { get; set; }
@@ -72,15 +65,12 @@ namespace Entity.Models
         [Column("RevisionNotify")]
         public int? RevisionNotify { get; set; }
 
-        [Required]
         [Column("Aboard")]
         public bool Aboard { get; set; }
 
-        [Required]
         [Column("Privy")]
         public bool Privy { get; set; }
 
-        [Required]
         [MaxLength(128)]
         [Column("IssueNumber")]
         public string IssueNumber { get; set; }
@@ -89,27 +79,23 @@ namespace Entity.Models
         public int? NomenсlatureId { get; set; }
 
         [Column("ProlongationWayId")]
-        public ProlongationWay ProlongationWay { get; set; }
+        public ProlongationWay? ProlongationWay { get; set; }
 
         [Column("ServiceTypeId")]
         public int? ServiceTypeId { get; set; }
 
-        [Required]
         [Column("ResponsibleOccupationId")]
-        public int ResponsibleOccupationId { get; set; }
+        public int? ResponsibleOccupationId { get; set; }
 
         [Column("Remarks")]
         public string Remarks { get; set; }
 
-        [Required]
         [Column("LocationId")]
-        public int LocationId { get; set; }
+        public int? LocationId { get; set; }
 
-        [Required]
         [Column("SupplierId")]
-        public int SupplierId { get; set; }
+        public int? SupplierId { get; set; }
 
-        [Required]
         [Column("ParentAircraftId")]
         public int? ParentAircraftId { get; set; }
 
