@@ -7,6 +7,13 @@ namespace BusinessLayer.Views
 {
     public class DocumentView : BaseView
     {
+        private NomenclatureView _nomenсlature;
+        private DocumentSubTypeView _documentSubType;
+        private SpecializationView _responsibleOccupation;
+        private SupplierView _supplier;
+        private ServiceTypeView _serviceType;
+        private DepartmentView _department;
+        private LocationView _location;
         public int ParentID { get; set; }
 
         public int ParentTypeId { get; set; }
@@ -80,12 +87,46 @@ namespace BusinessLayer.Views
 
         public string IdNumber { get; set; }
 
-        public DocumentSubTypeView DocumentSubType { get; set; }
-        public SupplierView Supplier { get; set; }
-        public SpecializationView ResponsibleOccupation { get; set; }
-        public NomenclatureView Nomenсlature { get; set; }
-        public ServiceTypeView ServiceType { get; set; }
-        public DepartmentView Department { get; set; }
-        public LocationView Location { get; set; }
+        public DocumentSubTypeView DocumentSubType
+        {
+            get => _documentSubType ?? DocumentSubTypeView.Unknown;
+            set => _documentSubType = value;
+        }
+
+        public SupplierView Supplier
+        {
+            get => _supplier ?? SupplierView.Unknown;
+            set => _supplier = value;
+        }
+
+        public SpecializationView ResponsibleOccupation
+        {
+            get => _responsibleOccupation ?? SpecializationView.Unknown;
+            set => _responsibleOccupation = value;
+        }
+
+        public NomenclatureView Nomenсlature
+        {
+            get => _nomenсlature ?? NomenclatureView.Unknown;
+            set => _nomenсlature = value;
+        }
+
+        public ServiceTypeView ServiceType
+        {
+            get => _serviceType ?? ServiceTypeView.Unknown;
+            set => _serviceType = value;
+        }
+
+        public DepartmentView Department
+        {
+            get => _department ?? DepartmentView.Unknown;
+            set => _department = value;
+        }
+
+        public LocationView Location
+        {
+            get => _location ?? LocationView.Unknown;
+            set => _location = value;
+        }
     }
 }

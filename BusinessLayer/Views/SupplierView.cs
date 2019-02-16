@@ -31,5 +31,23 @@
         public int SupplierClassId { get; set; }
 
         public string Subject { get; set; }
+
+        #region public static SupplierView Unknown
+        private static SupplierView _unknown;
+
+        public static SupplierView Unknown
+        {
+            get
+            {
+                return _unknown ?? (_unknown = new SupplierView
+                {
+                    ItemId = -1,
+                    Name = "Unknown",
+                    ShortName = "UNK",
+                });
+            }
+        }
+
+        #endregion
     }
 }
