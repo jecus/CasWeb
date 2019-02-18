@@ -25,6 +25,8 @@ namespace WebDevelopment
 				mc.AddProfile(new DocumentProfile());
 				mc.AddProfile(new TransferRecordProfile());
 				mc.AddProfile(new BaseComponentProfile());
+				mc.AddProfile(new SpecializationProfile());
+				mc.AddProfile(new DepartmentProfile());
 			});
 
 			var mapper = mappingConfig.CreateMapper();

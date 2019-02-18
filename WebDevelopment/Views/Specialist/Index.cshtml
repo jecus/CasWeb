@@ -1,0 +1,92 @@
+﻿@using BusinessLayer.Views
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var specialists = (List<SpecialistView>)ViewData["Specialists"];
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5>Personal</h5>
+        <span>The DataTables API has a number of methods available for attaching child rows to a parent row in the DataTable. This can be used to show additional information about a row, useful for cases where you wish to convey more information about a row than there is space for in the host table.</span>
+    </div>
+    <div class="card-block">
+        <div class="dt-responsive table-responsive">
+            <table id="footer-search" class="table table-striped table-bordered nowrap">
+                <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Occupation</th>
+                    <th>Department</th>
+                    @*<th>Privileges</th>*@
+                    <th>Date Of Birth</th>
+                    <th>Education</th>
+                    <th>Position</th>
+                    @*<th>Facility</th>*@
+                    <th>Sex</th>
+                    <th>Nationality</th>
+                    <th>Address</th>
+                    <th>Family Status</th>
+                    <th>Phone Mobile</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Skype</th>
+                </tr>
+                </thead>
+                <tbody>
+                       
+                @foreach (var spec in specialists)
+                {
+                    <tr>
+                        <td>@spec.Status</td>
+                        <td>@spec.FirstName</td>
+                        <td>@spec.LastName</td>
+                        <td>@spec.Specialization.FullName</td>
+                        <td>@spec.Specialization.Department.FullName</td>
+                        @*<td>@spec.Privileges</td>*@
+                        <td>@spec.DateOfBirth.Value.ToString("dd-MMMM-yyyy")</td>
+                        <td>@spec.Education</td>
+                        <td>@spec.Position</td>
+                       @* <td>@spec.Facility</td>*@
+                        <td>@spec.Gender</td>
+                        <td>@spec.Nationality</td>
+                        <td>@spec.Address</td>
+                        <td>@spec.FamilyStatus</td>
+                        <td>@spec.PhoneMobile</td>
+                        <td>@spec.Phone</td>
+                        <td>@spec.Email</td>
+                        <td>@spec.Skype</td>
+                    </tr>
+                }
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Status</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Occupation</th>
+                        <th>Department</th>
+                        @*<th>Privileges</th>*@
+                        <th>Date Of Birth</th>
+                        <th>Education</th>
+                        <th>Position</th>
+                        @*<th>Facility</th>*@
+                        <th>Sex</th>
+                        <th>Nationality</th>
+                        <th>Address</th>
+                        <th>Family Status</th>
+                        <th>Phone Mobile</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Skype</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+

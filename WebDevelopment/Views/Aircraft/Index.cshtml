@@ -19,7 +19,7 @@
             </div>
             <div class="card-block accordion-block color-accordion-block">
                 <div class="color-accordion" id="color-accordion">
-                    <a class="accordion-msg b-none waves-effect waves-light">>Aircraft General</a>
+                    <a class="z-depth-top-0 accordion-msg b-none waves-effect waves-light">>Aircraft General</a>
                     <div class="accordion-desc">
                         <p>
                             <form>
@@ -114,7 +114,7 @@
 
                     @foreach (var baseComponentType in baseComponents.OrderBy(i => i.BaseComponentType.ShortName).GroupBy(i => i.BaseComponentType.ShortName))
                     {
-                        <a class="accordion-msg bg-dark-primary b-none waves-effect waves-light">
+                        <a class="z-depth-top-0 accordion-msg bg-dark-primary b-none waves-effect waves-light">
                             >@baseComponentType.Key
                         </a>
                         <div class="accordion-desc">
@@ -177,7 +177,7 @@
                     }
 
 
-                        <a class="accordion-msg b-none waves-effect waves-light">>Interior Configuration</a>
+                        <a class="z-depth-top-0 accordion-msg b-none waves-effect waves-light">>Interior Configuration</a>
                     <div class="accordion-desc">
                         <p>
                             <form>
@@ -232,7 +232,7 @@
                         </p>
                     </div>
 
-                    <a class="accordion-msg bg-darkest-primary b-none waves-effect waves-light">
+                    <a class="z-depth-top-0 accordion-msg bg-darkest-primary b-none waves-effect waves-light">
                         Other
                     </a>
                     <div class="accordion-desc">

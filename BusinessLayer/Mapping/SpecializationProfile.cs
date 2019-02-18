@@ -14,6 +14,7 @@ namespace BusinessLayer.Mapping
                 .ForMember(dst => dst.FullName, src => src.MapFrom(x => x.FullName))
                 .ForMember(dst => dst.ShortName, src => src.MapFrom(x => x.ShortName))
                 .ForMember(dst => dst.DepartmentId, src => src.MapFrom(x => x.DepartmentId))
+                .ForMember(dst => dst.Department, src => src.MapFrom(x => x.Department))
                 .ForMember(dst => dst.Level, src => src.MapFrom(x => x.Level))
                 .ForMember(dst => dst.KeyPersonel, src => src.MapFrom(x => x.KeyPersonel));
         }
