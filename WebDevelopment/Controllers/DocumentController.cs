@@ -37,7 +37,18 @@ namespace WebDevelopment.Controllers
 				.Include(i => i.Department)
 				.Include(i => i.Location)
 				.ToListAsync();
+
+
+            var docIds = documents.Select(i => i.ItemId);
+            var fileLinks = await _db.ItemFileLinks
+	            .AsNoTracking()
+	            .Where(i => i.ParentTypeId == 1275 && docIds.Contains(i.ParentId))
+	            .ToListAsync();
+
             var doc = _mapper.MapToBlView<Document, DocumentView>(documents).ToList();
+
+            foreach (var documentView in doc)
+	            documentView.ItemFileLink = fileLinks.FirstOrDefault(i => i.ParentId == documentView.ItemId);
 
             ViewData["Documents"] = doc;
 

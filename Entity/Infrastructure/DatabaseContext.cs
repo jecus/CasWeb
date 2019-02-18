@@ -21,6 +21,8 @@ namespace Entity.Infrastructure
 		public DbSet<ServiceType> ServiceTypes { get; set; }
 		public DbSet<Department> Departments { get; set; }
 		public DbSet<Location> Locations { get; set; }
+		public DbSet<ItemFileLink> ItemFileLinks { get; set; }
+		public DbSet<AttachedFile> Files { get; set; }
 
 		public DatabaseContext(DbContextOptions<DatabaseContext> opt):base(opt)
 		{
@@ -43,7 +45,7 @@ namespace Entity.Infrastructure
 				.HasMany(a => a.TransferRecords)
 				.WithOne(b => b.Component)
 				.HasForeignKey(b => b.ParentID);
-
+			
             modelBuilder.Entity<Document>()
                 .HasOne(a => a.DocumentSubType)
                 .WithMany(b => b.Documents)

@@ -20,6 +20,7 @@
 
                         <thead>
                         <tr>
+                            <th>File</th>
                             <th>Type</th>
                             <th>Title</th>
                             <th>№</th>
@@ -49,9 +50,25 @@
                     
                         <tbody>
                        
-                           @foreach (var doc in documents)
-                           {
+                        @foreach (var doc in documents)
+                        {
                             <tr>
+                                <td>
+                                   
+                                    @if (@doc.ItemFileLink != null)
+                                    {
+                                        <button class="btn waves-effect waves-light btn-primary btn-outline-primary" id ="123" value="@doc.ItemFileLink?.FileId">
+                                            Open File
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn waves-effect waves-light btn-disabled btn-outline-disabled disabled">
+                                            Open File
+                                        </button>
+                                    }
+
+                                </td>
                                 <td>@doc.DocumentType</td>
                                 <td>@doc.DocumentSubType.Name</td>
                                 <td>@doc.ContractNumber</td>
@@ -78,7 +95,7 @@
                                 <td>@doc.Remarks</td>
 
                             </tr>
-                           }
+                        }
 
                         </tbody>
                         <tfoot>
@@ -112,6 +129,9 @@
                     </table>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
+
+

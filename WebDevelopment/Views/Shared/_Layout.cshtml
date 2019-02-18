@@ -1,6 +1,4 @@
-﻿@using BusinessLayer.Views
-@using WebDevelopment.Helper
-@{ }
+﻿@{ }
 <!DOCTYPE html>
 <html>
 <head>
@@ -209,9 +207,6 @@
                                 <div class="page-wrapper">
                                     <div class="page-body">
 
-
-
-
                                         @RenderBody()
 
                                     </div>
@@ -251,15 +246,32 @@
     <script src="~/js/Template/vertical-layout.min.js"></script>
     <script type="text/javascript" src="~/js/Template/crm-dashboard.min.js"></script>
     <script type="text/javascript" src="~/js/Template/script.min.js"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
 
-        gtag('config', 'UA-23581568-13');
-    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script type="text/javascript">
+    $('#123').click(function () {
 
-    @RenderSection("Scripts", required: false)
+        var val1 = $('#123').val();
+        $.ajax({
+            url: "@Url.Action("OpenPdf", "File")",
+            type: "POST",
+            data: { fileId: val1 },
+            cache: false,
+            async: true,
+            success: function (data) {
+                var win = window.open(data, '_blank');
+                if(win){
+                    //Browser has allowed it to be opened
+                    win.focus();
+                }else{
+                    //Broswer has blocked it
+                    alert('Please allow popups for this site');
+                }
+            }
+        });
+    });
+</script>
+
+@RenderSection("Scripts", required: false)
 </body>
 </html>

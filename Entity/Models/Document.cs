@@ -103,6 +103,8 @@ namespace Entity.Models
         [MaxLength(128)]
         public string IdNumber { get; set; }
 
+		[NotMapped]
+		public ItemFileLink ItemFileLink { get; set; }
         
         public virtual DocumentSubType DocumentSubType { get; set; }
 
