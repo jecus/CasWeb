@@ -27,6 +27,9 @@ namespace Entity.Models
         [Required]
         public bool KeyPersonel { get; set; }
 
+        public Department Department { get; set; }
+
         public ICollection<Document> Documents { get; set; }
+        public ICollection<Specialist> Specialists { get; set; }
     }
 }

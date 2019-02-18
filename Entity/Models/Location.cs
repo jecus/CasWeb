@@ -20,5 +20,7 @@ namespace Entity.Models
         public int LocationsTypeId { get; set; }
 
         public ICollection<Document> Documents { get; set; }
+
+        public virtual LocationsType Locations { get; set; }
     }
 }

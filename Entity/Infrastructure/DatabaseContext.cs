@@ -23,6 +23,7 @@ namespace Entity.Infrastructure
 		public DbSet<Location> Locations { get; set; }
 		public DbSet<ItemFileLink> ItemFileLinks { get; set; }
 		public DbSet<AttachedFile> Files { get; set; }
+		public DbSet<LocationsType> LcoaLocationsTypes { get; set; }
 
 		public DatabaseContext(DbContextOptions<DatabaseContext> opt):base(opt)
 		{
@@ -80,6 +81,26 @@ namespace Entity.Infrastructure
                 .HasOne(a => a.Location)
                 .WithMany(b => b.Documents)
                 .HasForeignKey(b => b.LocationId);
+
+            modelBuilder.Entity<Specialist>()
+                .HasOne(a => a.AGWCategory)
+                .WithMany(b => b.Specialists)
+                .HasForeignKey(b => b.AGWCategoryId);
+
+            modelBuilder.Entity<Specialist>()
+                .HasOne(a => a.Facility)
+                .WithMany(b => b.Specialists)
+                .HasForeignKey(b => b.Location);
+
+            modelBuilder.Entity<Specialist>()
+                .HasOne(a => a.Specialization)
+                .WithMany(b => b.Specialists)
+                .HasForeignKey(b => b.SpecializationID);
+
+            modelBuilder.Entity<Specialization>()
+                .HasOne(a => a.Department)
+                .WithMany(b => b.Specializations)
+                .HasForeignKey(b => b.DepartmentId);
         }
 	}
 }

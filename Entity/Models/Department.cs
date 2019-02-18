@@ -17,5 +17,6 @@ namespace Entity.Models
         public string FullName { get; set; }
 
         public ICollection<Document> Documents { get; set; }
+        public ICollection<Specialization> Specializations { get; set; }
     }
 }
