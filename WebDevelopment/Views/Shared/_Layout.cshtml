@@ -47,18 +47,18 @@
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
                             @*<li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-prepend search-close">
-                                            <i class="feather icon-x input-group-text"></i>
-                                        </span>
-                                        <input type="text" class="form-control" placeholder="Enter Keyword">
-                                        <span class="input-group-append search-btn">
-                                            <i class="feather icon-search input-group-text"></i>
-                                        </span>
+                                    <div class="main-search morphsearch-search">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend search-close">
+                                                <i class="feather icon-x input-group-text"></i>
+                                            </span>
+                                            <input type="text" class="form-control" placeholder="Enter Keyword">
+                                            <span class="input-group-append search-btn">
+                                                <i class="feather icon-search input-group-text"></i>
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>*@
+                                </li>*@
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="full-screen feather icon-maximize"></i>
@@ -246,20 +246,8 @@
     <script src="~/js/Template/vertical-layout.min.js"></script>
     <script type="text/javascript" src="~/js/Template/crm-dashboard.min.js"></script>
     <script type="text/javascript" src="~/js/Template/script.min.js"></script>
+    <script type="text/javascript" src="~/js/OurCustom.js"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-<script type="text/javascript">
-    $('#123').click(function () {
-
-        var val1 = $('#123').val();
-        $.ajax({
-            type: 'GET',
-            url: "@Url.Action("OpenPdf", "File")",
-            data: { fileId: val1 }
-        });
-    });
-</script>
-
-@RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

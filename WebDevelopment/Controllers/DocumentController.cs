@@ -54,5 +54,11 @@ namespace WebDevelopment.Controllers
 
             return View();
         }
-    }
+
+        public IActionResult Get(int id)
+        {
+	        return PartialView();
+        }
+
+	}
 }

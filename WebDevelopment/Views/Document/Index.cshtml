@@ -1,11 +1,9 @@
 ﻿@using BusinessLayer.Views
 @using Entity.Extentions
-@using Entity.Models
-
 @{
     ViewData["Title"] = "index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var documents = (List<DocumentView>)ViewData["Documents"];
+    var documents = (List<DocumentView>) ViewData["Documents"];
 }
 <div class="row">
     <div class="col-sm-12">
@@ -46,26 +44,37 @@
                             <th>Remark</th>
                         </tr>
                         </thead>
-                    
+
                         <tbody>
-                       
+
+
+                        
+
                         @foreach (var doc in documents)
                         {
                             <tr>
                                 <td>
-
                                     @if (@doc.ItemFileLink != null)
                                     {
                                         <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@doc.ItemFileLink?.FileId" onclick="location.href = '@Url.Action("OpenPdf", "File", new {fileId = @doc.ItemFileLink.FileId})'">
                                             <i class="fa fa-file-pdf-o"></i>
                                         </button>
-                                        
+
                                     }
                                     else
                                     {
-                                        <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled" ><i class="fa fa-file-pdf-o"></i></button>
+                                        <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-pdf-o"></i></button>
                                     }
 
+
+                                    @*<div class="modal fade" id="large-Modal" tabindex="-1" role="dialog" style="display: none; z-index: 1050;" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div id="dialogContent" class="modal-content">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @Html.ActionLink("123", "Get", "Document", new { id = 666 }, new { id = "modalLargeBtn" });*@
                                 </td>
                                 <td>@doc.DocumentType</td>
                                 <td>@doc.DocumentSubType.Name</td>
@@ -97,33 +106,33 @@
 
                         </tbody>
                         <tfoot>
-                            <tr>
-                                <th>File</th>
-                                <th>Type</th>
-                                <th>Title</th>
-                                <th>№</th>
-                                <th>Id №</th>
-                                <th>Description</th>
-                                <th>Issue</th>
-                                <th>№ Issue</th>
-                                <th>Valid To</th>
-                                @*<th>Remain</th>*@
-                                <th>Rev.Date</th>
-                                <th>№ Rev.</th>
-                                <th>Valid To</th>
-                                @*<th>Remain</th>*@
-                                <th>Department</th>
-                                <th>Responsible</th>
-                                <th>Service Type</th>
-                                <th>Aboard</th>
-                                <th>Privy</th>
-                                <th>Nomenclature</th>
-                                <th>Location</th>
-                                <th>Prolongation</th>
-                                @*<th>Contractor</th>
+                        <tr>
+                            <th>File</th>
+                            <th>Type</th>
+                            <th>Title</th>
+                            <th>№</th>
+                            <th>Id №</th>
+                            <th>Description</th>
+                            <th>Issue</th>
+                            <th>№ Issue</th>
+                            <th>Valid To</th>
+                            @*<th>Remain</th>*@
+                            <th>Rev.Date</th>
+                            <th>№ Rev.</th>
+                            <th>Valid To</th>
+                            @*<th>Remain</th>*@
+                            <th>Department</th>
+                            <th>Responsible</th>
+                            <th>Service Type</th>
+                            <th>Aboard</th>
+                            <th>Privy</th>
+                            <th>Nomenclature</th>
+                            <th>Location</th>
+                            <th>Prolongation</th>
+                            @*<th>Contractor</th>
                                   <th>Status</th>*@
-                                <th>Remark</th>
-                            </tr>
+                            <th>Remark</th>
+                        </tr>
                         </tfoot>
                     </table>
                 </div>
@@ -131,5 +140,3 @@
         </div>
     </div>
 </div>
-
-
