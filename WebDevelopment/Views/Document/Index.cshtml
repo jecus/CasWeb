@@ -53,19 +53,17 @@
                         {
                             <tr>
                                 <td>
-                                   
+
                                     @if (@doc.ItemFileLink != null)
                                     {
-                                        //@Html.ActionLink("Download","OpenPdf","File", new{fileId = @doc.ItemFileLink.FileId})
-                                        <button class="btn waves-effect waves-light btn-primary btn-outline-primary" value="@doc.ItemFileLink?.FileId" onclick="location.href = '@Url.Action("OpenPdf", "File", new{fileId = @doc.ItemFileLink.FileId})'">
-                                            Open File
+                                        <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@doc.ItemFileLink?.FileId" onclick="location.href = '@Url.Action("OpenPdf", "File", new {fileId = @doc.ItemFileLink.FileId})'">
+                                            <i class="fa fa-file-pdf-o"></i>
                                         </button>
+                                        
                                     }
                                     else
                                     {
-                                        <button class="btn waves-effect waves-light btn-disabled btn-outline-disabled disabled">
-                                            Open File
-                                        </button>
+                                        <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled" ><i class="fa fa-file-pdf-o"></i></button>
                                     }
 
                                 </td>
@@ -99,32 +97,33 @@
 
                         </tbody>
                         <tfoot>
-                        <tr>
-                            <th>Type</th>
-                            <th>Title</th>
-                            <th>№</th>
-                            <th>Id №</th>
-                            <th>Description</th>
-                            <th>Issue</th>
-                            <th>№ Issue</th>
-                            <th>Valid To</th>
-                            @*<th>Remain</th>*@
-                            <th>Rev.Date</th>
-                            <th>№ Rev.</th>
-                            <th>Valid To</th>
-                            @*<th>Remain</th>*@
-                            <th>Department</th>
-                            <th>Responsible</th>
-                            <th>Service Type</th>
-                            <th>Aboard</th>
-                            <th>Privy</th>
-                            <th>Nomenclature</th>
-                            <th>Location</th>
-                            <th>Prolongation</th>
-                            @*<th>Contractor</th>
-                            <th>Status</th>*@
-                            <th>Remark</th>
-                        </tr>
+                            <tr>
+                                <th>File</th>
+                                <th>Type</th>
+                                <th>Title</th>
+                                <th>№</th>
+                                <th>Id №</th>
+                                <th>Description</th>
+                                <th>Issue</th>
+                                <th>№ Issue</th>
+                                <th>Valid To</th>
+                                @*<th>Remain</th>*@
+                                <th>Rev.Date</th>
+                                <th>№ Rev.</th>
+                                <th>Valid To</th>
+                                @*<th>Remain</th>*@
+                                <th>Department</th>
+                                <th>Responsible</th>
+                                <th>Service Type</th>
+                                <th>Aboard</th>
+                                <th>Privy</th>
+                                <th>Nomenclature</th>
+                                <th>Location</th>
+                                <th>Prolongation</th>
+                                @*<th>Contractor</th>
+                                  <th>Status</th>*@
+                                <th>Remark</th>
+                            </tr>
                         </tfoot>
                     </table>
                 </div>
