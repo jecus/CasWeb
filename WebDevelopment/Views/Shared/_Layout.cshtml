@@ -253,21 +253,9 @@
 
         var val1 = $('#123').val();
         $.ajax({
+            type: 'GET',
             url: "@Url.Action("OpenPdf", "File")",
-            type: "POST",
             data: { fileId: val1 },
-            cache: false,
-            async: true,
-            success: function (data) {
-                var win = window.open(data, '_blank');
-                if(win){
-                    //Browser has allowed it to be opened
-                    win.focus();
-                }else{
-                    //Broswer has blocked it
-                    alert('Please allow popups for this site');
-                }
-            }
         });
     });
 </script>

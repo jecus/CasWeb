@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Entity.Infrastructure;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,14 +17,14 @@ namespace WebDevelopment.Controllers
 			_db = db;
 		}
 
-		[HttpPost]
+		[HttpGet]
 		public async Task<ActionResult> OpenPdf(int? fileId)
 		{
 			var file = await _db.Files
 				.AsNoTracking()
 				.FirstOrDefaultAsync(i => i.ItemId == fileId);
 
-			return File(file.FileData, System.Net.Mime.MediaTypeNames.Application.Octet, file.FileName);
+			return File(file.FileData, System.Net.Mime.MediaTypeNames.Application.Pdf, file.FileName);
 		}
 	}
 }

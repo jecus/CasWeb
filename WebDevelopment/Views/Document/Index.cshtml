@@ -56,15 +56,11 @@
                                    
                                     @if (@doc.ItemFileLink != null)
                                     {
-                                        <button class="btn waves-effect waves-light btn-primary btn-outline-primary" id ="123" value="@doc.ItemFileLink?.FileId">
-                                            Open File
-                                        </button>
+                                        @Html.ActionLink("Download","OpenPdf","File", new{fileId = @doc.ItemFileLink.FileId});
                                     }
                                     else
                                     {
-                                        <button class="btn waves-effect waves-light btn-disabled btn-outline-disabled disabled">
-                                            Open File
-                                        </button>
+                                        <li href="#">NoFile</li>
                                     }
 
                                 </td>
@@ -128,7 +124,6 @@
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

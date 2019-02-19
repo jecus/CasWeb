@@ -24,6 +24,7 @@ namespace Entity.Infrastructure
 		public DbSet<ItemFileLink> ItemFileLinks { get; set; }
 		public DbSet<AttachedFile> Files { get; set; }
 		public DbSet<LocationsType> LcoaLocationsTypes { get; set; }
+		public DbSet<Specialist> Specialists { get; set; }
 
 		public DatabaseContext(DbContextOptions<DatabaseContext> opt):base(opt)
 		{

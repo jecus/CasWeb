@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using BusinessLayer.Views;
 using Entity.Infrastructure;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -23,10 +24,6 @@ namespace WebDevelopment
 		{
 			Configuration = configuration;
 		}
-		/// <summary>
-		/// Фаил конфига
-		/// </summary>
-		
 
 		public void  ConfigureServices(IServiceCollection services)
 		{
