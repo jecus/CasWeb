@@ -56,11 +56,16 @@
                                    
                                     @if (@doc.ItemFileLink != null)
                                     {
-                                        @Html.ActionLink("Download","OpenPdf","File", new{fileId = @doc.ItemFileLink.FileId});
+                                        //@Html.ActionLink("Download","OpenPdf","File", new{fileId = @doc.ItemFileLink.FileId})
+                                        <button class="btn waves-effect waves-light btn-primary btn-outline-primary" value="@doc.ItemFileLink?.FileId" onclick="location.href = '@Url.Action("OpenPdf", "File", new{fileId = @doc.ItemFileLink.FileId})'">
+                                            Open File
+                                        </button>
                                     }
                                     else
                                     {
-                                        <li href="#">NoFile</li>
+                                        <button class="btn waves-effect waves-light btn-disabled btn-outline-disabled disabled">
+                                            Open File
+                                        </button>
                                     }
 
                                 </td>
