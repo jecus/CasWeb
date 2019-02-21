@@ -58,7 +58,7 @@ namespace Entity.Models.General
 
         #region Navigation Property
 
-        public Specialist SpecialistDto { get; set; }
+        public Specialist Specialist { get; set; }
 
         #endregion
     }
