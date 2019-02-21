@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.Models.General
 {
-    [Table("TransferRecords", Schema = "dbo")]
+    [Table("WorkShops", Schema = "dbo")]
     public class WorkShop : BaseEntity
     {
         [Column("StoreName")]

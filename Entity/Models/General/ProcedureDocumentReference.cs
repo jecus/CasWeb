@@ -17,12 +17,12 @@ namespace Entity.Models.General
 
         //[DataMember]
         //[Include]
-        //public ProcedureDTO Procedure { get; set; }
+        //public Procedure Procedure { get; set; }
 
         #region Navigation Property
 
         //[DataMember]
-        //public ProcedureDTO ProcedureDto { get; set; }
+        public Procedure Procedure { get; set; }
 
         #endregion
     }

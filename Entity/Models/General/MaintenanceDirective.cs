@@ -168,7 +168,7 @@ namespace Entity.Models.General
 
         //[DataMember]
         //[Child]
-        //public MaintenanceCheckDTO MaintenanceCheck { get; set; }
+        //public MaintenanceCheck MaintenanceCheck { get; set; }
 
         public JobCard JobCard { get; set; }
 
@@ -184,11 +184,13 @@ namespace Entity.Models.General
         //[Child(FilterType.Equal, "ParentTypeId", 14)]
         public ICollection<AccessoryRequired> Kits { get; set; }
 
-        #region Navigation Property
+        public ICollection<MaintenanceDirective> BindMpds { get; set; }
 
-        //[DataMember]
-        //public MaintenanceCheckDTO MaintenanceCheckDto { get; set; }
+		#region Navigation Property
 
-        #endregion
-    }
+		//[DataMember]
+		public MaintenanceCheck MaintenanceCheck { get; set; }
+
+		#endregion
+	}
 }

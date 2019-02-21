@@ -28,15 +28,7 @@ namespace Entity.Models.General
         [Column("Cost")]
         public double? Cost { get; set; }
 
-		//[DataMember]
-		//[Include]
-		//public JobCardDTO JobCard { get; set; }
+		public JobCard JobCard { get; set; }
 
-		//#region Navigation Property
-
-		//[DataMember]
-		//public JobCardDTO JobCardDto { get; set; }
-
-		//#endregion
     }
 }

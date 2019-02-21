@@ -712,6 +712,9 @@ namespace Entity.Infrastructure
 			modelBuilder.Entity<JobCard>()
 				.HasMany(i => i.Kits).WithOne(i => i.JobCard).HasForeignKey(i => i.ParentId);
 
+			modelBuilder.Entity<JobCard>()
+				.HasMany(i => i.JobCardTasks).WithOne(i => i.JobCard).HasForeignKey(i => i.JobCardId);
+
 			#endregion
 
 			#region KitSuppliersRelation
@@ -736,6 +739,8 @@ namespace Entity.Infrastructure
 				.HasMany(i => i.CategoriesRecords).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.ParentId);
 			modelBuilder.Entity<MaintenanceCheck>()
 				.HasMany(i => i.Kits).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<MaintenanceCheck>()
+				.HasMany(i => i.BindMpds).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.MaintenanceCheckId);
 
 			#endregion
 
@@ -766,6 +771,7 @@ namespace Entity.Infrastructure
 				.HasMany(i => i.CategoriesRecords).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentId);
 			modelBuilder.Entity<MaintenanceDirective>()
 				.HasMany(i => i.Kits).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentId);
+
 
 			#endregion
 
@@ -817,6 +823,8 @@ namespace Entity.Infrastructure
 				.HasMany(i => i.PerformanceRecords).WithOne(i => i.Procedure).HasForeignKey(i => i.ParentID);
 			modelBuilder.Entity<Procedure>()
 				.HasMany(i => i.Kits).WithOne(i => i.Procedure).HasForeignKey(i => i.ParentId);
+			modelBuilder.Entity<Procedure>()
+				.HasMany(i => i.DocumentReferences).WithOne(i => i.Procedure).HasForeignKey(i => i.ProcedureId);
 
 			#endregion
 
