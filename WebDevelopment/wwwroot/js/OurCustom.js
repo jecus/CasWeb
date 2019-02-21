@@ -9,7 +9,7 @@
 //В каждом html где вызывается модальное окно должен быть этот отрезок
 $(function () {
     $.ajaxSetup({ cache: false });
-    $("#modalLargeBtn").click(function (e) {
+    $(".modalLargeBtn").click(function (e) {
 
         e.preventDefault();
         $.get(this.href, function (data) {
