@@ -111,7 +111,7 @@ namespace Entity.Models.General
         public Supplier ToSupplier { get; set; }
 
         //[Child(FilterType.Equal, "ParentTypeId", 1900)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
 
         public ICollection<RequestForQuotationRecord> PackageRecords { get; set; }
     }

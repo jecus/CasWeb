@@ -145,6 +145,6 @@ namespace Entity.Models.General
 
         
         //[Child(FilterType.Equal, "ParentTypeId", 13)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Entity.Models.Dictionaries
 
         
         //[Child(FilterType.Equal, "ParentTypeId", 1180)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
 
 
         public AccessoryDescription AccessoryDescription { get; set; }

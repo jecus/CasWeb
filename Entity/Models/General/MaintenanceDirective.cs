@@ -173,7 +173,7 @@ namespace Entity.Models.General
         public JobCard JobCard { get; set; }
 
         //[Child(FilterType.Equal, "ParentTypeId", 14)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
 
         //[Child(FilterType.Equal, "ParentTypeId", 14)]
         public ICollection<DirectiveRecord> PerformanceRecords { get; set; }

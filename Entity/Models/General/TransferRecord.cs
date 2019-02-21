@@ -104,7 +104,7 @@ namespace Entity.Models.General
         public Specialist ReleasedSpecialist { get; set; }
 
         //[Child(FilterType.Equal, "ParentTypeId", 2260)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
 
         #region Navigation Property
 

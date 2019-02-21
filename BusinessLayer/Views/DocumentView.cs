@@ -1,7 +1,6 @@
 ﻿using System;
 using BusinessLayer.Dictionaties;
 using Entity.Enums;
-using Entity.Models;
 using Entity.Models.General;
 
 namespace BusinessLayer.Views

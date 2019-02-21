@@ -1,11 +1,8 @@
 ﻿using System.Threading.Tasks;
-using AutoMapper;
-using BusinessLayer.Mapping;
 using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
-using Entity.Models.General;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLayer.Repositiry
@@ -13,11 +10,9 @@ namespace BusinessLayer.Repositiry
 	public class UserRepository : IUserRepository
 	{
 		private readonly DatabaseContext _db;
-		private readonly IMapper _mapper;
 
-		public UserRepository(IMapper mapper, DatabaseContext databaseContext)
+		public UserRepository(DatabaseContext databaseContext)
 		{
-			_mapper = mapper;
 			_db = databaseContext;
 		}
 
@@ -27,7 +22,7 @@ namespace BusinessLayer.Repositiry
 				.AsNoTracking()
 				.OnlyActive()
 				.FirstOrDefaultAsync(i => i.Login == login && i.Password == password);
-			return _mapper.MapToBlView<User, UserView>(user);
+			return user.ToBlView();
 		}
 
 		public async Task<bool> IsAuthorized(string login, string password)

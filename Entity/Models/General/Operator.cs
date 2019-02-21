@@ -6,6 +6,10 @@ namespace Entity.Models.General
     [Table("Operators", Schema = "dbo")]
     public class Operator : BaseEntity
     {
+        [Key]
+        [Column("OperatorID")]
+        public override int ItemId { get; set; }
+
         [Column("Name")]
         [MaxLength(50)]
         public string Name { get; set; }

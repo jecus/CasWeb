@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using BusinessLayer.Mapping;
 using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Entity.Extentions;
@@ -16,11 +14,9 @@ namespace BusinessLayer.Repositiry
 	public class AircraftRepository : IAircraftRepository
 	{
 		private readonly DatabaseContext _db;
-		private readonly IMapper _mapper;
 
-		public AircraftRepository(IMapper mapper, DatabaseContext databaseContext)
+		public AircraftRepository(DatabaseContext databaseContext)
 		{
-			_mapper = mapper;
 			_db = databaseContext;
 		}
 
@@ -30,8 +26,9 @@ namespace BusinessLayer.Repositiry
 				.OnlyActive()
                 .Include(i => i.Model)
 				.FirstOrDefaultAsync(i => i.ItemId == id);
-			return _mapper.MapToBlView<Aircraft, AircraftView>(aircraft);
-		}
+            return aircraft.ToBlView();
+
+        }
 
 		public async Task<List<AircraftView>> Get(IEnumerable<int> ids)
 		{
@@ -40,7 +37,7 @@ namespace BusinessLayer.Repositiry
 				.OnlyActive()
 				.Where(i => ids.Contains(i.ItemId))
 				.ToListAsync();
-			return (List<AircraftView>) _mapper.MapToBlView<Aircraft, AircraftView>(aircraft);
+			return aircraft.ToBlView();
 		}
 
 		public async Task<List<AircraftView>> GetAll()
@@ -50,7 +47,7 @@ namespace BusinessLayer.Repositiry
 				.OnlyActive()
 				.Include(i => i.Model)
 				.ToListAsync();
-			return (List<AircraftView>)_mapper.MapToBlView<Aircraft, AircraftView>(aircraft);
+			return aircraft.ToBlView();
 		}
 	}
 }

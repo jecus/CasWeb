@@ -106,7 +106,7 @@ namespace Entity.Models.General
         public Specialist ClosedBy { get; set; }
 
         //[Child(FilterType.Equal, "ParentTypeId", 1560)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
 
         public ICollection<InitialOrderRecord> PackageRecords { get; set; }
     }

@@ -1,13 +1,10 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using BusinessLayer.Mapping;
+using BusinessLayer;
 using BusinessLayer.Repositiry.Interfaces;
-using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
-using Entity.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebDevelopment.Helper;
@@ -19,13 +16,11 @@ namespace WebDevelopment.Controllers
 	{
 		private readonly IAircraftRepository _aircraftRepository;
 		private readonly DatabaseContext _db;
-        private readonly IMapper _mapper;
 
-        public HomeController(IAircraftRepository aircraftRepository, DatabaseContext db, IMapper mapper)
+        public HomeController(IAircraftRepository aircraftRepository, DatabaseContext db)
         {
 	        _aircraftRepository = aircraftRepository;
 	        _db = db;
-            _mapper = mapper;
         }
 
 
@@ -40,7 +35,9 @@ namespace WebDevelopment.Controllers
             var stores = await _db.Stores
                 .OnlyActive()
                 .ToListAsync();
-            var str = _mapper.MapToBlView<Store, StoreView>(stores)
+
+
+            var str = stores.ToBlView()
                 .OrderBy(i => i.StoreName)
                 .ToList();
 
@@ -48,7 +45,7 @@ namespace WebDevelopment.Controllers
                 .OrderByDescending(x => x.ItemId)
                 .Take(5)
                 .ToListAsync();
-            var doc = _mapper.MapToBlView<Document, DocumentView>(documents).ToList();
+            var doc = documents.ToBlView().ToList();
             var doccount = await _db.Documents.CountAsync();
 
             var op = await _db.Operators.AsNoTracking().FirstOrDefaultAsync();

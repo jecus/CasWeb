@@ -128,7 +128,7 @@ namespace Entity.Models.General
         public ICollection<CategoryRecord> CategoriesRecords { get; set; }
 
         //[Child(FilterType.Equal, "ParentTypeId", 1310)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
 
         #region Navigation Property
 

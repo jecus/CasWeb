@@ -1,12 +1,7 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using BusinessLayer.Mapping;
-using BusinessLayer.Views;
+﻿using System.Threading.Tasks;
+using BusinessLayer;
 using Entity.Extentions;
 using Entity.Infrastructure;
-using Entity.Models;
-using Entity.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,13 +10,11 @@ namespace WebDevelopment.Controllers
     public class SpecialistController : Controller
     {
         private readonly DatabaseContext _db;
-        private readonly IMapper _mapper;
 
-        public SpecialistController(DatabaseContext db, IMapper mapper)
+        public SpecialistController(DatabaseContext db)
         {
 
             _db = db;
-            _mapper = mapper;
         }
 
 
@@ -35,7 +28,7 @@ namespace WebDevelopment.Controllers
                 .Include(i => i.Specialization)
                 .ThenInclude(i => i.Department)
                 .ToListAsync();
-            var spec = _mapper.MapToBlView<Specialist, SpecialistView>(specialists).ToList();
+            var spec = specialists.ToBlView();
 
             ViewData["Specialists"] = spec;
 

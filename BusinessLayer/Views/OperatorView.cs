@@ -17,5 +17,13 @@
         public string Fax { get; set; }
 
         public string Email { get; set; }
+
+        public byte[] LogoType { get; set; }
+
+        public byte[] LogoTypeWhite { get; set; }
+
+        public byte[] LogotypeReportLarge { get; set; }
+
+        public byte[] LogotypeReportVeryLarge { get; set; }
     }
 }

@@ -205,8 +205,8 @@ namespace Entity.Infrastructure
 				.WithMany(i => i.AircraftFlightsDelays)
 				.HasForeignKey(i => i.DelayReasonId);
 
-			modelBuilder.Entity<AircraftFlight>()
-				.HasMany(i => i.Files).WithOne(i => i.AircraftFlight).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<AircraftFlight>()
+			//	.HasMany(i => i.Files).WithOne(i => i.AircraftFlight).HasForeignKey(i => i.ParentId);
 
 			#endregion
 
@@ -224,15 +224,15 @@ namespace Entity.Infrastructure
 
 			#region ATLB
 
-			modelBuilder.Entity<ATLB>()
-				.HasMany(i => i.Files).WithOne(i => i.Atlb).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<ATLB>()
+			//	.HasMany(i => i.Files).WithOne(i => i.Atlb).HasForeignKey(i => i.ParentId);
 
 			#endregion
 
 			#region Audit
 
-			modelBuilder.Entity<Audit>()
-				.HasMany(i => i.Files).WithOne(i => i.Audit).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<Audit>()
+			//	.HasMany(i => i.Files).WithOne(i => i.Audit).HasForeignKey(i => i.ParentId);
 			modelBuilder.Entity<Audit>()
 				.HasMany(i => i.AuditRecords).WithOne(i => i.Audit).HasForeignKey(i => i.AuditId);
 
@@ -268,8 +268,8 @@ namespace Entity.Infrastructure
 
 			#region ComponentDirective
 
-			modelBuilder.Entity<ComponentDirective>()
-				.HasMany(i => i.Files).WithOne(i => i.ComponentDirective).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<ComponentDirective>()
+			//	.HasMany(i => i.Files).WithOne(i => i.ComponentDirective).HasForeignKey(i => i.ParentId);
 
 			modelBuilder.Entity<ComponentDirective>()
 				.HasMany(i => i.PerformanceRecords).WithOne(i => i.ComponentDirective).HasForeignKey(i => i.ParentID);
@@ -289,8 +289,8 @@ namespace Entity.Infrastructure
 				.WithMany(i => i.CategoryChangeRecords)
 				.HasForeignKey(i => i.ToCategoryId);
 
-			modelBuilder.Entity<ComponentLLPCategoryChangeRecord>()
-				.HasMany(i => i.Files).WithOne(i => i.CategoryChangeRecord).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<ComponentLLPCategoryChangeRecord>()
+			//	.HasMany(i => i.Files).WithOne(i => i.CategoryChangeRecord).HasForeignKey(i => i.ParentId);
 
 			#endregion
 
@@ -328,8 +328,8 @@ namespace Entity.Infrastructure
 			modelBuilder.Entity<Component>()
 				.HasMany(i => i.SupplierRelations).WithOne(i => i.Component).HasForeignKey(i => i.KitId);
 
-			modelBuilder.Entity<Component>()
-				.HasMany(i => i.Files).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<Component>()
+			//	.HasMany(i => i.Files).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
 
 			modelBuilder.Entity<Component>()
 				.HasMany(i => i.LLPData).WithOne(i => i.Component).HasForeignKey(i => i.ComponentId);
@@ -356,8 +356,8 @@ namespace Entity.Infrastructure
 
 			#region DamageDocument
 
-			modelBuilder.Entity<DamageDocument>()
-				.HasMany(i => i.Files).WithOne(i => i.DamageDocument).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<DamageDocument>()
+			//	.HasMany(i => i.Files).WithOne(i => i.DamageDocument).HasForeignKey(i => i.ParentId);
 
 			modelBuilder.Entity<DamageDocument>()
 				.HasMany(i => i.DamageSectors).WithOne(i => i.DamageDocument).HasForeignKey(i => i.DamageDocumentId);
@@ -381,8 +381,8 @@ namespace Entity.Infrastructure
 				.WithMany(i => i.Directives)
 				.HasForeignKey(i => i.ComponentId);
 
-			modelBuilder.Entity<Directive>()
-				.HasMany(i => i.Files).WithOne(i => i.Directive).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<Directive>()
+			//	.HasMany(i => i.Files).WithOne(i => i.Directive).HasForeignKey(i => i.ParentId);
 
 			modelBuilder.Entity<Directive>()
 				.HasMany(i => i.DamageDocs).WithOne(i => i.Directive).HasForeignKey(i => i.DirectiveId);
@@ -400,10 +400,10 @@ namespace Entity.Infrastructure
 
 			#region DirectiveRecord
 
-			modelBuilder.Entity<DirectiveRecord>()
-				.HasMany(i => i.Files).WithOne(i => i.DirectiveRecord).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<DirectiveRecord>()
-				.HasMany(i => i.FilesForMaintenanceCheckRecord).WithOne(i => i.MaintenanceCheckRecord).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<DirectiveRecord>()
+			//	.HasMany(i => i.Files).WithOne(i => i.DirectiveRecord).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<DirectiveRecord>()
+			//	.HasMany(i => i.FilesForMaintenanceCheckRecord).WithOne(i => i.MaintenanceCheckRecord).HasForeignKey(i => i.ParentId);
 
 			#endregion
 
@@ -656,8 +656,8 @@ namespace Entity.Infrastructure
 				.HasForeignKey(i => i.ClosedById);
 
 
-			modelBuilder.Entity<InitialOrder>()
-				.HasMany(i => i.Files).WithOne(i => i.InitialOrder).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<InitialOrder>()
+			//	.HasMany(i => i.Files).WithOne(i => i.InitialOrder).HasForeignKey(i => i.ParentId);
 			modelBuilder.Entity<InitialOrder>()
 				.HasMany(i => i.PackageRecords).WithOne(i => i.InitialOrder).HasForeignKey(i => i.ParentPackageId);
 
@@ -763,8 +763,8 @@ namespace Entity.Infrastructure
 				.WithMany(i => i.MaintenanceDirectives)
 				.HasForeignKey(i => i.JobCardId);
 
-			modelBuilder.Entity<MaintenanceDirective>()
-				.HasMany(i => i.Files).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<MaintenanceDirective>()
+			//	.HasMany(i => i.Files).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentId);
 			modelBuilder.Entity<MaintenanceDirective>()
 				.HasMany(i => i.PerformanceRecords).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentID);
 			modelBuilder.Entity<MaintenanceDirective>()
@@ -817,8 +817,8 @@ namespace Entity.Infrastructure
 				.WithMany(i => i.Procedure)
 				.HasForeignKey(i => i.JobCardId);
 
-			modelBuilder.Entity<Procedure>()
-				.HasMany(i => i.Files).WithOne(i => i.Procedure).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<Procedure>()
+			//	.HasMany(i => i.Files).WithOne(i => i.Procedure).HasForeignKey(i => i.ParentId);
 			modelBuilder.Entity<Procedure>()
 				.HasMany(i => i.PerformanceRecords).WithOne(i => i.Procedure).HasForeignKey(i => i.ParentID);
 			modelBuilder.Entity<Procedure>()
@@ -835,8 +835,8 @@ namespace Entity.Infrastructure
 				.WithMany(i => i.PurchaseOrders)
 				.HasForeignKey(i => i.SupplierId);
 
-			modelBuilder.Entity<PurchaseOrder>()
-				.HasMany(i => i.Files).WithOne(i => i.PurchaseOrder).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<PurchaseOrder>()
+			//	.HasMany(i => i.Files).WithOne(i => i.PurchaseOrder).HasForeignKey(i => i.ParentId);
 
 			#endregion
 
@@ -847,8 +847,8 @@ namespace Entity.Infrastructure
 				.WithMany(i => i.PurchaseRequestRecords)
 				.HasForeignKey(i => i.SupplierId);
 
-			modelBuilder.Entity<PurchaseRequestRecord>()
-				.HasMany(i => i.Files).WithOne(i => i.PurchaseRequestRecord).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<PurchaseRequestRecord>()
+			//	.HasMany(i => i.Files).WithOne(i => i.PurchaseRequestRecord).HasForeignKey(i => i.ParentId);
 
 			#endregion
 
@@ -879,8 +879,8 @@ namespace Entity.Infrastructure
 				.WithMany(i => i.RequestForQuotations)
 				.HasForeignKey(i => i.ToSupplierId);
 
-			modelBuilder.Entity<RequestForQuotation>()
-				.HasMany(i => i.Files).WithOne(i => i.RequestForQuotation).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<RequestForQuotation>()
+			//	.HasMany(i => i.Files).WithOne(i => i.RequestForQuotation).HasForeignKey(i => i.ParentId);
 			modelBuilder.Entity<RequestForQuotation>()
 				.HasMany(i => i.PackageRecords).WithOne(i => i.RequestForQuotation).HasForeignKey(i => i.ParentPackageId);
 
@@ -992,8 +992,8 @@ namespace Entity.Infrastructure
 				.HasMany(i => i.EmployeeDocuments).WithOne(i => i.Specialist).HasForeignKey(i => i.ParentID);
 			modelBuilder.Entity<Specialist>()
 				.HasMany(i => i.CategoriesRecords).WithOne(i => i.Specialist).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<Specialist>()
-				.HasMany(i => i.Files).WithOne(i => i.SpecialistDto).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<Specialist>()
+			//	.HasMany(i => i.Files).WithOne(i => i.SpecialistDto).HasForeignKey(i => i.ParentId);
 
 			#endregion
 
@@ -1014,8 +1014,8 @@ namespace Entity.Infrastructure
 				.WithMany(i => i.SpecialistTrainings)
 				.HasForeignKey(i => i.SupplierId);
 
-			modelBuilder.Entity<SpecialistTraining>()
-				.HasMany(i => i.Files).WithOne(i => i.SpecialistTraining).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<SpecialistTraining>()
+			//	.HasMany(i => i.Files).WithOne(i => i.SpecialistTraining).HasForeignKey(i => i.ParentId);
 
 			#endregion
 
@@ -1035,8 +1035,8 @@ namespace Entity.Infrastructure
 
 			#region SupplierDocument
 
-			modelBuilder.Entity<SupplierDocument>()
-				.HasMany(i => i.Files).WithOne(i => i.SupplierDocument).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<SupplierDocument>()
+			//	.HasMany(i => i.Files).WithOne(i => i.SupplierDocument).HasForeignKey(i => i.ParentId);
 
 			#endregion
 
@@ -1060,8 +1060,8 @@ namespace Entity.Infrastructure
 				.HasForeignKey(i => i.ReleasedSpecialistId);
 
 
-			modelBuilder.Entity<TransferRecord>()
-				.HasMany(i => i.Files).WithOne(i => i.TransferRecord).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<TransferRecord>()
+			//	.HasMany(i => i.Files).WithOne(i => i.TransferRecord).HasForeignKey(i => i.ParentId);
 
 			#endregion
 
@@ -1102,8 +1102,8 @@ namespace Entity.Infrastructure
 
 			#region WorkPackage
 
-			modelBuilder.Entity<WorkPackage>()
-				.HasMany(i => i.Files).WithOne(i => i.WorkPackage).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<WorkPackage>()
+			//	.HasMany(i => i.Files).WithOne(i => i.WorkPackage).HasForeignKey(i => i.ParentId);
 
 			#endregion
 
@@ -1120,8 +1120,8 @@ namespace Entity.Infrastructure
 				.WithMany(i => i.AccessoryDescriptions)
 				.HasForeignKey(i => i.StandartId);
 
-			modelBuilder.Entity<AccessoryDescription>()
-				.HasMany(i => i.Files).WithOne(i => i.AccessoryDescription).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<AccessoryDescription>()
+			//	.HasMany(i => i.Files).WithOne(i => i.AccessoryDescription).HasForeignKey(i => i.ParentId);
 
 			modelBuilder.Entity<AccessoryDescription>()
 				.HasMany(i => i.SupplierRelations).WithOne(i => i.AccessoryDescription).HasForeignKey(i => i.KitId);
@@ -1135,8 +1135,8 @@ namespace Entity.Infrastructure
 				.WithMany(i => i.DamageCharts)
 				.HasForeignKey(i => i.AircraftModelId);
 
-			modelBuilder.Entity<DamageChart>()
-				.HasMany(i => i.Files).WithOne(i => i.DamageChart).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<DamageChart>()
+			//	.HasMany(i => i.Files).WithOne(i => i.DamageChart).HasForeignKey(i => i.ParentId);
 
 			#endregion
 

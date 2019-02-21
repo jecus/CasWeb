@@ -31,7 +31,7 @@ namespace Entity.Models.General
 
         
         //[Child(FilterType.Equal, "ParentTypeId", 1200)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
 
         #region Navigation Property
 

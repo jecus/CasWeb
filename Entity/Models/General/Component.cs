@@ -249,7 +249,7 @@ namespace Entity.Models.General
         public ICollection<KitSuppliersRelation> SupplierRelations { get; set; }
         
         //[Child(FilterType.Equal, "ParentTypeId", 5)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
 
         //[Child(FilterType.Equal, "ParentTypeId", new[] { 5, 6 })]
         public ICollection<AccessoryRequired> Kits { get; set; }

@@ -88,7 +88,7 @@ namespace Entity.Models.General
 
 
         //[Child(FilterType.Equal, "ParentTypeId", 1080)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
 
         public ICollection<AuditRecord> AuditRecords { get; set; }
     }

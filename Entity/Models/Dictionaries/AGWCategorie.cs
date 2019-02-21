@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entity.Enums;
 using Entity.Models.General;
 
 namespace Entity.Models.Dictionaries
@@ -13,7 +14,7 @@ namespace Entity.Models.Dictionaries
         public string FullName { get; set; }
 
         [Column("Gender")]
-        public short? Gender { get; set; }
+        public Gender Gender { get; set; }
 
         [Column("MinAge")]
         public int? MinAge { get; set; }

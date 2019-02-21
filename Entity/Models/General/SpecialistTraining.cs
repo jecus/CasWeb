@@ -53,7 +53,7 @@ namespace Entity.Models.General
         public Supplier Supplier { get; set; }
 
         //[Child(FilterType.Equal, "ParentTypeId", 1317)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
 
 
         #region Navigation Property

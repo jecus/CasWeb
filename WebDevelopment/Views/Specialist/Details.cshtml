@@ -1,0 +1,22 @@
+﻿@using BusinessLayer.Views
+@using Entity.Models
+@model Entity.Models.General.Specialist
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <h5>Default Modal</h5>
+        @Html.DisplayFor(model => model.FirstName)
+        <p>This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary waves-effect waves-light ">Save changes</button>
+    </div>
+</div>

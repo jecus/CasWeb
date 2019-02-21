@@ -69,7 +69,7 @@ namespace Entity.Models.General
 
         
         //[Child(FilterType.Equal, "ParentTypeId", 2)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
         
         //[Child(FilterType.Equal, "ParentTypeId", 2)]
         public ICollection<DirectiveRecord> PerformanceRecords { get; set; }

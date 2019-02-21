@@ -4,9 +4,6 @@
     ViewData["Title"] = "index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var documents = (List<DocumentView>) ViewData["Documents"];
-
-    var button = @Html.ActionLink("123", "Get", "Document", new { id = 666 }, new { @class = "modalLargeBtn" });
-
 }
 <div class="row">
     <div class="col-sm-12">
@@ -63,7 +60,7 @@
                         {
                             <tr>
                                 <td>
-                                    @*@if (@doc.ItemFileLink != null)
+                                    @if (@doc.ItemFileLink != null)
                                     {
                                         <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@doc.ItemFileLink?.FileId" onclick="location.href = '@Url.Action("OpenPdf", "File", new {fileId = @doc.ItemFileLink.FileId})'">
                                             <i class="fa fa-file-pdf-o"></i>
@@ -73,10 +70,7 @@
                                     else
                                     {
                                         <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-pdf-o"></i></button>
-                                    }*@
-
-
-                                    @button;
+                                    }
                                     
                                 </td>
                                 <td>@doc.DocumentType</td>

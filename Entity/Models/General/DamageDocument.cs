@@ -26,7 +26,7 @@ namespace Entity.Models.General
 
         
         //[Child(FilterType.Equal, "ParentTypeId", 1185)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
 
         public ICollection<DamageSector> DamageSectors { get; set; }
         

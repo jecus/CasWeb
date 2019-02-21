@@ -37,6 +37,6 @@ namespace Entity.Models.General
 
         
         //[Child(FilterType.Equal, "ParentTypeId", 1040)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
     }
 }

@@ -1,13 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using BusinessLayer.Mapping;
-using BusinessLayer.Repositiry;
+using BusinessLayer;
 using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
-using Entity.Models;
 using Entity.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,13 +16,11 @@ namespace WebDevelopment.Controllers
     {
 	    private readonly IAircraftRepository _aircraftRepository;
         private readonly DatabaseContext _db;
-        private readonly IMapper _mapper;
 
-        public AircraftController(IAircraftRepository aircraftRepository, DatabaseContext db, IMapper mapper)
+        public AircraftController(IAircraftRepository aircraftRepository, DatabaseContext db)
         {
             _aircraftRepository = aircraftRepository;
             _db = db;
-            _mapper = mapper;
         }
 
         [HttpGet]
@@ -46,7 +41,7 @@ namespace WebDevelopment.Controllers
             ViewData["MainMenu"] = mainMenu.Items.OrderByDescending(i => i.SubMenu.Count() > 0).ThenBy(i => i.Header).ToList();
             ViewData["Aircraft"] = aircraft;
             ViewData["Operator"] = await _db.Operators.FirstOrDefaultAsync();
-            ViewData["BaseComponents"] = _mapper.MapToBlView<Component, BaseComponentView>(bc);
+            ViewData["BaseComponents"] = bc.ToBlView();
             return View();
         }
     }

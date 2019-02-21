@@ -1,11 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using BusinessLayer.Mapping;
-using BusinessLayer.Views;
+using BusinessLayer;
 using Entity.Extentions;
 using Entity.Infrastructure;
-using Entity.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,13 +12,10 @@ namespace WebDevelopment.Controllers
     {
 
         private readonly DatabaseContext _db;
-        private readonly IMapper _mapper;
 
-        public DocumentController(DatabaseContext db, IMapper mapper)
+        public DocumentController(DatabaseContext db)
         {
-
             _db = db;
-            _mapper = mapper;
         }
 
         public async Task <IActionResult> Index()
@@ -45,7 +39,7 @@ namespace WebDevelopment.Controllers
 	            .Where(i => i.ParentTypeId == 1275 && docIds.Contains(i.ParentId))
 	            .ToListAsync();
 
-            var doc = _mapper.MapToBlView<Document, DocumentView>(documents).ToList();
+            var doc = documents.ToBlView();
 
             foreach (var documentView in doc)
 	            documentView.ItemFileLink = fileLinks.FirstOrDefault(i => i.ParentId == documentView.ItemId);

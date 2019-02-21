@@ -87,6 +87,6 @@ namespace Entity.Models.General
         public string EmployeesRemark { get; set; }
 
         //[Child(FilterType.Equal, "ParentTypeId", 2499)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
     }
 }

@@ -104,7 +104,7 @@ namespace Entity.Models.Dictionaries
 
         
         //[Child(FilterType.Equal, "ParentTypeId", 1005)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
 
         //[Child(FilterType.Equal, "ParentTypeId", 1005)]
         public ICollection<KitSuppliersRelation> SupplierRelations { get; set; }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Reflection;
-using BusinessLayer.Views;
-using Entity.Infrastructure;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Entity.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -44,8 +40,6 @@ namespace WebDevelopment
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 			services.AddDbContext<DatabaseContext>(builder => builder.UseSqlServer(Configuration.GetConnectionString("CORE_CONNECTION_STRING")));
-
-			services.AddMapping(Assembly.GetAssembly(typeof(BusinessLayer.Mapping.CommonProfile)));
 			services.AddRepositories();
 
 			//services.AddMvc().AddControllersAsServices();
@@ -61,7 +55,6 @@ namespace WebDevelopment
 
 		protected void Setup(IApplicationBuilder app, IHostingEnvironment env)
 		{
-
 			RouteConfig.RegisterRoutes(app, env);
 		}
 	}

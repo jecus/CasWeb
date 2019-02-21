@@ -83,10 +83,10 @@ namespace Entity.Models.General
 
         
         //[Child(FilterType.Equal, "ParentTypeId", 1260)]
-        public ICollection<ItemFileLink> Files { get; set; }
+        //public ICollection<ItemFileLink> Files { get; set; }
 
         //[Child(FilterType.Equal, "ParentTypeId", 1680)]
-        public ICollection<ItemFileLink> FilesForMaintenanceCheckRecord { get; set; }
+        //public ICollection<ItemFileLink> FilesForMaintenanceCheckRecord { get; set; }
 
         #region Navigation Property
 
