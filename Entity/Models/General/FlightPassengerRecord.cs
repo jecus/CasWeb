@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entity.Models.Dictionaries;
 
 namespace Entity.Models.General
 {

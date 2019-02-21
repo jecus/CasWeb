@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BusinessLayer.Views;
 using Entity.Models;
+using Entity.Models.General;
 using WebDevelopment.Helper;
 
 namespace WebDevelopment.Models

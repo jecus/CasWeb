@@ -1,19 +1,6 @@
 ﻿using Entity.Models.Dictionaries;
 using Entity.Models.General;
 using Microsoft.EntityFrameworkCore;
-using AccessoryDescription = Entity.Models.AccessoryDescription;
-using AGWCategorie = Entity.Models.AGWCategorie;
-using Aircraft = Entity.Models.Aircraft;
-using Component = Entity.Models.Component;
-using Department = Entity.Models.Department;
-using Document = Entity.Models.Document;
-using DocumentSubType = Entity.Models.DocumentSubType;
-using Location = Entity.Models.Location;
-using LocationsType = Entity.Models.LocationsType;
-using Nomenclature = Entity.Models.Nomenclature;
-using ServiceType = Entity.Models.ServiceType;
-using Specialist = Entity.Models.Specialist;
-using Specialization = Entity.Models.Specialization;
 
 namespace Entity.Infrastructure
 {
@@ -153,7 +140,6 @@ namespace Entity.Infrastructure
         public DbSet<WorkShop> WorkShops { get; set; }
 
         #endregion
-
 
 
         public DatabaseContext(DbContextOptions<DatabaseContext> opt):base(opt)

@@ -4,6 +4,9 @@
     ViewData["Title"] = "index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var documents = (List<DocumentView>) ViewData["Documents"];
+
+    var button = @Html.ActionLink("123", "Get", "Document", new { id = 666 }, new { @class = "modalLargeBtn" });
+
 }
 <div class="row">
     <div class="col-sm-12">
@@ -48,13 +51,19 @@
                         <tbody>
 
 
-                        
+                        <div class="modal fade" id="large-Modal" tabindex="-1" role="dialog" style="display: none; z-index: 1050;" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div id="dialogContent" class="modal-content">
+
+                                </div>
+                            </div>
+                        </div>
 
                         @foreach (var doc in documents)
                         {
                             <tr>
                                 <td>
-                                    @if (@doc.ItemFileLink != null)
+                                    @*@if (@doc.ItemFileLink != null)
                                     {
                                         <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@doc.ItemFileLink?.FileId" onclick="location.href = '@Url.Action("OpenPdf", "File", new {fileId = @doc.ItemFileLink.FileId})'">
                                             <i class="fa fa-file-pdf-o"></i>
@@ -64,17 +73,11 @@
                                     else
                                     {
                                         <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-pdf-o"></i></button>
-                                    }
+                                    }*@
 
 
-                                    @*<div class="modal fade" id="large-Modal" tabindex="-1" role="dialog" style="display: none; z-index: 1050;" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg" role="document">
-                                            <div id="dialogContent" class="modal-content">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @Html.ActionLink("123", "Get", "Document", new { id = 666 }, new { id = "modalLargeBtn" });*@
+                                    @button;
+                                    
                                 </td>
                                 <td>@doc.DocumentType</td>
                                 <td>@doc.DocumentSubType.Name</td>

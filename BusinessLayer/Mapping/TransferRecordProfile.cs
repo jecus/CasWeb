@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLayer.Views;
 using Entity.Models;
+using Entity.Models.General;
 
 namespace BusinessLayer.Mapping
 {

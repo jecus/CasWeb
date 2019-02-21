@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entity.Enums;
+using Entity.Models.Dictionaries;
 
 namespace Entity.Models.General
 {
@@ -78,7 +80,7 @@ namespace Entity.Models.General
         public int? NomenсlatureId { get; set; }
 
         [Column("ProlongationWayId")]
-        public int? ProlongationWayId { get; set; }
+        public ProlongationWay ProlongationWay { get; set; }
 
         [Column("ServiceTypeId")]
         public int? ServiceTypeId { get; set; }

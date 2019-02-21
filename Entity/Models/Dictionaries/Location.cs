@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entity.Models.General;
 
 namespace Entity.Models.Dictionaries
 {
@@ -26,7 +27,7 @@ namespace Entity.Models.Dictionaries
 
         public ICollection<Component> Components { get; set; }
 
-        public ICollection<Document> Documents { get; set; }
+        public IEnumerable<Document> Documents { get; set; }
 
         #endregion
     }

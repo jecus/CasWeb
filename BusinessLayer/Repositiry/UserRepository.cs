@@ -5,7 +5,7 @@ using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
-using Entity.Models;
+using Entity.Models.General;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLayer.Repositiry

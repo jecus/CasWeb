@@ -5,7 +5,7 @@ using BusinessLayer.Mapping;
 using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
-using Entity.Models;
+using Entity.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

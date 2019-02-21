@@ -20,7 +20,7 @@ namespace WebDevelopment.Controllers
 		[HttpGet]
 		public async Task<ActionResult> OpenPdf(int? fileId)
 		{
-			var file = await _db.Files
+			var file = await _db.AttachedFiles
 				.AsNoTracking()
 				.FirstOrDefaultAsync(i => i.ItemId == fileId);
 

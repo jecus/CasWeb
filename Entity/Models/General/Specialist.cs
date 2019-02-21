@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entity.Models.Dictionaries;
 
 namespace Entity.Models.General
 {
@@ -63,7 +64,7 @@ namespace Entity.Models.General
         public string Information { get; set; }
 
         [Column("Education")]
-        public short Education { get; set; }
+        public short EducationId { get; set; }
 
         [Column("Location")]
         public int Location { get; set; }
@@ -78,7 +79,7 @@ namespace Entity.Models.General
         public byte[] Sign { get; set; }
 
         [Column("FamilyStatus")]
-        public short FamilyStatus { get; set; }
+        public short FamilyStatusId { get; set; }
 
         [Column("Citizenship")]
         public short Citizenship { get; set; }
