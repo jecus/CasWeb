@@ -1099,10 +1099,102 @@ namespace Entity.Infrastructure
 
 			#endregion
 
+
+			#region AccessoryDescription
+
+			modelBuilder.Entity<AccessoryDescription>()
+				.HasOne(i => i.ATAChapter)
+				.WithMany(i => i.AccessoryDescriptions)
+				.HasForeignKey(i => i.AtaChapterId);
+
+			modelBuilder.Entity<AccessoryDescription>()
+				.HasOne(i => i.GoodStandart)
+				.WithMany(i => i.AccessoryDescriptions)
+				.HasForeignKey(i => i.StandartId);
+
+			modelBuilder.Entity<AccessoryDescription>()
+				.HasMany(i => i.Files).WithOne(i => i.AccessoryDescription).HasForeignKey(i => i.ParentId);
+
+			modelBuilder.Entity<AccessoryDescription>()
+				.HasMany(i => i.SupplierRelations).WithOne(i => i.AccessoryDescription).HasForeignKey(i => i.KitId);
+
+			#endregion
+
+			#region DamageChart
+
+			modelBuilder.Entity<DamageChart>()
+				.HasOne(i => i.AccessoryDescription)
+				.WithMany(i => i.DamageCharts)
+				.HasForeignKey(i => i.AircraftModelId);
+
+			modelBuilder.Entity<DamageChart>()
+				.HasMany(i => i.Files).WithOne(i => i.DamageChart).HasForeignKey(i => i.ParentId);
+
+			#endregion
+
+			#region DefferedCategorie
+
+			modelBuilder.Entity<DefferedCategorie>()
+				.HasOne(i => i.AccessoryDescription)
+				.WithMany(i => i.DefferedCategories)
+				.HasForeignKey(i => i.AircraftModelId);
+
+			#endregion
+
+			#region LifeLimitCategorie
+
+			modelBuilder.Entity<LifeLimitCategorie>()
+				.HasOne(i => i.AccessoryDescription)
+				.WithMany(i => i.LifeLimitCategories)
+				.HasForeignKey(i => i.AircraftModelId);
+
+			#endregion
+
+			#region Location
+
+			modelBuilder.Entity<Location>()
+				.HasOne(i => i.LocationsType)
+				.WithMany(i => i.Locations)
+				.HasForeignKey(i => i.LocationsTypeId);
+
+			#endregion
+
+			#region LocationsType
+
+			modelBuilder.Entity<LocationsType>()
+				.HasOne(i => i.Department)
+				.WithMany(i => i.LocationsTypes)
+				.HasForeignKey(i => i.DepartmentId);
+
+			#endregion
+
+			#region Nomenclature
+
+			modelBuilder.Entity<Nomenclature>()
+				.HasOne(i => i.Department)
+				.WithMany(i => i.Nomenclatures)
+				.HasForeignKey(i => i.DepartmentId);
+
+			#endregion
+
+			#region NonRoutineJob
+
+			modelBuilder.Entity<NonRoutineJob>()
+				.HasOne(i => i.ATAChapter)
+				.WithMany(i => i.NonRoutineJobs)
+				.HasForeignKey(i => i.ATAChapterId);
+
+			#endregion
+
+			#region Specialization
+
 			modelBuilder.Entity<Specialization>()
-                .HasOne(a => a.Department)
-                .WithMany(b => b.Specializations)
-                .HasForeignKey(b => b.DepartmentId);
-        }
+				.HasOne(a => a.Department)
+				.WithMany(b => b.Specializations)
+				.HasForeignKey(b => b.DepartmentId);
+
+			#endregion
+
+		}
 	}
 }
