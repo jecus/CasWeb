@@ -47,7 +47,7 @@ namespace BusinessLayer
             return new List<AGWCategorieView>(agwCategory.Select(i => i.ToBlView()));
         }
 
-        public static List<AGWCategorie> ToBlView(this IEnumerable<AGWCategorieView> agwCategory)
+        public static List<AGWCategorie>ToEntity(this IEnumerable<AGWCategorieView> agwCategory)
         {
             return new List<AGWCategorie>(agwCategory.Select(i => i.ToEntity()));
         }
@@ -178,7 +178,7 @@ namespace BusinessLayer
             return new List<AircraftView>(aircraft.Select(i => i.ToBlView()));
         }
 
-        public static List<Aircraft> ToBlView(this IEnumerable<AircraftView> aircraft)
+        public static List<Aircraft> ToEntity(this IEnumerable<AircraftView> aircraft)
         {
             return new List<Aircraft>(aircraft.Select(i => i.ToEntity()));
         }
@@ -214,7 +214,7 @@ namespace BusinessLayer
             return new List<DepartmentView>(department.Select(i => i.ToBlView()));
         }
 
-        public static List<Department> ToBlView(this IEnumerable<DepartmentView> department)
+        public static List<Department> ToEntity(this IEnumerable<DepartmentView> department)
         {
             return new List<Department>(department.Select(i => i.ToEntity()));
         }
@@ -236,7 +236,7 @@ namespace BusinessLayer
                 PartNumber = com.PartNumber,
                 SerialNumber = com.SerialNumber,
                 BaseComponentTypeId = com.BaseComponentTypeId,
-                //TransferRecords = com.TransferRecords,
+                TransferRecords = com.TransferRecords.ToEntity(),
                 Model = com.Model?.ToEntity()
             };
         }
@@ -254,7 +254,7 @@ namespace BusinessLayer
                 PartNumber = com.PartNumber,
                 SerialNumber = com.SerialNumber,
                 BaseComponentTypeId = com.BaseComponentTypeId,
-                //TransferRecords = com.TransferRecords,
+                TransferRecords = com.TransferRecords?.ToBlView(),
                 Model = com.Model?.ToBlView()
             };
         }
@@ -264,7 +264,7 @@ namespace BusinessLayer
             return new List<BaseComponentView>(component.Select(i => i.ToBlView()));
         }
 
-        public static List<Component> ToBlView(this IEnumerable<BaseComponentView> component)
+        public static List<Component> ToEntity(this IEnumerable<BaseComponentView> component)
         {
             return new List<Component>(component.Select(i => i.ToEntity()));
         }
@@ -352,7 +352,7 @@ namespace BusinessLayer
             return new List<DocumentView>(document.Select(i => i.ToBlView()));
         }
 
-        public static List<Document> ToBlView(this IEnumerable<DocumentView> document)
+        public static List<Document> ToEntity(this IEnumerable<DocumentView> document)
         {
             return new List<Document>(document.Select(i => i.ToEntity()));
         }
@@ -388,7 +388,7 @@ namespace BusinessLayer
             return new List<DocumentSubTypeView>(document.Select(i => i.ToBlView()));
         }
 
-        public static List<DocumentSubType> ToBlView(this IEnumerable<DocumentSubTypeView> document)
+        public static List<DocumentSubType> ToEntity(this IEnumerable<DocumentSubTypeView> document)
         {
             return new List<DocumentSubType>(document.Select(i => i.ToEntity()));
         }
@@ -427,7 +427,7 @@ namespace BusinessLayer
             return new List<LocationView>(location.Select(i => i.ToBlView()));
         }
 
-        public static List<Location> ToBlView(this IEnumerable<LocationView> location)
+        public static List<Location> ToEntity(this IEnumerable<LocationView> location)
         {
             return new List<Location>(location.Select(i => i.ToEntity()));
         }
@@ -465,7 +465,7 @@ namespace BusinessLayer
             return new List<LocationsTypeView>(locationsType.Select(i => i.ToBlView()));
         }
 
-        public static List<LocationsType> ToBlView(this IEnumerable<LocationsTypeView> locationsType)
+        public static List<LocationsType> ToEntity(this IEnumerable<LocationsTypeView> locationsType)
         {
             return new List<LocationsType>(locationsType.Select(i => i.ToEntity()));
         }
@@ -501,7 +501,7 @@ namespace BusinessLayer
             return new List<ModelView>(models.Select(i => i.ToBlView()));
         }
 
-        public static List<AccessoryDescription> ToBlView(this IEnumerable<ModelView> models)
+        public static List<AccessoryDescription> ToEntity(this IEnumerable<ModelView> models)
         {
             return new List<AccessoryDescription>(models.Select(i => i.ToEntity()));
         }
@@ -537,7 +537,7 @@ namespace BusinessLayer
             return new List<NomenclatureView>(nomenclature.Select(i => i.ToBlView()));
         }
 
-        public static List<Nomenclature> ToBlView(this IEnumerable<NomenclatureView> nomenclature)
+        public static List<Nomenclature> ToEntity(this IEnumerable<NomenclatureView> nomenclature)
         {
             return new List<Nomenclature>(nomenclature.Select(i => i.ToEntity()));
         }
@@ -589,7 +589,7 @@ namespace BusinessLayer
             return new List<OperatorView>(oper.Select(i => i.ToBlView()));
         }
 
-        public static List<Operator> ToBlView(this IEnumerable<OperatorView> oper)
+        public static List<Operator> ToEntity(this IEnumerable<OperatorView> oper)
         {
             return new List<Operator>(oper.Select(i => i.ToEntity()));
         }
@@ -625,7 +625,7 @@ namespace BusinessLayer
             return new List<ServiceTypeView>(servicetype.Select(i => i.ToBlView()));
         }
 
-        public static List<ServiceType> ToBlView(this IEnumerable<ServiceTypeView> servicetype)
+        public static List<ServiceType> ToEntity(this IEnumerable<ServiceTypeView> servicetype)
         {
             return new List<ServiceType>(servicetype.Select(i => i.ToEntity()));
         }
@@ -669,6 +669,7 @@ namespace BusinessLayer
                 GradeIssueDate = specialist.GradeIssueDate,
                 Additional = specialist.Additional,
                 Combination = specialist.Combination,
+				Specialization = specialist.Specialization.ToEntity()
             };
         }
 
@@ -704,6 +705,7 @@ namespace BusinessLayer
                 GradeIssueDate = specialist.GradeIssueDate,
                 Additional = specialist.Additional,
                 Combination = specialist.Combination ?? "",
+                Specialization = specialist.Specialization?.ToBlView(),
                 
             };
 
@@ -714,7 +716,7 @@ namespace BusinessLayer
             return new List<SpecialistView>(specialist.Select(i => i.ToBlView()));
         }
 
-        public static List<Specialist> ToBlView(this IEnumerable<SpecialistView> specialist)
+        public static List<Specialist> ToEntity(this IEnumerable<SpecialistView> specialist)
         {
             return new List<Specialist>(specialist.Select(i => i.ToEntity()));
         }
@@ -755,7 +757,7 @@ namespace BusinessLayer
             return new List<SpecializationView>(specialization.Select(i => i.ToBlView()));
         }
 
-        public static List<Specialization> ToBlView(this IEnumerable<SpecializationView> specialization)
+        public static List<Specialization> ToEntity(this IEnumerable<SpecializationView> specialization)
         {
             return new List<Specialization>(specialization.Select(i => i.ToEntity()));
         }
@@ -789,7 +791,7 @@ namespace BusinessLayer
             return new List<StoreView>(stores.Select(i => i.ToBlView()));
         }
 
-        public static List<Store> ToBlView(this IEnumerable<StoreView> stores)
+        public static List<Store> ToEntity(this IEnumerable<StoreView> stores)
         {
             return new List<Store>(stores.Select(i => i.ToEntity()));
         }
@@ -853,7 +855,7 @@ namespace BusinessLayer
             return new List<SupplierView>(supplier.Select(i => i.ToBlView()));
         }
 
-        public static List<Supplier> ToBlView(this IEnumerable<SupplierView> supplier)
+        public static List<Supplier> ToEntity(this IEnumerable<SupplierView> supplier)
         {
             return new List<Supplier>(supplier.Select(i => i.ToEntity()));
         }
@@ -876,7 +878,6 @@ namespace BusinessLayer
                 DestinationObjectType = transrec.DestinationObjectType,
                 TransferDate = transrec.TransferDate,
                 Position = transrec.Position,
-                Component = transrec.Component.ToEntity(),
                 
             };
         }
@@ -896,8 +897,6 @@ namespace BusinessLayer
                 DestinationObjectType = transrec.DestinationObjectType,
                 TransferDate = transrec.TransferDate,
                 Position = transrec.Position,
-                Component = transrec.Component.ToBlView(),
-
             };
         }
 
@@ -906,7 +905,7 @@ namespace BusinessLayer
             return new List<TransferRecordView>(transrec.Select(i => i.ToBlView()));
         }
 
-        public static List<TransferRecord> ToBlView(this IEnumerable<TransferRecordView> transrec)
+        public static List<TransferRecord> ToEntity(this IEnumerable<TransferRecordView> transrec)
         {
             return new List<TransferRecord>(transrec.Select(i => i.ToEntity()));
         }
@@ -946,7 +945,7 @@ namespace BusinessLayer
             return new List<UserView>(user.Select(i => i.ToBlView()));
         }
 
-        public static List<User> ToBlView(this IEnumerable<UserView> user)
+        public static List<User> ToEntity(this IEnumerable<UserView> user)
         {
             return new List<User>(user.Select(i => i.ToEntity()));
         }

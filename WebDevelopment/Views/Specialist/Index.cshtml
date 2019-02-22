@@ -38,17 +38,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                       
+                     
+                <div class="modal fade" id="large-Modal" tabindex="-1" role="dialog" style="display: none; z-index: 1050;" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div id="dialogContent" class="modal-content">
+
+                        </div>
+                    </div>
+                </div>
+
                 @foreach (var spec in specialists)
                 {
                     <tr>
                         <td>
-                            <div class="modal fade" id="large-Modal" tabindex="-1" role="dialog">
-                                <div id="dialogContent" class="modal-dialog modal-lg" role="document">
+                           
+                            <a href=@Url.Action("Get", "Document", new {id = spec.ItemId}) , class="modalLargeBtn btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon">
+                                <i class="fa fa-file-pdf-o"></i>
+                            </a>
 
-                                </div>
-                            </div>
-                            @Html.ActionLink("123", "Details", "Specialist", new { id = spec.ItemId}, new { @class = "modalLargeBtn" });
+                            @*@Html.ActionLink("", "Get", "Document", new { id = spec.ItemId}, new { @class = "modalLargeBtn btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" })*@
                         </td>
                         <td>@spec.Status</td>
                         <td>@spec.FirstName</td>
