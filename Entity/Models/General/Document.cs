@@ -20,7 +20,7 @@ namespace Entity.Models.General
         public int DocTypeId { get; set; }
 
         [Column("SubTypeId")]
-        public int SubTypeId { get; set; }
+        public int? SubTypeId { get; set; }
 
         [Column("Description")]
         public string Description { get; set; }
@@ -86,7 +86,7 @@ namespace Entity.Models.General
         public int? ServiceTypeId { get; set; }
 
         [Column("ResponsibleOccupationId")]
-        public int ResponsibleOccupationId { get; set; }
+        public int? ResponsibleOccupationId { get; set; }
 
         [Column("Remarks")]
         public string Remarks { get; set; }
@@ -95,7 +95,7 @@ namespace Entity.Models.General
         public int LocationId { get; set; }
 
         [Column("SupplierId")]
-        public int SupplierId { get; set; }
+        public int? SupplierId { get; set; }
 
         [Column("ParentAircraftId")]
         public int? ParentAircraftId { get; set; }
