@@ -308,13 +308,14 @@ namespace BusinessLayer
                 LocationId = document.Location?.ItemId ?? -1,
                 SupplierId = document.Supplier?.ItemId ?? -1,
                 ParentAircraftId = document.ParentAircraftId,
-                IdNumber = document.IdNumber
+                IdNumber = document.IdNumber,
+
             };
         }
 
         public static DocumentView ToBlView(this Document document)
         {
-            return new DocumentView()
+            var doc = new DocumentView()
             {
                 ItemId = document.ItemId,
                 IsDeleted = document.IsDeleted,
@@ -343,8 +344,18 @@ namespace BusinessLayer
                 ParentAircraftId = document.ParentAircraftId ?? default(int),
                 IdNumber = document.IdNumber,
                 Supplier = document.Supplier?.ToBlView(),
-                
+                ResponsibleOccupation = document.ResponsibleOccupation?.ToBlView(),
+                Nomenсlature = document.Nomenсlature?.ToBlView(),
+                ServiceType = document.ServiceType?.ToBlView(),
+                Location = document.Location?.ToBlView()
+
             };
+            var department = document.Department?.ToBlView();
+            if (department != null)
+                doc.Department = department.IsDeleted ? DepartmentView.Unknown : department;
+            else doc.Department = DepartmentView.Unknown;
+
+            return doc;
         }
 
         public static List<DocumentView> ToBlView(this IEnumerable<Document> document)

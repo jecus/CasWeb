@@ -52,11 +52,11 @@
                     <tr>
                         <td>
                            
-                            <a href=@Url.Action("Get", "Document", new {id = spec.ItemId}) , class="modalLargeBtn btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon">
-                                <i class="fa fa-file-pdf-o"></i>
+                            <a href=@Url.Action("Modal", "Document", new {id = spec.ItemId}) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon">
+                                <i class="fa fa-pencil"></i>
                             </a>
 
-                            @*@Html.ActionLink("", "Get", "Document", new { id = spec.ItemId}, new { @class = "modalLargeBtn btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" })*@
+                            @*@Html.ActionLink("", "Modal", "Document", new { id = spec.ItemId}, new { @class = "modalLargeBtn btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" })*@
                         </td>
                         <td>@spec.Status</td>
                         <td>@spec.FirstName</td>

@@ -8,6 +8,7 @@ namespace BusinessLayer.Views
     {
         private LocationsTypeView _facility;
         private FamilyStatus _familyStatus;
+        private SpecializationView _specialization;
 
         public string FirstName { get; set; }
 
@@ -92,6 +93,10 @@ namespace BusinessLayer.Views
             set => _facility = value;
         }
 
-        public SpecializationView Specialization { get; set; }
+        public SpecializationView Specialization
+        {
+            get => _specialization ?? SpecializationView.Unknown;
+            set => _specialization = value;
+        }
     }
 }

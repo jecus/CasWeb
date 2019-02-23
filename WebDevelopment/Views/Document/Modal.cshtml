@@ -1,0 +1,298 @@
+﻿@using BusinessLayer.Dictionaties
+@using BusinessLayer.Views
+@using Entity.Enums
+@model BusinessLayer.Views.DocumentView
+
+@{
+    var specializations = (List<SpecializationView>)ViewData["Specialization"];
+    var documentSubTypes = (List<DocumentSubTypeView>)ViewData["DocumentSubTypes"];
+    var suppliers = (List<SupplierView>)ViewData["Suppliers"];
+    var serviceTypes = (List<ServiceTypeView>)ViewData["ServiceTypes"];
+    var nomenclatures = (List<NomenclatureView>)ViewData["Nomenclatures"];
+    var departments = (List<DepartmentView>)ViewData["Departments"];
+    var locations = (List<LocationView>)ViewData["Locations"];
+}
+
+<form>
+<div class="modal-content">
+
+<div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+
+<div class="modal-body">
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Doc. Type:</label>
+    <div class="col-sm-4">
+        <select name="select" class="form-control">
+            <option selected>@Html.DisplayFor(model => model.DocumentType.FullName) </option>
+
+            @foreach (DocumentType value in DocumentType.Items.ToList())
+            {
+                <option>@value</option>
+            }
+        </select>
+    </div>
+    <label class="col-sm-2 col-form-label">Title:</label>
+    <div class="col-sm-4">
+        <select name="select" class="form-control">
+            <option selected>@Html.DisplayFor(model => model.DocumentSubType.Name) </option>
+
+            @foreach (var value in @documentSubTypes)
+                    {
+                        <option>@value.Name</option>
+                    }
+        </select>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Doc №:</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.ContractNumber)">
+    </div>
+    <label class="col-sm-2 col-form-label">ID №:</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.IdNumber)">
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+            
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Description:</label>
+            <div class="col-sm-8">
+                <textarea rows="5" cols="5" class="form-control" placeholder="@Html.DisplayFor(model => model.Description)"></textarea>
+            </div>
+        </div>
+            
+    </div>
+    <div class="col-sm-6">
+            
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Responsible:</label>
+            <div class="col-sm-8">
+                <select name="select" class="form-control">
+                    <option selected>@Html.DisplayFor(model => model.ResponsibleOccupation.FullName) </option>
+
+                    @foreach (var value in @specializations)
+                    {
+                        <option>@value.FullName</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Contractor:</label>
+            <div class="col-sm-8">
+                <select name="select" class="form-control">
+                    <option selected>@Html.DisplayFor(model => model.Supplier.Name) </option>
+
+                    @foreach (var value in @suppliers)
+                    {
+                        <option>@value.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Prolong. way:</label>
+            <div class="col-sm-8">
+                <select name="select" class="form-control">
+                    <option selected>@Html.DisplayFor(Enum => Enum.ProlongationWay) </option>
+
+                    @foreach (object value in Enum.GetValues(typeof(ProlongationWay)).Cast<ProlongationWay>().Where(pw => pw != ProlongationWay.Unknown).Distinct())
+                    {
+                        <option>@value</option>
+                    }
+                </select>
+            </div>
+        </div>
+            
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Service Type:</label>
+    <div class="col-sm-4">
+        <select name="select" class="form-control">
+            <option selected>@Html.DisplayFor(model => model.ServiceType.FullName) </option>
+
+            @foreach (var value in @serviceTypes)
+                    {
+                        <option>@value.FullName</option>
+                    }
+        </select>
+    </div>
+    <label class="col-sm-2 col-form-label">Nomenclature:</label>
+    <div class="col-sm-4">
+        <select name="select" class="form-control">
+            <option selected>@Html.DisplayFor(model => model.Nomenсlature.FullName) </option>
+
+            @foreach (var value in @nomenclatures)
+                    {
+                        <option>@value.FullName</option>
+                    }
+        </select>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Department:</label>
+    <div class="col-sm-4">
+        <select name="select" class="form-control">
+            <option selected>@Html.DisplayFor(model => model.Department.FullName) </option>
+
+            @foreach (var value in @departments)
+                    {
+                        <option>@value.FullName</option>
+                    }
+        </select>
+    </div>
+    <label class="col-sm-2 col-form-label">Location:</label>
+    <div class="col-sm-4">
+        <select name="select" class="form-control">
+            <option selected>@Html.DisplayFor(model => model.Location.FullName) </option>
+
+            @foreach (var value in @locations)
+                    {
+                        <option>@value.FullName</option>
+                    }
+        </select>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">№ Issue:</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.IssueNumber)">
+    </div>
+    <label class="col-sm-2 col-form-label">Revision:</label>
+    <div class="col-sm-4">
+        <input type="date" class="form-control" placeholder="@Html.DisplayFor(model => model.RevisionDateFrom.Value)">
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Issue:</label>
+    <div class="col-sm-4">
+        <input type="date" class="form-control" placeholder="@Html.DisplayFor(model => model.IssueDateValidTo)">
+    </div>
+    <label class="col-sm-2 col-form-label">Rev.№:</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.RevNumber)">
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-6">
+        <div class="checkbox-fade fade-in-primary">
+            <label>
+                <input type="checkbox" value="">
+                <span class="cr">
+                    <i class="cr-icon fa fa-check txt-primary"></i>
+                </span>
+                <span>ValidTo</span>
+            </label>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="checkbox-fade fade-in-primary">
+            <label>
+                <input type="checkbox" value="">
+                <span class="cr">
+                    <i class="cr-icon fa fa-check txt-primary"></i>
+                </span>
+                <span>ValidTo</span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">ValidTo:</label>
+    <div class="col-sm-4">
+        <input type="date" class="form-control" placeholder="@Html.DisplayFor(model => model.IssueDateValidTo)">
+    </div>
+    <label class="col-sm-2 col-form-label">ValidTo:</label>
+    <div class="col-sm-4">
+        <input type="date" class="form-control" placeholder="@Html.DisplayFor(model => model.RevNumber)">
+    </div>
+</div>
+    
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Notify days</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder=" " disabled>
+    </div>
+    <label class="col-sm-2 col-form-label">Notify days</label>
+    <div class="col-sm-4">
+        <input type="text" class="form-control" placeholder=" " disabled>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Remarks:</label>
+                <div class="col-sm-8">
+                    <textarea rows="5" cols="5" class="form-control" placeholder="@Html.DisplayFor(model => model.Remarks)"></textarea>
+                </div>
+            </div>
+        
+    </div>
+    <div class="col-sm-6">
+        
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Status:</label>
+                <div class="col-sm-8">
+                    <div class="checkbox-fade fade-in-primary">
+                        <label>
+                            <input type="checkbox" value="">
+                            <span class="cr">
+                                <i class="cr-icon fa fa-check txt-primary"></i>
+                            </span>
+                            <span>Closed</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-fade fade-in-primary">
+                        <label>
+                            <input type="checkbox" value="">
+                            <span class="cr">
+                                <i class="cr-icon fa fa-check txt-primary"></i>
+                            </span>
+                            <span>Aboard</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-fade fade-in-primary">
+                        <label>
+                            <input type="checkbox" value="">
+                            <span class="cr">
+                                <i class="cr-icon fa fa-check txt-primary"></i>
+                            </span>
+                            <span>Privy</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">File:</label>
+                <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon"><i class="fa fa-file-pdf-o"></i></button>
+            </div>
+        
+    </div>
+</div>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary waves-effect waves-light ">Save changes</button>
+</div>
+</div>
+</form>

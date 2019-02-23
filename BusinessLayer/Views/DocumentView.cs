@@ -34,7 +34,7 @@ namespace BusinessLayer.Views
 
         public string ShortDescription
         {
-            get { return Description.Length > 30 ? Description.Substring(0, 29).Insert(29, "...") : Description; }
+            get { return Description.Length > 60 ? Description.Substring(0, 59).Insert(59, "...") : Description; }
         }
 
         public DateTime IssueDateValidFrom { get; set; }
@@ -46,6 +46,11 @@ namespace BusinessLayer.Views
         public int? IssueNotify { get; set; }
 
         public string ContractNumber { get; set; }
+
+        public string ShortContractNumber
+        {
+            get { return ContractNumber.Length > 15 ? ContractNumber.Substring(0, 14).Insert(14, "...") : ContractNumber; }
+        }
 
         public bool? Revision { get; set; }
 

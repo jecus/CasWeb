@@ -16,33 +16,21 @@
                     <table id="footer-search" class="table table-striped table-bordered nowrap">
 
                         <thead>
-                        <tr>
-                            <th>File</th>
-                            <th>Type</th>
-                            <th>Title</th>
-                            <th>№</th>
-                            <th>Id №</th>
-                            <th>Description</th>
-                            <th>Issue</th>
-                            <th>№ Issue</th>
-                            <th>Valid To</th>
-                            @*<th>Remain</th>*@
-                            <th>Rev.Date</th>
-                            <th>№ Rev.</th>
-                            <th>Valid To</th>
-                            @*<th>Remain</th>*@
-                            <th>Department</th>
-                            <th>Responsible</th>
-                            <th>Service Type</th>
-                            <th>Aboard</th>
-                            <th>Privy</th>
-                            <th>Nomenclature</th>
-                            <th>Location</th>
-                            <th>Prolongation</th>
-                            @*<th>Contractor</th>
-                            <th>Status</th>*@
-                            <th>Remark</th>
-                        </tr>
+                            <tr>
+                                <th>  </th>
+                               
+                                <th>№ Doc</th>
+
+                                <th>Description</th>
+                                <th>Issue</th>
+                                <th>№ Issue</th>
+                                <th>Valid To</th>
+
+                                <th>Rev.Date</th>
+                                <th>№ Rev.</th>
+                                <th>Valid To</th>
+
+                            </tr>
                         </thead>
 
                         <tbody>
@@ -58,78 +46,60 @@
 
                         @foreach (var doc in documents)
                         {
-                            <tr>
-                                <td>
-                                    @if (@doc.ItemFileLink != null)
-                                    {
-                                        <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@doc.ItemFileLink?.FileId" onclick="location.href = '@Url.Action("OpenPdf", "File", new {fileId = @doc.ItemFileLink.FileId})'">
-                                            <i class="fa fa-file-pdf-o"></i>
-                                        </button>
+                        <tr>
+                            <td>
+                                <a href=@Url.Action("Modal", "Document", new {id = doc.ItemId}) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            
+                                <a class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                                @if (@doc.ItemFileLink != null)
+                                {
+                                    <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@doc.ItemFileLink?.FileId" onclick="location.href = '@Url.Action("OpenPdf", "File", new {fileId = @doc.ItemFileLink.FileId})'">
+                                        <i class="fa fa-file-pdf-o"></i>
+                                    </button>
 
-                                    }
-                                    else
-                                    {
-                                        <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-pdf-o"></i></button>
-                                    }
-                                    
-                                </td>
-                                <td>@doc.DocumentType</td>
-                                <td>@doc.DocumentSubType.Name</td>
-                                <td>@doc.ContractNumber</td>
-                                <td>@doc.IdNumber</td>
-                                <td>@doc.ShortDescription</td>
-                                <td>@doc.IssueDateValidFrom.ToShortDateString()</td>
-                                <td>@doc.IssueNumber</td>
-                                <td>@doc.IssueDateValidTo.ToShortDateString()</td>
-                                @*<td>Remain</td>*@
-                                <td>@doc.RevisionDateFrom.Value.ToShortDateString()</td>
-                                <td>@doc.RevNumber</td>
-                                <td>@doc.IssueDateValidTo.ToShortDateString()</td>
-                                @*<td>@doc.Remain</td>*@
-                                <td>@doc.Department.FullName</td>
-                                <td>@doc.ResponsibleOccupation.FullName</td>
-                                <td>@doc.ServiceType.FullName</td>
-                                <td>@doc.Aboard.ToYesNo()</td>
-                                <td>@doc.Privy.ToYesNo()</td>
-                                <td>@doc.Nomenсlature.FullName</td>
-                                <td>@doc.Location.FullName</td>
-                                <td>@doc.ProlongationWay</td>
-                                @*<td>@doc.</td>
-                                <td>@doc.</td>*@
-                                <td>@doc.Remarks</td>
+                                }
+                                else
+                                {
+                                    <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-pdf-o"></i></button>
+                                }
 
-                            </tr>
+                            </td>
+                           
+                            <td>@doc.ShortContractNumber</td>
+                            
+                            <td>@doc.ShortDescription</td>
+                            <td>@doc.IssueDateValidFrom.ToString("yyyy.MM.dd")</td>
+                            <td>@doc.IssueNumber</td>
+                            <td>@doc.IssueDateValidTo.ToString("yyyy.MM.dd")</td>
+                           
+                            <td>@doc.RevisionDateFrom.Value.ToString("yyyy.MM.dd")</td>
+                            <td>@doc.RevNumber</td>
+                            <td>@doc.IssueDateValidTo.ToString("yyyy.MM.dd")</td>
+                           
+
+                        </tr>
                         }
 
                         </tbody>
                         <tfoot>
-                        <tr>
-                            <th>File</th>
-                            <th>Type</th>
-                            <th>Title</th>
-                            <th>№</th>
-                            <th>Id №</th>
-                            <th>Description</th>
-                            <th>Issue</th>
-                            <th>№ Issue</th>
-                            <th>Valid To</th>
-                            @*<th>Remain</th>*@
-                            <th>Rev.Date</th>
-                            <th>№ Rev.</th>
-                            <th>Valid To</th>
-                            @*<th>Remain</th>*@
-                            <th>Department</th>
-                            <th>Responsible</th>
-                            <th>Service Type</th>
-                            <th>Aboard</th>
-                            <th>Privy</th>
-                            <th>Nomenclature</th>
-                            <th>Location</th>
-                            <th>Prolongation</th>
-                            @*<th>Contractor</th>
-                                  <th>Status</th>*@
-                            <th>Remark</th>
-                        </tr>
+                            <tr>
+                                <th>  </th>
+
+                                <th>№ Doc</th>
+                                
+                                <th>Description</th>
+                                <th>Issue</th>
+                                <th>№ Issue</th>
+                                <th>Valid To</th>
+                                
+                                <th>Rev.Date</th>
+                                <th>№ Rev.</th>
+                                <th>Valid To</th>
+                                </tr>
                         </tfoot>
                     </table>
                 </div>

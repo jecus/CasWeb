@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using BusinessLayer;
 using Entity.Extentions;
 using Entity.Infrastructure;
+using Entity.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +35,12 @@ namespace WebDevelopment.Controllers
             ViewData["Specialists"] = spec;
 
             return View();
+        }
+
+        public IActionResult Details(int id)
+        {
+            Specialist c = _db.Specialists.FirstOrDefault(sp => sp.ItemId == id);
+            return PartialView(c);
         }
     }
 }
