@@ -80,7 +80,7 @@ namespace Entity.Models.General
         public int? NomenсlatureId { get; set; }
 
         [Column("ProlongationWayId")]
-        public ProlongationWay ProlongationWay { get; set; }
+        public int? ProlongationWay { get; set; }
 
         [Column("ServiceTypeId")]
         public int? ServiceTypeId { get; set; }
@@ -92,7 +92,7 @@ namespace Entity.Models.General
         public string Remarks { get; set; }
 
         [Column("LocationId")]
-        public int LocationId { get; set; }
+        public int? LocationId { get; set; }
 
         [Column("SupplierId")]
         public int? SupplierId { get; set; }

@@ -105,7 +105,7 @@
                 <select name="select" class="form-control">
                     <option selected>@Html.DisplayFor(Enum => Enum.ProlongationWay) </option>
 
-                    @foreach (object value in Enum.GetValues(typeof(ProlongationWay)).Cast<ProlongationWay>().Where(pw => pw != ProlongationWay.Unknown).Distinct())
+                    @foreach (var value in Enum.GetValues(typeof(ProlongationWay)).Cast<ProlongationWay>().Distinct())
                     {
                         <option>@value</option>
                     }

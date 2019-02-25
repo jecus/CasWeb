@@ -24,16 +24,7 @@ namespace WebDevelopment.Controllers
             var documents = await _db.Documents
                 .OnlyActive()
                 .AsNoTracking()
-				.Include(i => i.DocumentSubType)
-				.Include(i => i.Supplier)
-				.Include(i => i.ResponsibleOccupation)
-				.Include(i => i.Nomenсlature)
-				.Include(i => i.ServiceType)
-				.Include(i => i.Department)
-				.Include(i => i.Location)
 				.ToListAsync();
-
-            
 
             var docIds = documents.Select(i => i.ItemId);
             var fileLinks = await _db.ItemFileLinks

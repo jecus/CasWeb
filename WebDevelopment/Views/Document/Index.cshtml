@@ -4,6 +4,8 @@
     ViewData["Title"] = "index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var documents = (List<DocumentView>) ViewData["Documents"];
+    var modalUrl = @Url.Action("Modal", "Document", new {id = "_DOCID_"});
+    var fileUrl = @Url.Action("OpenPdf", "File", new {fileId = "_FILEID_" });
 }
 <div class="row">
     <div class="col-sm-12">
@@ -20,12 +22,10 @@
                                 <th>  </th>
                                
                                 <th>№ Doc</th>
-
                                 <th>Description</th>
                                 <th>Issue</th>
                                 <th>№ Issue</th>
                                 <th>Valid To</th>
-
                                 <th>Rev.Date</th>
                                 <th>№ Rev.</th>
                                 <th>Valid To</th>
@@ -48,7 +48,7 @@
                         {
                         <tr>
                             <td>
-                                <a href=@Url.Action("Modal", "Document", new {id = doc.ItemId}) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon">
+                                <a href=@modalUrl.Replace("_DOCID_", doc.ItemId.ToString()) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon">
                                     <i class="fa fa-pencil"></i>
                                 </a>
                             
@@ -57,10 +57,9 @@
                                 </a>
                                 @if (@doc.ItemFileLink != null)
                                 {
-                                    <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@doc.ItemFileLink?.FileId" onclick="location.href = '@Url.Action("OpenPdf", "File", new {fileId = @doc.ItemFileLink.FileId})'">
+                                    <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@doc.ItemFileLink?.FileId" onclick="location.href = '@fileUrl.Replace("_FILEID_", doc.ItemFileLink.FileId?.ToString())'">
                                         <i class="fa fa-file-pdf-o"></i>
                                     </button>
-
                                 }
                                 else
                                 {
