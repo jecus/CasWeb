@@ -10,7 +10,7 @@ namespace BusinessLayer.Views
 {
     public class ComponentView : BaseView
     {
-        public int ComponentCount { get; set; }
+	    public int ComponentCount { get; set; }
 
         public byte[] AverageUtilization { get; set; }
 
@@ -168,5 +168,9 @@ namespace BusinessLayer.Views
             }
 
         }
-    }
+
+        public int DocumentShippingId { get; set; }
+
+        public int DocumentCRSId;
+	}
 }

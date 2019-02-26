@@ -7,6 +7,7 @@ using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
+using Entity.Models.Dictionaries;
 using Entity.Models.General;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -43,14 +44,32 @@ namespace BusinessLayer.Repositiry
                 .AsNoTracking()
                 .ToListAsync();
 
-            var storeView = stores.ToBlView();
+            var documents = await _db.Documents
+	            .Where(i => i.ParentTypeId == SmartCoreType.Component.ItemId)
+	            .ToListAsync();
 
+            var crs = await _db.DocumentSubTypes.AsNoTracking().FirstOrDefaultAsync(i => i.Name == "Component CRS Form");
+            var shipping = await _db.DocumentSubTypes.AsNoTracking().FirstOrDefaultAsync(i => i.Name == "Shipping document");
+
+            var storeView = stores.ToBlView();
             var result = components.ToBlView();
 
-            foreach (var componentView in result)
+			foreach (var componentView in result)
             {
                 SetDestinations(componentView, storeView);
-            }
+
+                var docShipping = documents.FirstOrDefault(d =>
+	                d.ParentID == componentView.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId &&
+	                d.DocumentSubType.ItemId == shipping.ItemId);
+                if (docShipping != null)
+	                componentView.DocumentShippingId = docShipping.ItemId;
+
+                var docCrs = documents.FirstOrDefault(d =>
+	                d.ParentID == componentView.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId && d.DocumentSubType.ItemId == crs.ItemId);
+                if (docCrs != null)
+	                componentView.DocumentCRSId = docCrs.ItemId;
+
+			}
 
             return result;
         }
