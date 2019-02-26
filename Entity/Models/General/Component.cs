@@ -206,7 +206,7 @@ namespace Entity.Models.General
         public bool IsBaseComponent { get; set; }
 
         [Column("LocationId")]
-        public int LocationId { get; set; }
+        public int? LocationId { get; set; }
 
         [Column("Incoming")]
         public bool Incoming { get; set; }

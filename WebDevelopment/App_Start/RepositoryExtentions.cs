@@ -22,6 +22,7 @@ namespace WebDevelopment
 		{
 			services.AddScoped<IUserRepository, UserRepository>();
 			services.AddScoped<IAircraftRepository, AircraftRepository>();
+			services.AddScoped<IComponentRepository, ComponentRepository>();
 			return services;
 		}
 	}

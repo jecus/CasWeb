@@ -22,6 +22,7 @@ namespace WebDevelopment.Controllers
         public async Task <IActionResult> Index()
         {
             var documents = await _db.Documents
+                .Include(i => i.DocumentSubType)
                 .OnlyActive()
                 .AsNoTracking()
 				.ToListAsync();

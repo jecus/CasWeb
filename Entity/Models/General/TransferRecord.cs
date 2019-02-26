@@ -9,7 +9,7 @@ namespace Entity.Models.General
     public class TransferRecord : BaseEntity
     {
         [Column("ParentID")]
-        public int ParentID { get; set; }
+        public int? ParentID { get; set; }
 
         [Column("ParentType")]
         public int? ParentType { get; set; }

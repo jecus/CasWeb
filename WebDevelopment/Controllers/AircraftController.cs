@@ -41,7 +41,7 @@ namespace WebDevelopment.Controllers
             ViewData["MainMenu"] = mainMenu.Items.OrderByDescending(i => i.SubMenu.Count() > 0).ThenBy(i => i.Header).ToList();
             ViewData["Aircraft"] = aircraft;
             ViewData["Operator"] = await _db.Operators.FirstOrDefaultAsync();
-            ViewData["BaseComponents"] = bc.ToBlView();
+            ViewData["BaseComponents"] = bc.ToBaseComponentView();
             return View();
         }
     }

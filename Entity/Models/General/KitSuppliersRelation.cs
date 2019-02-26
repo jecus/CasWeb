@@ -7,7 +7,7 @@ namespace Entity.Models.General
     public class KitSuppliersRelation : BaseEntity
     {
         [Column("KitId")]
-        public int KitId { get; set; }
+        public int? KitId { get; set; }
 
         [Column("SupplierId")]
         public int? SupplierId { get; set; }

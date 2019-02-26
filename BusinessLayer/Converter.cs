@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using BusinessLayer.Dictionaties;
 using BusinessLayer.Views;
 using Entity.Enums;
 using Entity.Models.Dictionaries;
@@ -221,9 +222,9 @@ namespace BusinessLayer
 
         #endregion
 
-        #region Component
+        #region BaseComponent
 
-        public static Component ToEntity(this BaseComponentView com)
+        public static Component ToBaseComponentEntity(this BaseComponentView com)
         {
             return new Component
             {
@@ -241,7 +242,7 @@ namespace BusinessLayer
             };
         }
 
-        public static BaseComponentView ToBlView(this Component com)
+        public static BaseComponentView ToBaseComponentView(this Component com)
         {
             return new BaseComponentView()
             {
@@ -259,14 +260,14 @@ namespace BusinessLayer
             };
         }
 
-        public static List<BaseComponentView> ToBlView(this IEnumerable<Component> component)
+        public static List<BaseComponentView> ToBaseComponentView(this IEnumerable<Component> com)
         {
-            return new List<BaseComponentView>(component.Select(i => i.ToBlView()));
+            return new List<BaseComponentView>(com.Select(i => i.ToBaseComponentView()));
         }
 
-        public static List<Component> ToEntity(this IEnumerable<BaseComponentView> component)
+        public static List<Component> ToBaseComponentEntity(this IEnumerable<BaseComponentView> com)
         {
-            return new List<Component>(component.Select(i => i.ToEntity()));
+            return new List<Component>(com.Select(i => i.ToBaseComponentEntity()));
         }
 
         #endregion
@@ -429,7 +430,8 @@ namespace BusinessLayer
                 IsDeleted = location.IsDeleted,
                 Name = location.Name,
                 FullName = location.FullName,
-                LocationsTypeId = location.LocationsTypeId
+                LocationsTypeId = location.LocationsTypeId,
+                LocationsType = location.LocationsType?.ToBlView(),
             };
         }
 
@@ -873,7 +875,7 @@ namespace BusinessLayer
 
         #endregion
 
-        #region TransferRecord
+        #region TransferRecords
 
         public static TransferRecord ToEntity(this TransferRecordView transrec)
         {
@@ -908,6 +910,7 @@ namespace BusinessLayer
                 DestinationObjectType = transrec.DestinationObjectType,
                 TransferDate = transrec.TransferDate,
                 Position = transrec.Position,
+                State = transrec.State
             };
         }
 
@@ -959,6 +962,233 @@ namespace BusinessLayer
         public static List<User> ToEntity(this IEnumerable<UserView> user)
         {
             return new List<User>(user.Select(i => i.ToEntity()));
+        }
+
+        #endregion
+
+        #region Component
+
+        public static Component ToEntity(this ComponentView comp)
+
+        {
+            return new Component
+            {
+                ItemId = comp.ItemId,
+                IsDeleted = comp.IsDeleted,
+                StartDate = comp.StartDate,
+                ATAChapterId = comp.ATAChapter?.ItemId,
+                PartNumber = comp.PartNumber,
+                Description = comp.Description,
+                SerialNumber = comp.SerialNumber,
+                BatchNumber = comp.BatchNumber,
+                IdNumber = comp.IdNumber,
+                MaintenanceType = comp.MaintenanceType,
+                Remarks = comp.Remarks,
+                Manufacturer = comp.Manufacturer,
+                ManufactureDate = comp.ManufactureDate,
+                DeliveryDate = comp.DeliveryDate,
+                Lifelength = comp.Lifelength,
+                LLPMark = comp.LLPMark,
+                LLPCategories = comp.LLPCategories,
+                LandingGear = (short)comp.LandingGear,
+                AvionicsInventory = (short)comp.AvionicsInventory,
+                ALTPN = comp.ALTPN,
+                MTOGW = comp.MTOGW,
+
+                HushKit = comp.HushKit,
+                Cost = comp.Cost,
+                CostServiceable = comp.CostServiceable,
+                CostOverhaul = comp.CostOverhaul,
+                Measure = comp.Measure,
+
+                Quantity = comp.Quantity,
+                ManHours = comp.ManHours,
+                Warranty = comp.Warranty,
+                WarrantyNotify = comp.WarrantyNotify,
+                Serviceable = comp.Serviceable,
+                ShelfLife = comp.ShelfLife,
+                ExpirationDate = comp.ExpirationDate,
+                NotificationDate = comp.NotificationDate,
+
+                Highlight = comp.Highlight,
+                MPDItem = comp.MPDItem,
+                HiddenRemarks = comp.HiddenRemarks,
+                Supplier = comp.Supplier,
+                LifeLimit = comp.LifeLimit,
+
+                LifeLimitNotify = comp.LifeLimitNotify,
+                KitRequired = comp.KitRequired,
+
+                StartLifelength = comp.StartLifelength,
+                Code = comp.Code,
+
+                Status = (short?)comp.Status,
+                IsBaseComponent = comp.IsBaseComponent,
+
+                LocationId = comp.Location?.ItemId ?? -1,
+
+                Incoming = comp.Incoming,
+
+                Discrepancy = comp.Discrepancy,
+                IsPool = comp.IsPool,
+                IsDangerous = comp.IsDangerous,
+
+                QuantityInput = comp.QuantityIn,
+                FromSupplierId = comp.FromSupplier?.ItemId ?? -1,
+                FromSupplierReciveDate = comp.FromSupplierReciveDate,
+                
+            };
+        }
+
+
+        public static ComponentView ToBlView(this Component comp)
+        {
+            return new ComponentView()
+            {
+                ItemId = comp.ItemId,
+
+                IsDeleted = comp.IsDeleted,
+                StartDate = comp.StartDate ,
+
+                ATAChapter = comp.ATAChapter,
+                PartNumber = comp.PartNumber,
+                Description = comp.Description,
+                SerialNumber = comp.SerialNumber,
+                BatchNumber = comp.BatchNumber,
+
+                IdNumber = comp.IdNumber,
+                MaintenanceType = comp.MaintenanceType,
+                Remarks = comp.Remarks,
+                Manufacturer = comp.Manufacturer,
+
+                ManufactureDate = comp.ManufactureDate,
+                DeliveryDate = comp.DeliveryDate,
+                Lifelength = comp.Lifelength,
+                LLPMark = comp.LLPMark,
+                LLPCategories = comp.LLPCategories,
+                LandingGear = (LandingGearMarkType)comp.LandingGear,
+                AvionicsInventory = comp.AvionicsInventory,
+                ALTPN = comp.ALTPN,
+                MTOGW = comp.MTOGW,
+                HushKit = comp.HushKit,
+                Cost = comp.Cost ?? default(double),
+                CostServiceable = comp.CostServiceable ?? default(double),
+                CostOverhaul = comp.CostOverhaul ?? default(double),
+                Measure = comp.Measure ?? default(int),
+                Quantity = comp.Quantity,
+                ManHours = comp.ManHours ?? default(double),
+                Warranty = comp.Warranty,
+                WarrantyNotify = comp.WarrantyNotify,
+                Serviceable = comp.Serviceable ?? default(bool),
+                ShelfLife = comp.ShelfLife,
+                ExpirationDate = comp.ExpirationDate,
+                NotificationDate = comp.NotificationDate,
+                Highlight = comp.Highlight,
+
+                MPDItem = comp.MPDItem,
+                HiddenRemarks = comp.HiddenRemarks,
+
+                LifeLimit = comp.LifeLimit,
+                LifeLimitNotify = comp.LifeLimitNotify,
+                KitRequired = comp.KitRequired,
+
+                StartLifelength = comp.StartLifelength,
+                Code = comp.Code,
+                Status = (ComponentStatus?)comp.Status,
+                IsBaseComponent = comp.IsBaseComponent,
+                Location = comp.Location?.ToBlView(),
+
+                Incoming = comp.Incoming,
+                Discrepancy = comp.Discrepancy,
+                IsPool = comp.IsPool,
+                IsDangerous = comp.IsDangerous,
+                QuantityIn = comp.QuantityIn,
+                FromSupplier = comp.FromSupplier?.ToBlView(),
+                TransferRecords = comp.TransferRecords?.ToBlView(),
+                FromSupplierReciveDate = comp.FromSupplierReciveDate
+            };
+           
+        }
+
+
+        public static List<ComponentView> ToBlView(this IEnumerable<Component> comp)
+        {
+            return new List<ComponentView>(comp.Select(i => i.ToBlView()));
+        }
+
+        public static List<Component> ToEntity(this IEnumerable<ComponentView> comp)
+        {
+            return new List<Component>(comp.Select(i => i.ToEntity()));
+        }
+        #endregion
+
+        #region ComponentDirective
+
+        public static ComponentDirective ToEntity(this ComponentDirectiveView comdir)
+        {
+            return new ComponentDirective
+
+            {
+                ItemId = comdir.ItemId,
+                IsDeleted = comdir.IsDeleted,
+                DirectiveType = comdir.DirectiveType,
+                Threshold = comdir.Threshold,
+                ManHours = comdir.ManHours,
+                Remarks = comdir.Remarks,
+                Cost = comdir.Cost,
+                Highlight = comdir.Highlight,
+                KitRequired = comdir.KitRequired,
+                HiddenRemarks = comdir.HiddenRemarks,
+                IsClosed = comdir.IsClosed,
+                MPDTaskTypeId = comdir.MPDTaskTypeId,
+                NDTType = (short)comdir.NDTType,
+                ComponentId = comdir.ComponentId,
+                ZoneArea = comdir.ZoneArea,
+                AccessDirective = comdir.AccessDirective,
+                AAM = comdir.AAM,
+                CMM = comdir.CMM,
+                
+            };
+        }
+
+
+        public static ComponentDirectiveView ToBlView(this ComponentDirective comdir)
+        {
+            return new ComponentDirectiveView()
+            {
+                ItemId = comdir.ItemId,
+                IsDeleted = comdir.IsDeleted,
+                DirectiveType = comdir.DirectiveType,
+
+                //TODO:Разобраться почему private set
+                //Threshold = new ComponentDirectiveThreshold(comdirdto.Threshold),
+
+                ManHours = comdir.ManHours ?? default(double),
+                Remarks = comdir.Remarks,
+                Cost = comdir.Cost ?? default(double),
+                Highlight = comdir.Highlight,
+                KitRequired = comdir.KitRequired,
+                HiddenRemarks = comdir.HiddenRemarks,
+                IsClosed = comdir.IsClosed ?? default(bool),
+                MPDTaskTypeId = comdir.MPDTaskTypeId ?? default(int),
+                NDTType = comdir.NDTType,
+                ComponentId = comdir.ComponentId,
+                ZoneArea = comdir.ZoneArea,
+                AccessDirective = comdir.AccessDirective,
+                AAM = comdir.AAM,
+                CMM = comdir.CMM
+            };
+
+        }
+
+        public static List<ComponentDirectiveView> ToBlView(this IEnumerable<ComponentDirective> comdir)
+        {
+            return new List<ComponentDirectiveView>(comdir.Select(i => i.ToBlView()));
+        }
+
+        public static List<ComponentDirective> ToEntity(this IEnumerable<ComponentDirectiveView> comdir)
+        {
+            return new List<ComponentDirective>(comdir.Select(i => i.ToEntity()));
         }
 
         #endregion
