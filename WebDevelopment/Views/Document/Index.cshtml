@@ -52,9 +52,9 @@
                                     <i class="fa fa-pencil"></i>
                                 </a>
                             
-                                <a class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon">
+                                <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon">
                                     <i class="fa fa-times"></i>
-                                </a>
+                                </button>
                                 @if (@doc.ItemFileLink != null)
                                 {
                                     <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@doc.ItemFileLink?.FileId" onclick="location.href = '@fileUrl.Replace("_FILEID_", doc.ItemFileLink.FileId?.ToString())'">

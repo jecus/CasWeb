@@ -36,6 +36,7 @@ namespace BusinessLayer.Repositiry
                 .Include(i => i.Location.LocationsType)
                 .Include(i => i.SupplierRelations)
                 .Include(i => i.TransferRecords)
+                .Include(i => i.FromSupplier)
                 .Where(i => transferRecordId.Contains(i.ItemId))
                 .ToListAsync();
 
@@ -60,12 +61,12 @@ namespace BusinessLayer.Repositiry
 
                 var docShipping = documents.FirstOrDefault(d =>
 	                d.ParentID == componentView.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId &&
-	                d.DocumentSubType.ItemId == shipping.ItemId);
+	                d.SubTypeId == shipping.ItemId);
                 if (docShipping != null)
 	                componentView.DocumentShippingId = docShipping.ItemId;
 
                 var docCrs = documents.FirstOrDefault(d =>
-	                d.ParentID == componentView.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId && d.DocumentSubType.ItemId == crs.ItemId);
+	                d.ParentID == componentView.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId && d.SubTypeId == crs.ItemId);
                 if (docCrs != null)
 	                componentView.DocumentCRSId = docCrs.ItemId;
 

@@ -6,6 +6,8 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var components = (List<ComponentView>)ViewData["Components"];
+    var docCrs = @Url.Action("Modal", "Document", new { id = "_CRSID_" });
+    var docShip = @Url.Action("Modal", "Document", new { id = "_SHIPID_" });
 }
 
 <div class="row">
@@ -20,6 +22,7 @@
 
                         <thead>
                             <tr>
+                                <th>  </th>
                                 <th>Store</th>
                                 <th>Part. №</th>
                                 <th>Description</th>
@@ -50,7 +53,30 @@
                             @foreach (var str in components)
                             {
                                 <tr>
-                                    <td>@str.ParentStore.StoreName  </td>
+                                    <td>
+                                        @if (str.DocumentCRSId > 0)
+                                        {
+                                            <a href=@docCrs.Replace("_CRSID_", str.DocumentCRSId.ToString()) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon" data-toggle="tooltip" data-placement="top" title="Component CRS Form">
+                                                <i class="fa fa-file-text-o"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-text-o"></i></button>
+                                        }
+
+                                        @if (str.DocumentShippingId > 0)
+                                        {
+                                            <a href=@docShip.Replace("_SHIPID_", str.DocumentShippingId.ToString()) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon" data-toggle="tooltip" data-placement="top" title="Shipping document">
+                                                <i class="fa fa-file-text-o"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-text-o"></i></button>
+                                        }
+                                    </td>
+                                    <td>@str.ParentStore.StoreName</td>
                                     <td>@str.PartNumber</td>
                                     <td>@str.Description</td>
                                     <td>@str.SerialNumber</td>
@@ -61,7 +87,7 @@
                                     <td>@str.  </td>
                                     <td>@str.  </td>
                                     <td>@str.QuantityIn</td>
-                                    <td>@str.Supplier</td>
+                                    <td>@str.FromSupplier.Name</td>
                                     <td>@str.Remarks</td>
                                    
 
@@ -72,6 +98,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th>  </th>
                                 <th>Store</th>
                                 <th>Part. №</th>
                                 <th>Description</th>
