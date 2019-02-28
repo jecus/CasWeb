@@ -35,6 +35,7 @@ namespace BusinessLayer.Repositiry
                 .Include(i => i.Location.LocationsType)
                 .Include(i => i.SupplierRelations)
                 .Include(i => i.TransferRecords)
+                .Include(i => i.FromSupplier)
                 .Where(i => transferRecordId.Contains(i.ItemId))
                 .ToListAsync();
 
