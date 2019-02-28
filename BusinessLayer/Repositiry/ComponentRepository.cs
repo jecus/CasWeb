@@ -7,20 +7,19 @@ using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
-using Entity.Models.Dictionaries;
-using Entity.Models.General;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace BusinessLayer.Repositiry
 {
     public class ComponentRepository : IComponentRepository
     {
         private readonly DatabaseContext _db;
+        private readonly IStockCalculator _stockCalculator;
 
-        public ComponentRepository(DatabaseContext db)
+        public ComponentRepository(DatabaseContext db, IStockCalculator stockCalculator)
         {
-            _db = db;
+	        _db = db;
+	        _stockCalculator = stockCalculator;
         }
 
         public async Task<List<ComponentView>> GetAllStoreComponent()
@@ -60,21 +59,25 @@ namespace BusinessLayer.Repositiry
 
                 var docShipping = documents.FirstOrDefault(d =>
 	                d.ParentID == componentView.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId &&
-	                d.DocumentSubType.ItemId == shipping.ItemId);
+	                d.SubTypeId == shipping.ItemId);
                 if (docShipping != null)
 	                componentView.DocumentShippingId = docShipping.ItemId;
 
                 var docCrs = documents.FirstOrDefault(d =>
-	                d.ParentID == componentView.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId && d.DocumentSubType.ItemId == crs.ItemId);
+	                d.ParentID == componentView.ItemId && 
+	                d.ParentTypeId == SmartCoreType.Component.ItemId && 
+	                d.SubTypeId == crs.ItemId);
                 if (docCrs != null)
 	                componentView.DocumentCRSId = docCrs.ItemId;
-
 			}
 
-            return result;
+			await _stockCalculator.CalculateStock(result, stores.Select(i => i.ItemId).ToList());
+
+
+			return result;
         }
 
-        public void SetDestinations(ComponentView component, List<StoreView> storeViews)
+        private void SetDestinations(ComponentView component, List<StoreView> storeViews)
         {
             var lastTransfer = component.TransferRecords
                 .OrderBy(i => i.TransferDate)

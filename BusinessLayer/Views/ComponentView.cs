@@ -150,8 +150,15 @@ namespace BusinessLayer.Views
 
         public List<TransferRecordView> TransferRecords { get; set; }
 
-
         public StoreView ParentStore { get; set; }
+
+        public GoodsClass GoodsClass
+        {
+	        get
+	        {
+				return Type.HasValue ? GoodsClass.GetItemById(Type.Value) : GoodsClass.Unknown;
+	        }
+        }
 
         public ComponentStorePosition State
         {
@@ -170,7 +177,9 @@ namespace BusinessLayer.Views
         }
 
         public int DocumentShippingId { get; set; }
-
         public int DocumentCRSId;
-	}
+
+		public double Current { get; set; }
+		public double ShouldBeOnStock { get; set; }
+    }
 }

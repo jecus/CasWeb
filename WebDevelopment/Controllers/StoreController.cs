@@ -19,7 +19,6 @@ namespace WebDevelopment.Controllers
 
         public async Task <IActionResult> Index()
         {
-      
             var result = await _componentRepository.GetAllStoreComponent();
             ViewData["Components"] = result.Where(i => i.ParentStore != null).ToList();
 

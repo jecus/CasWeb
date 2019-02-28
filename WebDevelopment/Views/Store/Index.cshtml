@@ -58,8 +58,8 @@
                                     <td>@str.Status</td>
                                     <td>@str.Location?.FullName</td>
                                     <td>@str.Location?.LocationsType.FullName</td>
-                                    <td>@str.  </td>
-                                    <td>@str.  </td>
+                                    <td>1</td>
+                                    <td>@(str.ShouldBeOnStock > 0 ? "Yes" : "No")</td>
                                     <td>@str.QuantityIn</td>
                                     <td>@str.Supplier</td>
                                     <td>@str.Remarks</td>

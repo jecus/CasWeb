@@ -1091,7 +1091,7 @@ namespace BusinessLayer
                 LifeLimit = comp.LifeLimit,
                 LifeLimitNotify = comp.LifeLimitNotify,
                 KitRequired = comp.KitRequired,
-
+				Type = comp.Type,
                 StartLifelength = comp.StartLifelength,
                 Code = comp.Code,
                 Status = (ComponentStatus?)comp.Status,
