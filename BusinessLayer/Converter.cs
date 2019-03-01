@@ -1103,7 +1103,7 @@ namespace BusinessLayer
                 IsPool = comp.IsPool,
                 IsDangerous = comp.IsDangerous,
                 QuantityIn = comp.QuantityIn,
-                FromSupplier = comp.FromSupplier?.ToBlView(),
+                FromSupplier = comp.FromSupplier?.ToBlView() ?? SupplierView.Unknown,
                 TransferRecords = comp.TransferRecords?.ToBlView(),
                 FromSupplierReciveDate = comp.FromSupplierReciveDate
             };

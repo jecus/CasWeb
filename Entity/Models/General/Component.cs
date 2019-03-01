@@ -225,7 +225,7 @@ namespace Entity.Models.General
         public double? QuantityInput { get; set; }
 
         [Column("FromSupplierId")]
-        public int FromSupplierId { get; set; }
+        public int? FromSupplierId { get; set; }
 
         [Column("FromSupplierReciveDate")]
         public DateTime? FromSupplierReciveDate { get; set; }
