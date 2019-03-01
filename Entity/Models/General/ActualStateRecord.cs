@@ -22,7 +22,7 @@ namespace Entity.Models.General
         public int? WorkRegimeTypeId { get; set; }
 
         [Column("ComponentId")]
-        public int ComponentId { get; set; }
+        public int? ComponentId { get; set; }
 
 
         #region Navigation Property

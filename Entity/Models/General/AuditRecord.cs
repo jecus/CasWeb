@@ -8,7 +8,7 @@ namespace Entity.Models.General
 
     {
         [Column("AuditId")]
-        public int AuditId { get; set; }
+        public int? AuditId { get; set; }
 
         [Column("DirectivesId")]
         public int? DirectivesId { get; set; }

@@ -10,7 +10,7 @@ namespace Entity.Models.General
         public DateTime IssueDate { get; set; }
 
         [Column("SpecialistLicenseId")]
-        public int SpecialistLicenseId { get; set; }
+        public int? SpecialistLicenseId { get; set; }
 
         [Column("RightsId")]
         public int RightsId { get; set; }

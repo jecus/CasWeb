@@ -17,7 +17,7 @@ namespace Entity.Models.Dictionaries
         public string FullName { get; set; }
 
         [Column("LocationsTypeId")]
-        public int LocationsTypeId { get; set; }
+        public int? LocationsTypeId { get; set; }
 
         
         public LocationsType LocationsType { get; set; }

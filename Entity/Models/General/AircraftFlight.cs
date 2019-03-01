@@ -120,13 +120,13 @@ namespace Entity.Models.General
         public int? CancelReasonId { get; set; }
 
         [Column("StationFromId")]
-        public int StationFromId { get; set; }
+        public int? StationFromId { get; set; }
 
         [Column("StationToId")]
-        public int StationToId { get; set; }
+        public int? StationToId { get; set; }
 
         [Column("FlightNumber")]
-        public int FlightNumberId { get; set; }
+        public int? FlightNumberId { get; set; }
 
 
        

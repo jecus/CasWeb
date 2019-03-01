@@ -13,10 +13,10 @@ namespace Entity.Models.General
         public DateTime IssueDate { get; set; }
 
         [Column("SpecialistLicenseId")]
-        public int SpecialistLicenseId { get; set; }
+        public int? SpecialistLicenseId { get; set; }
 
         [Column("SpecialistId")]
-        public int SpecialistId { get; set; }
+        public int? SpecialistId { get; set; }
 
 
         #region Navigation Property

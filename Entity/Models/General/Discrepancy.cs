@@ -19,7 +19,7 @@ namespace Entity.Models.General
         public string PilotRemarks { get; set; }
 
         [Column("ATAChapterID")]
-        public int ATAChapterID { get; set; }
+        public int? ATAChapterID { get; set; }
 
         [Column("DirectiveId")]
         public int DirectiveId { get; set; }
@@ -58,7 +58,7 @@ namespace Entity.Models.General
         public int Occurrence { get; set; }
 
         [Column("Auth")]
-        public int AuthId { get; set; }
+        public int? AuthId { get; set; }
 
         [Column("BaseComponentId")]
         public int BaseComponentId { get; set; }

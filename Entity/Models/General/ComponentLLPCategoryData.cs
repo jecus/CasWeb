@@ -9,7 +9,7 @@ namespace Entity.Models.General
     public class ComponentLLPCategoryData : BaseEntity
     {
         [Column("LLPCategoryId")]
-        public int LLPCategoryId { get; set; }
+        public int? LLPCategoryId { get; set; }
 
         [Column("LLPLifeLength")]
         [MaxLength(50)]
@@ -24,7 +24,7 @@ namespace Entity.Models.General
         public byte[] Notify { get; set; }
 
         [Column("ComponentId")]
-        public int ComponentId { get; set; }
+        public int? ComponentId { get; set; }
 
         [Column("LLPLifeLengthCurrent")]
         [MaxLength(50)]

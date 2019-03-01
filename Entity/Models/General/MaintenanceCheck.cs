@@ -21,7 +21,7 @@ namespace Entity.Models.General
         public int ParentAircraft { get; set; }
 
         [Column("CheckTypeId")]
-        public int CheckTypeId { get; set; }
+        public int? CheckTypeId { get; set; }
 
         [Column("Cost")]
         public double? Cost { get; set; }

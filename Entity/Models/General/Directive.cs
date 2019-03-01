@@ -107,7 +107,7 @@ namespace Entity.Models.General
         public string DeferredLogBookRef { get; set; }
 
         [Column("DefferedCategory")]
-        public int DeferredCategoryId { get; set; }
+        public int? DeferredCategoryId { get; set; }
 
         [Column("Number")]
         public string Number { get; set; }

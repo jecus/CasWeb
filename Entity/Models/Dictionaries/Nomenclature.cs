@@ -9,7 +9,7 @@ namespace Entity.Models.Dictionaries
     public class Nomenclature : BaseEntity
     {
         [Column("DepartmentId")]
-        public int DepartmentId { get; set; }
+        public int? DepartmentId { get; set; }
 
         [Column("Name")]
         [MaxLength(50)]

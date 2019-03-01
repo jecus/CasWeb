@@ -17,7 +17,7 @@ namespace Entity.Models.Dictionaries
         public string ShortName { get; set; }
 
         [Column("DepartmentId")]
-        public int DepartmentId { get; set; }
+        public int? DepartmentId { get; set; }
 
         [Column("Level")]
         public int Level { get; set; }

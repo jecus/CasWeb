@@ -15,7 +15,7 @@ namespace Entity.Models.General
         public int RecordTypeID { get; set; }
 
         [Column("ParentID")]
-        public int ParentID { get; set; }
+        public int? ParentID { get; set; }
 
         [Column("ParentTypeId")]
         public int ParentTypeId { get; set; }

@@ -8,7 +8,7 @@ namespace Entity.Models.General
     public class AccessoryRequired : BaseEntity
     {
         [Column("ParentId")]
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
 
         [Column("ParentTypeId")]
         public int? ParentTypeId { get; set; }

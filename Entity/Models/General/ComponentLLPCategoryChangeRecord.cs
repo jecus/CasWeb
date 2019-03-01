@@ -10,7 +10,7 @@ namespace Entity.Models.General
     public class ComponentLLPCategoryChangeRecord : BaseEntity
     {
         [Column("ParentId")]
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
 
         [Column("RecordDate")]
         public DateTime? RecordDate { get; set; }

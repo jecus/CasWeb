@@ -18,7 +18,7 @@ namespace Entity.Models.General
         public string ShortName { get; set; }
 
         [Column("SpecializationID")]
-        public int SpecializationID { get; set; }
+        public int? SpecializationID { get; set; }
 
         [Column("LastName")]
         [MaxLength(256)]
@@ -67,7 +67,7 @@ namespace Entity.Models.General
         public short EducationId { get; set; }
 
         [Column("Location")]
-        public int Location { get; set; }
+        public int? Location { get; set; }
 
         [Column("Status")]
         public short Status { get; set; }

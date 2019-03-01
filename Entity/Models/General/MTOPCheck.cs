@@ -15,7 +15,7 @@ namespace Entity.Models.General
         public int ParentAircraftId { get; set; }
 
         [Column("CheckTypeId")]
-        public int CheckTypeId { get; set; }
+        public int? CheckTypeId { get; set; }
 
         [Column("Thresh")]
         public byte[] Thresh { get; set; }

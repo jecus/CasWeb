@@ -9,7 +9,7 @@ namespace Entity.Models.General
     public class SpecialistTraining : BaseEntity
     {
         [Column("SpecialistId")]
-        public int SpecialistId { get; set; }
+        public int? SpecialistId { get; set; }
 
         [Column("TrainingId")]
         public int? TrainingId { get; set; }
@@ -40,10 +40,10 @@ namespace Entity.Models.General
         public bool? IsClosed { get; set; }
 
         [Column("AircraftTypeID")]
-        public int AircraftTypeID { get; set; }
+        public int? AircraftTypeID { get; set; }
 
         [Column("EmployeeSubjectID")]
-        public int EmployeeSubjectID { get; set; }
+        public int? EmployeeSubjectID { get; set; }
 
         
         public AccessoryDescription AircraftType { get; set; }

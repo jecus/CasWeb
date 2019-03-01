@@ -6,7 +6,7 @@ namespace Entity.Models.General
     public class FlightTrackRecord : BaseEntity
     {
         [Column("FlightTripId")]
-        public int FlightTripId { get; set; }
+        public int? FlightTripId { get; set; }
 
         [Column("FlightPeriodId")]
         public int? FlightPeriodId { get; set; }

@@ -16,10 +16,10 @@ namespace Entity.Models.General
         public int LicenseTypeID { get; set; }
 
         [Column("AircraftTypeID")]
-        public int AircraftTypeID { get; set; }
+        public int? AircraftTypeID { get; set; }
 
         [Column("SpecialistId")]
-        public int SpecialistId { get; set; }
+        public int? SpecialistId { get; set; }
 
         [Column("Notify")]
         [MaxLength(21)]

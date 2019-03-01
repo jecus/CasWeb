@@ -48,7 +48,7 @@ namespace Entity.Models.General
         public short NDTType { get; set; }
 
         [Column("ComponentId")]
-        public int ComponentId { get; set; }
+        public int? ComponentId { get; set; }
 
         [Column("ZoneArea")]
         [MaxLength(256)]

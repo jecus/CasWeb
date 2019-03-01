@@ -21,7 +21,7 @@ namespace Entity.Models.General
         public DateTime ValidTo { get; set; }
 
         [Column("SpecialistLicenseId")]
-        public int SpecialistLicenseId { get; set; }
+        public int? SpecialistLicenseId { get; set; }
 
         [Column("Notify")]
         [MaxLength(21)]

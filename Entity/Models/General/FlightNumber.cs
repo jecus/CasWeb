@@ -9,7 +9,7 @@ namespace Entity.Models.General
     public class FlightNumber : BaseEntity
     {
         [Column("FlightNo")]
-        public int FlightNoId { get; set; }
+        public int? FlightNoId { get; set; }
 
         [Column("Description")]
         public string Description { get; set; }

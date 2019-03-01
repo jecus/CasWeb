@@ -7,7 +7,7 @@ namespace Entity.Models.General
     public class RequestForQuotationRecord : BaseEntity
     {
         [Column("ParentPackageId")]
-        public int ParentPackageId { get; set; }
+        public int? ParentPackageId { get; set; }
 
         [Column("PackageItemId")]
         public int PackageItemId { get; set; }
@@ -43,7 +43,7 @@ namespace Entity.Models.General
         public int Priority { get; set; }
 
         [Column("DefferedCategory")]
-        public int DefferedCategoryId { get; set; }
+        public int? DefferedCategoryId { get; set; }
 
         [Column("DestinationObjectId")]
         public int DestinationObjectId { get; set; }

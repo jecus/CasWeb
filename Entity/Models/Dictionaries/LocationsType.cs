@@ -17,7 +17,7 @@ namespace Entity.Models.Dictionaries
         public string FullName { get; set; }
 
         [Column("DepartmentId")]
-        public int DepartmentId { get; set; }
+        public int? DepartmentId { get; set; }
 
         
         public Department Department { get; set; }

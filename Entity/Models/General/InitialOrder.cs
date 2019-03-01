@@ -46,13 +46,13 @@ namespace Entity.Models.General
         public int TypeOfOperation { get; set; }
 
         [Column("ApprovedById")]
-        public int ApprovedById { get; set; }
+        public int? ApprovedById { get; set; }
 
         [Column("PublishedById")]
-        public int PublishedById { get; set; }
+        public int? PublishedById { get; set; }
 
         [Column("ClosedById")]
-        public int ClosedById { get; set; }
+        public int? ClosedById { get; set; }
 
         [Column("ShipBy")]
         public int ShipBy { get; set; }
@@ -64,7 +64,7 @@ namespace Entity.Models.General
         public int CountryId { get; set; }
 
         [Column("CarrierId")]
-        public int CarrierId { get; set; }
+        public int? CarrierId { get; set; }
 
         [Column("Description")]
         [MaxLength(256)]

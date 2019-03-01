@@ -19,7 +19,7 @@ namespace Entity.Models.General
         public int? TripNameId { get; set; }
 
         [Column("SupplierID")]
-        public int SupplierID { get; set; }
+        public int? SupplierID { get; set; }
 
         
         public TripNames TripName { get; set; }

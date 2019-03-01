@@ -11,7 +11,7 @@ namespace Entity.Models.General
     public class Document : BaseEntity
     {
         [Column("ParentID")]
-        public int ParentID { get; set; }
+        public int? ParentID { get; set; }
 
         [Column("ParentTypeId")]
         public int ParentTypeId { get; set; }
