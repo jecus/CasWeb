@@ -20,7 +20,7 @@ namespace BusinessLayer.Views
             {
                 return _unknown ?? (_unknown = new NomenclatureView
                 {
-                    ItemId = -1,
+                    Id = -1,
                     FullName = "Unknown",
                     Name = "UNK",
                 });

@@ -120,7 +120,7 @@ namespace BusinessLayer.Dictionaties
 		}
 		#endregion
 
-		#region public BaseComponentType(Int32 ItemId, String shortName, String fullName)
+		#region public BaseComponentType(Int32 Id, String shortName, String fullName)
 		/// <summary>
 		/// Конструктор создает запись о типе агрегата
 		/// </summary>

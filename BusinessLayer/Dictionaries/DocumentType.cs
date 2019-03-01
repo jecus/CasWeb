@@ -218,7 +218,7 @@ namespace BusinessLayer.Dictionaties
          * Реализация
          */
 
-        #region public DocumentType(Int16 ItemId, String shortName, String fullName)
+        #region public DocumentType(Int16 Id, String shortName, String fullName)
         /// <summary>
         /// Конструктор создает объект типа директивы
         /// </summary>

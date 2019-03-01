@@ -28,7 +28,7 @@ namespace BusinessLayer.Views
 
         public short NDTType { get; set; }
 
-        public int ComponentId { get; set; }
+        public int? ComponentId { get; set; }
         
         public string ZoneArea { get; set; }
 

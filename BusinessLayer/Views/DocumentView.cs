@@ -14,7 +14,7 @@ namespace BusinessLayer.Views
         private ServiceTypeView _serviceType;
         private DepartmentView _department;
         private LocationView _location;
-        public int ParentID { get; set; }
+        public int? ParentID { get; set; }
 
         public int ParentTypeId { get; set; }
 

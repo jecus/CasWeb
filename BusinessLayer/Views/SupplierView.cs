@@ -41,7 +41,7 @@
             {
                 return _unknown ?? (_unknown = new SupplierView
                 {
-                    ItemId = -1,
+                    Id = -1,
                     Name = "Unknown",
                     ShortName = "UNK",
                 });

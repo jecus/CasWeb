@@ -22,7 +22,7 @@ namespace WebDevelopment.Controllers
 		{
 			var file = await _db.AttachedFiles
 				.AsNoTracking()
-				.FirstOrDefaultAsync(i => i.ItemId == fileId);
+				.FirstOrDefaultAsync(i => i.Id == fileId);
 
 			return File(file.FileData, System.Net.Mime.MediaTypeNames.Application.Pdf, file.FileName);
 		}

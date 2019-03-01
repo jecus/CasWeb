@@ -2,7 +2,7 @@
 {
 	public interface IBaseEntity
 	{
-		int ItemId { get; set; }
+		int Id { get; set; }
 		bool IsDeleted { get; set; }
 	}
 }

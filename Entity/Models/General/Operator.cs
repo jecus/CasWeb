@@ -8,7 +8,7 @@ namespace Entity.Models.General
     {
         [Key]
         [Column("OperatorID")]
-        public override int ItemId { get; set; }
+        public override int Id { get; set; }
 
         [Column("Name")]
         [MaxLength(50)]

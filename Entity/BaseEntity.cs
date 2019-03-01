@@ -7,7 +7,7 @@ namespace Entity
 	{
 		[Key]
 		[Column("ItemId")]
-		public virtual int ItemId { get; set; }
+		public virtual int Id { get; set; }
 
 		[Column("IsDeleted")]
 		public bool IsDeleted { get; set; }

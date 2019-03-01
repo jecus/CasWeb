@@ -36,7 +36,7 @@ namespace BusinessLayer.Repositiry
                 .Include(i => i.SupplierRelations)
                 .Include(i => i.TransferRecords)
                 .Include(i => i.FromSupplier)
-                .Where(i => transferRecordId.Contains(i.ItemId))
+                .Where(i => transferRecordId.Contains(i.Id))
                 .ToListAsync();
 
 
@@ -59,20 +59,20 @@ namespace BusinessLayer.Repositiry
                 SetDestinations(componentView, storeView);
 
                 var docShipping = documents.FirstOrDefault(d =>
-	                d.ParentID == componentView.ItemId && d.ParentTypeId == SmartCoreType.Component.ItemId &&
-	                d.SubTypeId == shipping.ItemId);
+	                d.ParentID == componentView.Id && d.ParentTypeId == SmartCoreType.Component.ItemId &&
+	                d.SubTypeId == shipping.Id);
                 if (docShipping != null)
-	                componentView.DocumentShippingId = docShipping.ItemId;
+	                componentView.DocumentShippingId = docShipping.Id;
 
                 var docCrs = documents.FirstOrDefault(d =>
-	                d.ParentID == componentView.ItemId && 
+	                d.ParentID == componentView.Id && 
 	                d.ParentTypeId == SmartCoreType.Component.ItemId && 
-	                d.SubTypeId == crs.ItemId);
+	                d.SubTypeId == crs.Id);
                 if (docCrs != null)
-	                componentView.DocumentCRSId = docCrs.ItemId;
+	                componentView.DocumentCRSId = docCrs.Id;
 			}
 
-			await _stockCalculator.CalculateStock(result, stores.Select(i => i.ItemId).ToList());
+			await _stockCalculator.CalculateStock(result, stores.Select(i => i.Id).ToList());
 
 
 			return result;
@@ -86,14 +86,14 @@ namespace BusinessLayer.Repositiry
 
             if (lastTransfer == null)
             {
-                var msg = $"Component {component.ItemId} has no transfer records";
+                var msg = $"Component {component.Id} has no transfer records";
                 //_logger.LogError(msg);
                 throw new Exception(msg);
             }
 
             if (lastTransfer.DestinationType == SmartCoreType.Store)
             {
-                var store = storeViews.FirstOrDefault(i => i.ItemId == lastTransfer.DestinationObjectID);
+                var store = storeViews.FirstOrDefault(i => i.Id == lastTransfer.DestinationObjectID);
                 if (store == null)
                 {
                     var msg = $"Destination object ID:{lastTransfer.DestinationObjectID} was not found";

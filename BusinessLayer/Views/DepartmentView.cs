@@ -15,7 +15,7 @@
             {
                 return _unknown ?? (_unknown = new DepartmentView
                 {
-                    ItemId = -1,
+                    Id = -1,
                     FullName = "Unknown",
                     Name = "UNK"
                 });

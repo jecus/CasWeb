@@ -537,7 +537,7 @@ namespace BusinessLayer.Dictionaties
          * Реализация
          */
 
-		#region private GoodsClass(Int32 ItemId, String shortName, String fullName, String commonName) : this(itemId, shortName, fullName, commonName, Unknown)
+		#region private GoodsClass(Int32 Id, String shortName, String fullName, String commonName) : this(itemId, shortName, fullName, commonName, Unknown)
 
 		/// <summary>
 		/// Конструктор создает объект типа директивы

@@ -42,7 +42,7 @@ namespace WebDevelopment.Controllers
                 .ToList();
 
             var documents = await _db.Documents.OnlyActive()
-                .OrderByDescending(x => x.ItemId)
+                .OrderByDescending(x => x.Id)
                 .Take(5)
                 .ToListAsync();
             var doc = documents.ToBlView().ToList();
@@ -54,9 +54,9 @@ namespace WebDevelopment.Controllers
 			ViewData["AircraftsCount"] = res.Count;
 			ViewData["StoreCount"] = str.Count;
 			ViewData["DocumentCount"] = doccount;
-			ViewData["AircraftLast"] = $"Last created Aircraft {airctafts.OrderBy(i => i.ItemId)?.LastOrDefault()?.RegistrationNumber}";
-			ViewData["StoreLast"] = $"Last created Store {stores.OrderBy(i => i.ItemId)?.LastOrDefault()?.StoreName}";
-			ViewData["DocumentLast"] = $"Last added document {documents.OrderBy(i => i.ItemId)?.LastOrDefault()?.Description}";
+			ViewData["AircraftLast"] = $"Last created Aircraft {airctafts.OrderBy(i => i.Id)?.LastOrDefault()?.RegistrationNumber}";
+			ViewData["StoreLast"] = $"Last created Store {stores.OrderBy(i => i.Id)?.LastOrDefault()?.StoreName}";
+			ViewData["DocumentLast"] = $"Last added document {documents.OrderBy(i => i.Id)?.LastOrDefault()?.Description}";
 			ViewData["Operators"] = op;
 
 			var mainMenu = new MainMenu(Url);

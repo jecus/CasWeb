@@ -16,7 +16,7 @@
             {
                 return _unknown ?? (_unknown = new ServiceTypeView
                 {
-                    ItemId = -1,
+                    Id = -1,
                     FullName = "Unknown",
                     Name = "UNK"
                 });

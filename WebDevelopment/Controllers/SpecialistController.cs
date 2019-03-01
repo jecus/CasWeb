@@ -39,7 +39,7 @@ namespace WebDevelopment.Controllers
 
         public IActionResult Details(int id)
         {
-            Specialist c = _db.Specialists.FirstOrDefault(sp => sp.ItemId == id);
+            Specialist c = _db.Specialists.FirstOrDefault(sp => sp.Id == id);
             return PartialView(c);
         }
     }

@@ -17,7 +17,7 @@ namespace BusinessLayer
         {
             return new AGWCategorie
             {
-                ItemId = agwCategory.ItemId,
+                Id = agwCategory.Id,
                 IsDeleted = agwCategory.IsDeleted,
                 FullName = agwCategory.FullName,
                 Gender = agwCategory.Gender,
@@ -32,7 +32,7 @@ namespace BusinessLayer
         {
             return new AGWCategorieView()
             {
-                ItemId = agwCategorie.ItemId,
+                Id = agwCategorie.Id,
                 IsDeleted = agwCategorie.IsDeleted,
                 FullName = agwCategorie.FullName,
                 Gender = agwCategorie.Gender,
@@ -61,13 +61,13 @@ namespace BusinessLayer
         {
             return new Aircraft
             {
-                ItemId = aircraft.ItemId,
+                Id = aircraft.Id,
                 IsDeleted = aircraft.IsDeleted,
                 AircraftFrameId = aircraft.AircraftFrameId,
                 OperatorID = aircraft.OperatorID,
                 APUFH = aircraft.APUFH,
                 AircraftTypeID = aircraft.AircraftTypeID,
-                ModelId = aircraft.Model?.ItemId,
+                ModelId = aircraft.Model?.Id,
                 TypeCertificateNumber = aircraft.TypeCertificateNumber,
                 ManufactureDate = aircraft.ManufactureDate,
                 RegistrationNumber = aircraft.RegistrationNumber,
@@ -119,7 +119,7 @@ namespace BusinessLayer
         {
             return new AircraftView
             {
-                ItemId = aircraft.ItemId,
+                Id = aircraft.Id,
                 AircraftFrameId = aircraft.AircraftFrameId,
                 IsDeleted = aircraft.IsDeleted,
                 APUFH = aircraft.APUFH,
@@ -192,7 +192,7 @@ namespace BusinessLayer
         {
             return new Department
             {
-                ItemId = department.ItemId,
+                Id = department.Id,
                 IsDeleted = department.IsDeleted,
                 Name = department.Name,
                 FullName = department.FullName
@@ -203,7 +203,7 @@ namespace BusinessLayer
         {
             return new DepartmentView()
             {
-                ItemId = department.ItemId,
+                Id = department.Id,
                 IsDeleted = department.IsDeleted,
                 Name = department.Name,
                 FullName = department.FullName
@@ -228,7 +228,7 @@ namespace BusinessLayer
         {
             return new Component
             {
-                ItemId = com.ItemId,
+                Id = com.Id,
                 IsDeleted = com.IsDeleted,
                 StartDate = com.StartDate,
                 IsBaseComponent = com.IsBaseComponent,
@@ -246,7 +246,7 @@ namespace BusinessLayer
         {
             return new BaseComponentView()
             {
-                ItemId = com.ItemId,
+                Id = com.Id,
                 IsDeleted = com.IsDeleted,
                 StartDate = com.StartDate,
                 IsBaseComponent = com.IsBaseComponent,
@@ -278,12 +278,12 @@ namespace BusinessLayer
         {
             return new Document
             {
-                ItemId = document.ItemId,
+                Id = document.Id,
                 IsDeleted = document.IsDeleted,
                 ParentID = document.ParentID,
                 ParentTypeId = document.ParentTypeId,
                 DocTypeId = document.DocTypeId,
-                SubTypeId = document.DocumentSubType?.ItemId ?? -1,
+                SubTypeId = document.DocumentSubType?.Id ?? -1,
                 Description = document.Description,
                 IssueDateValidFrom = document.IssueDateValidFrom,
                 IssueValidTo = document.IssueValidTo,
@@ -294,20 +294,20 @@ namespace BusinessLayer
                 RevNumber = document.RevNumber,
                 RevisionDateFrom = document.RevisionDateFrom,
                 IsClosed = document.IsClosed,
-                DepartmentId = document.Department?.ItemId,
+                DepartmentId = document.Department?.Id,
                 RevisionValidTo = document.RevisionValidTo,
                 RevisionDateValidTo = document.RevisionDateValidTo,
                 RevisionNotify = document.RevisionNotify,
                 Aboard = document.Aboard,
                 Privy = document.Privy,
                 IssueNumber = document.IssueNumber,
-                NomenсlatureId = document.Nomenсlature?.ItemId,
+                NomenсlatureId = document.Nomenсlature?.Id,
                 ProlongationWay = (int?) document.ProlongationWay,
-                ServiceTypeId = document.ServiceType?.ItemId,
-                ResponsibleOccupationId = document.ResponsibleOccupation?.ItemId ?? -1,
+                ServiceTypeId = document.ServiceType?.Id,
+                ResponsibleOccupationId = document.ResponsibleOccupation?.Id ?? -1,
                 Remarks = document.Remarks,
-                LocationId = document.Location?.ItemId ?? -1,
-                SupplierId = document.Supplier?.ItemId ?? -1,
+                LocationId = document.Location?.Id ?? -1,
+                SupplierId = document.Supplier?.Id ?? -1,
                 ParentAircraftId = document.ParentAircraftId,
                 IdNumber = document.IdNumber,
 
@@ -318,7 +318,7 @@ namespace BusinessLayer
         {
             var doc = new DocumentView()
             {
-                ItemId = document.ItemId,
+                Id = document.Id,
                 IsDeleted = document.IsDeleted,
                 ParentID = document.ParentID,
                 ParentTypeId = document.ParentTypeId,
@@ -377,7 +377,7 @@ namespace BusinessLayer
         {
             return new DocumentSubType
             {
-                ItemId = documentsubtype.ItemId,
+                Id = documentsubtype.Id,
                 IsDeleted = documentsubtype.IsDeleted,
                 Name = documentsubtype.Name,
                 DocumentTypeId = documentsubtype.DocumentTypeId,
@@ -388,7 +388,7 @@ namespace BusinessLayer
         {
             return new DocumentSubTypeView()
             {
-                ItemId = documentsubtype.ItemId,
+                Id = documentsubtype.Id,
                 IsDeleted = documentsubtype.IsDeleted,
                 Name = documentsubtype.Name,
                 DocumentTypeId = documentsubtype.DocumentTypeId
@@ -413,7 +413,7 @@ namespace BusinessLayer
         {
             return new Location
             {
-                ItemId = location.ItemId,
+                Id = location.Id,
                 IsDeleted = location.IsDeleted,
                 Name = location.Name,
                 FullName = location.FullName,
@@ -426,7 +426,7 @@ namespace BusinessLayer
         {
             return new LocationView()
             {
-                ItemId = location.ItemId,
+                Id = location.Id,
                 IsDeleted = location.IsDeleted,
                 Name = location.Name,
                 FullName = location.FullName,
@@ -453,7 +453,7 @@ namespace BusinessLayer
         {
             return new LocationsType
             {
-                ItemId = locationsType.ItemId,
+                Id = locationsType.Id,
                 IsDeleted = locationsType.IsDeleted,
                 FullName = locationsType.FullName,
                 Name = locationsType.Name,
@@ -465,11 +465,11 @@ namespace BusinessLayer
         {
             return new LocationsTypeView()
             {
-                ItemId = locationsType.ItemId,
+                Id = locationsType.Id,
                 IsDeleted = locationsType.IsDeleted,
                 FullName = locationsType.FullName,
                 Name = locationsType.Name,
-                DepartmentId = locationsType.Department?.ItemId ?? -1
+                DepartmentId = locationsType.Department?.Id ?? -1
             };
         }
 
@@ -491,7 +491,7 @@ namespace BusinessLayer
         {
             return new AccessoryDescription
             {
-                ItemId = acc.ItemId,
+                Id = acc.Id,
                 IsDeleted = acc.IsDeleted,
                 ShortName = acc.ShortName,
                 FullName = acc.FullName
@@ -502,7 +502,7 @@ namespace BusinessLayer
         {
             return new ModelView()
             {
-                ItemId = acc.ItemId,
+                Id = acc.Id,
                 IsDeleted = acc.IsDeleted,
                 ShortName = acc.ShortName,
                 FullName = acc.FullName
@@ -527,7 +527,7 @@ namespace BusinessLayer
         {
             return new Nomenclature
             {
-                ItemId = nomenclature.ItemId,
+                Id = nomenclature.Id,
                 IsDeleted = nomenclature.IsDeleted,
                 Name = nomenclature.Name,
                 FullName = nomenclature.FullName
@@ -538,7 +538,7 @@ namespace BusinessLayer
         {
             return new NomenclatureView()
             {
-                ItemId = nomenclature.ItemId,
+                Id = nomenclature.Id,
                 IsDeleted = nomenclature.IsDeleted,
                 Name = nomenclature.Name,
                 FullName = nomenclature.FullName,
@@ -563,7 +563,7 @@ namespace BusinessLayer
         {
             return new Operator
             {
-                ItemId = oper.ItemId,
+                Id = oper.ItemId,
                 IsDeleted = oper.IsDeleted,
                 Name = oper.Name,
                 LogoType = oper.LogoType,
@@ -582,7 +582,7 @@ namespace BusinessLayer
         {
             return new OperatorView()
             {
-                ItemId = oper.ItemId,
+                ItemId = oper.Id,
                 IsDeleted = oper.IsDeleted,
                 Name = oper.Name,
                 LogoType = oper.LogoType,
@@ -615,7 +615,7 @@ namespace BusinessLayer
         {
             return new ServiceType
             {
-                ItemId = servicetype.ItemId,
+                Id = servicetype.Id,
                 IsDeleted = servicetype.IsDeleted,
                 Name = servicetype.Name,
                 FullName = servicetype.FullName
@@ -626,7 +626,7 @@ namespace BusinessLayer
         {
             return new ServiceTypeView()
             {
-                ItemId = servicetype.ItemId,
+                Id = servicetype.Id,
                 IsDeleted = servicetype.IsDeleted,
                 Name = servicetype.Name,
                 FullName = servicetype.FullName
@@ -651,14 +651,14 @@ namespace BusinessLayer
         {
             return new Specialist
             {
-                ItemId = specialist.ItemId,
+                Id = specialist.Id,
                 IsDeleted = specialist.IsDeleted,
                 FirstName = specialist.FirstName,
                 ShortName = specialist.ShortName,
-                SpecializationID = specialist.Specialization?.ItemId ?? -1,
+                SpecializationID = specialist.Specialization?.Id ?? -1,
                 LastName = specialist.LastName,
                 Gender = (short?) specialist.Gender,
-                AGWCategoryId = specialist.AGWCategory?.ItemId,
+                AGWCategoryId = specialist.AGWCategory?.Id,
                 DateOfBirth = specialist.DateOfBirth,
                 Nationality = specialist.Nationality,
                 Address = specialist.Address,
@@ -669,7 +669,7 @@ namespace BusinessLayer
                 Skype = specialist.Skype,
                 Information = specialist.Information,
                 EducationId = (short) (specialist.Education?.ItemId ?? -1),
-                Location = (short) (specialist.Facility?.ItemId ?? -1),
+                Location = (short) (specialist.Facility?.Id ?? -1),
                 Status = (short) specialist.Status,
                 Position = (short) specialist.Position,
                 Sign = specialist.Sign,
@@ -690,7 +690,7 @@ namespace BusinessLayer
         {
             return new SpecialistView()
             {
-                ItemId = specialist.ItemId,
+                Id = specialist.Id,
                 IsDeleted = specialist.IsDeleted,
                 FirstName = specialist.FirstName,
                 LastName = specialist.LastName,
@@ -742,11 +742,11 @@ namespace BusinessLayer
         {
             return new Specialization
             {
-                ItemId = specialization.ItemId,
+                Id = specialization.Id,
                 IsDeleted = specialization.IsDeleted,
                 ShortName = specialization.ShortName,
                 FullName = specialization.FullName,
-                DepartmentId = specialization.Department?.ItemId ?? -1,
+                DepartmentId = specialization.Department?.Id ?? -1,
                 Level = specialization.Level,
                 KeyPersonel = specialization.KeyPersonel,
             };
@@ -756,7 +756,7 @@ namespace BusinessLayer
         {
             return new SpecializationView()
             {
-                ItemId = specialization.ItemId,
+                Id = specialization.Id,
                 IsDeleted = specialization.IsDeleted,
                 ShortName = specialization.ShortName,
                 FullName = specialization.FullName,
@@ -783,7 +783,7 @@ namespace BusinessLayer
         {
             return new Store
             {
-                ItemId = store.ItemId,
+                Id = store.Id,
                 IsDeleted = store.IsDeleted,
                 StoreName = store.StoreName
             };
@@ -793,7 +793,7 @@ namespace BusinessLayer
         {
             return new StoreView()
             {
-                ItemId = store.ItemId,
+                Id = store.Id,
                 IsDeleted = store.IsDeleted,
                 StoreName = store.StoreName
             };
@@ -817,7 +817,7 @@ namespace BusinessLayer
         {
             return new Supplier
             {
-                ItemId = supplier.ItemId,
+                Id = supplier.Id,
                 IsDeleted = supplier.IsDeleted,
                 Name = supplier.Name,
                 ShortName = supplier.ShortName,
@@ -843,7 +843,7 @@ namespace BusinessLayer
 
             return new SupplierView()
             {
-                ItemId = supplier.ItemId,
+                Id = supplier.Id,
                 IsDeleted = supplier.IsDeleted,
                 Name = supplier.Name,
                 ShortName = supplier.ShortName,
@@ -881,7 +881,7 @@ namespace BusinessLayer
         {
             return new TransferRecord
             {
-                ItemId = transrec.ItemId,
+                Id = transrec.Id,
                 IsDeleted = transrec.IsDeleted,
                 ParentID = transrec.ParentID,
                 ParentType = transrec.ParentType,
@@ -900,7 +900,7 @@ namespace BusinessLayer
             return new TransferRecordView()
             {
 
-                ItemId = transrec.ItemId,
+                Id = transrec.Id,
                 IsDeleted = transrec.IsDeleted,
                 ParentID = transrec.ParentID,
                 ParentType = transrec.ParentType,
@@ -932,7 +932,7 @@ namespace BusinessLayer
         {
             return new User
             {
-                ItemId = user.ItemId,
+                Id = user.Id,
                 IsDeleted = user.IsDeleted,
                 Login = user.Login,
                 Name = user.Name,
@@ -945,7 +945,7 @@ namespace BusinessLayer
         {
             return new UserView()
             {
-                ItemId = user.ItemId,
+                Id = user.Id,
                 IsDeleted = user.IsDeleted,
                 Login = user.Login,
                 Name = user.Name,
@@ -973,10 +973,10 @@ namespace BusinessLayer
         {
             return new Component
             {
-                ItemId = comp.ItemId,
+                Id = comp.Id,
                 IsDeleted = comp.IsDeleted,
                 StartDate = comp.StartDate,
-                ATAChapterId = comp.ATAChapter?.ItemId,
+                ATAChapterId = comp.ATAChapter?.Id,
                 PartNumber = comp.PartNumber,
                 Description = comp.Description,
                 SerialNumber = comp.SerialNumber,
@@ -1025,7 +1025,7 @@ namespace BusinessLayer
                 Status = (short?)comp.Status,
                 IsBaseComponent = comp.IsBaseComponent,
 
-                LocationId = comp.Location?.ItemId ?? -1,
+                LocationId = comp.Location?.Id ?? -1,
 
                 Incoming = comp.Incoming,
 
@@ -1034,7 +1034,7 @@ namespace BusinessLayer
                 IsDangerous = comp.IsDangerous,
 
                 QuantityInput = comp.QuantityIn,
-                FromSupplierId = comp.FromSupplier?.ItemId ?? -1,
+                FromSupplierId = comp.FromSupplier?.Id ?? -1,
                 FromSupplierReciveDate = comp.FromSupplierReciveDate,
                 
             };
@@ -1045,7 +1045,7 @@ namespace BusinessLayer
         {
             return new ComponentView()
             {
-                ItemId = comp.ItemId,
+                Id = comp.Id,
 
                 IsDeleted = comp.IsDeleted,
                 StartDate = comp.StartDate ,
@@ -1129,7 +1129,7 @@ namespace BusinessLayer
             return new ComponentDirective
 
             {
-                ItemId = comdir.ItemId,
+                Id = comdir.Id,
                 IsDeleted = comdir.IsDeleted,
                 DirectiveType = comdir.DirectiveType,
                 Threshold = comdir.Threshold,
@@ -1156,7 +1156,7 @@ namespace BusinessLayer
         {
             return new ComponentDirectiveView()
             {
-                ItemId = comdir.ItemId,
+                Id = comdir.Id,
                 IsDeleted = comdir.IsDeleted,
                 DirectiveType = comdir.DirectiveType,
 

@@ -27,7 +27,7 @@
             {
                 return _unknown ?? (_unknown = new SpecializationView
                 {
-                    ItemId = -1,
+                    Id = -1,
                     FullName = "Unknown",
                     ShortName = "UNK",
                 });

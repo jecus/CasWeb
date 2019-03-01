@@ -25,7 +25,7 @@ namespace BusinessLayer.Repositiry
 			var aircraft = await _db.Aircrafts
 				.OnlyActive()
                 .Include(i => i.Model)
-				.FirstOrDefaultAsync(i => i.ItemId == id);
+				.FirstOrDefaultAsync(i => i.Id == id);
             return aircraft.ToBlView();
 
         }
@@ -35,7 +35,7 @@ namespace BusinessLayer.Repositiry
 			var aircraft = await _db.Aircrafts
 				.AsNoTracking()
 				.OnlyActive()
-				.Where(i => ids.Contains(i.ItemId))
+				.Where(i => ids.Contains(i.Id))
 				.ToListAsync();
 			return aircraft.ToBlView();
 		}

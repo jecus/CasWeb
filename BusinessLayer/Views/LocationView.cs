@@ -10,7 +10,7 @@ namespace BusinessLayer.Views
 
         public string FullName { get; set; }
 
-        public int LocationsTypeId { get; set; }
+        public int? LocationsTypeId { get; set; }
 
         public LocationsTypeView LocationsType
         {
@@ -26,7 +26,7 @@ namespace BusinessLayer.Views
             {
                 return _unknown ?? (_unknown = new LocationView
                 {
-                    ItemId = -1,
+                    Id = -1,
                     FullName = "Unknown",
                     Name = "UNK"
                 });

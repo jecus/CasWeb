@@ -383,7 +383,7 @@ namespace BusinessLayer.Dictionaties
         }
         #endregion
 
-        #region public SmartCoreType(Int32 ItemId, String shortName, String fullName)
+        #region public SmartCoreType(Int32 Id, String shortName, String fullName)
 
         /// <summary>
         /// Конструктор создает объект типа директивы

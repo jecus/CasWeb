@@ -255,7 +255,7 @@ namespace BusinessLayer.Dictionaties
         }
         #endregion
 
-        #region public Measure(Int32 ItemId, String shortName, String fullName)
+        #region public Measure(Int32 Id, String shortName, String fullName)
 
         /// <summary>
         /// Конструктор создает объект категории единицы измерения
@@ -464,7 +464,7 @@ namespace BusinessLayer.Dictionaties
         }
         #endregion
 
-        #region public MeasureCategory(Int32 ItemId, String shortName, String fullName)
+        #region public MeasureCategory(Int32 Id, String shortName, String fullName)
 
         /// <summary>
         /// Конструктор создает объект категории единицы измерения

@@ -27,7 +27,7 @@ namespace WebDevelopment.Controllers
                 .AsNoTracking()
 				.ToListAsync();
 
-            var docIds = documents.Select(i => i.ItemId);
+            var docIds = documents.Select(i => i.Id);
             var fileLinks = await _db.ItemFileLinks
 	            .AsNoTracking()
 	            .Where(i => i.ParentTypeId == 1275 && docIds.Contains(i.ParentId))
@@ -36,7 +36,7 @@ namespace WebDevelopment.Controllers
             var doc = documents.ToBlView();
 
             foreach (var documentView in doc)
-	            documentView.ItemFileLink = fileLinks.FirstOrDefault(i => i.ParentId == documentView.ItemId);
+	            documentView.ItemFileLink = fileLinks.FirstOrDefault(i => i.ParentId == documentView.Id);
 
             ViewData["Documents"] = doc;
            
@@ -96,7 +96,7 @@ namespace WebDevelopment.Controllers
                 .Include(i => i.ServiceType)
                 .Include(i => i.Department)
                 .Include(i => i.Location)
-                .FirstOrDefaultAsync(sp => sp.ItemId == id);
+                .FirstOrDefaultAsync(sp => sp.Id == id);
             return PartialView(d.ToBlView());
         }
 

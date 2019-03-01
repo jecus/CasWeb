@@ -15,7 +15,7 @@
             {
                 return _unknown ?? (_unknown = new DocumentSubTypeView
                 {
-                    ItemId = -1,
+                    Id = -1,
                     Name = "Unknown"
                 });
             }

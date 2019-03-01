@@ -22,7 +22,7 @@ namespace BusinessLayer.Views
             {
                 return _unknown ?? (_unknown = new LocationsTypeView
                 {
-                    ItemId = -1,
+                    Id = -1,
                     FullName = "Unknown",
                     
                 });

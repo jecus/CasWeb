@@ -30,8 +30,8 @@ namespace WebDevelopment.Controllers
             var bc = await _db.Components
 	            .AsNoTracking()
 	            .OnlyActive()
-	            .Where(i => i.IsBaseComponent && i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.ItemId).DestinationObjectID == aircraftId &&
-	                        i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.ItemId).DestinationObjectType == 7)
+	            .Where(i => i.IsBaseComponent && i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectID == aircraftId &&
+	                        i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectType == 7)
 	            .Include(i => i.TransferRecords)
 	            .Include(i => i.Model)
 	            .ToListAsync();
