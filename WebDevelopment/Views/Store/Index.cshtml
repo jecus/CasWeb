@@ -6,8 +6,8 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var components = (List<ComponentView>)ViewData["Components"];
-    var docCrs = @Url.Action("Modal", "Document", new { id = "_CRSID_" });
-    var docShip = @Url.Action("Modal", "Document", new { id = "_SHIPID_" });
+    var fileCrs = @Url.Action("OpenPdf", "File", new { fileId = "_FILEID_" });
+    var fileShip = @Url.Action("OpenPdf", "File", new { fileId = "_FILEID_" });
 }
 
 <div class="row">
@@ -54,27 +54,29 @@
                             {
                                 <tr>
                                     <td>
-                                        @if (str.DocumentCRSId > 0)
+
+                                        @if (@str.CRSFileId > 0)
                                         {
-                                            <a href=@docCrs.Replace("_CRSID_", str.DocumentCRSId.ToString()) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon" data-toggle="tooltip" data-placement="top" title="Component CRS Form">
-                                                <i class="fa fa-file-text-o"></i>
-                                            </a>
+                                            <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@str.CRSFileId" onclick="location.href = '@fileCrs.Replace("_FILEID_", str.CRSFileId.ToString())'">
+                                                <i class="fa fa-file-pdf-o"></i>
+                                            </button>
                                         }
                                         else
                                         {
-                                            <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-text-o"></i></button>
+                                            <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-pdf-o"></i></button>
                                         }
 
-                                        @if (str.DocumentShippingId > 0)
+                                        @if (@str.ShippingFileId > 0)
                                         {
-                                            <a href=@docShip.Replace("_SHIPID_", str.DocumentShippingId.ToString()) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon" data-toggle="tooltip" data-placement="top" title="Shipping document">
-                                                <i class="fa fa-file-text-o"></i>
-                                            </a>
+                                            <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@str.ShippingFileId" onclick="location.href = '@fileCrs.Replace("_FILEID_", str.ShippingFileId.ToString())'">
+                                                <i class="fa fa-file-pdf-o"></i>
+                                            </button>
                                         }
                                         else
                                         {
-                                            <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-text-o"></i></button>
+                                            <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-pdf-o"></i></button>
                                         }
+
                                     </td>
                                     <td>@str.ParentStore.StoreName</td>
                                     <td>@str.PartNumber</td>

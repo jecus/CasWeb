@@ -24,7 +24,11 @@ namespace BusinessLayer.Repositiry
 
         public async Task<List<ComponentView>> GetAllStoreComponent()
         {
-            var transferRecordId = await _db.TransferRecords
+	        var stores = await _db.Stores
+		        .AsNoTracking()
+		        .ToListAsync();
+
+			var transferRecordId = await _db.TransferRecords
                 .Where(i => i.DestinationObjectType == SmartCoreType.Store.ItemId)
                 .Select(i => i.ParentID).ToListAsync();
 
@@ -39,13 +43,26 @@ namespace BusinessLayer.Repositiry
                 .Where(i => transferRecordId.Contains(i.Id))
                 .ToListAsync();
 
-
-            var stores = await _db.Stores
-                .AsNoTracking()
-                .ToListAsync();
-
+            
             var documents = await _db.Documents
 	            .Where(i => i.ParentTypeId == SmartCoreType.Component.ItemId)
+	            .ToListAsync();
+
+            var documentsView = documents.ToBlView();
+
+            var docIds = documents.Select(i => i.Id);
+            var fileLinks = await _db.ItemFileLinks
+	            .AsNoTracking()
+	            .Where(i => i.ParentTypeId == SmartCoreType.Document.ItemId && docIds.Contains(i.ParentId))
+	            .ToListAsync();
+
+            foreach (var documentView in documentsView)
+				documentView.ItemFileLink = fileLinks.FirstOrDefault(i => i.ParentId == documentView.Id);
+
+			var ids = components.Select(i => i.Id);
+            var componentLinks = await _db.ItemFileLinks
+	            .AsNoTracking()
+	            .Where(i => ids.Contains(i.ParentId) && i.ParentTypeId == SmartCoreType.Component.ItemId)
 	            .ToListAsync();
 
             var crs = await _db.DocumentSubTypes.AsNoTracking().FirstOrDefaultAsync(i => i.Name == "Component CRS Form");
@@ -55,21 +72,33 @@ namespace BusinessLayer.Repositiry
             var result = components.ToBlView();
 
 			foreach (var componentView in result)
-            {
+			{
+				componentView.Files.AddRange(componentLinks.Where(i => i.ParentId == componentView.Id));
                 SetDestinations(componentView, storeView);
 
-                var docShipping = documents.FirstOrDefault(d =>
-	                d.ParentID == componentView.Id && d.ParentTypeId == SmartCoreType.Component.ItemId &&
-	                d.SubTypeId == shipping.Id);
-                if (docShipping != null)
-	                componentView.DocumentShippingId = docShipping.Id;
 
-                var docCrs = documents.FirstOrDefault(d =>
-	                d.ParentID == componentView.Id && 
-	                d.ParentTypeId == SmartCoreType.Component.ItemId && 
-	                d.SubTypeId == crs.Id);
-                if (docCrs != null)
-	                componentView.DocumentCRSId = docCrs.Id;
+                if (componentView.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.MaintenanceMaterials) ||
+                    componentView.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Tools) ||
+                    componentView.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Protection))
+                {
+	                componentView.ShippingFileId = componentView.Files.GetFileIdByFileLinkType(FileLinkType.IncomingFile) ?? -1;
+	                componentView.CRSFileId = componentView.Files.GetFileIdByFileLinkType(FileLinkType.FaaFormFile) ?? -1;
+                }
+                else
+                {
+					var docShipping = documentsView.FirstOrDefault(d =>
+						d.ParentID == componentView.Id && d.ParentTypeId == SmartCoreType.Component.ItemId &&
+						d.SubTypeId == shipping.Id);
+					if (docShipping != null)
+						componentView.ShippingFileId = docShipping.ItemFileLink?.FileId ?? -1;
+
+					var docCrs = documentsView.FirstOrDefault(d =>
+						d.ParentID == componentView.Id &&
+						d.ParentTypeId == SmartCoreType.Component.ItemId &&
+						d.SubTypeId == crs.Id);
+					if (docCrs != null)
+						componentView.CRSFileId = docCrs.ItemFileLink?.FileId ?? -1;
+				}	
 			}
 
 			await _stockCalculator.CalculateStock(result, stores.Select(i => i.Id).ToList());

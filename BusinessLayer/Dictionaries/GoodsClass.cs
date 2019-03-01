@@ -533,6 +533,16 @@ namespace BusinessLayer.Dictionaties
 		}
 		#endregion
 
+		public bool IsNodeOrSubNodeOf(GoodsClass node)
+		{
+			if (ItemId == node.ItemId)
+				return true;
+
+			if (_parent == null)
+				return false;
+			return _parent.IsNodeOrSubNodeOf(node);
+		}
+
 		/*
          * Реализация
          */

@@ -10,6 +10,7 @@ namespace BusinessLayer.Views
 {
     public class ComponentView : BaseView
     {
+	    private List<ItemFileLink> _files;
 	    public int ComponentCount { get; set; }
 
         public byte[] AverageUtilization { get; set; }
@@ -176,10 +177,16 @@ namespace BusinessLayer.Views
 
         }
 
-        public int DocumentShippingId { get; set; }
-        public int DocumentCRSId;
+        public int ShippingFileId { get; set;}
+        public int CRSFileId { get; set; }
 
 		public double Current { get; set; }
 		public double ShouldBeOnStock { get; set; }
+
+		public List<ItemFileLink> Files
+		{
+			get => _files ?? (_files = new List<ItemFileLink>());
+			set => _files = value;
+		}
     }
 }

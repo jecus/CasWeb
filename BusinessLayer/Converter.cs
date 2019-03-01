@@ -323,6 +323,7 @@ namespace BusinessLayer
                 ParentID = document.ParentID,
                 ParentTypeId = document.ParentTypeId,
                 DocTypeId = document.DocTypeId,
+				SubTypeId = document.SubTypeId ?? -1,
                 DocumentSubType = document.DocumentSubType?.ToBlView(),
                 Description = document.Description,
                 IssueDateValidFrom = document.IssueDateValidFrom,

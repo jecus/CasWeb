@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BusinessLayer.Views;
+using Entity.Models.General;
 
 namespace BusinessLayer
 {
@@ -9,6 +10,11 @@ namespace BusinessLayer
 		public static TransferRecordView GetLast(this List<TransferRecordView> Items)
 		{
 			return Items.Count == 0 ? null : Items.OrderBy(r => r.TransferDate).Last();
+		}
+
+		public static int? GetFileIdByFileLinkType(this List<ItemFileLink> files, FileLinkType fileLinkType)
+		{
+			return files.FirstOrDefault(i => i.LinkType == (short)fileLinkType)?.FileId;
 		}
 	}
 }
