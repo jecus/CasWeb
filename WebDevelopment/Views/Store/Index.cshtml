@@ -57,7 +57,7 @@
 
                                         @if (@str.CRSFileId > 0)
                                         {
-                                            <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@str.CRSFileId" onclick="location.href = '@fileCrs.Replace("_FILEID_", str.CRSFileId.ToString())'">
+                                            <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" data-toggle="tooltip" data-placement="top" title="CRS Document" value="@str.CRSFileId" onclick="location.href = '@fileCrs.Replace("_FILEID_", str.CRSFileId.ToString())'">
                                                 <i class="fa fa-file-pdf-o"></i>
                                             </button>
                                         }
@@ -68,7 +68,7 @@
 
                                         @if (@str.ShippingFileId > 0)
                                         {
-                                            <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@str.ShippingFileId" onclick="location.href = '@fileCrs.Replace("_FILEID_", str.ShippingFileId.ToString())'">
+                                            <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" data-toggle="tooltip" data-placement="top" title="Shipping Document" value="@str.ShippingFileId" onclick="location.href = '@fileCrs.Replace("_FILEID_", str.ShippingFileId.ToString())'">
                                                 <i class="fa fa-file-pdf-o"></i>
                                             </button>
                                         }
