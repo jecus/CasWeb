@@ -12,6 +12,7 @@ using WebDevelopment.Helper;
 
 namespace WebDevelopment.Controllers
 {
+	[Route("aircraft/{aircraftId}")]
     public class AircraftController : Controller
     {
 	    private readonly IAircraftRepository _aircraftRepository;
