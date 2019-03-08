@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BusinessLayer.Views;
 using Entity.Models.General;
@@ -16,5 +17,10 @@ namespace BusinessLayer
 		{
 			return files.FirstOrDefault(i => i.LinkType == (short)fileLinkType)?.FileId;
 		}
+
+        public static string ToUniversalString(this DateTime? dateTime)
+        {
+            return dateTime.HasValue ? dateTime.Value.ToString("yyyy.MM.dd") : "";
+        }
 	}
 }

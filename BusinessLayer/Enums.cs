@@ -1,4 +1,6 @@
-﻿namespace BusinessLayer
+﻿using System;
+
+namespace BusinessLayer
 {
 	#region public enum MSG : short
 
@@ -143,6 +145,83 @@
 
 	}
 
-	#endregion
+    #endregion
 
+    #region ATLB
+
+    public enum AtlbStatus
+    {
+        Opened = 0,
+        Closed = 1,
+    }
+
+    #endregion
+
+    #region public enum AtlbRecordType : short
+    /// <summary>
+    /// Тип записи борт-журнала
+    /// </summary>
+    public enum AtlbRecordType : short
+    {
+        /// <summary>
+        /// Полет
+        /// </summary>
+        Flight = 1,
+        /// <summary>
+        /// Тех. обслуживание
+        /// </summary>
+        Maintenance = 2,
+    }
+    #endregion
+
+    #region public enum FlightCategory : short
+    /// <summary>
+    /// Категория Полета (Внутренний рейс, Международный рейс и т.д.)
+    /// </summary>
+    public enum FlightCategory : short
+    {
+        /// <summary>
+        /// Неизветсный
+        /// </summary>
+        Unknown = 0,
+        /// <summary>
+        /// Внутренний рейс
+        /// </summary>
+        DomesticFlight = 1,
+        /// <summary>
+        /// Международный рейс
+        /// </summary>
+        InternationalFlight = 2,
+        /// <summary>
+        /// Ближнее зарубежье
+        /// </summary>
+        NearAbroad = 3,
+    }
+    #endregion
+
+    #region public enum FlightAircraftCode : short
+    /// <summary>
+    /// Код ВС на полет
+    /// </summary>
+    [Flags]
+    public enum FlightAircraftCode : short
+    {
+        /// <summary>
+        /// Неизвестно
+        /// </summary>
+        Unknown = 0,
+        /// <summary>
+        /// Пассажирское
+        /// </summary>
+        P = 1,
+        /// <summary>
+        /// Грузовое, не перевозящее пассажиров
+        /// </summary>
+        F = 2,
+        /// <summary>
+        /// Смешанное (перевозящее пассажиров и груз)
+        /// </summary>
+        M = 4,
+    }
+    #endregion
 }

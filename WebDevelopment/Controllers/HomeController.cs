@@ -70,13 +70,7 @@ namespace WebDevelopment.Controllers
             return View();
 		}
 
-        [Route("Doc")]
-        public async Task<IActionResult> Doc()
-        {
-            return View();
-        }
-
-
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{

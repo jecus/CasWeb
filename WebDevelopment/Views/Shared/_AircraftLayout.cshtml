@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     @Html.Partial("_Favicons")
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>@ViewData["Title"] - WebDevelopment</title>
+    <title>@ViewData["Title"] - Cas</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
@@ -16,10 +16,16 @@
     <link href="~/css/Template/feather.css" rel="stylesheet" type="text/css">
     <link href="~/fonts/Template/font_o5hd5vvqpoqiwwmi.css" rel="stylesheet" />
     <link href="~/css/Login/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/css/Template/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/css/Template/buttons.dataTables.min.css" rel="stylesheet" />
+    <link href="~/css/Template/responsive.bootstrap4.min.css" rel="stylesheet" />
     <link href="~/css/Template/chartist.css" rel="stylesheet" type="text/css" media="all">
+    <link href="~/css/Template/custom-toolbar.css" rel="stylesheet" />
+    <link href="~/css/Template/jquery.toolbar.css" rel="stylesheet" />
     <link href="~/css/Template/style.css" rel="stylesheet" type="text/css">
     <link href="~/css/Template/widget.css" rel="stylesheet" type="text/css">
     <link href="~/css/Template/pages.css" rel="stylesheet" />
+
 
 </head>
 <body>
@@ -47,18 +53,18 @@
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
                             @*<li class="header-search">
-                                <div class="main-search morphsearch-search">
-                                    <div class="input-group">
-                                        <span class="input-group-prepend search-close">
-                                            <i class="feather icon-x input-group-text"></i>
-                                        </span>
-                                        <input type="text" class="form-control" placeholder="Enter Keyword">
-                                        <span class="input-group-append search-btn">
-                                            <i class="feather icon-search input-group-text"></i>
-                                        </span>
+                                    <div class="main-search morphsearch-search">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend search-close">
+                                                <i class="feather icon-x input-group-text"></i>
+                                            </span>
+                                            <input type="text" class="form-control" placeholder="Enter Keyword">
+                                            <span class="input-group-append search-btn">
+                                                <i class="feather icon-search input-group-text"></i>
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>*@
+                                </li>*@
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                                     <i class="full-screen feather icon-maximize"></i>
@@ -188,8 +194,18 @@
     <script type="text/javascript" src="~/js/Template/jquery-ui.min.js"></script>
     <script type="text/javascript" src="~/js/Template/popper.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="~/js/Template/jquery.dataTables.min.js"></script>
+    <script src="~/js/Template/dataTables.buttons.min.js"></script>
+    <script src="~/js/Template/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/Template/dataTables.responsive.min.js"></script>
+    <script src="~/js/Template/responsive.bootstrap4.min.js"></script>
+    <script src="~/js/Template/data-table-custom.js"></script>
+
     <script src="~/js/Template/waves.min.js"></script>
     <script type="text/javascript" src="~/js/Template/jquery.slimscroll.js"></script>
+    <script src="~/js/Template/custom-toolbar.js"></script>
+    <script src="~/js/Template/jquery.toolbar.min.js"></script>
     <script src="~/js/Template/jquery.flot.js"></script>
     <script src="~/js/Template/jquery.flot.categories.js"></script>
     <script src="~/js/Template/curvedLines.js"></script>
@@ -202,14 +218,10 @@
     <script src="~/js/Template/vertical-layout.min.js"></script>
     <script type="text/javascript" src="~/js/Template/crm-dashboard.min.js"></script>
     <script type="text/javascript" src="~/js/Template/script.min.js"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+    <script type="text/javascript" src="~/js/OurCustom.js"></script>
 
-        gtag('config', 'UA-23581568-13');
-    </script>
+    
 
-    @RenderSection("Scripts", required: false)
+@RenderSection("Scripts", required: false)
 </body>
 </html>

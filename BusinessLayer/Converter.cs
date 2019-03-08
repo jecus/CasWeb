@@ -1193,5 +1193,183 @@ namespace BusinessLayer
         }
 
         #endregion
+
+        #region ATLB
+
+        public static ATLB ToEntity(this ATLBView atl)
+
+        {
+            return new ATLB
+            {
+                Id = atl.Id,
+                IsDeleted = atl.IsDeleted,
+
+                AircraftID = atl.AircraftID,
+                ATLBNo = atl.ATLBNo,
+                StartPageNo = atl.StartPageNo,
+                OpeningDate = atl.OpeningDate,
+                Remarks = atl.Remarks,
+                Revision = atl.Revision,
+                PageFlightCount = atl.PageFlightCount,
+                AtlbStatus = (int)atl.AtlbStatus,
+
+            };
+
+        }
+
+
+        public static ATLBView ToBlView(this ATLB atl)
+        {
+
+            return new ATLBView()
+            {
+                Id = atl.Id,
+                IsDeleted = atl.IsDeleted,
+
+                AircraftID = atl.AircraftID ?? default(int),
+                ATLBNo = atl.ATLBNo,
+                StartPageNo = atl.StartPageNo ?? default(int),
+                OpeningDate = atl.OpeningDate,
+
+                Remarks = atl.Remarks,
+
+                Revision = atl.Revision,
+                PageFlightCount = atl.PageFlightCount ?? default(int),
+                AtlbStatus = (AtlbStatus)atl.AtlbStatus
+            };
+
+        }
+
+        public static List<ATLBView> ToBlView(this IEnumerable<ATLB> atl)
+        {
+            return new List<ATLBView>(atl.Select(i => i.ToBlView()));
+        }
+
+        public static List<ATLB> ToEntity(this IEnumerable<ATLBView> atl)
+        {
+            return new List<ATLB>(atl.Select(i => i.ToEntity()));
+        }
+
+        #endregion
+
+        #region AircraftFlight
+
+        public static AircraftFlight ToEntity(this AircraftFlightView arcf)
+        {
+
+            return new AircraftFlight
+            {
+                Id = arcf.Id,
+                IsDeleted = arcf.IsDeleted,
+                ATLBID = arcf.ATLBID,
+                AircraftId = arcf.AircraftId,
+                FlightNo = arcf.FlightNo,
+                Remarks = arcf.Remarks,
+                FlightDate = arcf.FlightDate,
+                StationFrom = arcf.StationFrom,
+                StationTo = arcf.StationTo,
+
+                DelayTime = arcf.DelayTime,
+
+                DelayReasonId = arcf.DelayReasonId,
+                OutTime = arcf.OutTime,
+                InTime = arcf.InTime,
+                TakeOffTime = arcf.TakeOffTime,
+                LDGTime = arcf.LDGTime,
+                NightTime = arcf.NightTime,
+
+                CRSID = arcf.CRSID,
+                Tanks = arcf.Tanks,
+                Fluids = arcf.Fluids,
+                EnginesGeneralCondition = arcf.EnginesGeneralCondition,
+                Highlight = arcf.Highlight,
+                Correct = arcf.Correct,
+                Reference = arcf.Reference,
+
+                Cycles = arcf.Cycles,
+                PageNo = arcf.PageNo,
+
+                FlightType = (short?)arcf.FlightType,
+                LevelId = arcf.LevelId,
+                Distance = arcf.Distance,
+
+                DistanceMeasure = arcf.DistanceMeasure,
+                TakeOffWeight = arcf.TakeOffWeight,
+
+                AlignmentBefore = arcf.AlignmentBefore,
+                AlignmentAfter = arcf.AlignmentAfter,
+                FlightCategory = (short?)arcf.FlightCategory,
+                AtlbRecordType = (short)arcf.AtlbRecordType,
+                FlightAircraftCode = (short?)arcf.FlightAircraftCode,
+                CancelReasonId = arcf.CancelReasonId,
+                StationFromId = arcf.StationFromId ?? -1,
+                StationToId = arcf.StationToId ?? -1,
+                FlightNumberId = arcf.FlightNumberId
+                
+            };
+        }
+
+        public static AircraftFlightView ToBlView(this AircraftFlight arcf)
+        {
+            return new AircraftFlightView()
+                {
+                    Id = arcf.Id,
+                    IsDeleted = arcf.IsDeleted,
+                    ATLBID = arcf.ATLBID,
+                    AircraftId = arcf.AircraftId ?? default(int),
+
+                    FlightNo = arcf.FlightNo,
+                    Remarks = arcf.Remarks,
+                    FlightDate = arcf.FlightDate,
+                    StationFrom = arcf.StationFrom,
+                    StationTo = arcf.StationTo,
+                    DelayTime = arcf.DelayTime ?? default(short),
+                    DelayReason = arcf.DelayReason,
+
+                    OutTime = arcf.OutTime ?? default(int),
+                    InTime = arcf.InTime ?? default(int),
+                    TakeOffTime = arcf.TakeOffTime ?? default(int),
+                    LDGTime = arcf.LDGTime ?? default(int),
+                    NightTime = arcf.NightTime ?? default(int),
+
+                    CRSID = arcf.CRSID ?? default(int),
+                    Tanks = arcf.Tanks,
+                    Fluids = arcf.Fluids,
+                    EnginesGeneralCondition = arcf.EnginesGeneralCondition,
+                    Highlight = arcf.Highlight,
+                    Correct = arcf.Correct,
+
+                    Reference = arcf.Reference,
+
+                    Cycles = arcf.Cycles,
+                    PageNo = arcf.PageNo,
+                    FlightType = arcf.FlightType ?? default(short),
+                    Level = arcf.Level,
+                    Distance = arcf.Distance ?? default(int),
+                    DistanceMeasure = arcf.DistanceMeasure ?? default(short),
+                    TakeOffWeight = arcf.TakeOffWeight ?? default(double),
+                    AlignmentBefore = arcf.AlignmentBefore ?? default(double),
+                    AlignmentAfter = arcf.AlignmentAfter ?? default(double),
+                    FlightCategory = (FlightCategory?) arcf.FlightCategory,
+                    AtlbRecordType = (AtlbRecordType) arcf.AtlbRecordType,
+                    FlightAircraftCode = (FlightAircraftCode?) arcf.FlightAircraftCode,
+                    CancelReason = arcf.CancelReason,
+                    StationFromId = arcf.StationFromId,
+                    StationToId = arcf.StationFromId,
+                    FlightNumber = arcf.FlightNumber,
+                };
+        }
+
+        public static List<AircraftFlightView> ToBlView(this IEnumerable<AircraftFlight> arcf)
+        {
+            return new List<AircraftFlightView>(arcf.Select(i => i.ToBlView()));
+        }
+
+        public static List<AircraftFlight> ToEntity(this IEnumerable<AircraftFlightView> arcf)
+        {
+            return new List<AircraftFlight>(arcf.Select(i => i.ToEntity()));
+        }
+
+        #endregion
     }
 }

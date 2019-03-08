@@ -37,7 +37,7 @@ namespace WebDevelopment.Controllers
 	            .ToListAsync();
 
 
-            var mainMenu = new AircraftMainMenu(Url);
+            var mainMenu = new AircraftMainMenu(Url, aircraftId);
             ViewData["MainMenu"] = mainMenu.Items.OrderByDescending(i => i.SubMenu.Count() > 0).ThenBy(i => i.Header).ToList();
             ViewData["Aircraft"] = aircraft;
             ViewData["Operator"] = await _db.Operators.FirstOrDefaultAsync();

@@ -5,12 +5,14 @@ namespace WebDevelopment.Helper
 {
     public class AircraftMainMenu : StaticMenu
     {
+        public readonly int _aircraftId;
         public List<AircraftMainMenu> Items = new List<AircraftMainMenu>();
 
         #region Constructor
 
-        public AircraftMainMenu(IUrlHelper url)
+        public AircraftMainMenu(IUrlHelper url, int aircraftId)
         {
+            _aircraftId = aircraftId;
             Items.AddRange(new[]
             {
                 new AircraftMainMenu(1, "General Information", "#!", "feather icon-clipboard",
@@ -56,7 +58,7 @@ namespace WebDevelopment.Helper
 
                 new AircraftMainMenu(6, "Planning", "#!", "feather icon-clipboard", subMenu: new List<AircraftMainMenu>()
                 {
-                    new AircraftMainMenu(1, "ATLBs", "#!"),
+                    new AircraftMainMenu(1, "ATLBs", url.Action("Index", "ATLB", new {aircraftId})),
                     new AircraftMainMenu(2, "Forecast MTOP Report", "#!"),
                     new AircraftMainMenu(3, "Forecast Report Kits", "#!"),
                     new AircraftMainMenu(4, "Monthly Utilization", "#!"),
