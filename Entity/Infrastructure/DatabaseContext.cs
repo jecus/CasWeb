@@ -1,4 +1,5 @@
-﻿using Entity.Models.Dictionaries;
+﻿using System.Threading.Tasks;
+using Entity.Models.Dictionaries;
 using Entity.Models.General;
 using Microsoft.EntityFrameworkCore;
 
@@ -1203,6 +1204,16 @@ namespace Entity.Infrastructure
 
 			#endregion
 
+		}
+
+		public async Task SaveAsync(BaseEntity entity)
+		{
+			if (entity.Id <= 0)
+				Entry(entity).State = EntityState.Added;
+			else
+				Entry(entity).State = EntityState.Modified;
+
+			await SaveChangesAsync();
 		}
 	}
 }

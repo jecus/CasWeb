@@ -1,29 +1,34 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer;
+using BusinessLayer.Infrastructure;
 using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebDevelopment.Helper;
+using WebDevelopment.Infrastructude;
 
 namespace WebDevelopment.Controllers
 {
-    [Route("{aircraftId}/atlb")]
+    [AircraftRoute("atlb")]
     public class ATLBController : Controller
     {
         private readonly DatabaseContext _db;
+        private readonly IAircraftIdentity _identity;
 
-        public ATLBController(DatabaseContext db)
+        public ATLBController(DatabaseContext db, IAircraftIdentity identity)
         {
-            _db = db;
+	        _db = db;
+	        _identity = identity;
         }
 
-        public async Task<IActionResult> Index(int aircraftId)
+        public async Task<IActionResult> Index([FromRoute]int aircraftId)
         {
             var atlbs = await _db.Atlbs
                 .Where(i => i.AircraftID == aircraftId)
+                .AsNoTracking()
                 .OnlyActive()
                 .ToListAsync();
 
@@ -67,22 +72,11 @@ namespace WebDevelopment.Controllers
             return PartialView("Modal", a.ToBlView());
         }
 
-        //[Route("new")]
-        //public async Task<IActionResult> ModalNew(int aircraftId)
-        //{
-        //    return PartialView("Modal", new ATLBView { AircraftID = aircraftId });
-        //}
-
         [HttpPost]
         public async Task<IActionResult> Create(ATLBView view)
         {
-            if (view.Id > 0)
-            {
-                _db.Atlbs.Add(view.ToEntity());
-            }
-            await _db.SaveChangesAsync();
-
-            return Ok();
+            await _db.SaveAsync(view.ToEntity());
+            return RedirectToAction("Index");
         }
     }
 }

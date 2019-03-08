@@ -3,6 +3,8 @@
 
 @using (Html.BeginForm("Create", "ATLB", FormMethod.Post))
 {
+    @Html.HiddenFor(i => i.Id);
+
     <div class="modal-content">
 
         <div class="modal-header">
