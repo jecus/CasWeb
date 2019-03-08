@@ -1,11 +1,11 @@
 ﻿@using BusinessLayer
 @using WebDevelopment.Helper
+@using WebDevelopment.Infrastructude
 @model List<BusinessLayer.Views.ATLBView>
 @{
     ViewData["Title"] = "Index";
-    var aircraftId = (int) ViewData["AircraftId"];
     Layout = "~/Views/Shared/_AircraftLayout.cshtml";
-    var modalUrl = @Url.Action("Modal", "ATLB", new {aircraftId, atlbId = "_ATLBID_" });
+    var modalUrl = @Url.Action("ModalEdit", "ATLB", new {GlobalObject.AircraftId, atlbId = "_ATLBID_" });
  }
 
 
@@ -16,7 +16,7 @@
                 <h5>ATLBs</h5>
             </div>
             <div class="card-block">
-               <a href=@Url.Action("Modal", "ATLB", new {aircraftId}) , class="modalLargeBtn btn btn-primary m-b-20">
+               <a href=@Url.Action("ModalCreate", "ATLB", new {GlobalObject.AircraftId}) , class="modalLargeBtn btn btn-primary m-b-20">
                     + Add New
                 </a>
                 <div class="dt-responsive table-responsive">

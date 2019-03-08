@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer;
-using BusinessLayer.Infrastructure;
 using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
@@ -16,12 +15,10 @@ namespace WebDevelopment.Controllers
     public class ATLBController : Controller
     {
         private readonly DatabaseContext _db;
-        private readonly IAircraftIdentity _identity;
 
-        public ATLBController(DatabaseContext db, IAircraftIdentity identity)
+        public ATLBController(DatabaseContext db)
         {
 	        _db = db;
-	        _identity = identity;
         }
 
         public async Task<IActionResult> Index([FromRoute]int aircraftId)
@@ -58,25 +55,28 @@ namespace WebDevelopment.Controllers
                 atlb.Dates = dates;
             }
 
-            var mainMenu = new AircraftMainMenu(Url, aircraftId);
-            ViewData["MainMenu"] = mainMenu.Items.OrderByDescending(i => i.SubMenu.Count() > 0).ThenBy(i => i.Header).ToList();
-            ViewData["AircraftId"] = aircraftId;
             return View(view);
         }
 
         [Route("edit")]
-        public async Task<IActionResult> Modal(int atlbId)
+        public async Task<IActionResult> ModalEdit(int atlbId)
         {
             var a = await _db.Atlbs
                 .FirstOrDefaultAsync(i => i.Id == atlbId);
             return PartialView("Modal", a.ToBlView());
         }
 
-        [HttpPost]
+        [Route("create")]
+        public async Task<IActionResult> ModalCreate()
+        {
+	        return PartialView("Modal", new ATLBView());
+        }
+
+		[HttpPost]
         public async Task<IActionResult> Create(ATLBView view)
         {
             await _db.SaveAsync(view.ToEntity());
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new {aircraftId = GlobalObject.AircraftId });
         }
     }
 }

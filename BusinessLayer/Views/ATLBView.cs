@@ -6,6 +6,11 @@ namespace BusinessLayer.Views
 {
     public class ATLBView : BaseView
     {
+	    public ATLBView()
+	    {
+		    OpeningDate = DateTime.Today;
+	    }
+
         public int? AircraftID { get; set; }
 
         public string ATLBNo { get; set; }

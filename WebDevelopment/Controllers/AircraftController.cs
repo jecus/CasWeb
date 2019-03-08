@@ -7,6 +7,7 @@ using Entity.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebDevelopment.Helper;
+using WebDevelopment.Infrastructude;
 
 namespace WebDevelopment.Controllers
 {
@@ -23,8 +24,11 @@ namespace WebDevelopment.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(int aircraftId)
+        public async Task<IActionResult> Index([FromRoute]int aircraftId)
         {
+	        GlobalObject.AircraftId = aircraftId;
+	        GlobalObject.AircraftMainMenu = new AircraftMainMenu(Url, aircraftId);
+
             var aircraft = await _aircraftRepository.GetById(aircraftId);
             var bc = await _db.Components
 	            .AsNoTracking()
@@ -36,8 +40,6 @@ namespace WebDevelopment.Controllers
 	            .ToListAsync();
 
 
-            var mainMenu = new AircraftMainMenu(Url, aircraftId);
-            ViewData["MainMenu"] = mainMenu.Items.OrderByDescending(i => i.SubMenu.Count() > 0).ThenBy(i => i.Header).ToList();
             ViewData["Aircraft"] = aircraft;
             ViewData["Operator"] = await _db.Operators.FirstOrDefaultAsync();
             ViewData["BaseComponents"] = bc.ToBaseComponentView();

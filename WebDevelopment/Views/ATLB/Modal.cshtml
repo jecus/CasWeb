@@ -4,6 +4,7 @@
 @using (Html.BeginForm("Create", "ATLB", FormMethod.Post))
 {
     @Html.HiddenFor(i => i.Id);
+    @Html.HiddenFor(i => i.IsDeleted);
 
     <div class="modal-content">
 

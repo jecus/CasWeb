@@ -1,5 +1,6 @@
 ﻿@using BusinessLayer.Views
 @using WebDevelopment.Helper
+@using WebDevelopment.Infrastructude
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     @Html.Partial("_Favicons")
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>@ViewData["Title"] - Cas</title>
+    <title>Cas</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
@@ -102,7 +103,7 @@
                         <div class="nav-list">
                             <div class="pcoded-inner-navbar main-menu">
 
-                                @foreach (var item in (List<AircraftMainMenu>)@ViewData["MainMenu"])
+                                @foreach (var item in GlobalObject.AircraftMainMenu.Items.OrderByDescending(i => i.SubMenu.Count() > 0).ThenBy(i => i.Header).ToList())
                                 {
                                     <ul class="pcoded-item pcoded-left-item">
                                         @if (item.SubMenu?.Count() > 0)

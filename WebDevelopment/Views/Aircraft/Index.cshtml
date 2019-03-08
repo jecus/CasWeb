@@ -1,8 +1,8 @@
 ﻿@using BusinessLayer
 @using BusinessLayer.Views
 @using Entity.Models.General
+@using WebDevelopment.Infrastructude
 @{
-    ViewBag.Title = "title";
     Layout = "_AircraftLayout";
     var aircraft = (AircraftView)ViewData["Aircraft"];
     var baseComponents = (List<BaseComponentView>)ViewData["BaseComponents"];
@@ -73,7 +73,6 @@
                                             {
                                                 <option value="@o">@o</option>
                                             }
-
                                         </select>
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">APU Util.(FH/APUFH)</label>

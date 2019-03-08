@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using WebDevelopment.Infrastructude;
 
 namespace WebDevelopment.Helper
 {
@@ -56,7 +57,7 @@ namespace WebDevelopment.Helper
 
                 new AircraftMainMenu(6, "Planning", "#!", "feather icon-clipboard", subMenu: new List<AircraftMainMenu>()
                 {
-                    new AircraftMainMenu(1, "ATLBs", url.Action("Index", "ATLB", new {aircraftId})),
+                    new AircraftMainMenu(1, "ATLBs", url.Action("Index", "ATLB", new {GlobalObject.AircraftId})),
                     new AircraftMainMenu(2, "Forecast MTOP Report", "#!"),
                     new AircraftMainMenu(3, "Forecast Report Kits", "#!"),
                     new AircraftMainMenu(4, "Monthly Utilization", "#!"),
