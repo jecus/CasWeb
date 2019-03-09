@@ -334,6 +334,23 @@ namespace BusinessLayer.Dictionaties
             return value;
         }
         #endregion
+
+        #region public static FlightType GetItemById(Int32 measureId)
+        /// <summary>
+        /// Возвращает тип диерктивы по его Id
+        /// </summary>
+        /// <param name="measureId"></param>
+        /// <returns></returns>
+        public static Measure GetItemById(Int32 measureId)
+        {
+            foreach (Measure t in _Items)
+                if (t.ItemId == measureId)
+                    return t;
+            //
+            return Unknown;
+        }
+
+        #endregion
     }
 
     #region public class MeasureCategory : StaticDictionary

@@ -18,55 +18,55 @@
         <div class="modal-body">
             
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">ATLB №:</label>
-                <div class="col-sm-10">
+                <label class="col-sm-5 col-form-label">ATLB №:</label>
+                <div class="col-sm-7">
                     @Html.TextBoxFor(i => i.ATLBNo, new { @class = "form-control" })
                     @Html.ValidationMessageFor(i => i.ATLBNo)
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Start Page №:</label>
-                <div class="col-sm-10">
+                <label class="col-sm-5 col-form-label">Start Page №:</label>
+                <div class="col-sm-7">
                     @Html.TextBoxFor(i => i.StartPageNo, new { @class = "form-control", type = "number" })
                     @Html.ValidationMessageFor(i => i.StartPageNo)
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Count flight on page:</label>
-                <div class="col-sm-10">
+                <label class="col-sm-5 col-form-label">Count flight on page:</label>
+                <div class="col-sm-7">
                     @Html.TextBoxFor(i => i.PageFlightCount, new { @class = "form-control", type = "number" })
                     @Html.ValidationMessageFor(i => i.PageFlightCount)
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Opening date:</label>
-                <div class="col-sm-10">
+                <label class="col-sm-5 col-form-label">Opening date:</label>
+                <div class="col-sm-7">
                     @Html.EditorFor(i => i.OpeningDate, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Revison №:</label>
-                <div class="col-sm-10">
+                <label class="col-sm-5 col-form-label">Revison №:</label>
+                <div class="col-sm-7">
                     @Html.TextBoxFor(i => i.Revision, new { @class = "form-control" })
                     @Html.ValidationMessageFor(i => i.Revision)
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Remarks:</label>
-                <div class="col-sm-10">
+                <label class="col-sm-5 col-form-label">Remarks:</label>
+                <div class="col-sm-7">
                     @Html.TextBoxFor(i => i.Remarks, new { @class = "form-control" })
                     @Html.ValidationMessageFor(i => i.Remarks)
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Atlb Status:</label>
-                <div class="col-sm-10">
+                <label class="col-sm-5 col-form-label">Atlb Status:</label>
+                <div class="col-sm-7">
                     @Html.DropDownListFor(i => i.AtlbStatus, Html.GetEnumSelectList(typeof(AtlbStatus)), new { @class = "form-control" })
                 </div>
             </div>

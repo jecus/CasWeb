@@ -1,10 +1,14 @@
 ﻿using System;
+using BusinessLayer.Dictionaties;
 using Entity.Models.Dictionaries;
 
 namespace BusinessLayer.Views
 {
     public class AircraftFlightView : BaseView
     {
+        private AirportCodeView _stationFroms;
+        private FlightNumView _flightNumber;
+
         public int ATLBID { get; set; }
 
         public int? AircraftId { get; set; }
@@ -53,13 +57,13 @@ namespace BusinessLayer.Views
 
         public string PageNo { get; set; }
 
-        public short? FlightType { get; set; }
+        public FlightType FlightType { get; set; }
 
         public int? LevelId { get; set; }
 
         public int? Distance { get; set; }
 
-        public int? DistanceMeasure { get; set; }
+        public Measure DistanceMeasure { get; set; }
 
         public double? TakeOffWeight { get; set; }
 
@@ -82,16 +86,30 @@ namespace BusinessLayer.Views
         public int FlightNumberId { get; set; }
 
 
-        public FlightNum FlightNumber { get; set; }
+        public FlightNumView FlightNumber
+        {
+            get => _flightNumber ?? FlightNumView.Unknown; 
+            set => _flightNumber = value;
+        }
 
-        public CruiseLevel Level { get; set; }
+        public CruiseLevelView Level { get; set; }
 
-        public AirportCode StationFroms { get; set; }
+        public AirportCodeView StationFroms
+        {
+            get => _stationFroms ?? AirportCodeView.Unknown;
+            set => _stationFroms = value;
+        }
 
-        public AirportCode StationTos { get; set; }
+        public AirportCodeView StationTos
+        {
+            get => _stationFroms ?? AirportCodeView.Unknown;
+            set => _stationFroms = value;
+        }
+        public ReasonView DelayReason { get; set; }
 
-        public Reason DelayReason { get; set; }
+        public ReasonView CancelReason { get; set; }
 
-        public Reason CancelReason { get; set; }
+        public string Route { get; set; }
+        public string Times { get; set; }
     }
 }
