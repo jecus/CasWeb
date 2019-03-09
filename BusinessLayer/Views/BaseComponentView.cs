@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using BusinessLayer.Dictionaties;
@@ -19,9 +20,15 @@ namespace BusinessLayer.Views
 
 		public string PartNumber { get; set; }
 
-		public DateTime? ManufactureDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayName("ManufactureDate")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime? ManufactureDate { get; set; }
 
-		public DateTime? StartDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayName("StartDate")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime? StartDate { get; set; }
 
 		public bool IsBaseComponent { get; set; }
 

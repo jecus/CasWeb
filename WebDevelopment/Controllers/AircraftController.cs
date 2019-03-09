@@ -40,10 +40,9 @@ namespace WebDevelopment.Controllers
 	            .ToListAsync();
 
 
-            ViewData["Aircraft"] = aircraft;
             ViewData["Operator"] = await _db.Operators.FirstOrDefaultAsync();
             ViewData["BaseComponents"] = bc.ToBaseComponentView();
-            return View();
+            return View(aircraft);
         }
     }
 }

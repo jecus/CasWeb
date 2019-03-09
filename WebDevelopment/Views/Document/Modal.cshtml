@@ -1,4 +1,6 @@
-﻿@using BusinessLayer.Dictionaties
+﻿@using System.Collections.Generic
+@using BusinessLayer
+@using BusinessLayer.Dictionaties
 @using BusinessLayer.Views
 @using Entity.Enums
 @model BusinessLayer.Views.DocumentView
@@ -17,7 +19,7 @@
 <div class="modal-content">
 
 <div class="modal-header">
-    <h4 class="modal-title">Modal title</h4>
+    <h4 class="modal-title">Edit Document</h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">×</span>
     </button>
@@ -28,36 +30,24 @@
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Doc. Type:</label>
     <div class="col-sm-4">
-        <select name="select" class="form-control">
-            <option selected>@Html.DisplayFor(model => model.DocumentType.FullName) </option>
-
-            @foreach (DocumentType value in DocumentType.Items.ToList())
-            {
-                <option>@value</option>
-            }
-        </select>
+        @Html.DropDownListFor(i => i.DocumentType.FullName, new SelectList(DocumentType.Items.ToList()), new { @class = "form-control" })
     </div>
     <label class="col-sm-2 col-form-label">Title:</label>
     <div class="col-sm-4">
-        <select name="select" class="form-control">
-            <option selected>@Html.DisplayFor(model => model.DocumentSubType.Name) </option>
-
-            @foreach (var value in @documentSubTypes)
-                    {
-                        <option>@value.Name</option>
-                    }
-        </select>
+        @Html.DropDownListFor(i => i.DocumentSubType.Name, new SelectList(documentSubTypes), new { @class = "form-control" })
     </div>
 </div>
 
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Doc №:</label>
     <div class="col-sm-4">
-        <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.ContractNumber)">
+        @Html.TextBoxFor(i => i.ContractNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(i => i.ContractNumber)
     </div>
     <label class="col-sm-2 col-form-label">ID №:</label>
     <div class="col-sm-4">
-        <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.IdNumber)">
+        @Html.TextBoxFor(i => i.IdNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(i => i.IdNumber)
     </div>
 </div>
 <div class="row">
@@ -66,7 +56,8 @@
         <div class="form-group row">
             <label class="col-sm-4 col-form-label">Description:</label>
             <div class="col-sm-8">
-                <textarea rows="5" cols="5" class="form-control" placeholder="@Html.DisplayFor(model => model.Description)"></textarea>
+                @Html.TextAreaFor(i => i.Description, new { rows = 5, columns = 5, @class = "form-control" })
+                @Html.ValidationMessageFor(i => i.Description)
             </div>
         </div>
             
@@ -76,40 +67,19 @@
         <div class="form-group row">
             <label class="col-sm-4 col-form-label">Responsible:</label>
             <div class="col-sm-8">
-                <select name="select" class="form-control">
-                    <option selected>@Html.DisplayFor(model => model.ResponsibleOccupation.FullName) </option>
-
-                    @foreach (var value in @specializations)
-                    {
-                        <option>@value.FullName</option>
-                    }
-                </select>
+                @Html.DropDownListFor(i => i.ResponsibleOccupation.FullName, new SelectList(specializations), new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-4 col-form-label">Contractor:</label>
             <div class="col-sm-8">
-                <select name="select" class="form-control">
-                    <option selected>@Html.DisplayFor(model => model.Supplier.Name) </option>
-
-                    @foreach (var value in @suppliers)
-                    {
-                        <option>@value.Name</option>
-                    }
-                </select>
+                @Html.DropDownListFor(i => i.Supplier.Name, new SelectList(suppliers), new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-4 col-form-label">Prolong. way:</label>
             <div class="col-sm-8">
-                <select name="select" class="form-control">
-                    <option selected>@Html.DisplayFor(Enum => Enum.ProlongationWay) </option>
-
-                    @foreach (var value in Enum.GetValues(typeof(ProlongationWay)).Cast<ProlongationWay>().Distinct())
-                    {
-                        <option>@value</option>
-                    }
-                </select>
+                @Html.DropDownListFor(i => i.ProlongationWay, Html.GetEnumSelectList(typeof(ProlongationWay)), new { @class = "form-control" })
             </div>
         </div>
             
@@ -119,176 +89,163 @@
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Service Type:</label>
     <div class="col-sm-4">
-        <select name="select" class="form-control">
-            <option selected>@Html.DisplayFor(model => model.ServiceType.FullName) </option>
-
-            @foreach (var value in @serviceTypes)
-                    {
-                        <option>@value.FullName</option>
-                    }
-        </select>
+        @Html.DropDownListFor(i => i.ServiceType.FullName, new SelectList(serviceTypes), new { @class = "form-control" })
     </div>
     <label class="col-sm-2 col-form-label">Nomenclature:</label>
     <div class="col-sm-4">
-        <select name="select" class="form-control">
-            <option selected>@Html.DisplayFor(model => model.Nomenсlature.FullName) </option>
-
-            @foreach (var value in @nomenclatures)
-                    {
-                        <option>@value.FullName</option>
-                    }
-        </select>
+        @Html.DropDownListFor(i => i.Nomenсlature.FullName, new SelectList(nomenclatures), new { @class = "form-control" })
     </div>
 </div>
 
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Department:</label>
     <div class="col-sm-4">
-        <select name="select" class="form-control">
-            <option selected>@Html.DisplayFor(model => model.Department.FullName) </option>
-
-            @foreach (var value in @departments)
-                    {
-                        <option>@value.FullName</option>
-                    }
-        </select>
+        @Html.DropDownListFor(i => i.Department.FullName, new SelectList(departments), new { @class = "form-control" })
     </div>
     <label class="col-sm-2 col-form-label">Location:</label>
     <div class="col-sm-4">
-        <select name="select" class="form-control">
-            <option selected>@Html.DisplayFor(model => model.Location.FullName) </option>
-
-            @foreach (var value in @locations)
-                    {
-                        <option>@value.FullName</option>
-                    }
-        </select>
+        @Html.DropDownListFor(i => i.Location.FullName, new SelectList(locations), new { @class = "form-control" })
     </div>
 </div>
 
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">№ Issue:</label>
     <div class="col-sm-4">
-        <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.IssueNumber)">
+        @Html.TextBoxFor(i => i.IssueNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(i => i.IssueNumber)
     </div>
     <label class="col-sm-2 col-form-label">Revision:</label>
     <div class="col-sm-4">
-        <input type="date" class="form-control" placeholder="@Html.DisplayFor(model => model.RevisionDateFrom.Value)">
+        @Html.EditorFor(i => i.RevisionDateFrom, new { htmlAttributes = new { @class = "form-control" } })
     </div>
 </div>
 
 <div class="form-group row">
     <label class="col-sm-2 col-form-label">Issue:</label>
     <div class="col-sm-4">
-        <input type="date" class="form-control" placeholder="@Html.DisplayFor(model => model.IssueDateValidTo)">
+        @Html.EditorFor(i => i.IssueDateValidFrom, new { htmlAttributes = new { @class = "form-control" } })
     </div>
     <label class="col-sm-2 col-form-label">Rev.№:</label>
     <div class="col-sm-4">
-        <input type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.RevNumber)">
+        @Html.TextBoxFor(i => i.RevNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(i => i.RevNumber)
     </div>
 </div>
-
-<div class="form-group row">
+<div class="row">
     <div class="col-sm-6">
-        <div class="checkbox-fade fade-in-primary">
-            <label>
-                <input type="checkbox" value="">
-                <span class="cr">
-                    <i class="cr-icon fa fa-check txt-primary"></i>
-                </span>
-                <span>ValidTo</span>
-            </label>
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <div class="checkbox-fade fade-in-primary">
+                    <label>
+                        @Html.CheckBoxFor(i => i.IssueValidTo.Value)
+                        <span class="cr">
+                            <i class="cr-icon fa fa-check txt-primary"></i>
+                        </span>
+                        <span>ValidTo</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">ValidTo:</label>
+            <div class="col-sm-8">
+                @Html.EditorFor(i => i.IssueDateValidTo, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Notify days</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(i => i.IssueNotify, new { @class = "form-control", type = "number" })
+                @Html.ValidationMessageFor(i => i.IssueNotify)
+            </div>
         </div>
     </div>
-    <div class="col-sm-6">
-        <div class="checkbox-fade fade-in-primary">
-            <label>
-                <input type="checkbox" value="">
-                <span class="cr">
-                    <i class="cr-icon fa fa-check txt-primary"></i>
-                </span>
-                <span>ValidTo</span>
-            </label>
-        </div>
-    </div>
-</div>
 
-<div class="form-group row">
-    <label class="col-sm-2 col-form-label">ValidTo:</label>
-    <div class="col-sm-4">
-        <input type="date" class="form-control" placeholder="@Html.DisplayFor(model => model.IssueDateValidTo)">
-    </div>
-    <label class="col-sm-2 col-form-label">ValidTo:</label>
-    <div class="col-sm-4">
-        <input type="date" class="form-control" placeholder="@Html.DisplayFor(model => model.RevNumber)">
+    <div class="col-sm-6">
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <div class="checkbox-fade fade-in-primary">
+                    <label>
+                        @Html.CheckBoxFor(i => i.RevisionValidTo.Value)
+                        <span class="cr">
+                            <i class="cr-icon fa fa-check txt-primary"></i>
+                        </span>
+                        <span>ValidTo:</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">ValidTo:</label>
+            <div class="col-sm-8">
+                @Html.EditorFor(i => i.RevisionDateValidTo, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Notify days</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(i => i.RevisionNotify, new { @class = "form-control", type = "number" })
+                @Html.ValidationMessageFor(i => i.RevisionNotify)
+            </div>
+        </div>
     </div>
 </div>
     
-<div class="form-group row">
-    <label class="col-sm-2 col-form-label">Notify days</label>
-    <div class="col-sm-4">
-        <input type="text" class="form-control" placeholder=" " disabled>
-    </div>
-    <label class="col-sm-2 col-form-label">Notify days</label>
-    <div class="col-sm-4">
-        <input type="text" class="form-control" placeholder=" " disabled>
-    </div>
-</div>
+        <div class="row">
+            <div class="col-sm-6">
 
-<div class="row">
-    <div class="col-sm-6">
-        
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Remarks:</label>
-                <div class="col-sm-8">
-                    <textarea rows="5" cols="5" class="form-control" placeholder="@Html.DisplayFor(model => model.Remarks)"></textarea>
-                </div>
-            </div>
-        
-    </div>
-    <div class="col-sm-6">
-        
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Status:</label>
-                <div class="col-sm-8">
-                    <div class="checkbox-fade fade-in-primary">
-                        <label>
-                            <input type="checkbox" value="">
-                            <span class="cr">
-                                <i class="cr-icon fa fa-check txt-primary"></i>
-                            </span>
-                            <span>Closed</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-fade fade-in-primary">
-                        <label>
-                            <input type="checkbox" value="">
-                            <span class="cr">
-                                <i class="cr-icon fa fa-check txt-primary"></i>
-                            </span>
-                            <span>Aboard</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-fade fade-in-primary">
-                        <label>
-                            <input type="checkbox" value="">
-                            <span class="cr">
-                                <i class="cr-icon fa fa-check txt-primary"></i>
-                            </span>
-                            <span>Privy</span>
-                        </label>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Remarks:</label>
+                    <div class="col-sm-8">
+                        @Html.TextAreaFor(i => i.Remarks, new { rows = 5, columns = 5, @class = "form-control" })
+                        @Html.ValidationMessageFor(i => i.Remarks)
                     </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label">File:</label>
-                <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon"><i class="fa fa-file-pdf-o"></i></button>
-            </div>
-        
-    </div>
-</div>
 
-</div>
+            </div>
+            <div class="col-sm-6">
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Status:</label>
+                    <div class="col-sm-8">
+                        <div class="checkbox-fade fade-in-primary">
+                            <label>
+                                @Html.CheckBoxFor(i => i.IsClosed.Value)
+                                <span class="cr">
+                                    <i class="cr-icon fa fa-check txt-primary"></i>
+                                </span>
+                                <span>Closed</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-fade fade-in-primary">
+                            <label>
+                                @Html.CheckBoxFor(i => i.Aboard)
+                                <span class="cr">
+                                    <i class="cr-icon fa fa-check txt-primary"></i>
+                                </span>
+                                <span>Aboard</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-fade fade-in-primary">
+                            <label>
+                                @Html.CheckBoxFor(i => i.Privy)
+                                <span class="cr">
+                                    <i class="cr-icon fa fa-check txt-primary"></i>
+                                </span>
+                                <span>Privy</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="form-group row">
+                    <label class="col-sm-4 col-form-label">File:</label>
+                    <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon"><i class="fa fa-file-pdf-o"></i></button>
+                </div>*@
+
+            </div>
+        </div>
+
+    </div>
 
 <div class="modal-footer">
     <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>

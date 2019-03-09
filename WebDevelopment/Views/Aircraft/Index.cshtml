@@ -1,13 +1,14 @@
 ﻿@using BusinessLayer
+@using BusinessLayer.Dictionaties
 @using BusinessLayer.Views
 @using Entity.Models.General
 @using WebDevelopment.Infrastructude
+@model AircraftView
 @{
     Layout = "_AircraftLayout";
-    var aircraft = (AircraftView)ViewData["Aircraft"];
     var baseComponents = (List<BaseComponentView>)ViewData["BaseComponents"];
     var oper = (Operator)ViewData["Operator"];
-    var apuFlightMinutesList = new List<int> { 0, 20, 30, 40 };
+    //var startDate = baseComponents.FirstOrDefault(i => i.BaseComponentTypeId == SmartCoreType.BaseComponent.ItemId)?.StartDate ?? DateTime.Today;
 }
 
 <div class="row">
@@ -26,77 +27,72 @@
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Aircraft Model</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.Model.FullName" readonly>
+                                        @Html.TextBoxFor(i => i.Model.FullName, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.Model.FullName)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Owner</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.Owner" readonly>
+                                        @Html.TextBoxFor(i => i.Owner, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.Owner)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Serial Number</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.SerialNumber" readonly>
+                                        @Html.TextBoxFor(i => i.SerialNumber, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.SerialNumber)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Operator</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@oper.Name" readonly>
+                                        @Html.TextBoxFor(i => oper.Name, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => oper.Name)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Registration Number</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.RegistrationNumber" readonly>
+                                        @Html.TextBoxFor(i => i.RegistrationNumber, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.RegistrationNumber)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Variable Number</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.VariableNumber" readonly>
+                                        @Html.TextBoxFor(i => i.VariableNumber, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.VariableNumber)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Aircraft Type Certificate №</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.TypeCertificateNumber" readonly>
+                                        @Html.TextBoxFor(i => i.TypeCertificateNumber, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.TypeCertificateNumber)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Line Number</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.LineNumber" readonly>
+                                        @Html.TextBoxFor(i => i.LineNumber, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.LineNumber)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">MSG</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <select class="form-control">
-                                            <option selected>@aircraft.MSG</option>
-
-                                            @foreach (object o in Enum.GetValues(typeof(MSG)).Cast<MSG>().Where(msg => msg != MSG.Unknown).Distinct())
-                                            {
-                                                <option value="@o">@o</option>
-                                            }
-                                        </select>
+                                        @Html.DropDownListFor(i => i.MSG, Html.GetEnumSelectList(typeof(MSG)), new { @class = "form-control", @readonly = "readonly" })
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">APU Util.(FH/APUFH)</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <select class="form-control">
-                                            <option selected>@aircraft.ApuUtizationPerFlightinMinutes</option>
-                                            @foreach (int value in apuFlightMinutesList)
-                                            {
-                                                <option>@value</option>
-                                            }
-
-                                        </select>
+                                        @Html.TextBoxFor(i => i.APUFH, new { @class = "form-control", @*type = "number", min = "0" , step = "0.01"*@ @readonly = "readonly" })
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Manufacture Date</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input class="form-control" type="date" value="08.08.1993" />
+                                        @Html.EditorFor(i => i.ManufactureDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Start</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input class="form-control" type="date" />
+                                       @* @Html.EditorFor( i => startDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })*@
+                                        <input class="form-control" type="date"/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -121,37 +117,41 @@
                                 <div class="row">
                                     @foreach (var baseComponent in baseComponentType)
                                     {
-
-
                                         <div class="z-depth-top-4 p-t-30 m-r-20 col-sm-3">
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">Engine Model</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    <input type="text" class="form-control" placeholder="@baseComponent.Model.FullName" readonly>
+                                                    @Html.TextBoxFor(i => baseComponent.Model.FullName, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(i => i.LineNumber)
+                                                
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">Manufacturer</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    <input type="text" class="form-control" placeholder="@baseComponent.Manufacturer" readonly>
+                                                    @Html.TextBoxFor(i => baseComponent.Manufacturer, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(i => baseComponent.Manufacturer)
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">Position</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    <input type="text" class="form-control" placeholder="@baseComponent.Position" readonly>
+                                                    @Html.TextBoxFor(i => baseComponent.Position, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(i => baseComponent.Position)
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">Serial Number</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    <input type="text" class="form-control" placeholder="@baseComponent.SerialNumber" readonly>
+                                                    @Html.TextBoxFor(i => baseComponent.SerialNumber, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(i => baseComponent.SerialNumber)
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">Part Number</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    <input type="text" class="form-control" placeholder="@baseComponent.PartNumber" readonly>
+                                                    @Html.TextBoxFor(i => baseComponent.PartNumber, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(i => baseComponent.PartNumber)
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -163,7 +163,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">Manufacture Date</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    <input class="form-control" type="date" />
+                                                    @Html.EditorFor(i => baseComponent.ManufactureDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                                 </div>
                                             </div>
                                         </div>
@@ -173,8 +173,8 @@
                                 </div>
                             </form>
                         </div>
-                    }
 
+                    }
 
                         <a class="z-depth-top-0 accordion-msg b-none waves-effect waves-light">>Interior Configuration</a>
                     <div class="accordion-desc">
@@ -183,62 +183,63 @@
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Cockpit Seating</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.CockpitSeating" readonly>
+                                        @Html.TextBoxFor(i => i.CockpitSeating, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.CockpitSeating)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Oven</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.Oven" readonly>
+                                        @Html.TextBoxFor(i => i.Oven, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.Oven)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Galleys</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.Galleys" readonly>
+                                        @Html.TextBoxFor(i => i.Galleys, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.Galleys)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Boiler</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.Boiler" readonly>
+                                        @Html.TextBoxFor(i => i.Boiler, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.Boiler)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Lavatory</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.Lavatory" readonly>
+                                        @Html.TextBoxFor(i => i.Lavatory, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.Lavatory)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Air Stair Doors</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.AirStairDoors" readonly>
+                                        @Html.TextBoxFor(i => i.AirStairDoors, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.AirStairDoors)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Seating Economy</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.SeatingEconomy" readonly>
+                                        @Html.TextBoxFor(i => i.SeatingEconomy, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.SeatingEconomy)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Seating Business</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input type="text" class="form-control" placeholder="@aircraft.SeatingBusiness" readonly>
+                                        @Html.TextBoxFor(i => i.SeatingBusiness, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.SeatingBusiness)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Seating First</label>
-                                <div class="col-sm-12 col-lg-4">
-                                    <input type="text" class="form-control" placeholder="@aircraft.SeatingFirst" readonly>
-                                </div>
+                                    <div class="col-sm-12 col-lg-4">
+                                        @Html.TextBoxFor(i => i.SeatingFirst, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(i => i.SeatingFirst)
+                                    </div>
                                 </div>
                                     
                             </form>
                         </p>
                     </div>
-
-                    <a class="z-depth-top-0 accordion-msg bg-darkest-primary b-none waves-effect waves-light">
-                        Other
-                    </a>
-                    <div class="accordion-desc">
-                        <p>
-                            other
-                        </p>
-                    </div>
+                    
                 </div>
             </div>
         </div>

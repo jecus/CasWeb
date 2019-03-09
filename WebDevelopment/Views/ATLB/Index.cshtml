@@ -46,9 +46,18 @@
                             @foreach (var atlb in Model)
                             {
                                 <tr>
-                                    <td><a href=@modalUrl.Replace("_ATLBID_", atlb.Id.ToString()) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon">
-                                        <i class="fa fa-pencil"></i>
-                                    </a></td>
+                                    <td style="width: 80px">
+                                        <button class="btn waves-effect waves-dark btn-success btn-outline-success btn-icon">
+                                            <i class="fa fa-folder-open-o"></i>
+                                        </button>
+                                        <a href=@modalUrl.Replace("_ATLBID_", atlb.Id.ToString()) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+
+                                        <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
                                     <td>@atlb.ATLBNo</td>
                                     <td>@atlb.Pages</td>
                                     <td>@atlb.Dates</td>
@@ -71,12 +80,6 @@
                     </table>
                 </div>
             </div>
-            
-            <div id="toolbar-options" class="hidden">
-                <a href="#"><i class="fa fa-trash"></i></a>
-                <a href="#"><i class="fa fa-file"></i></a>
-            </div>
-
         </div>
     </div>
 </div>

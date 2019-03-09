@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace BusinessLayer.Views
 {
@@ -6,7 +8,7 @@ namespace BusinessLayer.Views
     {
 		public int AircraftFrameId { get; set; }
 
-		public double APUFH { get; set; }
+        public double APUFH { get; set; }
 
 		public int OperatorID { get; set; }
 
@@ -16,7 +18,10 @@ namespace BusinessLayer.Views
 
 		public string TypeCertificateNumber { get; set; }
 
-		public DateTime ManufactureDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayName("ManufactureDate")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime ManufactureDate { get; set; }
 
 		public string RegistrationNumber { get; set; }
 
@@ -78,9 +83,15 @@ namespace BusinessLayer.Views
 
 		public string ELTIdHexCode { get; set; }
 
-		public DateTime? DeliveryDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayName("DeliveryDate")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime? DeliveryDate { get; set; }
 
-		public DateTime? AcceptanceDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayName("AcceptanceDate")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime? AcceptanceDate { get; set; }
 
 		public bool Schedule { get; set; }
 

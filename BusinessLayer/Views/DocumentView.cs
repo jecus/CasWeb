@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using BusinessLayer.Dictionaties;
 using Entity.Enums;
 using Entity.Models.General;
@@ -37,10 +39,16 @@ namespace BusinessLayer.Views
             get { return Description.Length > 60 ? Description.Substring(0, 59).Insert(59, "...") : Description; }
         }
 
+        [DataType(DataType.Date)]
+        [DisplayName("IssueDateValidFrom")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime IssueDateValidFrom { get; set; }
 
         public bool? IssueValidTo { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayName("IssueDateValidTo")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime IssueDateValidTo { get; set; }
 
         public int? IssueNotify { get; set; }
@@ -56,6 +64,9 @@ namespace BusinessLayer.Views
 
         public string RevNumber { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayName("RevisionDateFrom")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? RevisionDateFrom { get; set; }
 
         public bool? IsClosed { get; set; }
@@ -64,6 +75,9 @@ namespace BusinessLayer.Views
 
         public bool? RevisionValidTo { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayName("RevisionDateValidTo")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? RevisionDateValidTo { get; set; }
 
         public int? RevisionNotify { get; set; }

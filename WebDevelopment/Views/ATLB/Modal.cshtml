@@ -28,7 +28,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Start Page №:</label>
                 <div class="col-sm-10">
-                    @Html.TextBoxFor(i => i.StartPageNo, new { @class = "form-control" })
+                    @Html.TextBoxFor(i => i.StartPageNo, new { @class = "form-control", type = "number" })
                     @Html.ValidationMessageFor(i => i.StartPageNo)
                 </div>
             </div>
@@ -36,7 +36,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Count flight on page:</label>
                 <div class="col-sm-10">
-                    @Html.TextBoxFor(i => i.PageFlightCount, new { @class = "form-control" })
+                    @Html.TextBoxFor(i => i.PageFlightCount, new { @class = "form-control", type = "number" })
                     @Html.ValidationMessageFor(i => i.PageFlightCount)
                 </div>
             </div>
@@ -44,7 +44,6 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Opening date:</label>
                 <div class="col-sm-10">
-                    @*<input type="date" class="form-control" placeholder=" ">*@
                     @Html.EditorFor(i => i.OpeningDate, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
             </div>

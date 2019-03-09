@@ -28,5 +28,10 @@ namespace BusinessLayer.Views
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            return FullName;
+        }
     }
 }
