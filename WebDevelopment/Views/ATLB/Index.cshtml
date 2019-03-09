@@ -6,6 +6,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AircraftLayout.cshtml";
     var modalUrl = @Url.Action("ModalEdit", "ATLB", new {GlobalObject.AircraftId, atlbId = "_ATLBID_" });
+    var confirmModalUrl = @Url.Action("ConfirmDelete", "ATLB", new {GlobalObject.AircraftId, atlbId = "_ATLBID_" });
  }
 
 
@@ -35,15 +36,24 @@
                         <tbody>
 
 
-                            <div class="modal fade" id="large-Modal" tabindex="-1" role="dialog" style="display: none; z-index: 1050;" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div id="dialogContent" class="modal-content">
+                        <div class="modal fade" id="large-Modal" tabindex="-1" role="dialog" style="display: none; z-index: 1050;" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div id="dialogContent" class="modal-content">
 
-                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        
+                        
+                        <div class="modal fade" id="small-Modal" tabindex="-1" role="dialog" style="display: none; z-index: 1050;" aria-hidden="true">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div id="dialogDeleteContent" class="modal-content">
 
-                            @foreach (var atlb in Model)
+                                </div>
+                            </div>
+                        </div>
+
+                        @foreach (var atlb in Model)
                             {
                                 <tr>
                                     <td style="width: 80px">
@@ -53,10 +63,11 @@
                                         <a href=@modalUrl.Replace("_ATLBID_", atlb.Id.ToString()) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-
-                                        <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon">
+                                        
+                                        <a href=@confirmModalUrl.Replace("_ATLBID_", atlb.Id.ToString()) , class="modalConfirmDeleteBtn btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon">
                                             <i class="fa fa-times"></i>
-                                        </button>
+                                        </a>
+
                                     </td>
                                     <td>@atlb.ATLBNo</td>
                                     <td>@atlb.Pages</td>

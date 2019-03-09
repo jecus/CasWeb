@@ -140,1071 +140,1080 @@ namespace Entity.Infrastructure
         public DbSet<WorkPackageSpecialists> WorkPackageSpecialistses { get; set; }
         public DbSet<WorkShop> WorkShops { get; set; }
 
-        #endregion
+		#endregion
 
+		#region  public DatabaseContext(DbContextOptions<DatabaseContext> opt)
 
-        public DatabaseContext(DbContextOptions<DatabaseContext> opt):base(opt)
-		{
-			Database.SetCommandTimeout(610);
-		}
+		public DatabaseContext(DbContextOptions<DatabaseContext> opt):base(opt)
+        {
+	        Database.SetCommandTimeout(610);
+        }
+
+		#endregion
+
+		#region protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
-			#region AccessoryRequired
+        {
+	        #region AccessoryRequired
 
-			modelBuilder.Entity<AccessoryRequired>()
-				.HasOne(i => i.Product)
-				.WithMany(i => i.AccessoryRequireds)
-				.HasForeignKey(i => i.AccessoryDescriptionId);
+	        modelBuilder.Entity<AccessoryRequired>()
+		        .HasOne(i => i.Product)
+		        .WithMany(i => i.AccessoryRequireds)
+		        .HasForeignKey(i => i.AccessoryDescriptionId);
 
-			modelBuilder.Entity<AccessoryRequired>()
-				.HasOne(i => i.Standart)
-				.WithMany(i => i.AccessoryRequireds)
-				.HasForeignKey(i => i.GoodStandartId);
+	        modelBuilder.Entity<AccessoryRequired>()
+		        .HasOne(i => i.Standart)
+		        .WithMany(i => i.AccessoryRequireds)
+		        .HasForeignKey(i => i.GoodStandartId);
 
-			#endregion
+	        #endregion
 
-			#region AircraftEquipment
+	        #region AircraftEquipment
 
-			modelBuilder.Entity<AircraftEquipment>()
-				.HasOne(i => i.AircraftOtherParameter)
-				.WithMany(i => i.AircraftEquipments)
-				.HasForeignKey(i => i.AircraftOtherParameterId);
+	        modelBuilder.Entity<AircraftEquipment>()
+		        .HasOne(i => i.AircraftOtherParameter)
+		        .WithMany(i => i.AircraftEquipments)
+		        .HasForeignKey(i => i.AircraftOtherParameterId);
 
-			#endregion
+	        #endregion
 
-			#region AircraftFlight
+	        #region AircraftFlight
 
-			modelBuilder.Entity<AircraftFlight>()
-				.HasOne(i => i.FlightNumber)
-				.WithMany(i => i.AircraftFlights)
-				.HasForeignKey(i => i.FlightNumberId);
+	        modelBuilder.Entity<AircraftFlight>()
+		        .HasOne(i => i.FlightNumber)
+		        .WithMany(i => i.AircraftFlights)
+		        .HasForeignKey(i => i.FlightNumberId);
 
-			modelBuilder.Entity<AircraftFlight>()
-				.HasOne(i => i.Level)
-				.WithMany(i => i.AircraftFlights)
-				.HasForeignKey(i => i.LevelId);
+	        modelBuilder.Entity<AircraftFlight>()
+		        .HasOne(i => i.Level)
+		        .WithMany(i => i.AircraftFlights)
+		        .HasForeignKey(i => i.LevelId);
 
-			modelBuilder.Entity<AircraftFlight>()
-				.HasOne(i => i.StationFroms)
-				.WithMany(i => i.AircraftFlightsFrom)
-				.HasForeignKey(i => i.StationFromId);
+	        modelBuilder.Entity<AircraftFlight>()
+		        .HasOne(i => i.StationFroms)
+		        .WithMany(i => i.AircraftFlightsFrom)
+		        .HasForeignKey(i => i.StationFromId);
 
-			modelBuilder.Entity<AircraftFlight>()
-				.HasOne(i => i.StationTos)
-				.WithMany(i => i.AircraftFlightsTo)
-				.HasForeignKey(i => i.StationToId);
+	        modelBuilder.Entity<AircraftFlight>()
+		        .HasOne(i => i.StationTos)
+		        .WithMany(i => i.AircraftFlightsTo)
+		        .HasForeignKey(i => i.StationToId);
 
 
-			modelBuilder.Entity<AircraftFlight>()
-				.HasOne(i => i.CancelReason)
-				.WithMany(i => i.AircraftFlightsCancels)
-				.HasForeignKey(i => i.CancelReasonId);
+	        modelBuilder.Entity<AircraftFlight>()
+		        .HasOne(i => i.CancelReason)
+		        .WithMany(i => i.AircraftFlightsCancels)
+		        .HasForeignKey(i => i.CancelReasonId);
 
-			modelBuilder.Entity<AircraftFlight>()
-				.HasOne(i => i.DelayReason)
-				.WithMany(i => i.AircraftFlightsDelays)
-				.HasForeignKey(i => i.DelayReasonId);
+	        modelBuilder.Entity<AircraftFlight>()
+		        .HasOne(i => i.DelayReason)
+		        .WithMany(i => i.AircraftFlightsDelays)
+		        .HasForeignKey(i => i.DelayReasonId);
 
-			//modelBuilder.Entity<AircraftFlight>()
-			//	.HasMany(i => i.Files).WithOne(i => i.AircraftFlight).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<AircraftFlight>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.AircraftFlight).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region Aircraft
+	        #region Aircraft
 
-			modelBuilder.Entity<Aircraft>()
-				.HasOne(a => a.Model)
-				.WithMany(b => b.Aircrafts)
-				.HasForeignKey(b => b.ModelId);
+	        modelBuilder.Entity<Aircraft>()
+		        .HasOne(a => a.Model)
+		        .WithMany(b => b.Aircrafts)
+		        .HasForeignKey(b => b.ModelId);
 
-			modelBuilder.Entity<Aircraft>()
-				.HasMany(i => i.MaintenanceProgramChangeRecords).WithOne(i => i.ParentAircraft).HasForeignKey(i => i.ParentAircraftId);
+	        modelBuilder.Entity<Aircraft>()
+		        .HasMany(i => i.MaintenanceProgramChangeRecords).WithOne(i => i.ParentAircraft).HasForeignKey(i => i.ParentAircraftId);
 
-			#endregion
+	        #endregion
 
-			#region ATLB
+	        #region ATLB
 
-			//modelBuilder.Entity<ATLB>()
-			//	.HasMany(i => i.Files).WithOne(i => i.Atlb).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<ATLB>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.Atlb).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region Audit
+	        #region Audit
 
-			//modelBuilder.Entity<Audit>()
-			//	.HasMany(i => i.Files).WithOne(i => i.Audit).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<Audit>()
-				.HasMany(i => i.AuditRecords).WithOne(i => i.Audit).HasForeignKey(i => i.AuditId);
+	        //modelBuilder.Entity<Audit>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.Audit).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<Audit>()
+		        .HasMany(i => i.AuditRecords).WithOne(i => i.Audit).HasForeignKey(i => i.AuditId);
 
-			#endregion
+	        #endregion
 
-			#region CategoryRecord
+	        #region CategoryRecord
 
-			modelBuilder.Entity<CategoryRecord>()
-				.HasOne(i => i.AircraftModel)
-				.WithMany(i => i.CategoryRecords)
-				.HasForeignKey(i => i.AircraftTypeId);
+	        modelBuilder.Entity<CategoryRecord>()
+		        .HasOne(i => i.AircraftModel)
+		        .WithMany(i => i.CategoryRecords)
+		        .HasForeignKey(i => i.AircraftTypeId);
 
-			modelBuilder.Entity<CategoryRecord>()
-				.HasOne(i => i.AircraftWorkerCategory)
-				.WithMany(i => i.CategoryRecords)
-				.HasForeignKey(i => i.AircraftWorkerCategoryId);
+	        modelBuilder.Entity<CategoryRecord>()
+		        .HasOne(i => i.AircraftWorkerCategory)
+		        .WithMany(i => i.CategoryRecords)
+		        .HasForeignKey(i => i.AircraftWorkerCategoryId);
 
-			#endregion
+	        #endregion
 
-			#region CertificateOfReleaseToService
+	        #region CertificateOfReleaseToService
 
-			modelBuilder.Entity<CertificateOfReleaseToService>()
-				.HasOne(i => i.AuthorizationB1)
-				.WithMany(i => i.CertificateOfReleaseToServiceB1s)
-				.HasForeignKey(i => i.AuthorizationB1Id);
+	        modelBuilder.Entity<CertificateOfReleaseToService>()
+		        .HasOne(i => i.AuthorizationB1)
+		        .WithMany(i => i.CertificateOfReleaseToServiceB1s)
+		        .HasForeignKey(i => i.AuthorizationB1Id);
 
-			modelBuilder.Entity<CertificateOfReleaseToService>()
-				.HasOne(i => i.AuthorizationB2)
-				.WithMany(i => i.CertificateOfReleaseToServiceB2s)
-				.HasForeignKey(i => i.AuthorizationB2Id);
+	        modelBuilder.Entity<CertificateOfReleaseToService>()
+		        .HasOne(i => i.AuthorizationB2)
+		        .WithMany(i => i.CertificateOfReleaseToServiceB2s)
+		        .HasForeignKey(i => i.AuthorizationB2Id);
 
-			#endregion
+	        #endregion
 
-			#region ComponentDirective
+	        #region ComponentDirective
 
-			//modelBuilder.Entity<ComponentDirective>()
-			//	.HasMany(i => i.Files).WithOne(i => i.ComponentDirective).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<ComponentDirective>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.ComponentDirective).HasForeignKey(i => i.ParentId);
 
-			modelBuilder.Entity<ComponentDirective>()
-				.HasMany(i => i.PerformanceRecords).WithOne(i => i.ComponentDirective).HasForeignKey(i => i.ParentID);
+	        modelBuilder.Entity<ComponentDirective>()
+		        .HasMany(i => i.PerformanceRecords).WithOne(i => i.ComponentDirective).HasForeignKey(i => i.ParentID);
 
-			modelBuilder.Entity<ComponentDirective>()
-				.HasMany(i => i.Kits).WithOne(i => i.ComponentDirective).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<ComponentDirective>()
+		        .HasMany(i => i.Kits).WithOne(i => i.ComponentDirective).HasForeignKey(i => i.ParentId);
 
-			modelBuilder.Entity<ComponentDirective>()
-				.HasMany(i => i.CategoriesRecords).WithOne(i => i.ComponentDirective).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<ComponentDirective>()
+		        .HasMany(i => i.CategoriesRecords).WithOne(i => i.ComponentDirective).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region ComponentLLPCategoryChangeRecord
+	        #region ComponentLLPCategoryChangeRecord
 
-			modelBuilder.Entity<ComponentLLPCategoryChangeRecord>()
-				.HasOne(i => i.ToCategory)
-				.WithMany(i => i.CategoryChangeRecords)
-				.HasForeignKey(i => i.ToCategoryId);
+	        modelBuilder.Entity<ComponentLLPCategoryChangeRecord>()
+		        .HasOne(i => i.ToCategory)
+		        .WithMany(i => i.CategoryChangeRecords)
+		        .HasForeignKey(i => i.ToCategoryId);
 
-			//modelBuilder.Entity<ComponentLLPCategoryChangeRecord>()
-			//	.HasMany(i => i.Files).WithOne(i => i.CategoryChangeRecord).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<ComponentLLPCategoryChangeRecord>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.CategoryChangeRecord).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region ComponentLLPCategoryData
+	        #region ComponentLLPCategoryData
 
-			modelBuilder.Entity<ComponentLLPCategoryData>()
-				.HasOne(i => i.ParentCategory)
-				.WithMany(i => i.CategoryDatas)
-				.HasForeignKey(i => i.LLPCategoryId);
+	        modelBuilder.Entity<ComponentLLPCategoryData>()
+		        .HasOne(i => i.ParentCategory)
+		        .WithMany(i => i.CategoryDatas)
+		        .HasForeignKey(i => i.LLPCategoryId);
 
-			#endregion
+	        #endregion
 
-			#region Component
+	        #region Component
 
-			modelBuilder.Entity<Component>()
-				.HasOne(i => i.ATAChapter)
-				.WithMany(i => i.Components)
-				.HasForeignKey(i => i.ATAChapterId);
+	        modelBuilder.Entity<Component>()
+		        .HasOne(i => i.ATAChapter)
+		        .WithMany(i => i.Components)
+		        .HasForeignKey(i => i.ATAChapterId);
 
-			modelBuilder.Entity<Component>()
-				.HasOne(i => i.Model)
-				.WithMany(i => i.Components)
-				.HasForeignKey(i => i.ModelId);
+	        modelBuilder.Entity<Component>()
+		        .HasOne(i => i.Model)
+		        .WithMany(i => i.Components)
+		        .HasForeignKey(i => i.ModelId);
 
-			modelBuilder.Entity<Component>()
-				.HasOne(i => i.Location)
-				.WithMany(i => i.Components)
-				.HasForeignKey(i => i.LocationId);
+	        modelBuilder.Entity<Component>()
+		        .HasOne(i => i.Location)
+		        .WithMany(i => i.Components)
+		        .HasForeignKey(i => i.LocationId);
 
-			modelBuilder.Entity<Component>()
-				.HasOne(i => i.FromSupplier)
-				.WithMany(i => i.Components)
-				.HasForeignKey(i => i.FromSupplierId);
+	        modelBuilder.Entity<Component>()
+		        .HasOne(i => i.FromSupplier)
+		        .WithMany(i => i.Components)
+		        .HasForeignKey(i => i.FromSupplierId);
 
-			modelBuilder.Entity<Component>()
-				.HasMany(i => i.SupplierRelations).WithOne(i => i.Component).HasForeignKey(i => i.KitId);
+	        modelBuilder.Entity<Component>()
+		        .HasMany(i => i.SupplierRelations).WithOne(i => i.Component).HasForeignKey(i => i.KitId);
 
-			//modelBuilder.Entity<Component>()
-			//	.HasMany(i => i.Files).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<Component>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
 
-			modelBuilder.Entity<Component>()
-				.HasMany(i => i.LLPData).WithOne(i => i.Component).HasForeignKey(i => i.ComponentId);
+	        modelBuilder.Entity<Component>()
+		        .HasMany(i => i.LLPData).WithOne(i => i.Component).HasForeignKey(i => i.ComponentId);
 
-			modelBuilder.Entity<Component>()
-				.HasMany(i => i.CategoriesRecords).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<Component>()
+		        .HasMany(i => i.CategoriesRecords).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
 
-			modelBuilder.Entity<Component>()
-				.HasMany(i => i.Kits).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<Component>()
+		        .HasMany(i => i.Kits).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
 
-			modelBuilder.Entity<Component>()
-				.HasMany(i => i.ActualStateRecords).WithOne(i => i.Component).HasForeignKey(i => i.ComponentId);
+	        modelBuilder.Entity<Component>()
+		        .HasMany(i => i.ActualStateRecords).WithOne(i => i.Component).HasForeignKey(i => i.ComponentId);
 
-			modelBuilder.Entity<Component>()
-				.HasMany(i => i.TransferRecords).WithOne(i => i.Component).HasForeignKey(i => i.ParentID);
+	        modelBuilder.Entity<Component>()
+		        .HasMany(i => i.TransferRecords).WithOne(i => i.Component).HasForeignKey(i => i.ParentID);
 
-			modelBuilder.Entity<Component>()
-				.HasMany(i => i.ComponentDirectives).WithOne(i => i.Component).HasForeignKey(i => i.ComponentId);
+	        modelBuilder.Entity<Component>()
+		        .HasMany(i => i.ComponentDirectives).WithOne(i => i.Component).HasForeignKey(i => i.ComponentId);
 
-			modelBuilder.Entity<Component>()
-				.HasMany(i => i.ChangeLLPCategoryRecords).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<Component>()
+		        .HasMany(i => i.ChangeLLPCategoryRecords).WithOne(i => i.Component).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region DamageDocument
+	        #region DamageDocument
 
-			//modelBuilder.Entity<DamageDocument>()
-			//	.HasMany(i => i.Files).WithOne(i => i.DamageDocument).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<DamageDocument>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.DamageDocument).HasForeignKey(i => i.ParentId);
 
-			modelBuilder.Entity<DamageDocument>()
-				.HasMany(i => i.DamageSectors).WithOne(i => i.DamageDocument).HasForeignKey(i => i.DamageDocumentId);
+	        modelBuilder.Entity<DamageDocument>()
+		        .HasMany(i => i.DamageSectors).WithOne(i => i.DamageDocument).HasForeignKey(i => i.DamageDocumentId);
 
-			#endregion
+	        #endregion
 
-			#region Directive
+	        #region Directive
 
-			modelBuilder.Entity<Directive>()
-				.HasOne(i => i.ATAChapter)
-				.WithMany(i => i.Directives)
-				.HasForeignKey(i => i.ATAChapterId);
+	        modelBuilder.Entity<Directive>()
+		        .HasOne(i => i.ATAChapter)
+		        .WithMany(i => i.Directives)
+		        .HasForeignKey(i => i.ATAChapterId);
 
-			modelBuilder.Entity<Directive>()
-				.HasOne(i => i.DeferredCategory)
-				.WithMany(i => i.Directives)
-				.HasForeignKey(i => i.DeferredCategoryId);
+	        modelBuilder.Entity<Directive>()
+		        .HasOne(i => i.DeferredCategory)
+		        .WithMany(i => i.Directives)
+		        .HasForeignKey(i => i.DeferredCategoryId);
 
-			modelBuilder.Entity<Directive>()
-				.HasOne(i => i.BaseComponent)
-				.WithMany(i => i.Directives)
-				.HasForeignKey(i => i.ComponentId);
+	        modelBuilder.Entity<Directive>()
+		        .HasOne(i => i.BaseComponent)
+		        .WithMany(i => i.Directives)
+		        .HasForeignKey(i => i.ComponentId);
 
-			//modelBuilder.Entity<Directive>()
-			//	.HasMany(i => i.Files).WithOne(i => i.Directive).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<Directive>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.Directive).HasForeignKey(i => i.ParentId);
 
-			modelBuilder.Entity<Directive>()
-				.HasMany(i => i.DamageDocs).WithOne(i => i.Directive).HasForeignKey(i => i.DirectiveId);
+	        modelBuilder.Entity<Directive>()
+		        .HasMany(i => i.DamageDocs).WithOne(i => i.Directive).HasForeignKey(i => i.DirectiveId);
 
-			modelBuilder.Entity<Directive>()
-				.HasMany(i => i.PerformanceRecords).WithOne(i => i.Directive).HasForeignKey(i => i.ParentID);
+	        modelBuilder.Entity<Directive>()
+		        .HasMany(i => i.PerformanceRecords).WithOne(i => i.Directive).HasForeignKey(i => i.ParentID);
 
-			modelBuilder.Entity<Directive>()
-				.HasMany(i => i.CategoriesRecords).WithOne(i => i.Directive).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<Directive>()
+		        .HasMany(i => i.CategoriesRecords).WithOne(i => i.Directive).HasForeignKey(i => i.ParentId);
 
-			modelBuilder.Entity<Directive>()
-				.HasMany(i => i.Kits).WithOne(i => i.Directive).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<Directive>()
+		        .HasMany(i => i.Kits).WithOne(i => i.Directive).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region DirectiveRecord
+	        #region DirectiveRecord
 
-			//modelBuilder.Entity<DirectiveRecord>()
-			//	.HasMany(i => i.Files).WithOne(i => i.DirectiveRecord).HasForeignKey(i => i.ParentId);
-			//modelBuilder.Entity<DirectiveRecord>()
-			//	.HasMany(i => i.FilesForMaintenanceCheckRecord).WithOne(i => i.MaintenanceCheckRecord).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<DirectiveRecord>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.DirectiveRecord).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<DirectiveRecord>()
+	        //	.HasMany(i => i.FilesForMaintenanceCheckRecord).WithOne(i => i.MaintenanceCheckRecord).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region Discrepancy
+	        #region Discrepancy
 
-			modelBuilder.Entity<Discrepancy>()
-				.HasOne(i => i.ATAChapter)
-				.WithMany(i => i.Discrepancys)
-				.HasForeignKey(i => i.ATAChapterID);
+	        modelBuilder.Entity<Discrepancy>()
+		        .HasOne(i => i.ATAChapter)
+		        .WithMany(i => i.Discrepancys)
+		        .HasForeignKey(i => i.ATAChapterID);
 
-			modelBuilder.Entity<Discrepancy>()
-				.HasOne(i => i.Auth)
-				.WithMany(i => i.Discrepancys)
-				.HasForeignKey(i => i.AuthId);
+	        modelBuilder.Entity<Discrepancy>()
+		        .HasOne(i => i.Auth)
+		        .WithMany(i => i.Discrepancys)
+		        .HasForeignKey(i => i.AuthId);
 
-			#endregion
+	        #endregion
 
-			#region Document
+	        #region Document
 
-			modelBuilder.Entity<Document>()
-				.HasOne(i => i.DocumentSubType)
-				.WithMany(i => i.Documents)
-				.HasForeignKey(i => i.SubTypeId);
+	        modelBuilder.Entity<Document>()
+		        .HasOne(i => i.DocumentSubType)
+		        .WithMany(i => i.Documents)
+		        .HasForeignKey(i => i.SubTypeId);
 
-			modelBuilder.Entity<Document>()
-				.HasOne(i => i.Supplier)
-				.WithMany(i => i.Documents)
-				.HasForeignKey(i => i.SupplierId);
+	        modelBuilder.Entity<Document>()
+		        .HasOne(i => i.Supplier)
+		        .WithMany(i => i.Documents)
+		        .HasForeignKey(i => i.SupplierId);
 
-			modelBuilder.Entity<Document>()
-				.HasOne(i => i.ResponsibleOccupation)
-				.WithMany(i => i.Documents)
-				.HasForeignKey(i => i.ResponsibleOccupationId);
+	        modelBuilder.Entity<Document>()
+		        .HasOne(i => i.ResponsibleOccupation)
+		        .WithMany(i => i.Documents)
+		        .HasForeignKey(i => i.ResponsibleOccupationId);
 
-			modelBuilder.Entity<Document>()
-				.HasOne(i => i.Nomenсlature)
-				.WithMany(i => i.Documents)
-				.HasForeignKey(i => i.NomenсlatureId);
+	        modelBuilder.Entity<Document>()
+		        .HasOne(i => i.Nomenсlature)
+		        .WithMany(i => i.Documents)
+		        .HasForeignKey(i => i.NomenсlatureId);
 
-			modelBuilder.Entity<Document>()
-				.HasOne(i => i.ServiceType)
-				.WithMany(i => i.Documents)
-				.HasForeignKey(i => i.ServiceTypeId);
+	        modelBuilder.Entity<Document>()
+		        .HasOne(i => i.ServiceType)
+		        .WithMany(i => i.Documents)
+		        .HasForeignKey(i => i.ServiceTypeId);
 
-			modelBuilder.Entity<Document>()
-				.HasOne(i => i.Department)
-				.WithMany(i => i.Documents)
-				.HasForeignKey(i => i.DepartmentId);
+	        modelBuilder.Entity<Document>()
+		        .HasOne(i => i.Department)
+		        .WithMany(i => i.Documents)
+		        .HasForeignKey(i => i.DepartmentId);
 
-			modelBuilder.Entity<Document>()
-				.HasOne(i => i.Location)
-				.WithMany(i => i.Documents)
-				.HasForeignKey(i => i.LocationId);
+	        modelBuilder.Entity<Document>()
+		        .HasOne(i => i.Location)
+		        .WithMany(i => i.Documents)
+		        .HasForeignKey(i => i.LocationId);
 
-			#endregion
+	        #endregion
 
-			#region Event
+	        #region Event
 
-			modelBuilder.Entity<Event>()
-				.HasOne(i => i.EventType)
-				.WithMany(i => i.Events)
-				.HasForeignKey(i => i.EventTypeId);
+	        modelBuilder.Entity<Event>()
+		        .HasOne(i => i.EventType)
+		        .WithMany(i => i.Events)
+		        .HasForeignKey(i => i.EventTypeId);
 
-			modelBuilder.Entity<Event>()
-				.HasOne(i => i.EventCategory)
-				.WithMany(i => i.Events)
-				.HasForeignKey(i => i.EventCategoryId);
+	        modelBuilder.Entity<Event>()
+		        .HasOne(i => i.EventCategory)
+		        .WithMany(i => i.Events)
+		        .HasForeignKey(i => i.EventCategoryId);
 
-			modelBuilder.Entity<Event>()
-				.HasOne(i => i.EventClass)
-				.WithMany(i => i.Events)
-				.HasForeignKey(i => i.EventClassId);
+	        modelBuilder.Entity<Event>()
+		        .HasOne(i => i.EventClass)
+		        .WithMany(i => i.Events)
+		        .HasForeignKey(i => i.EventClassId);
 
-			modelBuilder.Entity<Event>()
-				.HasMany(i => i.EventConditions).WithOne(i => i.Event).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<Event>()
+		        .HasMany(i => i.EventConditions).WithOne(i => i.Event).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region EventTypeRiskLevelChangeRecord
+	        #region EventTypeRiskLevelChangeRecord
 
-			modelBuilder.Entity<EventTypeRiskLevelChangeRecord>()
-				.HasOne(i => i.EventCategory)
-				.WithMany(i => i.ChangeRecords)
-				.HasForeignKey(i => i.EventCategoryId);
+	        modelBuilder.Entity<EventTypeRiskLevelChangeRecord>()
+		        .HasOne(i => i.EventCategory)
+		        .WithMany(i => i.ChangeRecords)
+		        .HasForeignKey(i => i.EventCategoryId);
 
 
-			modelBuilder.Entity<EventTypeRiskLevelChangeRecord>()
-				.HasOne(i => i.EventClass)
-				.WithMany(i => i.ChangeRecords)
-				.HasForeignKey(i => i.EventClassId);
+	        modelBuilder.Entity<EventTypeRiskLevelChangeRecord>()
+		        .HasOne(i => i.EventClass)
+		        .WithMany(i => i.ChangeRecords)
+		        .HasForeignKey(i => i.EventClassId);
 
 
-			modelBuilder.Entity<EventTypeRiskLevelChangeRecord>()
-				.HasOne(i => i.ParentEventType)
-				.WithMany(i => i.ChangeRecords)
-				.HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<EventTypeRiskLevelChangeRecord>()
+		        .HasOne(i => i.ParentEventType)
+		        .WithMany(i => i.ChangeRecords)
+		        .HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region FlightCrewRecord
+	        #region FlightCrewRecord
 
-			modelBuilder.Entity<FlightCrewRecord>()
-				.HasOne(i => i.Specialist)
-				.WithMany(i => i.FlightCrewRecords)
-				.HasForeignKey(i => i.SpecialistID);
+	        modelBuilder.Entity<FlightCrewRecord>()
+		        .HasOne(i => i.Specialist)
+		        .WithMany(i => i.FlightCrewRecords)
+		        .HasForeignKey(i => i.SpecialistID);
 
-			modelBuilder.Entity<FlightCrewRecord>()
-				.HasOne(i => i.Specialization)
-				.WithMany(i => i.FlightCrewRecords)
-				.HasForeignKey(i => i.SpecializationID);
+	        modelBuilder.Entity<FlightCrewRecord>()
+		        .HasOne(i => i.Specialization)
+		        .WithMany(i => i.FlightCrewRecords)
+		        .HasForeignKey(i => i.SpecializationID);
 
-			#endregion
+	        #endregion
 
-			#region FlightNumberAircraftModelRelation
+	        #region FlightNumberAircraftModelRelation
 
-			modelBuilder.Entity<FlightNumberAircraftModelRelation>()
-				.HasOne(i => i.FlightNumber)
-				.WithMany(i => i.FlightNumberAircraftModelRelations)
-				.HasForeignKey(i => i.FlightNumberId);
+	        modelBuilder.Entity<FlightNumberAircraftModelRelation>()
+		        .HasOne(i => i.FlightNumber)
+		        .WithMany(i => i.FlightNumberAircraftModelRelations)
+		        .HasForeignKey(i => i.FlightNumberId);
 
-			modelBuilder.Entity<FlightNumberAircraftModelRelation>()
-				.HasOne(i => i.AircraftModel)
-				.WithMany(i => i.FlightNumberAircraftModelRelations)
-				.HasForeignKey(i => i.AircraftModelId);
+	        modelBuilder.Entity<FlightNumberAircraftModelRelation>()
+		        .HasOne(i => i.AircraftModel)
+		        .WithMany(i => i.FlightNumberAircraftModelRelations)
+		        .HasForeignKey(i => i.AircraftModelId);
 
-			#endregion
+	        #endregion
 
-			#region FlightNumberAirportRelation
+	        #region FlightNumberAirportRelation
 
-			modelBuilder.Entity<FlightNumberAirportRelation>()
-				.HasOne(i => i.FlightNumber)
-				.WithMany(i => i.AirportRelations)
-				.HasForeignKey(i => i.FlightNumberId);
+	        modelBuilder.Entity<FlightNumberAirportRelation>()
+		        .HasOne(i => i.FlightNumber)
+		        .WithMany(i => i.AirportRelations)
+		        .HasForeignKey(i => i.FlightNumberId);
 
-			modelBuilder.Entity<FlightNumberAirportRelation>()
-				.HasOne(i => i.Airport)
-				.WithMany(i => i.AirportRelations)
-				.HasForeignKey(i => i.AirportId);
+	        modelBuilder.Entity<FlightNumberAirportRelation>()
+		        .HasOne(i => i.Airport)
+		        .WithMany(i => i.AirportRelations)
+		        .HasForeignKey(i => i.AirportId);
 
-			#endregion
+	        #endregion
 
-			#region FlightNumberCrewRecord
+	        #region FlightNumberCrewRecord
 
-			modelBuilder.Entity<FlightNumberCrewRecord>()
-				.HasOne(i => i.FlightNumber)
-				.WithMany(i => i.FlightNumberCrewRecords)
-				.HasForeignKey(i => i.FlightNumberId);
+	        modelBuilder.Entity<FlightNumberCrewRecord>()
+		        .HasOne(i => i.FlightNumber)
+		        .WithMany(i => i.FlightNumberCrewRecords)
+		        .HasForeignKey(i => i.FlightNumberId);
 
-			modelBuilder.Entity<FlightNumberCrewRecord>()
-				.HasOne(i => i.Specialization)
-				.WithMany(i => i.FlightNumberCrewRecords)
-				.HasForeignKey(i => i.SpecializationId);
+	        modelBuilder.Entity<FlightNumberCrewRecord>()
+		        .HasOne(i => i.Specialization)
+		        .WithMany(i => i.FlightNumberCrewRecords)
+		        .HasForeignKey(i => i.SpecializationId);
 
-			#endregion
+	        #endregion
 
-			#region FlightNumber
+	        #region FlightNumber
 
-			modelBuilder.Entity<FlightNumber>()
-				.HasOne(i => i.StationFrom)
-				.WithMany(i => i.From)
-				.HasForeignKey(i => i.StationFromId);
+	        modelBuilder.Entity<FlightNumber>()
+		        .HasOne(i => i.StationFrom)
+		        .WithMany(i => i.From)
+		        .HasForeignKey(i => i.StationFromId);
 
-			modelBuilder.Entity<FlightNumber>()
-				.HasOne(i => i.StationTo)
-				.WithMany(i => i.To)
-				.HasForeignKey(i => i.StationToId);
+	        modelBuilder.Entity<FlightNumber>()
+		        .HasOne(i => i.StationTo)
+		        .WithMany(i => i.To)
+		        .HasForeignKey(i => i.StationToId);
 
-			modelBuilder.Entity<FlightNumber>()
-				.HasOne(i => i.MinLevel)
-				.WithMany(i => i.FlightNumbers)
-				.HasForeignKey(i => i.MinLevelId);
+	        modelBuilder.Entity<FlightNumber>()
+		        .HasOne(i => i.MinLevel)
+		        .WithMany(i => i.FlightNumbers)
+		        .HasForeignKey(i => i.MinLevelId);
 
-			modelBuilder.Entity<FlightNumber>()
-				.HasOne(i => i.FlightNo)
-				.WithMany(i => i.FlightNumbers)
-				.HasForeignKey(i => i.FlightNoId);
+	        modelBuilder.Entity<FlightNumber>()
+		        .HasOne(i => i.FlightNo)
+		        .WithMany(i => i.FlightNumbers)
+		        .HasForeignKey(i => i.FlightNoId);
 
-			#endregion
+	        #endregion
 
-			#region FlightPassengerRecord
+	        #region FlightPassengerRecord
 
-			modelBuilder.Entity<FlightPassengerRecord>()
-				.HasOne(i => i.PassengerCategory)
-				.WithMany(i => i.FlightPassengerRecords)
-				.HasForeignKey(i => i.PassengerCategoryId);
+	        modelBuilder.Entity<FlightPassengerRecord>()
+		        .HasOne(i => i.PassengerCategory)
+		        .WithMany(i => i.FlightPassengerRecords)
+		        .HasForeignKey(i => i.PassengerCategoryId);
 
-			#endregion
+	        #endregion
 
-			#region FlightPlanOpsRecords
+	        #region FlightPlanOpsRecords
 
-			modelBuilder.Entity<FlightPlanOpsRecords>()
-				.HasOne(i => i.ParentFlightPlanOps)
-				.WithMany(i => i.FlightPlanOpsRecords)
-				.HasForeignKey(i => i.FlightPlanOpsId);
+	        modelBuilder.Entity<FlightPlanOpsRecords>()
+		        .HasOne(i => i.ParentFlightPlanOps)
+		        .WithMany(i => i.FlightPlanOpsRecords)
+		        .HasForeignKey(i => i.FlightPlanOpsId);
 
-			modelBuilder.Entity<FlightPlanOpsRecords>()
-				.HasOne(i => i.DelayReason)
-				.WithMany(i => i.DelayFlightPlanOpsRecords)
-				.HasForeignKey(i => i.DelayReasonId);
+	        modelBuilder.Entity<FlightPlanOpsRecords>()
+		        .HasOne(i => i.DelayReason)
+		        .WithMany(i => i.DelayFlightPlanOpsRecords)
+		        .HasForeignKey(i => i.DelayReasonId);
 
-			modelBuilder.Entity<FlightPlanOpsRecords>()
-				.HasOne(i => i.Reason)
-				.WithMany(i => i.ReasonFlightPlanOpsRecords)
-				.HasForeignKey(i => i.ReasonId);
+	        modelBuilder.Entity<FlightPlanOpsRecords>()
+		        .HasOne(i => i.Reason)
+		        .WithMany(i => i.ReasonFlightPlanOpsRecords)
+		        .HasForeignKey(i => i.ReasonId);
 
-			modelBuilder.Entity<FlightPlanOpsRecords>()
-				.HasOne(i => i.CancelReason)
-				.WithMany(i => i.CancelFlightPlanOpsRecords)
-				.HasForeignKey(i => i.CancelReasonId);
+	        modelBuilder.Entity<FlightPlanOpsRecords>()
+		        .HasOne(i => i.CancelReason)
+		        .WithMany(i => i.CancelFlightPlanOpsRecords)
+		        .HasForeignKey(i => i.CancelReasonId);
 
-			#endregion
+	        #endregion
 
-			#region FlightTrack
+	        #region FlightTrack
 
-			modelBuilder.Entity<FlightTrack>()
-				.HasOne(i => i.TripName)
-				.WithMany(i => i.FlightTracks)
-				.HasForeignKey(i => i.TripNameId);
+	        modelBuilder.Entity<FlightTrack>()
+		        .HasOne(i => i.TripName)
+		        .WithMany(i => i.FlightTracks)
+		        .HasForeignKey(i => i.TripNameId);
 
-			modelBuilder.Entity<FlightTrack>()
-				.HasOne(i => i.Supplier)
-				.WithMany(i => i.FlightTracks)
-				.HasForeignKey(i => i.SupplierID);
+	        modelBuilder.Entity<FlightTrack>()
+		        .HasOne(i => i.Supplier)
+		        .WithMany(i => i.FlightTracks)
+		        .HasForeignKey(i => i.SupplierID);
 
-			modelBuilder.Entity<FlightTrack>()
-				.HasMany(i => i.FlightTripRecord).WithOne(i => i.FlightTrack).HasForeignKey(i => i.FlightTripId);
+	        modelBuilder.Entity<FlightTrack>()
+		        .HasMany(i => i.FlightTripRecord).WithOne(i => i.FlightTrack).HasForeignKey(i => i.FlightTripId);
 
-			#endregion
+	        #endregion
 
-			#region InitialOrder
+	        #region InitialOrder
 
-			modelBuilder.Entity<InitialOrder>()
-				.HasOne(i => i.Supplier)
-				.WithMany(i => i.InitialOrders)
-				.HasForeignKey(i => i.CarrierId);
+	        modelBuilder.Entity<InitialOrder>()
+		        .HasOne(i => i.Supplier)
+		        .WithMany(i => i.InitialOrders)
+		        .HasForeignKey(i => i.CarrierId);
 
-			modelBuilder.Entity<InitialOrder>()
-				.HasOne(i => i.ApprovedBy)
-				.WithMany(i => i.Approveds)
-				.HasForeignKey(i => i.ApprovedById);
+	        modelBuilder.Entity<InitialOrder>()
+		        .HasOne(i => i.ApprovedBy)
+		        .WithMany(i => i.Approveds)
+		        .HasForeignKey(i => i.ApprovedById);
 
-			modelBuilder.Entity<InitialOrder>()
-				.HasOne(i => i.PublishedBy)
-				.WithMany(i => i.Publisheds)
-				.HasForeignKey(i => i.PublishedById);
+	        modelBuilder.Entity<InitialOrder>()
+		        .HasOne(i => i.PublishedBy)
+		        .WithMany(i => i.Publisheds)
+		        .HasForeignKey(i => i.PublishedById);
 
-			modelBuilder.Entity<InitialOrder>()
-				.HasOne(i => i.ClosedBy)
-				.WithMany(i => i.Closeds)
-				.HasForeignKey(i => i.ClosedById);
+	        modelBuilder.Entity<InitialOrder>()
+		        .HasOne(i => i.ClosedBy)
+		        .WithMany(i => i.Closeds)
+		        .HasForeignKey(i => i.ClosedById);
 
 
-			//modelBuilder.Entity<InitialOrder>()
-			//	.HasMany(i => i.Files).WithOne(i => i.InitialOrder).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<InitialOrder>()
-				.HasMany(i => i.PackageRecords).WithOne(i => i.InitialOrder).HasForeignKey(i => i.ParentPackageId);
+	        //modelBuilder.Entity<InitialOrder>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.InitialOrder).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<InitialOrder>()
+		        .HasMany(i => i.PackageRecords).WithOne(i => i.InitialOrder).HasForeignKey(i => i.ParentPackageId);
 
-			#endregion
+	        #endregion
 
-			#region InitialOrderRecord
+	        #region InitialOrderRecord
 
-			modelBuilder.Entity<InitialOrderRecord>()
-				.HasOne(i => i.DeferredCategory)
-				.WithMany(i => i.InitialOrderRecords)
-				.HasForeignKey(i => i.DefferedCategory);
+	        modelBuilder.Entity<InitialOrderRecord>()
+		        .HasOne(i => i.DeferredCategory)
+		        .WithMany(i => i.InitialOrderRecords)
+		        .HasForeignKey(i => i.DefferedCategory);
 
-			#endregion
+	        #endregion
 
-			#region ItemFileLink
+	        #region ItemFileLink
 
-			modelBuilder.Entity<ItemFileLink>()
-				.HasOne(i => i.File)
-				.WithMany(i => i.ItemFileLink)
-				.HasForeignKey(i => i.FileId);
+	        modelBuilder.Entity<ItemFileLink>()
+		        .HasOne(i => i.File)
+		        .WithMany(i => i.ItemFileLink)
+		        .HasForeignKey(i => i.FileId);
 
-			#endregion
+	        #endregion
 
-			#region JobCard
+	        #region JobCard
 
-			modelBuilder.Entity<JobCard>()
-				.HasOne(i => i.PreparedBy)
-				.WithMany(i => i.PreparedJobCards)
-				.HasForeignKey(i => i.PreparedById);
+	        modelBuilder.Entity<JobCard>()
+		        .HasOne(i => i.PreparedBy)
+		        .WithMany(i => i.PreparedJobCards)
+		        .HasForeignKey(i => i.PreparedById);
 
-			modelBuilder.Entity<JobCard>()
-				.HasOne(i => i.CheckedBy)
-				.WithMany(i => i.CheckedJobCards)
-				.HasForeignKey(i => i.CheckedById);
+	        modelBuilder.Entity<JobCard>()
+		        .HasOne(i => i.CheckedBy)
+		        .WithMany(i => i.CheckedJobCards)
+		        .HasForeignKey(i => i.CheckedById);
 
-			modelBuilder.Entity<JobCard>()
-				.HasOne(i => i.ApprovedBy)
-				.WithMany(i => i.ApprovedJobCards)
-				.HasForeignKey(i => i.ApprovedById);
+	        modelBuilder.Entity<JobCard>()
+		        .HasOne(i => i.ApprovedBy)
+		        .WithMany(i => i.ApprovedJobCards)
+		        .HasForeignKey(i => i.ApprovedById);
 
-			modelBuilder.Entity<JobCard>()
-				.HasOne(i => i.AtaChapter)
-				.WithMany(i => i.JobCards)
-				.HasForeignKey(i => i.AtaChapterId);
+	        modelBuilder.Entity<JobCard>()
+		        .HasOne(i => i.AtaChapter)
+		        .WithMany(i => i.JobCards)
+		        .HasForeignKey(i => i.AtaChapterId);
 
 
-			modelBuilder.Entity<JobCard>()
-				.HasOne(i => i.Qualification)
-				.WithMany(i => i.JobCards)
-				.HasForeignKey(i => i.QualificationId);
+	        modelBuilder.Entity<JobCard>()
+		        .HasOne(i => i.Qualification)
+		        .WithMany(i => i.JobCards)
+		        .HasForeignKey(i => i.QualificationId);
 
-			modelBuilder.Entity<JobCard>()
-				.HasMany(i => i.Kits).WithOne(i => i.JobCard).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<JobCard>()
+		        .HasMany(i => i.Kits).WithOne(i => i.JobCard).HasForeignKey(i => i.ParentId);
 
-			modelBuilder.Entity<JobCard>()
-				.HasMany(i => i.JobCardTasks).WithOne(i => i.JobCard).HasForeignKey(i => i.JobCardId);
+	        modelBuilder.Entity<JobCard>()
+		        .HasMany(i => i.JobCardTasks).WithOne(i => i.JobCard).HasForeignKey(i => i.JobCardId);
 
-			#endregion
+	        #endregion
 
-			#region KitSuppliersRelation
+	        #region KitSuppliersRelation
 
-			modelBuilder.Entity<KitSuppliersRelation>()
-				.HasOne(i => i.Supplier)
-				.WithMany(i => i.KitSuppliersRelations)
-				.HasForeignKey(i => i.SupplierId);
+	        modelBuilder.Entity<KitSuppliersRelation>()
+		        .HasOne(i => i.Supplier)
+		        .WithMany(i => i.KitSuppliersRelations)
+		        .HasForeignKey(i => i.SupplierId);
 
-			#endregion
+	        #endregion
 
-			#region MaintenanceCheck
+	        #region MaintenanceCheck
 
-			modelBuilder.Entity<MaintenanceCheck>()
-				.HasOne(i => i.CheckType)
-				.WithMany(i => i.MaintenanceChecks)
-				.HasForeignKey(i => i.CheckTypeId);
+	        modelBuilder.Entity<MaintenanceCheck>()
+		        .HasOne(i => i.CheckType)
+		        .WithMany(i => i.MaintenanceChecks)
+		        .HasForeignKey(i => i.CheckTypeId);
 
-			modelBuilder.Entity<MaintenanceCheck>()
-				.HasMany(i => i.PerformanceRecords).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.ParentID);
-			modelBuilder.Entity<MaintenanceCheck>()
-				.HasMany(i => i.CategoriesRecords).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<MaintenanceCheck>()
-				.HasMany(i => i.Kits).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<MaintenanceCheck>()
-				.HasMany(i => i.BindMpds).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.MaintenanceCheckId);
+	        modelBuilder.Entity<MaintenanceCheck>()
+		        .HasMany(i => i.PerformanceRecords).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.ParentID);
+	        modelBuilder.Entity<MaintenanceCheck>()
+		        .HasMany(i => i.CategoriesRecords).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<MaintenanceCheck>()
+		        .HasMany(i => i.Kits).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<MaintenanceCheck>()
+		        .HasMany(i => i.BindMpds).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.MaintenanceCheckId);
 
-			#endregion
+	        #endregion
 
-			#region MaintenanceDirective
+	        #region MaintenanceDirective
 
-			modelBuilder.Entity<MaintenanceDirective>()
-				.HasOne(i => i.ATAChapter)
-				.WithMany(i => i.MaintenanceDirectives)
-				.HasForeignKey(i => i.ATAChapterId);
+	        modelBuilder.Entity<MaintenanceDirective>()
+		        .HasOne(i => i.ATAChapter)
+		        .WithMany(i => i.MaintenanceDirectives)
+		        .HasForeignKey(i => i.ATAChapterId);
 
 
-			modelBuilder.Entity<MaintenanceDirective>()
-				.HasOne(i => i.BaseComponent)
-				.WithMany(i => i.MaintenanceDirectives)
-				.HasForeignKey(i => i.ComponentId);
+	        modelBuilder.Entity<MaintenanceDirective>()
+		        .HasOne(i => i.BaseComponent)
+		        .WithMany(i => i.MaintenanceDirectives)
+		        .HasForeignKey(i => i.ComponentId);
 
 
-			modelBuilder.Entity<MaintenanceDirective>()
-				.HasOne(i => i.JobCard)
-				.WithMany(i => i.MaintenanceDirectives)
-				.HasForeignKey(i => i.JobCardId);
+	        modelBuilder.Entity<MaintenanceDirective>()
+		        .HasOne(i => i.JobCard)
+		        .WithMany(i => i.MaintenanceDirectives)
+		        .HasForeignKey(i => i.JobCardId);
 
-			//modelBuilder.Entity<MaintenanceDirective>()
-			//	.HasMany(i => i.Files).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<MaintenanceDirective>()
-				.HasMany(i => i.PerformanceRecords).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentID);
-			modelBuilder.Entity<MaintenanceDirective>()
-				.HasMany(i => i.CategoriesRecords).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<MaintenanceDirective>()
-				.HasMany(i => i.Kits).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<MaintenanceDirective>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<MaintenanceDirective>()
+		        .HasMany(i => i.PerformanceRecords).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentID);
+	        modelBuilder.Entity<MaintenanceDirective>()
+		        .HasMany(i => i.CategoriesRecords).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<MaintenanceDirective>()
+		        .HasMany(i => i.Kits).WithOne(i => i.MaintenanceDirective).HasForeignKey(i => i.ParentId);
 
 
-			#endregion
+	        #endregion
 
-			#region ModuleRecord
+	        #region ModuleRecord
 
-			modelBuilder.Entity<ModuleRecord>()
-				.HasOne(i => i.AircraftWorkerCategory)
-				.WithMany(i => i.ModuleRecords)
-				.HasForeignKey(i => i.AircraftWorkerCategoryId);
+	        modelBuilder.Entity<ModuleRecord>()
+		        .HasOne(i => i.AircraftWorkerCategory)
+		        .WithMany(i => i.ModuleRecords)
+		        .HasForeignKey(i => i.AircraftWorkerCategoryId);
 
-			modelBuilder.Entity<ModuleRecord>()
-				.HasOne(i => i.KnowledgeModule)
-				.WithMany(i => i.ModuleRecords)
-				.HasForeignKey(i => i.KnowledgeModuleId);
+	        modelBuilder.Entity<ModuleRecord>()
+		        .HasOne(i => i.KnowledgeModule)
+		        .WithMany(i => i.ModuleRecords)
+		        .HasForeignKey(i => i.KnowledgeModuleId);
 
-			#endregion
+	        #endregion
 
-			#region MTOPCheck
+	        #region MTOPCheck
 
-			modelBuilder.Entity<MTOPCheck>()
-				.HasOne(i => i.CheckType)
-				.WithMany(i => i.MtopChecks)
-				.HasForeignKey(i => i.CheckTypeId);
+	        modelBuilder.Entity<MTOPCheck>()
+		        .HasOne(i => i.CheckType)
+		        .WithMany(i => i.MtopChecks)
+		        .HasForeignKey(i => i.CheckTypeId);
 
-			modelBuilder.Entity<MTOPCheck>()
-				.HasMany(i => i.PerformanceRecords).WithOne(i => i.MtopCheck).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<MTOPCheck>()
+		        .HasMany(i => i.PerformanceRecords).WithOne(i => i.MtopCheck).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region ProcedureDocumentReference
+	        #region ProcedureDocumentReference
 
-			modelBuilder.Entity<ProcedureDocumentReference>()
-				.HasOne(i => i.Document)
-				.WithMany(i => i.ProcedureDocumentReferences)
-				.HasForeignKey(i => i.DocumentId);
+	        modelBuilder.Entity<ProcedureDocumentReference>()
+		        .HasOne(i => i.Document)
+		        .WithMany(i => i.ProcedureDocumentReferences)
+		        .HasForeignKey(i => i.DocumentId);
 
-			#endregion
+	        #endregion
 
-			#region Procedure
+	        #region Procedure
 
-			modelBuilder.Entity<Procedure>()
-				.HasOne(i => i.JobCard)
-				.WithMany(i => i.Procedure)
-				.HasForeignKey(i => i.JobCardId);
+	        modelBuilder.Entity<Procedure>()
+		        .HasOne(i => i.JobCard)
+		        .WithMany(i => i.Procedure)
+		        .HasForeignKey(i => i.JobCardId);
 
-			//modelBuilder.Entity<Procedure>()
-			//	.HasMany(i => i.Files).WithOne(i => i.Procedure).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<Procedure>()
-				.HasMany(i => i.PerformanceRecords).WithOne(i => i.Procedure).HasForeignKey(i => i.ParentID);
-			modelBuilder.Entity<Procedure>()
-				.HasMany(i => i.Kits).WithOne(i => i.Procedure).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<Procedure>()
-				.HasMany(i => i.DocumentReferences).WithOne(i => i.Procedure).HasForeignKey(i => i.ProcedureId);
+	        //modelBuilder.Entity<Procedure>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.Procedure).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<Procedure>()
+		        .HasMany(i => i.PerformanceRecords).WithOne(i => i.Procedure).HasForeignKey(i => i.ParentID);
+	        modelBuilder.Entity<Procedure>()
+		        .HasMany(i => i.Kits).WithOne(i => i.Procedure).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<Procedure>()
+		        .HasMany(i => i.DocumentReferences).WithOne(i => i.Procedure).HasForeignKey(i => i.ProcedureId);
 
-			#endregion
+	        #endregion
 
-			#region PurchaseOrder
+	        #region PurchaseOrder
 
-			modelBuilder.Entity<PurchaseOrder>()
-				.HasOne(i => i.Supplier)
-				.WithMany(i => i.PurchaseOrders)
-				.HasForeignKey(i => i.SupplierId);
+	        modelBuilder.Entity<PurchaseOrder>()
+		        .HasOne(i => i.Supplier)
+		        .WithMany(i => i.PurchaseOrders)
+		        .HasForeignKey(i => i.SupplierId);
 
-			//modelBuilder.Entity<PurchaseOrder>()
-			//	.HasMany(i => i.Files).WithOne(i => i.PurchaseOrder).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<PurchaseOrder>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.PurchaseOrder).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region PurchaseRequestRecord
+	        #region PurchaseRequestRecord
 
-			modelBuilder.Entity<PurchaseRequestRecord>()
-				.HasOne(i => i.Supplier)
-				.WithMany(i => i.PurchaseRequestRecords)
-				.HasForeignKey(i => i.SupplierId);
+	        modelBuilder.Entity<PurchaseRequestRecord>()
+		        .HasOne(i => i.Supplier)
+		        .WithMany(i => i.PurchaseRequestRecords)
+		        .HasForeignKey(i => i.SupplierId);
 
-			//modelBuilder.Entity<PurchaseRequestRecord>()
-			//	.HasMany(i => i.Files).WithOne(i => i.PurchaseRequestRecord).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<PurchaseRequestRecord>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.PurchaseRequestRecord).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region RequestForQuotation
+	        #region RequestForQuotation
 
-			modelBuilder.Entity<RequestForQuotation>()
-				.HasOne(i => i.Supplier)
-				.WithMany(i => i.Quotations)
-				.HasForeignKey(i => i.CarrierId);
+	        modelBuilder.Entity<RequestForQuotation>()
+		        .HasOne(i => i.Supplier)
+		        .WithMany(i => i.Quotations)
+		        .HasForeignKey(i => i.CarrierId);
 
-			modelBuilder.Entity<RequestForQuotation>()
-				.HasOne(i => i.ApprovedBy)
-				.WithMany(i => i.QuotationApproveds)
-				.HasForeignKey(i => i.ApprovedById);
+	        modelBuilder.Entity<RequestForQuotation>()
+		        .HasOne(i => i.ApprovedBy)
+		        .WithMany(i => i.QuotationApproveds)
+		        .HasForeignKey(i => i.ApprovedById);
 
-			modelBuilder.Entity<RequestForQuotation>()
-				.HasOne(i => i.PublishedBy)
-				.WithMany(i => i.QuotationPublisheds)
-				.HasForeignKey(i => i.PublishedById);
+	        modelBuilder.Entity<RequestForQuotation>()
+		        .HasOne(i => i.PublishedBy)
+		        .WithMany(i => i.QuotationPublisheds)
+		        .HasForeignKey(i => i.PublishedById);
 
-			modelBuilder.Entity<RequestForQuotation>()
-				.HasOne(i => i.ClosedBy)
-				.WithMany(i => i.QuotationCloseds)
-				.HasForeignKey(i => i.ClosedById);
+	        modelBuilder.Entity<RequestForQuotation>()
+		        .HasOne(i => i.ClosedBy)
+		        .WithMany(i => i.QuotationCloseds)
+		        .HasForeignKey(i => i.ClosedById);
 
-			modelBuilder.Entity<RequestForQuotation>()
-				.HasOne(i => i.ToSupplier)
-				.WithMany(i => i.RequestForQuotations)
-				.HasForeignKey(i => i.ToSupplierId);
+	        modelBuilder.Entity<RequestForQuotation>()
+		        .HasOne(i => i.ToSupplier)
+		        .WithMany(i => i.RequestForQuotations)
+		        .HasForeignKey(i => i.ToSupplierId);
 
-			//modelBuilder.Entity<RequestForQuotation>()
-			//	.HasMany(i => i.Files).WithOne(i => i.RequestForQuotation).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<RequestForQuotation>()
-				.HasMany(i => i.PackageRecords).WithOne(i => i.RequestForQuotation).HasForeignKey(i => i.ParentPackageId);
+	        //modelBuilder.Entity<RequestForQuotation>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.RequestForQuotation).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<RequestForQuotation>()
+		        .HasMany(i => i.PackageRecords).WithOne(i => i.RequestForQuotation).HasForeignKey(i => i.ParentPackageId);
 
-			#endregion
+	        #endregion
 
-			#region RequestForQuotationRecord
+	        #region RequestForQuotationRecord
 
-			modelBuilder.Entity<RequestForQuotationRecord>()
-				.HasOne(i => i.ToSupplier)
-				.WithMany(i => i.RequestForQuotationRecords)
-				.HasForeignKey(i => i.ToSupplierId);
+	        modelBuilder.Entity<RequestForQuotationRecord>()
+		        .HasOne(i => i.ToSupplier)
+		        .WithMany(i => i.RequestForQuotationRecords)
+		        .HasForeignKey(i => i.ToSupplierId);
 
-			modelBuilder.Entity<RequestForQuotationRecord>()
-				.HasOne(i => i.DefferedCategory)
-				.WithMany(i => i.RequestForQuotationRecords)
-				.HasForeignKey(i => i.DefferedCategoryId);
+	        modelBuilder.Entity<RequestForQuotationRecord>()
+		        .HasOne(i => i.DefferedCategory)
+		        .WithMany(i => i.RequestForQuotationRecords)
+		        .HasForeignKey(i => i.DefferedCategoryId);
 
-			#endregion
+	        #endregion
 
-			#region Request
+	        #region Request
 
-			modelBuilder.Entity<Request>()
-				.HasOne(i => i.PreparedBy)
-				.WithMany(i => i.PreparedByRequests)
-				.HasForeignKey(i => i.PreparedById);
+	        modelBuilder.Entity<Request>()
+		        .HasOne(i => i.PreparedBy)
+		        .WithMany(i => i.PreparedByRequests)
+		        .HasForeignKey(i => i.PreparedById);
 
-			modelBuilder.Entity<Request>()
-				.HasOne(i => i.CheckedBy)
-				.WithMany(i => i.CheckedByRequests)
-				.HasForeignKey(i => i.CheckedById);
+	        modelBuilder.Entity<Request>()
+		        .HasOne(i => i.CheckedBy)
+		        .WithMany(i => i.CheckedByRequests)
+		        .HasForeignKey(i => i.CheckedById);
 
-			modelBuilder.Entity<Request>()
-				.HasOne(i => i.ApprovedBy)
-				.WithMany(i => i.ApprovedByRequests)
-				.HasForeignKey(i => i.ApprovedById);
+	        modelBuilder.Entity<Request>()
+		        .HasOne(i => i.ApprovedBy)
+		        .WithMany(i => i.ApprovedByRequests)
+		        .HasForeignKey(i => i.ApprovedById);
 
-			modelBuilder.Entity<Request>()
-				.HasMany(i => i.Kits).WithOne(i => i.Request).HasForeignKey(i => i.ParentId);
-			modelBuilder.Entity<Request>()
-				.HasMany(i => i.PackageRecords).WithOne(i => i.Request).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<Request>()
+		        .HasMany(i => i.Kits).WithOne(i => i.Request).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<Request>()
+		        .HasMany(i => i.PackageRecords).WithOne(i => i.Request).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region SpecialistLicense
+	        #region SpecialistLicense
 
-			modelBuilder.Entity<SpecialistLicense>()
-				.HasOne(i => i.AircraftType)
-				.WithMany(i => i.SpecialistLicenses)
-				.HasForeignKey(i => i.AircraftTypeID);
+	        modelBuilder.Entity<SpecialistLicense>()
+		        .HasOne(i => i.AircraftType)
+		        .WithMany(i => i.SpecialistLicenses)
+		        .HasForeignKey(i => i.AircraftTypeID);
 
-			modelBuilder.Entity<SpecialistLicense>()
-				.HasMany(i => i.CaaLicense).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
+	        modelBuilder.Entity<SpecialistLicense>()
+		        .HasMany(i => i.CaaLicense).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
 
-			modelBuilder.Entity<SpecialistLicense>()
-				.HasMany(i => i.LicenseDetails).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
+	        modelBuilder.Entity<SpecialistLicense>()
+		        .HasMany(i => i.LicenseDetails).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
 
-			modelBuilder.Entity<SpecialistLicense>()
-				.HasMany(i => i.LicenseRatings).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
+	        modelBuilder.Entity<SpecialistLicense>()
+		        .HasMany(i => i.LicenseRatings).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
 
-			modelBuilder.Entity<SpecialistLicense>()
-				.HasMany(i => i.SpecialistInstrumentRatings).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
+	        modelBuilder.Entity<SpecialistLicense>()
+		        .HasMany(i => i.SpecialistInstrumentRatings).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
 
-			modelBuilder.Entity<SpecialistLicense>()
-				.HasMany(i => i.LicenseRemark).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
+	        modelBuilder.Entity<SpecialistLicense>()
+		        .HasMany(i => i.LicenseRemark).WithOne(i => i.SpecialistLicense).HasForeignKey(i => i.SpecialistLicenseId);
 
-			#endregion
+	        #endregion
 
-			#region SpecialistLicenseRemark
+	        #region SpecialistLicenseRemark
 
-			modelBuilder.Entity<SpecialistLicenseRemark>()
-				.HasOne(i => i.Rights)
-				.WithMany(i => i.LicenseRemarks)
-				.HasForeignKey(i => i.RightsId);
+	        modelBuilder.Entity<SpecialistLicenseRemark>()
+		        .HasOne(i => i.Rights)
+		        .WithMany(i => i.LicenseRemarks)
+		        .HasForeignKey(i => i.RightsId);
 
-			modelBuilder.Entity<SpecialistLicenseRemark>()
-				.HasOne(i => i.LicenseRestriction)
-				.WithMany(i => i.LicenseRemarks)
-				.HasForeignKey(i => i.RestrictionId);
+	        modelBuilder.Entity<SpecialistLicenseRemark>()
+		        .HasOne(i => i.LicenseRestriction)
+		        .WithMany(i => i.LicenseRemarks)
+		        .HasForeignKey(i => i.RestrictionId);
 
-			#endregion
+	        #endregion
 
-			#region Specialist
+	        #region Specialist
 
-			modelBuilder.Entity<Specialist>()
-				.HasOne(i => i.AGWCategory)
-				.WithMany(i => i.Specialists)
-				.HasForeignKey(i => i.AGWCategoryId);
+	        modelBuilder.Entity<Specialist>()
+		        .HasOne(i => i.AGWCategory)
+		        .WithMany(i => i.Specialists)
+		        .HasForeignKey(i => i.AGWCategoryId);
 
-			modelBuilder.Entity<Specialist>()
-				.HasOne(i => i.Facility)
-				.WithMany(i => i.Specialists)
-				.HasForeignKey(i => i.Location);
+	        modelBuilder.Entity<Specialist>()
+		        .HasOne(i => i.Facility)
+		        .WithMany(i => i.Specialists)
+		        .HasForeignKey(i => i.Location);
 
-			modelBuilder.Entity<Specialist>()
-				.HasOne(i => i.Specialization)
-				.WithMany(i => i.Specialists)
-				.HasForeignKey(i => i.SpecializationID);
+	        modelBuilder.Entity<Specialist>()
+		        .HasOne(i => i.Specialization)
+		        .WithMany(i => i.Specialists)
+		        .HasForeignKey(i => i.SpecializationID);
 
 
-			modelBuilder.Entity<Specialist>()
-				.HasMany(i => i.Licenses).WithOne(i => i.Specialist).HasForeignKey(i => i.SpecialistId);
-			modelBuilder.Entity<Specialist>()
-				.HasMany(i => i.SpecialistTrainings).WithOne(i => i.Specialist).HasForeignKey(i => i.SpecialistId);
-			modelBuilder.Entity<Specialist>()
-				.HasMany(i => i.LicenseDetails).WithOne(i => i.Specialist).HasForeignKey(i => i.SpecialistId);
-			modelBuilder.Entity<Specialist>()
-				.HasMany(i => i.LicenseRemark).WithOne(i => i.Specialist).HasForeignKey(i => i.SpecialistId);
-			modelBuilder.Entity<Specialist>()
-				.HasMany(i => i.EmployeeDocuments).WithOne(i => i.Specialist).HasForeignKey(i => i.ParentID);
-			modelBuilder.Entity<Specialist>()
-				.HasMany(i => i.CategoriesRecords).WithOne(i => i.Specialist).HasForeignKey(i => i.ParentId);
-			//modelBuilder.Entity<Specialist>()
-			//	.HasMany(i => i.Files).WithOne(i => i.SpecialistDto).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<Specialist>()
+		        .HasMany(i => i.Licenses).WithOne(i => i.Specialist).HasForeignKey(i => i.SpecialistId);
+	        modelBuilder.Entity<Specialist>()
+		        .HasMany(i => i.SpecialistTrainings).WithOne(i => i.Specialist).HasForeignKey(i => i.SpecialistId);
+	        modelBuilder.Entity<Specialist>()
+		        .HasMany(i => i.LicenseDetails).WithOne(i => i.Specialist).HasForeignKey(i => i.SpecialistId);
+	        modelBuilder.Entity<Specialist>()
+		        .HasMany(i => i.LicenseRemark).WithOne(i => i.Specialist).HasForeignKey(i => i.SpecialistId);
+	        modelBuilder.Entity<Specialist>()
+		        .HasMany(i => i.EmployeeDocuments).WithOne(i => i.Specialist).HasForeignKey(i => i.ParentID);
+	        modelBuilder.Entity<Specialist>()
+		        .HasMany(i => i.CategoriesRecords).WithOne(i => i.Specialist).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<Specialist>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.SpecialistDto).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region SpecialistTraining
+	        #region SpecialistTraining
 
-			modelBuilder.Entity<SpecialistTraining>()
-				.HasOne(i => i.AircraftType)
-				.WithMany(i => i.SpecialistTrainings)
-				.HasForeignKey(i => i.AircraftTypeID);
+	        modelBuilder.Entity<SpecialistTraining>()
+		        .HasOne(i => i.AircraftType)
+		        .WithMany(i => i.SpecialistTrainings)
+		        .HasForeignKey(i => i.AircraftTypeID);
 
-			modelBuilder.Entity<SpecialistTraining>()
-				.HasOne(i => i.EmployeeSubject)
-				.WithMany(i => i.SpecialistTrainings)
-				.HasForeignKey(i => i.EmployeeSubjectID);
+	        modelBuilder.Entity<SpecialistTraining>()
+		        .HasOne(i => i.EmployeeSubject)
+		        .WithMany(i => i.SpecialistTrainings)
+		        .HasForeignKey(i => i.EmployeeSubjectID);
 
-			modelBuilder.Entity<SpecialistTraining>()
-				.HasOne(i => i.Supplier)
-				.WithMany(i => i.SpecialistTrainings)
-				.HasForeignKey(i => i.SupplierId);
+	        modelBuilder.Entity<SpecialistTraining>()
+		        .HasOne(i => i.Supplier)
+		        .WithMany(i => i.SpecialistTrainings)
+		        .HasForeignKey(i => i.SupplierId);
 
-			//modelBuilder.Entity<SpecialistTraining>()
-			//	.HasMany(i => i.Files).WithOne(i => i.SpecialistTraining).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<SpecialistTraining>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.SpecialistTraining).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region StockComponentInfo
+	        #region StockComponentInfo
 
-			modelBuilder.Entity<StockComponentInfo>()
-				.HasOne(i => i.Standart)
-				.WithMany(i => i.StockComponentInfos)
-				.HasForeignKey(i => i.GoodStandartId);
+	        modelBuilder.Entity<StockComponentInfo>()
+		        .HasOne(i => i.Standart)
+		        .WithMany(i => i.StockComponentInfos)
+		        .HasForeignKey(i => i.GoodStandartId);
 
-			modelBuilder.Entity<StockComponentInfo>()
-				.HasOne(i => i.AccessoryDescription)
-				.WithMany(i => i.StockComponentInfos)
-				.HasForeignKey(i => i.ComponentModel);
+	        modelBuilder.Entity<StockComponentInfo>()
+		        .HasOne(i => i.AccessoryDescription)
+		        .WithMany(i => i.StockComponentInfos)
+		        .HasForeignKey(i => i.ComponentModel);
 
-			#endregion
+	        #endregion
 
-			#region SupplierDocument
+	        #region SupplierDocument
 
-			//modelBuilder.Entity<SupplierDocument>()
-			//	.HasMany(i => i.Files).WithOne(i => i.SupplierDocument).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<SupplierDocument>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.SupplierDocument).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region Supplier
+	        #region Supplier
 
-			modelBuilder.Entity<Supplier>()
-				.HasMany(i => i.SupplierDocs).WithOne(i => i.Supplie).HasForeignKey(i => i.ParentID);
+	        modelBuilder.Entity<Supplier>()
+		        .HasMany(i => i.SupplierDocs).WithOne(i => i.Supplie).HasForeignKey(i => i.ParentID);
 
-			#endregion
+	        #endregion
 
-			#region TransferRecord
+	        #region TransferRecord
 
-			modelBuilder.Entity<TransferRecord>()
-				.HasOne(i => i.ReceivedSpecialist)
-				.WithMany(i => i.RecivedSpecialist)
-				.HasForeignKey(i => i.ReceivedSpecialistId);
+	        modelBuilder.Entity<TransferRecord>()
+		        .HasOne(i => i.ReceivedSpecialist)
+		        .WithMany(i => i.RecivedSpecialist)
+		        .HasForeignKey(i => i.ReceivedSpecialistId);
 
-			modelBuilder.Entity<TransferRecord>()
-				.HasOne(i => i.ReleasedSpecialist)
-				.WithMany(i => i.ReleasedSpecialist)
-				.HasForeignKey(i => i.ReleasedSpecialistId);
+	        modelBuilder.Entity<TransferRecord>()
+		        .HasOne(i => i.ReleasedSpecialist)
+		        .WithMany(i => i.ReleasedSpecialist)
+		        .HasForeignKey(i => i.ReleasedSpecialistId);
 
 
-			//modelBuilder.Entity<TransferRecord>()
-			//	.HasMany(i => i.Files).WithOne(i => i.TransferRecord).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<TransferRecord>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.TransferRecord).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region Vehicle
+	        #region Vehicle
 
-			modelBuilder.Entity<Vehicle>()
-				.HasOne(i => i.Model)
-				.WithMany(i => i.Vehicles)
-				.HasForeignKey(i => i.ModelId);
+	        modelBuilder.Entity<Vehicle>()
+		        .HasOne(i => i.Model)
+		        .WithMany(i => i.Vehicles)
+		        .HasForeignKey(i => i.ModelId);
 
-			#endregion
+	        #endregion
 
-			#region WorkOrder
+	        #region WorkOrder
 
-			modelBuilder.Entity<WorkOrder>()
-				.HasOne(i => i.PreparedBy)
-				.WithMany(i => i.PreparedWorkOrders)
-				.HasForeignKey(i => i.PreparedById);
+	        modelBuilder.Entity<WorkOrder>()
+		        .HasOne(i => i.PreparedBy)
+		        .WithMany(i => i.PreparedWorkOrders)
+		        .HasForeignKey(i => i.PreparedById);
 
-			modelBuilder.Entity<WorkOrder>()
-				.HasOne(i => i.CheckedBy)
-				.WithMany(i => i.CheckedWorkOrders)
-				.HasForeignKey(i => i.CheckedById);
+	        modelBuilder.Entity<WorkOrder>()
+		        .HasOne(i => i.CheckedBy)
+		        .WithMany(i => i.CheckedWorkOrders)
+		        .HasForeignKey(i => i.CheckedById);
 
-			modelBuilder.Entity<WorkOrder>()
-				.HasOne(i => i.ApprovedBy)
-				.WithMany(i => i.ApprovedWorkOrders)
-				.HasForeignKey(i => i.ApprovedById);
+	        modelBuilder.Entity<WorkOrder>()
+		        .HasOne(i => i.ApprovedBy)
+		        .WithMany(i => i.ApprovedWorkOrders)
+		        .HasForeignKey(i => i.ApprovedById);
 
 
-			modelBuilder.Entity<WorkOrder>()
-				.HasMany(i => i.Kits).WithOne(i => i.WorkOrder).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<WorkOrder>()
+		        .HasMany(i => i.Kits).WithOne(i => i.WorkOrder).HasForeignKey(i => i.ParentId);
 
-			modelBuilder.Entity<WorkOrder>()
-				.HasMany(i => i.PackageRecords).WithOne(i => i.WorkOrder).HasForeignKey(i => i.ParentId);
+	        modelBuilder.Entity<WorkOrder>()
+		        .HasMany(i => i.PackageRecords).WithOne(i => i.WorkOrder).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region WorkPackage
+	        #region WorkPackage
 
-			//modelBuilder.Entity<WorkPackage>()
-			//	.HasMany(i => i.Files).WithOne(i => i.WorkPackage).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<WorkPackage>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.WorkPackage).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
 
-			#region AccessoryDescription
+	        #region AccessoryDescription
 
-			modelBuilder.Entity<AccessoryDescription>()
-				.HasOne(i => i.ATAChapter)
-				.WithMany(i => i.AccessoryDescriptions)
-				.HasForeignKey(i => i.AtaChapterId);
+	        modelBuilder.Entity<AccessoryDescription>()
+		        .HasOne(i => i.ATAChapter)
+		        .WithMany(i => i.AccessoryDescriptions)
+		        .HasForeignKey(i => i.AtaChapterId);
 
-			modelBuilder.Entity<AccessoryDescription>()
-				.HasOne(i => i.GoodStandart)
-				.WithMany(i => i.AccessoryDescriptions)
-				.HasForeignKey(i => i.StandartId);
+	        modelBuilder.Entity<AccessoryDescription>()
+		        .HasOne(i => i.GoodStandart)
+		        .WithMany(i => i.AccessoryDescriptions)
+		        .HasForeignKey(i => i.StandartId);
 
-			//modelBuilder.Entity<AccessoryDescription>()
-			//	.HasMany(i => i.Files).WithOne(i => i.AccessoryDescription).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<AccessoryDescription>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.AccessoryDescription).HasForeignKey(i => i.ParentId);
 
-			modelBuilder.Entity<AccessoryDescription>()
-				.HasMany(i => i.SupplierRelations).WithOne(i => i.AccessoryDescription).HasForeignKey(i => i.KitId);
+	        modelBuilder.Entity<AccessoryDescription>()
+		        .HasMany(i => i.SupplierRelations).WithOne(i => i.AccessoryDescription).HasForeignKey(i => i.KitId);
 
-			#endregion
+	        #endregion
 
-			#region DamageChart
+	        #region DamageChart
 
-			modelBuilder.Entity<DamageChart>()
-				.HasOne(i => i.AccessoryDescription)
-				.WithMany(i => i.DamageCharts)
-				.HasForeignKey(i => i.AircraftModelId);
+	        modelBuilder.Entity<DamageChart>()
+		        .HasOne(i => i.AccessoryDescription)
+		        .WithMany(i => i.DamageCharts)
+		        .HasForeignKey(i => i.AircraftModelId);
 
-			//modelBuilder.Entity<DamageChart>()
-			//	.HasMany(i => i.Files).WithOne(i => i.DamageChart).HasForeignKey(i => i.ParentId);
+	        //modelBuilder.Entity<DamageChart>()
+	        //	.HasMany(i => i.Files).WithOne(i => i.DamageChart).HasForeignKey(i => i.ParentId);
 
-			#endregion
+	        #endregion
 
-			#region DefferedCategorie
+	        #region DefferedCategorie
 
-			modelBuilder.Entity<DefferedCategorie>()
-				.HasOne(i => i.AccessoryDescription)
-				.WithMany(i => i.DefferedCategories)
-				.HasForeignKey(i => i.AircraftModelId);
+	        modelBuilder.Entity<DefferedCategorie>()
+		        .HasOne(i => i.AccessoryDescription)
+		        .WithMany(i => i.DefferedCategories)
+		        .HasForeignKey(i => i.AircraftModelId);
 
-			#endregion
+	        #endregion
 
-			#region LifeLimitCategorie
+	        #region LifeLimitCategorie
 
-			modelBuilder.Entity<LifeLimitCategorie>()
-				.HasOne(i => i.AccessoryDescription)
-				.WithMany(i => i.LifeLimitCategories)
-				.HasForeignKey(i => i.AircraftModelId);
+	        modelBuilder.Entity<LifeLimitCategorie>()
+		        .HasOne(i => i.AccessoryDescription)
+		        .WithMany(i => i.LifeLimitCategories)
+		        .HasForeignKey(i => i.AircraftModelId);
 
-			#endregion
+	        #endregion
 
-			#region Location
+	        #region Location
 
-			modelBuilder.Entity<Location>()
-				.HasOne(i => i.LocationsType)
-				.WithMany(i => i.Locations)
-				.HasForeignKey(i => i.LocationsTypeId);
+	        modelBuilder.Entity<Location>()
+		        .HasOne(i => i.LocationsType)
+		        .WithMany(i => i.Locations)
+		        .HasForeignKey(i => i.LocationsTypeId);
 
-			#endregion
+	        #endregion
 
-			#region LocationsType
+	        #region LocationsType
 
-			modelBuilder.Entity<LocationsType>()
-				.HasOne(i => i.Department)
-				.WithMany(i => i.LocationsTypes)
-				.HasForeignKey(i => i.DepartmentId);
+	        modelBuilder.Entity<LocationsType>()
+		        .HasOne(i => i.Department)
+		        .WithMany(i => i.LocationsTypes)
+		        .HasForeignKey(i => i.DepartmentId);
 
-			#endregion
+	        #endregion
 
-			#region Nomenclature
+	        #region Nomenclature
 
-			modelBuilder.Entity<Nomenclature>()
-				.HasOne(i => i.Department)
-				.WithMany(i => i.Nomenclatures)
-				.HasForeignKey(i => i.DepartmentId);
+	        modelBuilder.Entity<Nomenclature>()
+		        .HasOne(i => i.Department)
+		        .WithMany(i => i.Nomenclatures)
+		        .HasForeignKey(i => i.DepartmentId);
 
-			#endregion
+	        #endregion
 
-			#region NonRoutineJob
+	        #region NonRoutineJob
 
-			modelBuilder.Entity<NonRoutineJob>()
-				.HasOne(i => i.ATAChapter)
-				.WithMany(i => i.NonRoutineJobs)
-				.HasForeignKey(i => i.ATAChapterId);
+	        modelBuilder.Entity<NonRoutineJob>()
+		        .HasOne(i => i.ATAChapter)
+		        .WithMany(i => i.NonRoutineJobs)
+		        .HasForeignKey(i => i.ATAChapterId);
 
-			#endregion
+	        #endregion
 
-			#region Specialization
+	        #region Specialization
 
-			modelBuilder.Entity<Specialization>()
-				.HasOne(a => a.Department)
-				.WithMany(b => b.Specializations)
-				.HasForeignKey(b => b.DepartmentId);
+	        modelBuilder.Entity<Specialization>()
+		        .HasOne(a => a.Department)
+		        .WithMany(b => b.Specializations)
+		        .HasForeignKey(b => b.DepartmentId);
 
-			#endregion
+	        #endregion
 
-		}
+        }
+
+        #endregion
+
+		#region public async Task SaveAsync(BaseEntity entity)
 
 		public async Task SaveAsync(BaseEntity entity)
 		{
@@ -1214,6 +1223,10 @@ namespace Entity.Infrastructure
 
 			await SaveChangesAsync();
 		}
+
+		#endregion
+
+		#region public async Task Delete(BaseEntity entity, bool isDeleteFromDB = false)
 
 		public async Task Delete(BaseEntity entity, bool isDeleteFromDB = false)
 		{
@@ -1225,5 +1238,7 @@ namespace Entity.Infrastructure
 			else Remove(entity);
 			await SaveChangesAsync();
 		}
+
+		#endregion
 	}
 }

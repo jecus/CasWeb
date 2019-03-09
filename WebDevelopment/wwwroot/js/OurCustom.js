@@ -1,5 +1,4 @@
-﻿
-//<div class="modal fade" id="large-Modal" tabindex="-1" role="dialog" style="z-index: 1050; display: none;" aria-hidden="true">
+﻿//<div class="modal fade" id="large-Modal" tabindex="-1" role="dialog" style="z-index: 1050; display: none;" aria-hidden="true">
 //  <div class="modal-dialog modal-lg" role="document">
 //    <div id="dialogContent" class="modal-content">
 
@@ -15,6 +14,19 @@ $(function () {
         $.get(this.href, function (data) {
             $('#dialogContent').html(data);
             $('#large-Modal').modal('show');
+        });
+    });
+});
+
+
+$(function () {
+    $.ajaxSetup({ cache: false });
+    $(".modalConfirmDeleteBtn").click(function (e) {
+
+        e.preventDefault();
+        $.get(this.href, function (data) {
+            $('#dialogDeleteContent').html(data);
+            $('#small-Modal').modal('show');
         });
     });
 });

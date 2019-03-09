@@ -36,52 +36,52 @@
                         <tbody>
 
 
-                        <div class="modal fade" id="large-Modal" tabindex="-1" role="dialog" style="display: none; z-index: 1050;" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div id="dialogContent" class="modal-content">
+                            <div class="modal fade" id="large-Modal" tabindex="-1" role="dialog" style="display: none; z-index: 1050;" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div id="dialogContent" class="modal-content">
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        @foreach (var doc in documents)
-                        {
-                        <tr>
-                            <td>
-                                <a href=@modalUrl.Replace("_DOCID_", doc.Id.ToString()) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                            
-                                <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                                @if (@doc.ItemFileLink != null)
-                                {
-                                    <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@doc.ItemFileLink?.FileId" onclick="location.href = '@fileUrl.Replace("_FILEID_", doc.ItemFileLink.FileId?.ToString())'">
-                                        <i class="fa fa-file-pdf-o"></i>
-                                    </button>
-                                }
-                                else
-                                {
-                                    <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-pdf-o"></i></button>
-                                }
+                            @foreach (var doc in documents)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href=@modalUrl.Replace("_DOCID_", doc.Id.ToString()) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
 
-                            </td>
-                            <td>@doc.DocumentSubType.Name</td>
-                            <td>@doc.ShortContractNumber</td>
-                            
-                            <td>@doc.ShortDescription</td>
-                            <td>@doc.IssueDateValidFrom.ToString("yyyy.MM.dd")</td>
-                            <td>@doc.IssueNumber</td>
-                            <td>@doc.IssueDateValidTo.ToString("yyyy.MM.dd")</td>
-                           
-                            <td>@doc.RevisionDateFrom.Value.ToString("yyyy.MM.dd")</td>
-                            <td>@doc.RevNumber</td>
-                            <td>@doc.IssueDateValidTo.ToString("yyyy.MM.dd")</td>
-                           
+                                        <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                        @if (@doc.ItemFileLink != null)
+                                        {
+                                            <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" value="@doc.ItemFileLink?.FileId" onclick="location.href = '@fileUrl.Replace("_FILEID_", doc.ItemFileLink.FileId?.ToString())'">
+                                                <i class="fa fa-file-pdf-o"></i>
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-pdf-o"></i></button>
+                                        }
 
-                        </tr>
-                        }
+                                    </td>
+                                    <td>@doc.DocumentSubType.Name</td>
+                                    <td>@doc.ShortContractNumber</td>
+
+                                    <td>@doc.ShortDescription</td>
+                                    <td>@doc.IssueDateValidFrom.ToString("yyyy.MM.dd")</td>
+                                    <td>@doc.IssueNumber</td>
+                                    <td>@doc.IssueDateValidTo.ToString("yyyy.MM.dd")</td>
+
+                                    <td>@doc.RevisionDateFrom.Value.ToString("yyyy.MM.dd")</td>
+                                    <td>@doc.RevNumber</td>
+                                    <td>@doc.IssueDateValidTo.ToString("yyyy.MM.dd")</td>
+
+
+                                </tr>
+                            }
 
                         </tbody>
                         <tfoot>

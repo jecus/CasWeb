@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebDevelopment.Helper;
 using WebDevelopment.Infrastructude;
+using WebDevelopment.Models;
 
 namespace WebDevelopment.Controllers
 {
@@ -31,31 +32,35 @@ namespace WebDevelopment.Controllers
 
             var view = atlbs.ToBlView();
 
-            foreach (var atlb in view)
-            {
-                var first = await _db.AircraftFlights
-                    .OnlyActive()
-                    .AsNoTracking()
-                    .OrderBy(i => i.FlightDate)
-                    .FirstOrDefaultAsync(i => i.ATLBID == atlb.Id);
 
-                var last = await _db.AircraftFlights
-                    .OnlyActive()
-                    .AsNoTracking()
-                    .OrderBy(i => i.FlightDate)
-                    .LastOrDefaultAsync(i => i.ATLBID == atlb.Id);
+			foreach (var atlb in view)
+			{
+				var first = await _db.AircraftFlights
+					.OnlyActive()
+					.AsNoTracking()
+					.Where(i => i.ATLBID == atlb.Id)
+					.OrderBy(i => i.FlightDate).Select(i => new { i.PageNo, i.FlightDate })
+					.FirstOrDefaultAsync();
 
-                var pages = (first != null && first.PageNo != "" ? first.PageNo : "XXX") + " - " +
-                            (last != null && last.PageNo != "" ? last.PageNo : "XXX");
+				var last = await _db.AircraftFlights
+					.OnlyActive()
+					.AsNoTracking()
+					.Where(i => i.ATLBID == atlb.Id)
+					.OrderBy(i => i.FlightDate).Select(i => new { i.PageNo, i.FlightDate})
+					.LastOrDefaultAsync();
 
-                var dates = (first != null ? first.FlightDate.ToUniversalString(): "YY:MM:DD") + " - " +
-                           (last != null ? last.FlightDate.ToUniversalString() : "YY:MM:DD");
+				var pages = (first != null && first.PageNo != "" ? first.PageNo : "XXX") + " - " +
+				            (last != null && last.PageNo != "" ? last.PageNo : "XXX");
 
-                atlb.Pages = pages;
-                atlb.Dates = dates;
-            }
+				var dates = (first != null ? first.FlightDate.ToUniversalString() : "YY:MM:DD") + " - " +
+				            (last != null ? last.FlightDate.ToUniversalString() : "YY:MM:DD");
 
-            return View(view);
+				atlb.Pages = pages;
+				atlb.Dates = dates;
+			}
+
+
+			return View(view);
         }
 
         [Route("edit")]
@@ -78,5 +83,19 @@ namespace WebDevelopment.Controllers
             await _db.SaveAsync(view.ToEntity());
             return RedirectToAction("Index", new {aircraftId = GlobalObject.AircraftId });
         }
-    }
+
+        [Route("confirm")]
+		public async Task<IActionResult> ConfirmDelete(int atlbId)
+		{
+			return PartialView("Modals/ConfirmDeleteModal", new ModalDeleteView("ATLB", "Delete", atlbId));
+		}
+
+		[HttpPost("delete")]
+		public async Task<IActionResult> Delete(int id)
+		{
+			var atlb = await _db.Atlbs.AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
+			await _db.Delete(atlb);
+			return RedirectToAction("Index", new { aircraftId = GlobalObject.AircraftId });
+		}
+	}
 }
