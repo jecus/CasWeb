@@ -1209,10 +1209,20 @@ namespace Entity.Infrastructure
 		public async Task SaveAsync(BaseEntity entity)
 		{
 			if (entity.Id <= 0)
-				Entry(entity).State = EntityState.Added;
-			else
-				Entry(entity).State = EntityState.Modified;
+				Add(entity);
+			else Update(entity);
 
+			await SaveChangesAsync();
+		}
+
+		public async Task Delete(BaseEntity entity, bool isDeleteFromDB = false)
+		{
+			if (!isDeleteFromDB)
+			{
+				entity.IsDeleted = true;
+				Update(entity);
+			}
+			else Remove(entity);
 			await SaveChangesAsync();
 		}
 	}
