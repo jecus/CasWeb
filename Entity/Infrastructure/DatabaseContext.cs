@@ -1217,6 +1217,9 @@ namespace Entity.Infrastructure
 
 		public async Task SaveAsync(BaseEntity entity)
 		{
+			if(entity == null)
+				return;
+
 			if (entity.Id <= 0)
 				Add(entity);
 			else Update(entity);
@@ -1230,6 +1233,9 @@ namespace Entity.Infrastructure
 
 		public async Task Delete(BaseEntity entity, bool isDeleteFromDB = false)
 		{
+			if (entity == null)
+				return;
+
 			if (!isDeleteFromDB)
 			{
 				entity.IsDeleted = true;
