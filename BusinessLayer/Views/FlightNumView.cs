@@ -1,0 +1,24 @@
+﻿using System.Collections.Generic;
+using Entity.Models.Dictionaries;
+using Entity.Models.General;
+
+namespace BusinessLayer.Views
+{
+    public class FlightNumView : BaseView
+    {
+        private static FlightNumView _unknown;
+
+        public string FlightNumber { get; set; }
+
+        public static FlightNumView Unknown
+        {
+            get
+            {
+                return _unknown ?? (_unknown = new FlightNumView()
+                {
+                    FlightNumber = "N/A"
+                });
+            }
+        }
+    }
+}

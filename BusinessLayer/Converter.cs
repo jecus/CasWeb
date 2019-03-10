@@ -1271,7 +1271,7 @@ namespace BusinessLayer
 
                 DelayTime = arcf.DelayTime,
 
-                DelayReasonId = arcf.DelayReasonId,
+                DelayReasonId = arcf.DelayReason?.Id,
                 OutTime = arcf.OutTime,
                 InTime = arcf.InTime,
                 TakeOffTime = arcf.TakeOffTime,
@@ -1282,18 +1282,17 @@ namespace BusinessLayer
                 Tanks = arcf.Tanks,
                 Fluids = arcf.Fluids,
                 EnginesGeneralCondition = arcf.EnginesGeneralCondition,
-                Highlight = arcf.Highlight,
                 Correct = arcf.Correct,
                 Reference = arcf.Reference,
 
                 Cycles = arcf.Cycles,
                 PageNo = arcf.PageNo,
 
-                FlightType = (short?)arcf.FlightType,
-                LevelId = arcf.LevelId,
+                FlightType = (short?)arcf.FlightType?.ItemId,
+                LevelId = arcf.Level?.Id,
                 Distance = arcf.Distance,
 
-                DistanceMeasure = arcf.DistanceMeasure,
+                DistanceMeasure = arcf.DistanceMeasure?.ItemId,
                 TakeOffWeight = arcf.TakeOffWeight,
 
                 AlignmentBefore = arcf.AlignmentBefore,
@@ -1301,10 +1300,10 @@ namespace BusinessLayer
                 FlightCategory = (short?)arcf.FlightCategory,
                 AtlbRecordType = (short)arcf.AtlbRecordType,
                 FlightAircraftCode = (short?)arcf.FlightAircraftCode,
-                CancelReasonId = arcf.CancelReasonId,
-                StationFromId = arcf.StationFromId ?? -1,
-                StationToId = arcf.StationToId ?? -1,
-                FlightNumberId = arcf.FlightNumberId
+                CancelReasonId = arcf.CancelReason?.Id,
+                StationFroms = arcf.StationFroms?.ToEntity(),
+                StationTos = arcf.StationTos?.ToEntity(),
+                FlightNumberId = arcf.FlightNumber?.Id ?? -1,
                 
             };
         }
@@ -1313,51 +1312,50 @@ namespace BusinessLayer
         {
             return new AircraftFlightView()
                 {
-                    Id = arcf.Id,
-                    IsDeleted = arcf.IsDeleted,
-                    ATLBID = arcf.ATLBID,
-                    AircraftId = arcf.AircraftId ?? default(int),
+                Id = arcf.Id,
+                IsDeleted = arcf.IsDeleted,
+                ATLBID = arcf.ATLBID,
+                AircraftId = arcf.AircraftId ?? default(int),
 
-                    FlightNo = arcf.FlightNo,
-                    Remarks = arcf.Remarks,
-                    FlightDate = arcf.FlightDate,
-                    StationFrom = arcf.StationFrom,
-                    StationTo = arcf.StationTo,
-                    DelayTime = arcf.DelayTime ?? default(short),
-                    DelayReason = arcf.DelayReason,
+                FlightNo = arcf.FlightNo,
+                Remarks = arcf.Remarks,
+                FlightDate = arcf.FlightDate ?? DateTimeExtend.GetCASMinDateTime(),
+                StationFrom = arcf.StationFrom,
+                StationTo = arcf.StationTo,
+                DelayTime = arcf.DelayTime ?? default(short),
+                DelayReason = arcf.DelayReason?.ToBlView(),
 
-                    OutTime = arcf.OutTime ?? default(int),
-                    InTime = arcf.InTime ?? default(int),
-                    TakeOffTime = arcf.TakeOffTime ?? default(int),
-                    LDGTime = arcf.LDGTime ?? default(int),
-                    NightTime = arcf.NightTime ?? default(int),
+                OutTime = arcf.OutTime ?? default(int),
+                InTime = arcf.InTime ?? default(int),
+                TakeOffTime = arcf.TakeOffTime ?? default(int),
+                LDGTime = arcf.LDGTime ?? default(int),
+                NightTime = arcf.NightTime ?? default(int),
 
-                    CRSID = arcf.CRSID ?? default(int),
-                    Tanks = arcf.Tanks,
-                    Fluids = arcf.Fluids,
-                    EnginesGeneralCondition = arcf.EnginesGeneralCondition,
-                    Highlight = arcf.Highlight,
-                    Correct = arcf.Correct,
+                CRSID = arcf.CRSID ?? default(int),
+                Tanks = arcf.Tanks,
+                Fluids = arcf.Fluids,
+                EnginesGeneralCondition = arcf.EnginesGeneralCondition,
+                Correct = arcf.Correct,
 
-                    Reference = arcf.Reference,
+                Reference = arcf.Reference,
 
-                    Cycles = arcf.Cycles,
-                    PageNo = arcf.PageNo,
-                    FlightType = arcf.FlightType ?? default(short),
-                    Level = arcf.Level,
-                    Distance = arcf.Distance ?? default(int),
-                    DistanceMeasure = arcf.DistanceMeasure ?? default(short),
-                    TakeOffWeight = arcf.TakeOffWeight ?? default(double),
-                    AlignmentBefore = arcf.AlignmentBefore ?? default(double),
-                    AlignmentAfter = arcf.AlignmentAfter ?? default(double),
-                    FlightCategory = (FlightCategory?) arcf.FlightCategory,
-                    AtlbRecordType = (AtlbRecordType) arcf.AtlbRecordType,
-                    FlightAircraftCode = (FlightAircraftCode?) arcf.FlightAircraftCode,
-                    CancelReason = arcf.CancelReason,
-                    StationFromId = arcf.StationFromId,
-                    StationToId = arcf.StationFromId,
-                    FlightNumber = arcf.FlightNumber,
-                };
+                Cycles = arcf.Cycles,
+                PageNo = arcf.PageNo,
+                FlightType = arcf.FlightType.HasValue ? FlightType.GetItemById(arcf.FlightType.Value) : FlightType.UNK,
+                Level = arcf.Level?.ToBlView(),
+                Distance = arcf.Distance ?? default(int),
+                DistanceMeasure = arcf.DistanceMeasure.HasValue ? Measure.GetItemById(arcf.DistanceMeasure.Value) : Measure.Unknown,
+                TakeOffWeight = arcf.TakeOffWeight ?? default(double),
+                AlignmentBefore = arcf.AlignmentBefore ?? default(double),
+                AlignmentAfter = arcf.AlignmentAfter ?? default(double),
+                FlightCategory = arcf.FlightCategory.HasValue ? (FlightCategory)arcf.FlightCategory.Value : FlightCategory.Unknown,
+                AtlbRecordType = (AtlbRecordType)arcf.AtlbRecordType,
+                FlightAircraftCode = arcf.FlightAircraftCode.HasValue ? (FlightAircraftCode)arcf.FlightAircraftCode.Value : FlightAircraftCode.Unknown,
+                CancelReason = arcf.CancelReason?.ToBlView(),
+                StationFroms = arcf.StationFroms?.ToBlView(),
+                StationTos = arcf.StationTos?.ToBlView(),
+                FlightNumber = arcf.FlightNumber?.ToBlView()
+            };
         }
 
         public static List<AircraftFlightView> ToBlView(this IEnumerable<AircraftFlight> arcf)
@@ -1370,6 +1368,160 @@ namespace BusinessLayer
             return new List<AircraftFlight>(arcf.Select(i => i.ToEntity()));
         }
 
+        #endregion
+
+        #region Reason
+
+        public static Reason ToEntity(this ReasonView reason)
+        {
+            return new Reason
+            {
+                Id = reason.Id,
+                IsDeleted = reason.IsDeleted,
+                Name = reason.Name,
+                Category = reason.Category
+            };
+        }
+
+        public static ReasonView ToBlView(this Reason reason)
+        {
+            return new ReasonView()
+            {
+                Id = reason.Id,
+                IsDeleted = reason.IsDeleted,
+                Name = reason.Name,
+                Category = reason.Category
+            };
+        }
+
+        public static List<ReasonView> ToBlView(this IEnumerable<Reason> reason)
+        {
+            return new List<ReasonView>(reason.Select(i => i.ToBlView()));
+        }
+
+        public static List<Reason> ToEntity(this IEnumerable<ReasonView> reason)
+        {
+            return new List<Reason>(reason.Select(i => i.ToEntity()));
+        }
+
+        #endregion
+
+        #region CruiseLevel
+
+        public static CruiseLevel ToEntity(this CruiseLevelView cruiseLevel)
+        {
+            return new CruiseLevel
+            {
+                Id = cruiseLevel.Id,
+                IsDeleted = cruiseLevel.IsDeleted,
+                FullName = cruiseLevel.FullName,
+                Feet = cruiseLevel.Feet,
+                IVFR = cruiseLevel.IVFR,
+                Meter = cruiseLevel.Meter,
+                Track = cruiseLevel.Track
+            };
+        }
+
+        public static CruiseLevelView ToBlView(this CruiseLevel cruiseLevel)
+        {
+            return new CruiseLevelView()
+            {
+                Id = cruiseLevel.Id,
+                IsDeleted = cruiseLevel.IsDeleted,
+                FullName = cruiseLevel.FullName,
+                Feet = cruiseLevel.Feet ?? default(int),
+                IVFR = cruiseLevel.IVFR,
+                Meter = cruiseLevel.Meter ?? default(int),
+                Track = cruiseLevel.Track
+            };
+        }
+
+        public static List<CruiseLevelView> ToBlView(this IEnumerable<CruiseLevel> cruiseLevel)
+        {
+            return new List<CruiseLevelView>(cruiseLevel.Select(i => i.ToBlView()));
+        }
+
+        public static List<CruiseLevel> ToEntity(this IEnumerable<CruiseLevelView> cruiseLevel)
+        {
+            return new List<CruiseLevel>(cruiseLevel.Select(i => i.ToEntity()));
+        }
+        #endregion
+
+        #region AirportsCodes
+
+        public static AirportCode ToEntity(this AirportCodeView code)
+        {
+            return new AirportCode
+            {
+                Id = code.Id,
+                IsDeleted = code.IsDeleted,
+                FullName = code.FullName,
+                City = code.City,
+                Country = code.Country,
+                Iata = code.Iata,
+                Icao = code.Icao,
+                Iso = code.Iso
+            };
+        }
+
+        public static AirportCodeView ToBlView(this AirportCode code)
+        {
+            return new AirportCodeView
+            {
+                Id = code.Id,
+                IsDeleted = code.IsDeleted,
+                FullName = code.FullName,
+                City = code.City,
+                Country = code.Country,
+                Iata = code.Iata,
+                Icao = code.Icao,
+                Iso = code.Iso
+            };
+        }
+
+        public static List<AirportCodeView> ToBlView(this IEnumerable<AirportCode> code)
+        {
+            return new List<AirportCodeView>(code.Select(i => i.ToBlView()));
+        }
+
+        public static List<AirportCode> ToEntity(this IEnumerable<AirportCodeView> code)
+        {
+            return new List<AirportCode>(code.Select(i => i.ToEntity()));
+        }
+
+        #endregion
+
+        #region FlightNum
+
+        public static FlightNum ToEntity(this FlightNumView flightnum)
+        {
+            return new FlightNum
+            {
+                Id = flightnum.Id,
+                IsDeleted = flightnum.IsDeleted,
+                FlightNumber = flightnum.FlightNumber
+            };
+        }
+
+        public static FlightNumView ToBlView(this FlightNum flightnum)
+        {
+            return new FlightNumView()
+            {
+                Id = flightnum.Id,
+                IsDeleted = flightnum.IsDeleted,
+                FlightNumber = flightnum.FlightNumber ?? ""
+            };
+        }
+
+        public static List<FlightNumView> ToBlView(this IEnumerable<FlightNum> flightnum)
+        {
+            return new List<FlightNumView>(flightnum.Select(i => i.ToBlView()));
+        }
+
+        public static List<FlightNum> ToEntity(this IEnumerable<FlightNumView> flightnum)
+        {
+            return new List<FlightNum>(flightnum.Select(i => i.ToEntity()));
+        }
         #endregion
     }
 }

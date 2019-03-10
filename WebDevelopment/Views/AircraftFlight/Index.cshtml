@@ -1,0 +1,59 @@
+﻿@using BusinessLayer
+@model List<BusinessLayer.Views.AircraftFlightView>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AircraftLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Aircraft Flight</h5>
+            </div>
+            <div class="card-block">
+                <div class="dt-responsive table-responsive">
+                    <table id="footer-search" class="table table-striped table-bordered nowrap">
+
+                        <thead>
+                            <tr>
+                                <th>Page №</th>
+                                <th>Flight №</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Route</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var airf in Model)
+                            {
+                                <tr>
+                                    <td>@airf.PageNo </td>
+                                    <td>@airf.FlightNumber?.FlightNumber</td>
+                                    <td>@airf.FlightDate.ToUniversalString()</td>
+                                    <td>@airf.Times</td>
+                                    <td>@airf.Route</td>
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Page №</th>
+                                <th>Flight №</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Route</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
