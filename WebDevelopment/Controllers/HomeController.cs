@@ -8,6 +8,7 @@ using Entity.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebDevelopment.Helper;
+using WebDevelopment.Infrastructude.JWT;
 using WebDevelopment.Models;
 
 namespace WebDevelopment.Controllers
@@ -22,7 +23,6 @@ namespace WebDevelopment.Controllers
 	        _aircraftRepository = aircraftRepository;
 	        _db = db;
         }
-
 
 		public async Task<IActionResult> Index()
 		{
