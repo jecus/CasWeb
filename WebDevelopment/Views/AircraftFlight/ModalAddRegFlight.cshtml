@@ -8,6 +8,13 @@
     var flightNum = (List<FlightNumView>)ViewData["FlightNums"];
     var stations = (List<AirportCodeView>)ViewData["AirportCodes"];
     var reasons = (List<ReasonView>)ViewData["Reasons"];
+
+    var q = new List<SelectListItem>();
+    foreach (var station in stations)
+    {
+        q.Add(new SelectListItem(station.FullName, station.Id.ToString()));
+    }
+
 }
 
 @using (Html.BeginForm("Create", "AircraftFlight", FormMethod.Post))
@@ -88,13 +95,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-12 col-lg-5 col-form-label">From</label>
                                 <div class="col-sm-12 col-lg-7">
-                                    @Html.DropDownListFor(i => i.StationFroms, new SelectList(stations), new { @class = "form-control" })
+                                    @Html.DropDownListFor(i => i.StationFromId, q, new { @class = "form-control" })
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-12 col-lg-5 col-form-label">To</label>
                                 <div class="col-sm-12 col-lg-7">
-                                    @Html.DropDownListFor(i => i.StationTos, new SelectList(stations), new { @class = "form-control" })
+                                    @Html.DropDownListFor(i => i.StationToId, q, new { @class = "form-control" })
                                 </div>
                             </div>
                         </div>

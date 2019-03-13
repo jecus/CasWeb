@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer;
 using BusinessLayer.Views;
@@ -57,7 +58,7 @@ namespace WebDevelopment.Controllers
 
 				atlb.Pages = pages;
 				atlb.Dates = dates;
-                atlb.DateFrom = first.FlightDate.Value;
+                atlb.DateFrom = first?.FlightDate.Value ?? DateTime.MinValue;
             }
 
 
