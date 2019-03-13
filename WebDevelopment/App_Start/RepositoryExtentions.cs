@@ -6,15 +6,16 @@ using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Microsoft.Extensions.DependencyInjection;
 using WebDevelopment.Infrastructude;
+using WebDevelopment.Infrastructude.JWT;
 
 namespace WebDevelopment
 {
 	public static class RepositoryExtentions
 	{
-		public static IServiceCollection AddProviderModule(this IServiceCollection services)
+		public static IServiceCollection AddProviders(this IServiceCollection services)
 		{
-			services.AddSingleton<AuthenticationProvider>();
-			services.AddTransient(provider => (Identity)provider.GetService<AuthenticationProvider>().GetIdentity());
+			services.AddSingleton<IJwtProvider, JwtProvider>();
+			
 			return services;
 		}
 

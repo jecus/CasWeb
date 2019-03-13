@@ -27,7 +27,7 @@ namespace WebDevelopment
 
 			services.Configure<CookiePolicyOptions>(options =>
 			{
-				options.CheckConsentNeeded = context => true;
+				options.CheckConsentNeeded = context => false;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
@@ -40,11 +40,8 @@ namespace WebDevelopment
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 			services.AddDbContext<DatabaseContext>(builder => builder.UseSqlServer(Configuration.GetConnectionString("CORE_CONNECTION_STRING")));
+			services.AddProviders();
 			services.AddRepositories();
-
-			//services.AddMvc().AddControllersAsServices();
-			// Был DI Autofac но на Core завезли встроенную реализацию оставил на всякий
-			//return new AutofacServiceProvider(DependencyInjectionConfig.Register(services, Assembly.GetAssembly(typeof(BusinessLayer.Mapping.CommonProfile))));
 		}
 
 
