@@ -1,4 +1,5 @@
-﻿@using BusinessLayer.Views
+﻿@using BusinessLayer
+@using BusinessLayer.Views
 @using Entity.Extentions
 @{
     ViewData["Title"] = "index";
@@ -71,13 +72,13 @@
                                     <td>@doc.ShortContractNumber</td>
 
                                     <td>@doc.ShortDescription</td>
-                                    <td>@doc.IssueDateValidFrom.ToString("yyyy.MM.dd")</td>
+                                    <td><span style="display: none">@doc.IssueDateValidFrom.ToUniversalFilterString()</span>@doc.IssueDateValidFrom.ToUniversalString()</td>
                                     <td>@doc.IssueNumber</td>
-                                    <td>@doc.IssueDateValidTo.ToString("yyyy.MM.dd")</td>
+                                    <td><span style="display: none">@doc.IssueDateValidTo.ToUniversalFilterString()</span>@doc.IssueDateValidTo.ToUniversalString()</td>
 
-                                    <td>@doc.RevisionDateFrom.Value.ToString("yyyy.MM.dd")</td>
+                                    <td><span style="display: none">@doc.RevisionDateFrom.ToUniversalFilterString()</span>@doc.RevisionDateFrom.ToUniversalString()</td>
                                     <td>@doc.RevNumber</td>
-                                    <td>@doc.IssueDateValidTo.ToString("yyyy.MM.dd")</td>
+                                    <td><span style="display: none">@doc.IssueDateValidTo.ToUniversalFilterString()</span>@doc.IssueDateValidTo.ToUniversalString()</td>
 
 
                                 </tr>

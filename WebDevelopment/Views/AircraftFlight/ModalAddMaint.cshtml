@@ -1,0 +1,167 @@
+﻿@using BusinessLayer
+@using BusinessLayer.Dictionaties
+@using BusinessLayer.Views
+@model BusinessLayer.Views.AircraftFlightView
+@{
+    var flightNum = (List<FlightNumView>)ViewData["FlightNums"];
+    var stations = (List<AirportCodeView>)ViewData["AirportCodes"];
+}
+
+@using (Html.BeginForm("ModalAddRegFlight", "AircraftFlight", FormMethod.Post))
+{
+    @Html.HiddenFor(i => i.Id);
+    @Html.HiddenFor(i => i.IsDeleted);
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h4 class="modal-title">Add Maint</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            
+                <h5>Flight General Information</h5>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-lg-3 col-form-label">FL./Maint.</label>
+                        <div class="col-sm-12 col-lg-9">
+                            @Html.DropDownListFor(i => i.AtlbRecordType, Html.GetEnumSelectList(typeof(AtlbRecordType)), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-lg-3 col-form-label">Date</label>
+                        <div class="col-sm-12 col-lg-9">
+                            @Html.EditorFor(i => i.FlightDate, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-lg-3 col-form-label">From</label>
+                        <div class="col-sm-12 col-lg-9">
+                            @Html.DropDownListFor(i => i.StationFroms.FullName, new SelectList(stations), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-lg-3 col-form-label">To</label>
+                        <div class="col-sm-12 col-lg-9">
+                            @Html.DropDownListFor(i => i.StationTos.FullName, new SelectList(stations), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-lg-3 col-form-label">Take-off-LDG</label>
+                        <div class="col-sm-12 col-lg-3">
+                            @Html.TextBoxFor(i => i.TimespanTakeOffTime, new { @class = "form-control", type = "time" })
+                            @Html.ValidationMessageFor(i => i.TimespanTakeOffTime)
+                        </div>
+                        <div class="col-sm-12 col-lg-3">
+                            @Html.TextBoxFor(i => i.TimespanLDGTime, new { @class = "form-control", type = "time" })
+                            @Html.ValidationMessageFor(i => i.TimespanLDGTime)
+                        </div>
+                        <label class="col-sm-12 col-lg-1 col-form-label">Flight</label>
+                        <div class="col-sm-12 col-lg-2">
+                            @Html.TextBoxFor(i => i.FlightTime, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-lg-3 col-form-label">Page №</label>
+                        <div class="col-sm-12 col-lg-9">
+                            @Html.TextBoxFor(i => i.PageNo, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(i => i.PageNo)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-12 col-lg-3 col-form-label">Flight №</label>
+                        <div class="col-sm-12 col-lg-9">
+                            @Html.DropDownListFor(i => i.FlightNumber.FlightNumber, new SelectList(flightNum), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Check complete</label>
+                        <div class="col-sm-9">
+                            <div class="checkbox-fade fade-in-primary">
+                                <label>
+                                    @Html.CheckBoxFor(i => i.Correct)
+                                    <span class="cr">
+                                        <i class="cr-icon fa fa-check txt-primary"></i>
+                                    </span>
+                                    <span>PFC</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-fade fade-in-primary">
+                                <label>
+                                    @Html.CheckBoxFor(i => i.Correct)
+                                    <span class="cr">
+                                        <i class="cr-icon fa fa-check txt-primary"></i>
+                                    </span>
+                                    <span>TC</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-fade fade-in-primary">
+                                <label>
+                                    @Html.CheckBoxFor(i => i.Correct)
+                                    <span class="cr">
+                                        <i class="cr-icon fa fa-check txt-primary"></i>
+                                    </span>
+                                    <span>DY</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-fade fade-in-primary">
+                                <label>
+                                    @Html.CheckBoxFor(i => i.Correct)
+                                    <span class="cr">
+                                        <i class="cr-icon fa fa-check txt-primary"></i>
+                                    </span>
+                                    <span>ADD</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-fade fade-in-primary">
+                                <label>
+                                    @Html.CheckBoxFor(i => i.Correct)
+                                    <span class="cr">
+                                        <i class="cr-icon fa fa-check txt-primary"></i>
+                                    </span>
+                                    <span>RC</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-fade fade-in-primary">
+                                <label>
+                                    @Html.CheckBoxFor(i => i.Correct)
+                                    <span class="cr">
+                                        <i class="cr-icon fa fa-check txt-primary"></i>
+                                    </span>
+                                    <span>SC</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-fade fade-in-primary">
+                                <label>
+                                    @Html.CheckBoxFor(i => i.Correct)
+                                    <span class="cr">
+                                        <i class="cr-icon fa fa-check txt-primary"></i>
+                                    </span>
+                                    <span>A</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-fade fade-in-primary">
+                                <label>
+                                    @Html.CheckBoxFor(i => i.Correct)
+                                    <span class="cr">
+                                        <i class="cr-icon fa fa-check txt-primary"></i>
+                                    </span>
+                                    <span>C</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+           
+        </div>
+
+
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary waves-effect waves-light ">Save changes</button>
+        </div>
+
+    </div>
+}

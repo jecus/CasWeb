@@ -18,6 +18,30 @@ $(function () {
     });
 });
 
+$(function () {
+    $.ajaxSetup({ cache: false });
+    $(".modalmdBtn").click(function (e) {
+
+        e.preventDefault();
+        $.get(this.href, function (data) {
+            $('#dialogmdContent').html(data);
+            $('#md-Modal').modal('show');
+        });
+    });
+});
+
+$(function () {
+    $.ajaxSetup({ cache: false });
+    $(".modalxlBtn").click(function (e) {
+
+        e.preventDefault();
+        $.get(this.href, function (data) {
+            $('#dialogxlContent').html(data);
+            $('#xl-Modal').modal('show');
+        });
+    });
+});
+
 
 $(function () {
     $.ajaxSetup({ cache: false });

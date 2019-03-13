@@ -20,5 +20,10 @@ namespace BusinessLayer.Views
                 });
             }
         }
+
+        public override string ToString()
+        {
+            return FlightNumber;
+        }
     }
 }

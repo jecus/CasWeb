@@ -68,7 +68,7 @@
                                     </td>
                                     <td>@atlb.ATLBNo</td>
                                     <td>@atlb.Pages</td>
-                                    <td>@atlb.Dates</td>
+                                    <td><span style="display: none">@atlb.DateFrom.ToUniversalFilterString()</span>@atlb.Dates</td>
                                     <td>@atlb.AtlbStatus.ToString()</td>
                                 </tr>
                             }

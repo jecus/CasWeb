@@ -24,5 +24,10 @@ namespace BusinessLayer.Views
         public ICollection<FlightPlanOpsRecords> CancelFlightPlanOpsRecords { get; set; }
 
         #endregion
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

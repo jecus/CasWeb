@@ -203,7 +203,7 @@ namespace BusinessLayer
     /// <summary>
     /// Код ВС на полет
     /// </summary>
-    [Flags]
+    //[Flags]
     public enum FlightAircraftCode : short
     {
         /// <summary>

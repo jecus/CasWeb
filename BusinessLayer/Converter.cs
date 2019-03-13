@@ -1301,8 +1301,8 @@ namespace BusinessLayer
                 AtlbRecordType = (short)arcf.AtlbRecordType,
                 FlightAircraftCode = (short?)arcf.FlightAircraftCode,
                 CancelReasonId = arcf.CancelReason?.Id,
-                StationFroms = arcf.StationFroms?.ToEntity(),
-                StationTos = arcf.StationTos?.ToEntity(),
+                StationFromId = arcf.StationFroms?.Id,
+                StationToId = arcf.StationTos?.Id,
                 FlightNumberId = arcf.FlightNumber?.Id ?? -1,
                 
             };

@@ -1,0 +1,168 @@
+﻿@using BusinessLayer
+@using BusinessLayer.Dictionaties
+@using BusinessLayer.Views
+@using Entity.Models.Dictionaries
+@model BusinessLayer.Views.AircraftFlightView
+
+@{
+    var flightNum = (List<FlightNumView>)ViewData["FlightNums"];
+    var stations = (List<AirportCodeView>)ViewData["AirportCodes"];
+    var reasons = (List<ReasonView>)ViewData["Reasons"];
+}
+
+@using (Html.BeginForm("Create", "AircraftFlight", FormMethod.Post))
+{
+    @Html.HiddenFor(i => i.Id);
+    @Html.HiddenFor(i => i.IsDeleted);
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h4 class="modal-title">Add Reg Flight</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+        @*<ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#FlGen" role="tab">Flight General</a>
+                
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#diskrepancies" role="tab">Disсrepancies</a>
+                
+            </li>
+            
+        </ul>*@
+            <div class="tab-content modal-body">
+
+                <div class="tab-pane active" id="FlGen" role="tabpanel">
+                    <div class="row">
+                        <div class="z-depth-top-4 p-t-30 col-sm-4">
+                            <h5>Flight General Information</h5>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-lg-5 col-form-label">FL./Maint.</label>
+                                <div class="col-sm-12 col-lg-7">
+                                    @Html.DropDownListFor(i => i.AtlbRecordType, Html.GetEnumSelectList(typeof(AtlbRecordType)), new {@class = "form-control"})
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-lg-5 col-form-label">Aircraft Code</label>
+                                <div class="col-sm-12 col-lg-7">
+                                    @Html.DropDownListFor(i => i.FlightAircraftCode, Html.GetEnumSelectList(typeof(FlightAircraftCode)), new {@class = "form-control"})
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-lg-5 col-form-label">Page №</label>
+                                <div class="col-sm-12 col-lg-7">
+                                    @Html.TextBoxFor(i => i.PageNo, new {@class = "form-control"})
+                                    @Html.ValidationMessageFor(i => i.PageNo)
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-lg-5 col-form-label">Flight Type</label>
+                                <div class="col-sm-12 col-lg-7">
+                                    @Html.DropDownListFor(i => i.FlightType.FullName, new SelectList(FlightType.Items.ToList()), new {@class = "form-control"})
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-lg-5 col-form-label">Flight Cat.</label>
+                                <div class="col-sm-12 col-lg-7">
+                                    @Html.DropDownListFor(i => i.FlightCategory, Html.GetEnumSelectList(typeof(FlightCategory)), new {@class = "form-control"})
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-lg-5 col-form-label">Flight №</label>
+                                <div class="col-sm-12 col-lg-7">
+                                    @Html.DropDownListFor(i => i.FlightNumber.FlightNumber, new SelectList(flightNum, Model.FlightNumber.FlightNumber), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-lg-5 col-form-label">Date</label>
+                                <div class="col-sm-12 col-lg-7">
+                                    @Html.EditorFor(i => i.FlightDate, new {htmlAttributes = new {@class = "form-control"}})
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-lg-5 col-form-label">From</label>
+                                <div class="col-sm-12 col-lg-7">
+                                    @Html.DropDownListFor(i => i.StationFroms, new SelectList(stations), new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-lg-5 col-form-label">To</label>
+                                <div class="col-sm-12 col-lg-7">
+                                    @Html.DropDownListFor(i => i.StationTos, new SelectList(stations), new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="z-depth-top-4 p-t-30 col-sm-8">
+                            <h5>Block / Airborne Time</h5>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-lg-3 col-form-label">Out - In</label>
+                                <div class="col-sm-12 col-lg-3">
+                                    @Html.TextBoxFor(i => i.TimespanOutTime, new {@class = "form-control", type = "time"})
+                                    @Html.ValidationMessageFor(i => i.TimespanOutTime)
+                                </div>
+                                <div class="col-sm-12 col-lg-3">
+                                    @Html.TextBoxFor(i => i.TimespanInTime, new {@class = "form-control", type = "time"})
+                                    @Html.ValidationMessageFor(i => i.TimespanInTime)
+                                </div>
+                                <label class="col-sm-12 col-lg-1 col-form-label">Block</label>
+                                <div class="col-sm-12 col-lg-2">
+                                    @Html.TextBoxFor(i => i.BlockTime, new {@class = "form-control", @readonly = "readonly"})
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-lg-3 col-form-label">Take-off-LDG</label>
+                                <div class="col-sm-12 col-lg-3">
+                                    @Html.TextBoxFor(i => i.TimespanTakeOffTime, new {@class = "form-control", type = "time"})
+                                    @Html.ValidationMessageFor(i => i.TimespanTakeOffTime)
+                                </div>
+                                <div class="col-sm-12 col-lg-3">
+                                    @Html.TextBoxFor(i => i.TimespanLDGTime, new {@class = "form-control", type = "time"})
+                                    @Html.ValidationMessageFor(i => i.TimespanLDGTime)
+                                </div>
+                                <label class="col-sm-12 col-lg-1 col-form-label">Flight</label>
+                                <div class="col-sm-12 col-lg-2">
+                                    @Html.TextBoxFor(i => i.FlightTime, new {@class = "form-control", @readonly = "readonly"})
+                                </div>
+                            </div>
+
+                            <div class="form-group row justify-content-end">
+                                <label class="col-sm-12 col-lg-2 col-form-label">Night</label>
+                                <div class="col-sm-12 col-lg-3">
+                                    @Html.TextBoxFor(i => i.TimeSpanNightTime, new {@class = "form-control", type = "time"})
+                                    @Html.ValidationMessageFor(i => i.TimeSpanNightTime)
+                                </div>
+                                <label class="col-sm-12 col-lg-1 col-form-label">Day</label>
+                                <div class="col-sm-12 col-lg-2">
+                                    @Html.TextBoxFor(i => i.FlightTime, new {@class = "form-control", @readonly = "readonly"})
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                @*<div class="tab-pane" id="diskrepancies" role="tabpanel">
+                    <h6>Diskrepancies</h6>
+                    <p>TEST</p>
+                </div>*@
+            </div>
+
+        </div>
+
+
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary waves-effect waves-light ">Save changes</button>
+        </div>
+
+    </div>
+}

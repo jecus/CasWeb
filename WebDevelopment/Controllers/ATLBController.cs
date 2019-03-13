@@ -57,7 +57,8 @@ namespace WebDevelopment.Controllers
 
 				atlb.Pages = pages;
 				atlb.Dates = dates;
-			}
+                atlb.DateFrom = first.FlightDate.Value;
+            }
 
 
 			return View(view);

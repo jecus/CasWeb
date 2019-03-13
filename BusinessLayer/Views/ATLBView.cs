@@ -33,5 +33,7 @@ namespace BusinessLayer.Views
         public string Pages { get; set; }
 
         public string Dates { get; set; }
+
+        public DateTime DateFrom { get; set; }
     }
 }

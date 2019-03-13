@@ -46,5 +46,10 @@ namespace BusinessLayer.Views
         public ICollection<FlightNumberAirportRelation> AirportRelations { get; set; }
 
         #endregion
+
+        public override string ToString()
+        {
+            return FullName;
+        }
     }
 }

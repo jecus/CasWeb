@@ -7,41 +7,49 @@
 
 <div class="row">
     <div class="col-xl-4 col-md-6">
-        <div class="card prod-p-card card-blue">
+        <div class="card prod-p-card text-white" style="background: linear-gradient(to top, #005b86, #027eb8)">
             <div class="card-body">
                 <div class="row">
-                    <label class="text-sm-right" style="width: 80px"><h6 class="m-l-5">Name:</h6></label>
-                    <div class="col-sm-9">
+                    <div class="col">
+                        <h3 class="m-b-15 m-l-20 text-white text-center">General Information</h3>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa fa-info text-c-blue f-18"></i>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="text-right" style="width: 80px"><h6 class="m-l-5">Name:</h6></label>
+                    <div class="col">
                         <h6 class="text-white">@op.Name</h6>
                     </div>
                 </div>
                 <div class="row">
-                    <label class="text-sm-right" style="width: 80px"><h6 class="m-l-5">ICAO:</h6></label>
-                    <div class="col-sm-9">
+                    <label class="text-right" style="width: 80px"><h6 class="m-l-5">ICAO:</h6></label>
+                    <div class="col">
                         <h6 class="text-white">@op.ICAOCode</h6>
                     </div>
                 </div>
                 <div class="row">
-                    <label class="text-sm-right" style="width: 80px"><h6 class="m-l-5">Address:</h6></label>
-                    <div class="col-sm-9">
+                    <label class="text-right" style="width: 80px"><h6 class="m-l-5">Address:</h6></label>
+                    <div class="col">
                         <h6 class="text-white">@op.Address</h6>
                     </div>
                 </div>
                 <div class="row">
-                    <label class="text-sm-right" style="width: 80px"><h6 class="m-l-5">Phone:</h6></label>
-                    <div class="col-sm-9">
+                    <label class="text-right" style="width: 80px"><h6 class="m-l-5">Phone:</h6></label>
+                    <div class="col">
                         <h6 class="text-white">@op.Phone</h6>
                     </div>
                 </div>
                 <div class="row">
-                    <label class="text-sm-right" style="width: 80px"><h6 class="m-l-5">Fax:</h6></label>
-                    <div class="col-sm-9">
+                    <label class="text-right" style="width: 80px"><h6 class="m-l-5">Fax:</h6></label>
+                    <div class="col">
                         <h6 class="text-white">@op.Fax</h6>
                     </div>
                 </div>
                 <div class="row">
-                    <label class="text-sm-right" style="width: 80px"><h6 class="m-l-5">Email:</h6></label>
-                    <div class="col-sm-9">
+                    <label class="text-right" style="width: 80px"><h6 class="m-l-5">Email:</h6></label>
+                    <div class="col">
                         <h6 class="text-white">@op.Email</h6>
                     </div>
                 </div>
@@ -50,7 +58,7 @@
         </div>
     </div>
     <div class="col-xl-4 col-md-6">
-        <div class="card prod-p-card card-red">
+        <div class="card prod-p-card text-white" style="background: linear-gradient(to top, #005b86, #027eb8)">
             <div class="card-body">
                 <div class="row align-items-center m-b-30">
                     <div class="col">
@@ -58,16 +66,16 @@
                         <h6 class="m-b-0 text-white">@ViewData["AircraftsCount"]</h6>
                     </div>
                     <div class="col-auto">
-                        <i class="fa fa-plane text-c-red f-18"></i>
+                        <i class="fa fa-plane text-c-blue f-18"></i>
                     </div>
                 </div>
-                <p class="m-b-0 text-white"><span class="label label-danger m-r-10">@ViewData["AircraftLast"]</span></p>
+                <p class="m-b-0 text-white"><span class="label m-r-10">@ViewData["AircraftLast"]</span></p>
             </div>
         </div>
     </div>
     
     <div class="col-xl-4 col-md-6">
-        <div class="card prod-p-card card-green">
+        <div class="card prod-p-card text-white" style="background: linear-gradient(to top, #005b86, #027eb8)">
             <div class="card-body">
                 <div class="row align-items-center m-b-30">
                     <div class="col">
@@ -75,10 +83,10 @@
                         <h6 class="m-b-0 text-white">@ViewData["DocumentCount"]</h6>
                     </div>
                     <div class="col-auto">
-                        <i class="fa fa-file text-c-green f-18"></i>
+                        <i class="fa fa-file text-c-blue f-18"></i>
                     </div>
                 </div>
-                <p class="m-b-0 text-white"><span class="label label-success m-r-10">@ViewData["DocumentLast"]</span></p>
+                <p class="m-b-0 text-white"><span class="label m-r-10">@ViewData["DocumentLast"]</span></p>
             </div>
         </div>
     </div>

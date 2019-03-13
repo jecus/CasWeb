@@ -6,6 +6,9 @@ namespace WebDevelopment.Infrastructude
 	{
 		public static int AircraftId { get; set; }
 
-		public static AircraftMainMenu AircraftMainMenu { get; set; }
-	}
+        public static int AtlbId { get; set; }
+
+        public static AircraftMainMenu AircraftMainMenu { get; set; }
+        
+    }
 }
