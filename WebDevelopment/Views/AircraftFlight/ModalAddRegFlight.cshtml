@@ -111,33 +111,32 @@
                             <div class="form-group row">
                                 <label class="col-sm-12 col-lg-3 col-form-label">Out - In</label>
                                 <div class="col-sm-12 col-lg-3">
-                                    @Html.TextBoxFor(i => i.TimespanOutTime, new {@class = "form-control", type = "time"})
+                                    @Html.TextBoxFor(i => i.TimespanOutTime, new {@class = "form-control", id = "Start", type = "time", onchange= "BetweenTime()" })
                                     @Html.ValidationMessageFor(i => i.TimespanOutTime)
                                 </div>
                                 <div class="col-sm-12 col-lg-3">
-                                    @Html.TextBoxFor(i => i.TimespanInTime, new {@class = "form-control", type = "time"})
+                                    @Html.TextBoxFor(i => i.TimespanInTime, new {@class = "form-control", id = "End", type = "time", onchange = "BetweenTime()" })
                                     @Html.ValidationMessageFor(i => i.TimespanInTime)
                                 </div>
                                 <label class="col-sm-12 col-lg-1 col-form-label">Block</label>
                                 <div class="col-sm-12 col-lg-2">
-                                    @Html.TextBoxFor(i => i.BlockTime, new {@class = "form-control", @readonly = "readonly"})
-
+                                    @Html.TextBoxFor(i => i.BlockTime, new {@class = "form-control", id = "Res", @readonly = "readonly"})
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-12 col-lg-3 col-form-label">Take-off-LDG</label>
                                 <div class="col-sm-12 col-lg-3">
-                                    @Html.TextBoxFor(i => i.TimespanTakeOffTime, new {@class = "form-control", type = "time"})
+                                    @Html.TextBoxFor(i => i.TimespanTakeOffTime, new {@class = "form-control", id = "Start1", type = "time", onchange = "BetweenTime()" })
                                     @Html.ValidationMessageFor(i => i.TimespanTakeOffTime)
                                 </div>
                                 <div class="col-sm-12 col-lg-3">
-                                    @Html.TextBoxFor(i => i.TimespanLDGTime, new {@class = "form-control", type = "time"})
+                                    @Html.TextBoxFor(i => i.TimespanLDGTime, new {@class = "form-control", id = "End1", type = "time", onchange = "BetweenTime()" })
                                     @Html.ValidationMessageFor(i => i.TimespanLDGTime)
                                 </div>
                                 <label class="col-sm-12 col-lg-1 col-form-label">Flight</label>
                                 <div class="col-sm-12 col-lg-2">
-                                    @Html.TextBoxFor(i => i.FlightTime, new {@class = "form-control", @readonly = "readonly"})
+                                    @Html.TextBoxFor(i => i.FlightTime, new {@class = "form-control", id = "Res1", @readonly = "readonly"})
                                 </div>
                             </div>
 
