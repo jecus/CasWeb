@@ -98,5 +98,10 @@ namespace BusinessLayer.Views
             get => _specialization ?? SpecializationView.Unknown;
             set => _specialization = value;
         }
+
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName}";
+        }
     }
 }

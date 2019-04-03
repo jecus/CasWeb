@@ -256,11 +256,15 @@ namespace Entity.Infrastructure
 		        .WithMany(i => i.CategoryRecords)
 		        .HasForeignKey(i => i.AircraftWorkerCategoryId);
 
-	        #endregion
+            #endregion
 
-	        #region CertificateOfReleaseToService
+            #region CertificateOfReleaseToService
+            modelBuilder.Entity<CorrectiveAction>()
+                .HasOne(i => i.CertificateOfReleaseToService)
+                .WithMany(i => i.CorrectiveActions)
+                .HasForeignKey(i => i.CRSID);
 
-	        modelBuilder.Entity<CertificateOfReleaseToService>()
+            modelBuilder.Entity<CertificateOfReleaseToService>()
 		        .HasOne(i => i.AuthorizationB1)
 		        .WithMany(i => i.CertificateOfReleaseToServiceB1s)
 		        .HasForeignKey(i => i.AuthorizationB1Id);

@@ -39,5 +39,7 @@ namespace Entity.Models.General
 
         [Column("CRSID")]
         public int CRSID { get; set; }
+
+        public CertificateOfReleaseToService CertificateOfReleaseToService { get; set; }
     }
 }

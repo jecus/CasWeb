@@ -97,5 +97,7 @@ namespace Entity.Models.General
         public ATAChapter ATAChapter { get; set; }
 
         public Specialist Auth { get; set; }
+
+        public CorrectiveAction CorrectiveAction { get; set; }
     }
 }

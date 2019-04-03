@@ -1523,5 +1523,241 @@ namespace BusinessLayer
             return new List<FlightNum>(flightnum.Select(i => i.ToEntity()));
         }
         #endregion
+
+        #region Discrepancy
+
+        public static Discrepancy ToEntity(this DiscrepancyView disc)
+        {
+
+            return new Discrepancy
+            {
+
+                Id = disc.Id,
+                IsDeleted = disc.IsDeleted,
+                FlightID = disc.FlightID,
+                FilledBy = disc.FilledBy,
+                Description = disc.Description,
+                PilotRemarks = disc.PilotRemarks,
+                ATAChapterID = disc.ATAChapter?.Id ?? -1,
+                DirectiveId = disc.DirectiveId,
+                Num = disc.Num,
+                Remarks = disc.Remarks,
+                EngineRemarks = disc.EngineRemarks,
+                EngineShutUp = disc.EngineShutUp,
+                BaseComponentId = disc.BaseComponentId,
+                FDR = disc.FDR,
+                AuthId = disc.Auth?.Id ?? -1,
+                Messages = disc.Messages,
+                WorkPackageId = disc.WorkPackageId,
+                IsReliability = disc.IsReliability,
+                Status = (int)disc.Status,
+                IsOccurrence = disc.IsOccurrence,
+                Substruction = disc.Substruction,
+                TimeDelay = disc.TimeDelay,
+                ConsequenceType = disc.ConsequenceType?.ItemId ?? -1,
+                DeffectConfirm = disc.DeffectConfirm?.ItemId ?? -1,
+                DeffeсtPhase = disc.DeffeсtPhase?.ItemId ?? -1,
+                DeffeсtCategory = disc.DeffeсtCategory?.ItemId ?? -1,
+                ActionType = disc.ActionType?.ItemId ?? -1,
+                InterruptionType = disc.InterruptionType?.ItemId ?? -1,
+                ConsequenceOps = disc.ConsequenceOps?.ItemId ?? -1,
+                Occurrence = disc.Occurrence?.ItemId ?? -1,
+                ConsequenceFault = disc.ConsequenceFault?.ItemId ?? -1,
+                CorrectiveAction = disc.CorrectiveAction?.ToEntity()
+            };
+        }
+
+        public static DiscrepancyView ToBlView(this Discrepancy disc)
+        {
+            return new DiscrepancyView()
+
+            {
+                Id = disc.Id,
+                IsDeleted = disc.IsDeleted,
+                FlightID = disc.FlightID,
+                IsReliability = disc.IsReliability,
+                IsOccurrence = disc.IsOccurrence,
+                Substruction = disc.Substruction,
+                FilledBy = disc.FilledBy,
+                BaseComponentId = disc.BaseComponentId,
+                Description = disc.Description,
+                Remarks = disc.Remarks,
+                EngineRemarks = disc.EngineRemarks,
+                EngineShutUp = disc.EngineShutUp,
+                FDR = disc.FDR,
+                Status = (CorrectiveActionStatus)disc.Status,
+                Messages = disc.Messages,
+                Auth = disc.Auth?.ToBlView(),
+                PilotRemarks = disc.PilotRemarks,
+                ATAChapter = disc.ATAChapter?.ToBlView(),
+                DirectiveId = disc.DirectiveId,
+                Num = disc.Num ?? default(int),
+                WorkPackageId = disc.WorkPackageId ?? default(int),
+                TimeDelay = disc.TimeDelay,
+                Occurrence = OccurrenceType.GetItemById(disc.Occurrence),
+                DeffectConfirm = DeffectConfirm.GetItemById(disc.DeffectConfirm),
+                InterruptionType = InterruptionType.GetItemById(disc.InterruptionType),
+                DeffeсtPhase = DeffeсtPhase.GetItemById(disc.DeffeсtPhase),
+                DeffeсtCategory = DeffeсtCategory.GetItemById(disc.DeffeсtCategory),
+                ActionType = ActionType.GetItemById(disc.ActionType),
+                ConsequenceOps = ConsequenceOPS.GetItemById(disc.ConsequenceOps),
+                ConsequenceFault = ConsequenceFaults.GetItemById(disc.ConsequenceFault),
+                ConsequenceType = IncidentType.GetItemById(disc.ConsequenceType),
+                CorrectiveAction = disc.CorrectiveAction?.ToBlView(),
+                ATAChapterID = disc.ATAChapterID
+                
+
+            };
+            
+        }
+
+        public static List<DiscrepancyView> ToBlView(this IEnumerable<Discrepancy> disc)
+        {
+            return new List<DiscrepancyView>(disc.Select(i => i.ToBlView()));
+        }
+
+        public static List<Discrepancy> ToEntity(this IEnumerable<DiscrepancyView> disc)
+        {
+            return new List<Discrepancy>(disc.Select(i => i.ToEntity()));
+        }
+
+        #endregion
+
+        #region AtaChapter
+
+        public static ATAChapter ToEntity(this ATAChapterView ataChapter)
+        {
+            return new ATAChapter
+            {
+                Id = ataChapter.Id,
+                IsDeleted = ataChapter.IsDeleted,
+                FullName = ataChapter.FullName,
+                ShortName = ataChapter.ShortName
+            };
+        }
+
+        public static ATAChapterView ToBlView(this ATAChapter ataChapter)
+        {
+            return new ATAChapterView()
+            {
+                Id = ataChapter.Id,
+                IsDeleted = ataChapter.IsDeleted,
+                FullName = ataChapter.FullName,
+                ShortName = ataChapter.ShortName
+            };
+        }
+
+        public static List<ATAChapterView> ToBlView(this IEnumerable<ATAChapter> ataChapter)
+        {
+            return new List<ATAChapterView>(ataChapter.Select(i => i.ToBlView()));
+        }
+
+        public static List<ATAChapter> ToEntity(this IEnumerable<ATAChapterView> ataChapter)
+        {
+            return new List<ATAChapter>(ataChapter.Select(i => i.ToEntity()));
+        }
+
+        #endregion
+
+        #region CorrectiveAction
+
+        public static CorrectiveAction ToEntity(this CorrectiveActionView coract)
+        {
+            return new CorrectiveAction()
+            {
+                Id = coract.Id,
+                IsDeleted = coract.IsDeleted,
+                DiscrepancyID = coract.DiscrepancyID,
+                Description = coract.Description,
+                ShortDescription = coract.ShortDescription,
+                ADDNo = coract.ADDNo,
+                IsClosed = coract.IsClosed,
+                PartNumberOff = coract.PartNumberOff,
+                SerialNumberOff = coract.SerialNumberOff,
+                PartNumberOn = coract.PartNumberOn,
+                SerialNumberOn = coract.SerialNumberOn,
+                CRSID = coract.CRSID
+
+            };
+        }
+
+        public static CorrectiveActionView ToBlView(this CorrectiveAction coract)
+        {
+            return new CorrectiveActionView()
+            {
+                Id = coract.Id,
+                IsDeleted = coract.IsDeleted,
+                DiscrepancyID = coract.DiscrepancyID,
+                Description = coract.Description,
+                ShortDescription = coract.ShortDescription,
+                ADDNo = coract.ADDNo,
+                IsClosed = coract.IsClosed,
+                PartNumberOff = coract.PartNumberOff,
+                SerialNumberOff = coract.SerialNumberOff,
+                PartNumberOn = coract.PartNumberOn,
+                SerialNumberOn = coract.SerialNumberOn,
+                CRSID = coract.CRSID,
+                CertificateOfReleaseToService = coract.CertificateOfReleaseToService?.ToBlView()
+            };
+        }
+
+        public static List<CorrectiveActionView> ToBlView(this IEnumerable<CorrectiveAction> coract)
+        {
+            return new List<CorrectiveActionView>(coract.Select(i => i.ToBlView()));
+        }
+
+        public static List<CorrectiveAction> ToEntity(this IEnumerable<CorrectiveActionView> coract)
+        {
+            return new List<CorrectiveAction>(coract.Select(i => i.ToEntity()));
+        }
+
+        #endregion
+
+        #region MyRegion
+
+        public static CertificateOfReleaseToService ToEntity(this CertificateOfReleaseToServiceView corts)
+        {
+
+            return new CertificateOfReleaseToService
+            {
+                Id = corts.Id,
+                IsDeleted = corts.IsDeleted,
+                Station = corts.Station,
+                RecordDate = corts.RecordDate,
+                CheckPerformed = corts.CheckPerformed,
+                Reference = corts.Reference,
+                AuthorizationB1Id = corts.AuthorizationB1Id,
+                AuthorizationB2Id = corts.AuthorizationB2Id
+            };
+        }
+
+
+        public static CertificateOfReleaseToServiceView ToBlView(this CertificateOfReleaseToService corts)
+
+        {
+            return new CertificateOfReleaseToServiceView()
+            {
+                Id = corts.Id,
+                IsDeleted = corts.IsDeleted,
+                Station = corts.Station,
+                RecordDate = corts.RecordDate ?? DateTimeExtend.GetCASMinDateTime(),
+                CheckPerformed = corts.CheckPerformed,
+                Reference = corts.Reference,
+                AuthorizationB1Id = corts.AuthorizationB1Id,
+                AuthorizationB2Id = corts.AuthorizationB2Id
+            };
+        }
+
+        public static List<CertificateOfReleaseToServiceView> ToBlView(this IEnumerable<CertificateOfReleaseToService> coract)
+        {
+            return new List<CertificateOfReleaseToServiceView>(coract.Select(i => i.ToBlView()));
+        }
+
+        public static List<CertificateOfReleaseToService> ToEntity(this IEnumerable<CertificateOfReleaseToServiceView> coract)
+        {
+            return new List<CertificateOfReleaseToService>(coract.Select(i => i.ToEntity()));
+        }
+
+        #endregion
     }
 }

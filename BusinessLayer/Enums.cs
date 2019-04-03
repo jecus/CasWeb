@@ -245,4 +245,22 @@ namespace BusinessLayer
         Years = 2
     }
     #endregion
+
+    #region public enum CorrectiveActionStatus
+    /// <summary>
+    /// Статус выполнения корректирующего действия
+    /// </summary>
+    public enum CorrectiveActionStatus
+    {
+        /// <summary>
+        /// Корректирующее действие не выполнено
+        /// </summary>
+        Open = 0,
+        /// <summary>
+        /// Корректирующее действие выполнено
+        /// </summary>
+        Close = 1,
+        Publish = 2
+    }
+    #endregion
 }

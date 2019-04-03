@@ -4,8 +4,8 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AircraftLayout.cshtml";
-    var modalUrl = @Url.Action("ModalEditRegFlight", "AircraftFlight", new { GlobalObject.AircraftId, atlbId = "_ATLBID_" });
-    var confirmModalUrl = @Url.Action("ConfirmDelete", "AircraftFlight", new { GlobalObject.AircraftId, atlbId = "_ATLBID_" });
+    var modalUrl = @Url.Action("ModalEditRegFlight", "AircraftFlight", new { GlobalObject.AircraftId, flightId = "_FLIGHTID_" });
+    var confirmModalUrl = @Url.Action("ConfirmDelete", "AircraftFlight", new { GlobalObject.AircraftId, flightId = "_FLIGHTID_" });
 }
 
 <div class="row">
@@ -64,11 +64,11 @@
                             {
                                 <tr>
                                     <td style="width: 80px">
-                                        <a href=@modalUrl.Replace("_ATLBID_", airf.Id.ToString()) , class="modalxlBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon">
+                                        <a href=@modalUrl.Replace("_FLIGHTID_", airf.Id.ToString()) , class="modalxlBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon">
                                             <i class="fa fa-pencil"></i>
                                         </a>
 
-                                        <a href=@confirmModalUrl.Replace("_ATLBID_", airf.Id.ToString()) , class="modalConfirmDeleteBtn btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon">
+                                        <a href=@confirmModalUrl.Replace("_FLIGHTID_", airf.Id.ToString()) , class="modalConfirmDeleteBtn btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon">
                                             <i class="fa fa-times"></i>
                                         </a>
                                     </td>

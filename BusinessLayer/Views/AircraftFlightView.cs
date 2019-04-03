@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using BusinessLayer.Dictionaties;
-using Entity.Models.Dictionaries;
 
 namespace BusinessLayer.Views
 {
@@ -11,6 +11,7 @@ namespace BusinessLayer.Views
         private AirportCodeView _stationFroms;
         private FlightNumView _flightNumber;
         private AirportCodeView _stationTos;
+        private List<DiscrepancyView> _discrepancy;
 
         public AircraftFlightView()
         {
@@ -198,5 +199,11 @@ namespace BusinessLayer.Views
             }
         }
         #endregion
+
+        public List<DiscrepancyView> Discrepancy
+        {
+            get => _discrepancy ?? (_discrepancy = new List<DiscrepancyView>());
+            set => _discrepancy = value;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,7 +29,7 @@ namespace Entity.Models.General
         [Column("AuthorizationB2Id")]
         public int? AuthorizationB2Id { get; set; }
 
-
+        public ICollection<CorrectiveAction> CorrectiveActions { get; set; }
         
         public Specialist AuthorizationB1 { get; set; }
 
