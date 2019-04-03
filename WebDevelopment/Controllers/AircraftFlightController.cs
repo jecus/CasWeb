@@ -60,26 +60,56 @@ namespace WebDevelopment.Controllers
         [Route("addflight")]
         public async Task<IActionResult> ModalAddRegFlight()
         {
-            var flightNum = await _db.FlightNums
-                .AsNoTracking()
-                .OnlyActive()
-                .ToListAsync();
+			var flightNum = await _db.FlightNums
+				.AsNoTracking()
+				.OnlyActive()
+				.ToListAsync();
 
-            var stations = await _db.AirportCodes
-                .AsNoTracking()
-                .OnlyActive()
-                .ToListAsync();
+			var stations = await _db.AirportCodes
+				.AsNoTracking()
+				.OnlyActive()
+				.ToListAsync();
 
-            var reasons = await _db.Reasons
-                .AsNoTracking()
-                .OnlyActive()
-                .ToListAsync();
+			var reasons = await _db.Reasons
+				.AsNoTracking()
+				.OnlyActive()
+				.ToListAsync();
 
-            ViewData["FlightNums"] = flightNum.ToBlView();
-            ViewData["AirportCodes"] = stations.ToBlView();
-            ViewData["Reasons"] = reasons.ToBlView();
+			var ata = await _db.AtaChapters
+				.AsNoTracking()
+				.OnlyActive()
+				.ToListAsync();
 
-            return PartialView("ModalAddRegFlight", new AircraftFlightView());
+			var spec = await _db.Specialists
+				.AsNoTracking()
+				.OnlyActive()
+				.ToListAsync();
+
+			var disc = await _db.Discrepancies
+				.AsNoTracking()
+				.OnlyActive()
+				.Include(i => i.CorrectiveAction)
+				.Include(i => i.CorrectiveAction.CertificateOfReleaseToService)
+				.Include(i => i.ATAChapter)
+				.ToListAsync();
+
+			ViewData["FlightNums"] = flightNum.ToBlView();
+			ViewData["AirportCodes"] = stations.ToBlView();
+			ViewData["Reasons"] = reasons.ToBlView();
+			ViewData["Discrepancy"] = disc.ToBlView();
+			ViewData["Specialists"] = spec.ToBlView();
+			ViewData["AtaChapter"] = ata.ToBlView().OrderBy(i => i.ShortName).ToList();
+
+			var a = await _db.AircraftFlights
+				.Include(i => i.FlightNumber)
+				.Include(i => i.StationFroms)
+				.Include(i => i.StationTos)
+				.FirstOrDefaultAsync();
+
+			var flight = a.ToBlView();
+			flight.Discrepancy.AddRange(disc.ToBlView());
+
+			return PartialView("ModalAddRegFlight", new AircraftFlightView());
         }
 
         [HttpPost]

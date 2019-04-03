@@ -646,16 +646,6 @@ namespace Entity.Infrastructure
 	        #region InitialOrder
 
 	        modelBuilder.Entity<InitialOrder>()
-		        .HasOne(i => i.Supplier)
-		        .WithMany(i => i.InitialOrders)
-		        .HasForeignKey(i => i.CarrierId);
-
-	        modelBuilder.Entity<InitialOrder>()
-		        .HasOne(i => i.ApprovedBy)
-		        .WithMany(i => i.Approveds)
-		        .HasForeignKey(i => i.ApprovedById);
-
-	        modelBuilder.Entity<InitialOrder>()
 		        .HasOne(i => i.PublishedBy)
 		        .WithMany(i => i.Publisheds)
 		        .HasForeignKey(i => i.PublishedById);

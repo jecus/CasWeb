@@ -184,7 +184,7 @@
                             <div class="accordion-heading" role="tab" id="headingOne">
                                 <h3 class="card-title accordion-title">
                                     <a class="accordion-msg waves-effect waves-dark" data-toggle="collapse" data-parent="#accordion" href="@col@y" aria-expanded="true" aria-controls="collapseOne">
-                                        Lorem Message 1
+                                        Discrepancy @y
                                     </a>
                                 </h3>
                             </div>
@@ -230,7 +230,7 @@
                                         </div>
                                         <label class="col-sm-12 col-lg-1 col-form-label">Comp:</label>
                                         <div class="col-sm-12 col-lg-3">
-                                            @Html.DropDownListFor(i => i.ATLBID, new SelectList(colId), new { @class = "form-control" })
+                                            @Html.DropDownListFor(i => i.ATLBID, new SelectList(""), new { @class = "form-control" })
                                         </div>
                                         <label class="col-sm-12 col-lg-1 col-form-label">Status:</label>
                                         <div class="col-sm-12 col-lg-3 col-form-label">
@@ -315,8 +315,8 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-2 col-form-label">MRO</label>
                                                 <div class="col-sm-2">
-                                                    @Html.TextBoxFor(i => i.Discrepancy[y], new {@class = "form-control"})
-                                                    @Html.ValidationMessageFor(i => i.EnginesGeneralCondition)
+                                                    @Html.TextBoxFor(i => i.Discrepancy[y].CorrectiveAction.CertificateOfReleaseToService.Station, new {@class = "form-control"})
+                                                    @Html.ValidationMessageFor(i => i.Discrepancy[y].CorrectiveAction.CertificateOfReleaseToService.Station)
                                                 </div>
                                                 <label class="col-sm-12 col-lg-2 col-form-label">Date</label>
                                                 <div class="col-sm-12 col-lg-6">

@@ -11,60 +11,12 @@ namespace Entity.Models.General
         [Column("Title")]
         [MaxLength(256)]
         public string Title { get; set; }
-
-        [Column("RFQ")]
-        [MaxLength(256)]
-        public string RFQ { get; set; }
-
-        [Column("QR")]
-        [MaxLength(256)]
-        public string QR { get; set; }
-
-        [Column("PO")]
-        [MaxLength(256)]
-        public string PO { get; set; }
-
-        [Column("Invoice")]
-        [MaxLength(256)]
-        public string Invoice { get; set; }
-
-        [Column("ShipTo")]
-        public string ShipTo { get; set; }
-
-        [Column("PickUp")]
-        public string PickUp { get; set; }
-
-        [Column("Weight")]
-        [MaxLength(256)]
-        public string Weight { get; set; }
-
-        [Column("DIMS")]
-        [MaxLength(256)]
-        public string DIMS { get; set; }
-
-        [Column("TypeOfOperation")]
-        public int TypeOfOperation { get; set; }
-
-        [Column("ApprovedById")]
-        public int? ApprovedById { get; set; }
-
+		
         [Column("PublishedById")]
         public int? PublishedById { get; set; }
 
         [Column("ClosedById")]
         public int? ClosedById { get; set; }
-
-        [Column("ShipBy")]
-        public int ShipBy { get; set; }
-
-        [Column("IncoTerm")]
-        public int IncoTerm { get; set; }
-
-        [Column("CountryId")]
-        public int CountryId { get; set; }
-
-        [Column("CarrierId")]
-        public int? CarrierId { get; set; }
 
         [Column("Description")]
         [MaxLength(256)]
