@@ -51,7 +51,7 @@ Task("Clenup")
 Task("Artifact::Publish")
 	.WithCriteria(TeamCity.IsRunningOnTeamCity)
 	.Does(() => {
-		TeamCity.PublishArtifacts("PanelRider\\Web.Panel\\" + PUBLISH_DIRECTORY);
+		TeamCity.PublishArtifacts("GitCasWeb\\WebDevelopment\\" + PUBLISH_DIRECTORY);
 	});
 
 
