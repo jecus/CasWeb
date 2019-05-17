@@ -22,7 +22,7 @@ namespace BusinessLayer.Repositiry
 				.AsNoTracking()
 				.OnlyActive()
 				.FirstOrDefaultAsync(i => i.Login == login && i.Password == password);
-			return user.ToBlView();
+			return user?.ToBlView();
 		}
 
 		public async Task<bool> IsAuthorized(string login, string password)
