@@ -1,7 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Entity.Models.Dictionaries;
 using Entity.Models.General;
 using Microsoft.EntityFrameworkCore;
+using EFCore.BulkExtensions;
 
 namespace Entity.Infrastructure
 {
@@ -1237,6 +1241,29 @@ namespace Entity.Infrastructure
 			}
 			else Remove(entity);
 			await SaveChangesAsync();
+		}
+
+		#endregion
+
+		#region public void Bulk<TEntity>(IEnumerable<TEntity> data, int? batchSize = null) where TEntity : BaseEntity
+
+		public void Bulk<TEntity>(IEnumerable<TEntity> data, int? batchSize = null) where TEntity : BaseEntity
+		{
+			if (this.Database.CurrentTransaction != null)
+				throw new Exception("Cant bulk in open transaction");
+
+			if (batchSize.HasValue)
+			{
+				for (int i = 0; i < data.Count(); i = i + batchSize.Value)
+				{
+					var items = data.Skip(i).Take(batchSize.Value);
+					this.BulkInsert<TEntity>(items.ToList(), config => { config.BatchSize = batchSize.Value; });
+				}
+			}
+			else
+			{
+				this.BulkInsert<TEntity>(data.ToList());
+			}
 		}
 
 		#endregion
