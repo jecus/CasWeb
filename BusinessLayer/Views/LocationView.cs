@@ -1,6 +1,4 @@
-﻿using Entity.Models.Dictionaries;
-
-namespace BusinessLayer.Views
+﻿namespace BusinessLayer.Views
 {
     public class LocationView : BaseView
     {

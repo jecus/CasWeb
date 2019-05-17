@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Entity.Enums;
 using Entity.Models.Dictionaries;
 
 namespace Entity.Models.General

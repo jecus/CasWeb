@@ -12,6 +12,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="published\**" />
+    <Compile Remove="tools\**" />
+    <Content Remove="published\**" />
+    <Content Remove="tools\**" />
+    <EmbeddedResource Remove="published\**" />
+    <EmbeddedResource Remove="tools\**" />
+    <None Remove="published\**" />
+    <None Remove="tools\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="WebDevelopment.csproj.vspscc" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="jQuery.UI" Version="1.12.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
