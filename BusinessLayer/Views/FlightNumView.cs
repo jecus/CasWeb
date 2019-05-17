@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using Entity.Models.Dictionaries;
-using Entity.Models.General;
-
-namespace BusinessLayer.Views
+﻿namespace BusinessLayer.Views
 {
     public class FlightNumView : BaseView
     {

@@ -3,13 +3,15 @@ using System.Threading.Tasks;
 using BusinessLayer;
 using Entity.Extentions;
 using Entity.Infrastructure;
-using Entity.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebDevelopment.Helper;
+using WebDevelopment.Infrastructude.JWT;
 
 namespace WebDevelopment.Controllers
 {
-    public class DocumentController : Controller
+	[Auth(Roles.Sender)]
+	public class DocumentController : Controller
     {
 
         private readonly DatabaseContext _db;

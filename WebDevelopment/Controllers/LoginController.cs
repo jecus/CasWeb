@@ -1,13 +1,15 @@
-﻿using System.Threading.Tasks;
-using BusinessLayer;
+﻿using System;
+using System.Threading.Tasks;
 using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using WebDevelopment.Infrastructude.JWT;
 
 namespace WebDevelopment.Controllers
 {
+	[AllowAnonymous]
     public class LoginController : Controller
     {
 	    private readonly IUserRepository _userRepository;
@@ -24,6 +26,7 @@ namespace WebDevelopment.Controllers
             return View();
         }
 
+		
 	    [HttpPost]
 		public async Task<IActionResult> Login(UserView userView)
 	    {
@@ -31,7 +34,12 @@ namespace WebDevelopment.Controllers
 
 		    if (user != null)
 			{
-				HttpContext.Response.Cookies.Append("AuthToken", _jwtProvider.GenerateToken(user));;
+				var options = new CookieOptions
+				{
+					Expires = DateTime.Now.AddHours(8),
+					IsEssential = true
+				};
+				HttpContext.Response.Cookies.Append("AuthToken", _jwtProvider.GenerateToken(user), options);;
 				return RedirectToAction("Index", "Home");
 		    }
 

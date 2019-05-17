@@ -1,11 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using BusinessLayer.Repositiry;
+﻿using BusinessLayer.Repositiry;
 using BusinessLayer.Repositiry.Interfaces;
-using BusinessLayer.Views;
 using Microsoft.Extensions.DependencyInjection;
-using WebDevelopment.Infrastructude;
 using WebDevelopment.Infrastructude.JWT;
 
 namespace WebDevelopment

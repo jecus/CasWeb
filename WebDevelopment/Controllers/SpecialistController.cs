@@ -6,10 +6,13 @@ using Entity.Infrastructure;
 using Entity.Models.General;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebDevelopment.Helper;
+using WebDevelopment.Infrastructude.JWT;
 
 namespace WebDevelopment.Controllers
 {
-    public class SpecialistController : Controller
+	[Auth(Roles.Sender)]
+	public class SpecialistController : Controller
     {
         private readonly DatabaseContext _db;
 

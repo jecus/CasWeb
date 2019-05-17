@@ -1,6 +1,4 @@
-﻿using Entity.Models;
-
-namespace BusinessLayer.Views
+﻿namespace BusinessLayer.Views
 {
     public class NomenclatureView : BaseView
     {

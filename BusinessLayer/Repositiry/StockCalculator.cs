@@ -5,7 +5,6 @@ using BusinessLayer.Dictionaties;
 using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Entity.Infrastructure;
-using Entity.Models.General;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLayer.Repositiry

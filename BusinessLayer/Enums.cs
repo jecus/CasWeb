@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BusinessLayer
+﻿namespace BusinessLayer
 {
 	#region public enum MSG : short
 
