@@ -8,12 +8,15 @@ using Entity.Extentions;
 using Entity.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebDevelopment.Helper;
 using WebDevelopment.Infrastructude;
+using WebDevelopment.Infrastructude.JWT;
 using WebDevelopment.Models;
 
 namespace WebDevelopment.Controllers
 {
-    [AircraftRoute("fligts")]
+	[Auth(Roles.Sender)]
+	[AircraftRoute("fligts")]
     public class AircraftFlightController : Controller
     {
         private readonly DatabaseContext _db;

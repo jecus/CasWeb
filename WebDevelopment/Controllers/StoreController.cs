@@ -3,10 +3,13 @@ using System.Threading.Tasks;
 using BusinessLayer.Repositiry.Interfaces;
 using Entity.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using WebDevelopment.Helper;
+using WebDevelopment.Infrastructude.JWT;
 
 namespace WebDevelopment.Controllers
 {
-    public class StoreController : Controller
+	[Auth(Roles.Sender)]
+	public class StoreController : Controller
     {
         private readonly DatabaseContext _db;
         private readonly IComponentRepository _componentRepository;

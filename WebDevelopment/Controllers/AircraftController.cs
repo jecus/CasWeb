@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebDevelopment.Helper;
 using WebDevelopment.Infrastructude;
+using WebDevelopment.Infrastructude.JWT;
 
 namespace WebDevelopment.Controllers
 {
+	[Auth(Roles.Sender)]
 	[Route("aircraft/{aircraftId}")]
     public class AircraftController : Controller
     {

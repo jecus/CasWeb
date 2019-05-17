@@ -31,7 +31,7 @@ namespace WebDevelopment.Infrastructude.JWT
 					}
 				),
 				signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature),
-				expires: DateTime.UtcNow.AddHours(12)
+				expires: DateTime.UtcNow.AddHours(8)
 			);
 
 			return handler.WriteToken(token);

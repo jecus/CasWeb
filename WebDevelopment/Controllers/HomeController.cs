@@ -13,6 +13,7 @@ using WebDevelopment.Models;
 
 namespace WebDevelopment.Controllers
 {
+	[Auth(Roles.Sender)]
 	public class HomeController : Controller
 	{
 		private readonly IAircraftRepository _aircraftRepository;

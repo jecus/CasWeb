@@ -5,9 +5,12 @@ using Entity.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebDevelopment.Helper;
+using WebDevelopment.Infrastructude.JWT;
 
 namespace WebDevelopment.Controllers
 {
+	[Auth(Roles.Sender)]
 	public class FileController : Controller
 	{
 		private readonly DatabaseContext _db;

@@ -9,11 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebDevelopment.Helper;
 using WebDevelopment.Infrastructude;
+using WebDevelopment.Infrastructude.JWT;
 using WebDevelopment.Models;
 
 namespace WebDevelopment.Controllers
 {
-    [AircraftRoute("atlb")]
+	[Auth(Roles.Sender)]
+	[AircraftRoute("atlb")]
     public class ATLBController : Controller
     {
         private readonly DatabaseContext _db;
