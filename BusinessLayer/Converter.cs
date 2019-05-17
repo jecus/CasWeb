@@ -1711,11 +1711,11 @@ namespace BusinessLayer
             return new List<CorrectiveAction>(coract.Select(i => i.ToEntity()));
         }
 
-        #endregion
+		#endregion
 
-        #region MyRegion
+		#region CertificateOfReleaseToService
 
-        public static CertificateOfReleaseToService ToEntity(this CertificateOfReleaseToServiceView corts)
+		public static CertificateOfReleaseToService ToEntity(this CertificateOfReleaseToServiceView corts)
         {
 
             return new CertificateOfReleaseToService
@@ -1758,6 +1758,285 @@ namespace BusinessLayer
             return new List<CertificateOfReleaseToService>(coract.Select(i => i.ToEntity()));
         }
 
-        #endregion
-    }
+		#endregion
+
+		#region InitialOrder
+
+		public static InitialOrder ToEntity(this InitialOrderView init)
+		{
+
+			return new InitialOrder
+			{
+				Id = init.Id,
+				IsDeleted = init.IsDeleted,
+				Title = init.Title,
+				PublishedById = init.PublishedById,
+				ClosedById = init.ClosedById,
+				Description = init.Description,
+				Author = init.Author,
+				ParentId = init.ParentId,
+				ParentTypeId = init.ParentTypeId,
+				Status = init.Status,
+				OpeningDate = init.OpeningDate,
+				PublishingDate = init.PublishingDate,
+				ClosingDate = init.ClosingDate,
+				Remarks = init.Remarks,
+				PublishedByUser = init.PublishedByUser,
+				CloseByUser = init.CloseByUser,
+				Number = init.Number
+			};
+		}
+
+
+		public static InitialOrderView ToBlView(this InitialOrder init)
+
+		{
+			return new InitialOrderView()
+			{
+				Id = init.Id,
+				IsDeleted = init.IsDeleted,
+				Title = init.Title,
+				PublishedById = init.PublishedById,
+				ClosedById = init.ClosedById,
+				Description = init.Description,
+				Author = init.Author,
+				ParentId = init.ParentId,
+				ParentTypeId = init.ParentTypeId,
+				Status = init.Status,
+				OpeningDate = init.OpeningDate,
+				PublishingDate = init.PublishingDate,
+				ClosingDate = init.ClosingDate,
+				Remarks = init.Remarks,
+				PublishedByUser = init.PublishedByUser,
+				CloseByUser = init.CloseByUser,
+				Number = init.Number
+			};
+		}
+
+		public static List<InitialOrderView> ToBlView(this IEnumerable<InitialOrder> init)
+		{
+			return new List<InitialOrderView>(init.Select(i => i.ToBlView()));
+		}
+
+		public static List<InitialOrder> ToEntity(this IEnumerable<InitialOrderView> init)
+		{
+			return new List<InitialOrder>(init.Select(i => i.ToEntity()));
+		}
+
+		#endregion
+
+		#region InitialOrderRecord
+
+		public static InitialOrderRecord ToEntity(this InitialOrderRecordView orderrec)
+		{
+
+			return new InitialOrderRecord
+			{
+				Id = orderrec.Id,
+				IsDeleted = orderrec.IsDeleted,
+				InitialReason = orderrec.InitialReason,
+				Priority = orderrec.Priority,
+				DestinationObjectID = orderrec.DestinationObjectID,
+				DestinationObjectType = orderrec.DestinationObjectType,
+				Measure = orderrec.Measure,
+				Quantity = orderrec.Quantity,
+				DefferedCategory = orderrec.DefferedCategory,
+				EffectiveDate = orderrec.EffectiveDate,
+				LifeLimit = orderrec.LifeLimit,
+				LifeLimitNotify = orderrec.LifeLimitNotify,
+				Processed = orderrec.Processed,
+				ParentPackageId = orderrec.ParentPackageId,
+				PackageItemId = orderrec.PackageItemId,
+				PackageItemTypeId = orderrec.PackageItemTypeId,
+				CostCondition = orderrec.CostCondition,
+				ProductId = orderrec.ProductId,
+				ProductType = orderrec.ProductType,
+				PerfNumFromStart = orderrec.PerfNumFromStart,
+				PerfNumFromRecord = orderrec.PerfNumFromRecord,
+				FromRecordId = orderrec.FromRecordId,
+				IsClosed = orderrec.IsClosed,
+				IsSchedule = orderrec.IsSchedule,
+				Remarks = orderrec.Remarks
+			};
+		}
+
+
+		public static InitialOrderRecordView ToBlView(this InitialOrderRecord orderrec)
+
+		{
+			return new InitialOrderRecordView()
+			{
+				Id = orderrec.Id,
+				IsDeleted = orderrec.IsDeleted,
+				InitialReason = orderrec.InitialReason,
+				Priority = orderrec.Priority,
+				DestinationObjectID = orderrec.DestinationObjectID,
+				DestinationObjectType = orderrec.DestinationObjectType,
+				Measure = orderrec.Measure,
+				Quantity = orderrec.Quantity,
+				DefferedCategory = orderrec.DefferedCategory,
+				EffectiveDate = orderrec.EffectiveDate,
+				LifeLimit = orderrec.LifeLimit,
+				LifeLimitNotify = orderrec.LifeLimitNotify,
+				Processed = orderrec.Processed,
+				ParentPackageId = orderrec.ParentPackageId,
+				PackageItemId = orderrec.PackageItemId,
+				PackageItemTypeId = orderrec.PackageItemTypeId,
+				CostCondition = orderrec.CostCondition,
+				ProductId = orderrec.ProductId,
+				ProductType = orderrec.ProductType,
+				PerfNumFromStart = orderrec.PerfNumFromStart,
+				PerfNumFromRecord = orderrec.PerfNumFromRecord,
+				FromRecordId = orderrec.FromRecordId,
+				IsClosed = orderrec.IsClosed,
+				IsSchedule = orderrec.IsSchedule,
+				Remarks = orderrec.Remarks
+			};
+		}
+
+		public static List<InitialOrderRecordView> ToBlView(this IEnumerable<InitialOrderRecord> init)
+		{
+			return new List<InitialOrderRecordView>(init.Select(i => i.ToBlView()));
+		}
+
+		public static List<InitialOrderRecord> ToEntity(this IEnumerable<InitialOrderRecordView> init)
+		{
+			return new List<InitialOrderRecord>(init.Select(i => i.ToEntity()));
+		}
+
+		#endregion
+
+		#region RequestForQuotation
+
+		public static RequestForQuotation ToEntity(this RequestForQuotationView quot)
+		{
+
+			return new RequestForQuotation
+			{
+				Id = quot.Id,
+				IsDeleted = quot.IsDeleted,
+				PublishedById = quot.PublishedById,
+				ClosedById = quot.ClosedById,
+				Title = quot.Title,
+				Description = quot.Description,
+				ParentId = quot.ParentId,
+				Status = quot.Status,
+				OpeningDate = quot.OpeningDate,
+				PublishingDate = quot.PublishingDate,
+				ClosingDate = quot.ClosingDate,
+				Author = quot.Author,
+				Remarks = quot.Remarks,
+				PublishedByUser = quot.PublishedByUser,
+				CloseByUser = quot.CloseByUser,
+				ParentTypeId = quot.ParentTypeId,
+				Number = quot.Number
+			};
+		}
+
+
+		public static RequestForQuotationView ToBlView(this RequestForQuotation quot)
+
+		{
+			return new RequestForQuotationView()
+			{
+				Id = quot.Id,
+				IsDeleted = quot.IsDeleted,
+				PublishedById = quot.PublishedById,
+				ClosedById = quot.ClosedById,
+				Title = quot.Title,
+				Description = quot.Description,
+				ParentId = quot.ParentId,
+				Status = quot.Status,
+				OpeningDate = quot.OpeningDate,
+				PublishingDate = quot.PublishingDate,
+				ClosingDate = quot.ClosingDate,
+				Author = quot.Author,
+				Remarks = quot.Remarks,
+				PublishedByUser = quot.PublishedByUser,
+				CloseByUser = quot.CloseByUser,
+				ParentTypeId = quot.ParentTypeId,
+				Number = quot.Number,
+			};
+		}
+
+		public static List<RequestForQuotationView> ToBlView(this IEnumerable<RequestForQuotation> init)
+		{
+			return new List<RequestForQuotationView>(init.Select(i => i.ToBlView()));
+		}
+
+		public static List<RequestForQuotation> ToEntity(this IEnumerable<RequestForQuotationView> init)
+		{
+			return new List<RequestForQuotation>(init.Select(i => i.ToEntity()));
+		}
+
+		#endregion
+
+		#region PurchaseOrder
+
+		public static PurchaseOrder ToEntity(this PurchaseOrderView purchase)
+		{
+
+			return new PurchaseOrder
+			{
+				Id = purchase.Id,
+				IsDeleted = purchase.IsDeleted,
+				Title = purchase.Title,
+				Description = purchase.Description,
+				ParentID = purchase.ParentID,
+				ParentQuotationId = purchase.ParentQuotationId,
+				Status = (int?) purchase.Status,
+				OpeningDate = purchase.OpeningDate,
+				PublishingDate = purchase.PublishingDate,
+				ClosingDate = purchase.ClosingDate,
+				Author = purchase.Author,
+				Remarks = purchase.Remarks,
+				ParentTypeId = purchase.ParentTypeId,
+				SupplierId = purchase.SupplierId,
+				PublishedById = purchase.PublishedById,
+				ClosedById = purchase.ClosedById,
+				PublishedByUser = purchase.PublishedByUser,
+				CloseByUser = purchase.CloseByUser,
+				Number = purchase.Number
+			};
+		}
+
+
+		public static PurchaseOrderView ToBlView(this PurchaseOrder purchase)
+
+		{
+			return new PurchaseOrderView()
+			{
+				Id = purchase.Id,
+				IsDeleted = purchase.IsDeleted,
+				Title = purchase.Title,
+				Description = purchase.Description,
+				ParentID = purchase.ParentID ?? default(int),
+				ParentQuotationId = purchase.ParentQuotationId ?? default(int),
+				Status = purchase.Status.HasValue ? (WorkPackageStatus)purchase.Status.Value : WorkPackageStatus.All,
+				OpeningDate = purchase.OpeningDate ?? DateTimeExtend.GetCASMinDateTime(),
+				PublishingDate = purchase.PublishingDate ?? DateTimeExtend.GetCASMinDateTime(),
+				ClosingDate = purchase.ClosingDate ?? DateTimeExtend.GetCASMinDateTime(),
+				Author = purchase.Author,
+				Remarks = purchase.Remarks,
+				ParentTypeId = purchase.ParentTypeId,
+				PublishedById = purchase.PublishedById,
+				ClosedById = purchase.ClosedById,
+				PublishedByUser = purchase.PublishedByUser,
+				CloseByUser = purchase.CloseByUser,
+				Number = purchase.Number
+			};
+		}
+
+		public static List<PurchaseOrderView> ToBlView(this IEnumerable<PurchaseOrder> init)
+		{
+			return new List<PurchaseOrderView>(init.Select(i => i.ToBlView()));
+		}
+
+		public static List<PurchaseOrder> ToEntity(this IEnumerable<PurchaseOrderView> init)
+		{
+			return new List<PurchaseOrder>(init.Select(i => i.ToEntity()));
+		}
+
+		#endregion
+	}
 }

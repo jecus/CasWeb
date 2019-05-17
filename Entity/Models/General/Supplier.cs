@@ -81,17 +81,12 @@ namespace Entity.Models.General
         
         public ICollection<RequestForQuotationRecord> RequestForQuotationRecords { get; set; }
         
-        public ICollection<RequestForQuotation> RequestForQuotations { get; set; }
-       
         public ICollection<PurchaseRequestRecord> PurchaseRequestRecords { get; set; }
         
         public ICollection<PurchaseOrder> PurchaseOrders { get; set; }
         
         public ICollection<KitSuppliersRelation> KitSuppliersRelations { get; set; }
-
-        public ICollection<InitialOrder> InitialOrders { get; set; }
-
-        public ICollection<RequestForQuotation> Quotations { get; set; }
+		
 
         #endregion
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using WebDevelopment.Controllers;
 
 namespace WebDevelopment.Helper
 {
@@ -135,10 +136,10 @@ namespace WebDevelopment.Helper
 
                 new MainMenu(16, "Purchase", "#!", "feather icon-clipboard", subMenu: new List<MainMenu>()
                 {
-                    new MainMenu(1, "Initial Orders", "#!"),
-                    new MainMenu(2, "Purchase Orders", "#!"),
-                    new MainMenu(3, "Quotation Orders", "#!"),
-                    new MainMenu(4, "Suppliers", "#!"),
+                    new MainMenu(1, "Initial Orders", url.Action("Initial", "Order")),
+                    new MainMenu(2, "Purchase Orders", url.Action("Purchase", "Order")),
+					new MainMenu(3, "Quotation Orders", url.Action("Quotation", "Order")),
+					new MainMenu(4, "Suppliers", "#!"),
                     new MainMenu(5, "Processing", "#!"),
 
                 }),

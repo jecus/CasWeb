@@ -48,10 +48,23 @@ namespace Entity.Models.General
         [Column("SupplierId")]
         public int? SupplierId { get; set; }
 
-        
-        public Supplier Supplier { get; set; }
+        [Column("PublishedById")]
+        public int? PublishedById { get; set; }
 
-        //[Child(FilterType.Equal, "ParentTypeId", 1860)]
-        //public ICollection<ItemFileLink> Files { get; set; }
-    }
+        [Column("ClosedById")]
+        public int? ClosedById { get; set; }
+
+        [Column("PublishedByUser")]
+        public string PublishedByUser { get; set; }
+
+        [Column("CloseByUser")]
+        public string CloseByUser { get; set; }
+
+        [Column("Number")]
+        public string Number { get; set; }
+
+
+		//[Child(FilterType.Equal, "ParentTypeId", 1860)]
+		//public ICollection<ItemFileLink> Files { get; set; }
+	}
 }

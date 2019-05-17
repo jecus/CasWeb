@@ -48,18 +48,25 @@ namespace Entity.Models.General
         [MaxLength(256)]
         public string Remarks { get; set; }
 
+		[Column("PublishedByUser")]
+		[MaxLength(128)]
+		public string PublishedByUser { get; set; }
 
-        public Supplier Supplier { get; set; }
+		[Column("CloseByUser")]
+		[MaxLength(128)]
+		public string CloseByUser { get; set; }
 
-        public Specialist ApprovedBy { get; set; }
+		[Column("Number")]
+		public string Number { get; set; }
 
-        public Specialist PublishedBy { get; set; }
 
-        public Specialist ClosedBy { get; set; }
+		//public Specialist PublishedBy { get; set; }
 
-        //[Child(FilterType.Equal, "ParentTypeId", 1560)]
-        //public ICollection<ItemFileLink> Files { get; set; }
+		//      public Specialist ClosedBy { get; set; }
 
-        public ICollection<InitialOrderRecord> PackageRecords { get; set; }
-    }
+		//[Child(FilterType.Equal, "ParentTypeId", 1560)]
+		//public ICollection<ItemFileLink> Files { get; set; }
+
+		public ICollection<InitialOrderRecord> PackageRecords { get; set; }
+	}
 }

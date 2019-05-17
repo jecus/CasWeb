@@ -645,15 +645,15 @@ namespace Entity.Infrastructure
 
 	        #region InitialOrder
 
-	        modelBuilder.Entity<InitialOrder>()
-		        .HasOne(i => i.PublishedBy)
-		        .WithMany(i => i.Publisheds)
-		        .HasForeignKey(i => i.PublishedById);
+	        //modelBuilder.Entity<InitialOrder>()
+		       // .HasOne(i => i.PublishedBy)
+		       // .WithMany(i => i.Publisheds)
+		       // .HasForeignKey(i => i.PublishedById);
 
-	        modelBuilder.Entity<InitialOrder>()
-		        .HasOne(i => i.ClosedBy)
-		        .WithMany(i => i.Closeds)
-		        .HasForeignKey(i => i.ClosedById);
+	        //modelBuilder.Entity<InitialOrder>()
+		       // .HasOne(i => i.ClosedBy)
+		       // .WithMany(i => i.Closeds)
+		       // .HasForeignKey(i => i.ClosedById);
 
 
 	        //modelBuilder.Entity<InitialOrder>()
@@ -830,11 +830,7 @@ namespace Entity.Infrastructure
 
 	        #region PurchaseOrder
 
-	        modelBuilder.Entity<PurchaseOrder>()
-		        .HasOne(i => i.Supplier)
-		        .WithMany(i => i.PurchaseOrders)
-		        .HasForeignKey(i => i.SupplierId);
-
+	        
 	        //modelBuilder.Entity<PurchaseOrder>()
 	        //	.HasMany(i => i.Files).WithOne(i => i.PurchaseOrder).HasForeignKey(i => i.ParentId);
 
@@ -854,30 +850,30 @@ namespace Entity.Infrastructure
 
 	        #region RequestForQuotation
 
-	        modelBuilder.Entity<RequestForQuotation>()
-		        .HasOne(i => i.Supplier)
-		        .WithMany(i => i.Quotations)
-		        .HasForeignKey(i => i.CarrierId);
+	        //modelBuilder.Entity<RequestForQuotation>()
+		       // .HasOne(i => i.Supplier)
+		       // .WithMany(i => i.Quotations)
+		       // .HasForeignKey(i => i.CarrierId);
 
-	        modelBuilder.Entity<RequestForQuotation>()
-		        .HasOne(i => i.ApprovedBy)
-		        .WithMany(i => i.QuotationApproveds)
-		        .HasForeignKey(i => i.ApprovedById);
+	        //modelBuilder.Entity<RequestForQuotation>()
+		       // .HasOne(i => i.ApprovedBy)
+		       // .WithMany(i => i.QuotationApproveds)
+		       // .HasForeignKey(i => i.ApprovedById);
 
-	        modelBuilder.Entity<RequestForQuotation>()
-		        .HasOne(i => i.PublishedBy)
-		        .WithMany(i => i.QuotationPublisheds)
-		        .HasForeignKey(i => i.PublishedById);
+	        //modelBuilder.Entity<RequestForQuotation>()
+		       // .HasOne(i => i.PublishedBy)
+		       // .WithMany(i => i.QuotationPublisheds)
+		       // .HasForeignKey(i => i.PublishedById);
 
-	        modelBuilder.Entity<RequestForQuotation>()
-		        .HasOne(i => i.ClosedBy)
-		        .WithMany(i => i.QuotationCloseds)
-		        .HasForeignKey(i => i.ClosedById);
+	        //modelBuilder.Entity<RequestForQuotation>()
+		       // .HasOne(i => i.ClosedBy)
+		       // .WithMany(i => i.QuotationCloseds)
+		       // .HasForeignKey(i => i.ClosedById);
 
-	        modelBuilder.Entity<RequestForQuotation>()
-		        .HasOne(i => i.ToSupplier)
-		        .WithMany(i => i.RequestForQuotations)
-		        .HasForeignKey(i => i.ToSupplierId);
+	        //modelBuilder.Entity<RequestForQuotation>()
+		       // .HasOne(i => i.ToSupplier)
+		       // .WithMany(i => i.RequestForQuotations)
+		       // .HasForeignKey(i => i.ToSupplierId);
 
 	        //modelBuilder.Entity<RequestForQuotation>()
 	        //	.HasMany(i => i.Files).WithOne(i => i.RequestForQuotation).HasForeignKey(i => i.ParentId);

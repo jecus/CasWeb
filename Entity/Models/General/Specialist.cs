@@ -162,18 +162,7 @@ namespace Entity.Models.General
        
         public ICollection<JobCard> ApprovedJobCards { get; set; }
 
-        public ICollection<InitialOrder> Approveds { get; set; }
-
-        public ICollection<InitialOrder> Publisheds { get; set; }
-
-        public ICollection<InitialOrder> Closeds { get; set; }
-
-        public ICollection<RequestForQuotation> QuotationApproveds { get; set; }
-
-        public ICollection<RequestForQuotation> QuotationPublisheds { get; set; }
-
-        public ICollection<RequestForQuotation> QuotationCloseds { get; set; }
-
+        
         #endregion
     }
 }

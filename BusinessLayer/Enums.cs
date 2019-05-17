@@ -262,5 +262,33 @@ namespace BusinessLayer
         Close = 1,
         Publish = 2
     }
-    #endregion
+	#endregion
+
+	#region public enum WorkPackageStatus : short
+	/// <summary>
+	/// Статус (состояние) рабочего пакета
+	/// </summary>
+	public enum WorkPackageStatus : short
+	{
+		/// <summary>
+		/// Все состояния (открыт, закрыт, на исполнении)
+		/// </summary>
+		All = 0,
+		/// <summary>
+		/// Рабочий пакет открыт
+		/// </summary>
+		Opened = 1,
+
+		/// <summary>
+		/// Рабочий пакет отправлен на выполнение
+		/// </summary>
+		Published = 2,
+
+		/// <summary>
+		/// Рабочий пакет закрыт
+		/// </summary>
+		Closed = 3,
+
+	}
+	#endregion
 }

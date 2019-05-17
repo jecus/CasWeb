@@ -76,8 +76,11 @@ namespace Entity.Models.General
         [Column("IsSchedule")]
         public bool? IsSchedule { get; set; }
 
-        
-        public DefferedCategorie DeferredCategory { get; set; }
+		[Column("Remarks")]
+		public string Remarks { get; set; }
+
+
+		public DefferedCategorie DeferredCategory { get; set; }
 
         #region Navigation Property
 
