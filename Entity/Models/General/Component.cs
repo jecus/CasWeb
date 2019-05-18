@@ -230,8 +230,15 @@ namespace Entity.Models.General
         [Column("FromSupplierReciveDate")]
         public DateTime? FromSupplierReciveDate { get; set; }
 
-        
-        public ATAChapter ATAChapter { get; set; }
+        [Column("Received")]
+        public int Received { get; set; }
+
+        [Column("Packing")]
+		[MaxLength(128)]
+        public string Packing { get; set; }
+
+
+		public ATAChapter ATAChapter { get; set; }
 
         public AccessoryDescription Model { get; set; }
 

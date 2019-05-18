@@ -54,8 +54,20 @@ namespace Entity.Models.General
         [Column("InitialReason")]
         public int InitialReason { get; set; }
 
-        
-        public DefferedCategorie DefferedCategory { get; set; }
+        [Column("Remarks")]
+		public string Remarks { get; set; }
+
+		[Column("LifeLimit")]
+		public byte[] LifeLimit { get; set; }
+
+		[Column("LifeLimitNotify")]
+		public byte[] LifeLimitNotify { get; set; }
+
+		[Column("SettingJSON")]
+		public string SettingJSON { get; set; }
+
+
+		public DefferedCategorie DefferedCategory { get; set; }
 
         public Supplier ToSupplier { get; set; }
 

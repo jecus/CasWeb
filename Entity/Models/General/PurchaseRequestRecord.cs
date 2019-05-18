@@ -37,8 +37,12 @@ namespace Entity.Models.General
         [Column("Processed")]
         public bool? Processed { get; set; }
 
-        
-        public Supplier Supplier { get; set; }
+        [Column("CurrencyId")]
+		public int CurrencyId { get; set; }
+
+
+
+		public Supplier Supplier { get; set; }
 
         //[Child(FilterType.Equal, "ParentTypeId", 1860)]
         //public ICollection<ItemFileLink> Files { get; set; }

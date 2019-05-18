@@ -12,6 +12,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="BusinessLayer.csproj.vspscc" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj" />
   </ItemGroup>
 

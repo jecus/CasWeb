@@ -22,7 +22,14 @@ namespace Entity.Models.General
         [MaxLength(100)]
         public string Password { get; set; }
 
-        public override string ToString()
+        [Column("UserType")]
+        public int UserType { get; set; }
+
+        [Column("UiType")]
+		public int UiType { get; set; }
+
+
+		public override string ToString()
         {
             return Name.Equals(Surname) ? Name : $"{Surname} {Name}";
         }

@@ -151,8 +151,28 @@ namespace Entity.Models.General
         [Column("InspectionDocumentsNo")]
         public string InspectionDocumentsNo { get; set; }
 
-        
-        public DefferedCategorie DeferredCategory { get; set; }
+        [Column("DirectiveOrder")]
+        public short DirectiveOrder { get; set; }
+
+        [Column("SupersedesId")]
+        public int? SupersedesId { get; set; }
+
+        [Column("SupersededId")]
+        public int? SupersededId { get; set; }
+
+        [Column("Zone")]
+        [MaxLength(256)]
+		public string Zone { get; set; }
+
+        [Column("Access")]
+        public string Access { get; set; }
+
+        [Column("Workarea")]
+        [MaxLength(256)]
+		public string Workarea { get; set; }
+
+
+		public DefferedCategorie DeferredCategory { get; set; }
 
         public ATAChapter ATAChapter { get; set; }
 

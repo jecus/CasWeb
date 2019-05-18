@@ -12,6 +12,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Entity.csproj.vspscc" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Infrastructure\" />
     <Folder Include="Extentions\" />
   </ItemGroup>

@@ -96,8 +96,14 @@ namespace Entity.Models.Dictionaries
         [MaxLength(128)]
         public string Reference { get; set; }
 
-        
-        public ATAChapter ATAChapter { get; set; }
+        [Column("AltPartNumber")]
+        [MaxLength(256)]
+		public string AltPartNumber { get; set; }
+
+		[Column("IsEffectivity")]
+		public string IsEffectivity { get; set; }
+
+		public ATAChapter ATAChapter { get; set; }
 
         
         public GoodStandart GoodStandart { get; set; }

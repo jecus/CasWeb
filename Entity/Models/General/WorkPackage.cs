@@ -85,7 +85,19 @@ namespace Entity.Models.General
         [Column("EmployeesRemark")]
         public string EmployeesRemark { get; set; }
 
-        //[Child(FilterType.Equal, "ParentTypeId", 2499)]
-        //public ICollection<ItemFileLink> Files { get; set; }
-    }
+        [Column("WpWorkType")]
+        public int WpWorkType { get; set; }
+
+        [Column("KMH")]
+        public float KMH { get; set; }
+
+        [Column("PerformAfter")]
+        public string PerformAfter { get; set; }
+
+        [Column("ProviderJSON")]
+        public string ProviderJSON { get; set; }
+
+		//[Child(FilterType.Equal, "ParentTypeId", 2499)]
+		//public ICollection<ItemFileLink> Files { get; set; }
+	}
 }
