@@ -4,10 +4,13 @@ using Entity.Extentions;
 using Entity.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebDevelopment.Helper;
+using WebDevelopment.Infrastructude.JWT;
 
 namespace WebDevelopment.Controllers
 {
-    public class OrderController : Controller
+	[Auth(Roles.Sender)]
+	public class OrderController : Controller
     {
 	    private readonly DatabaseContext _db;
 

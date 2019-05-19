@@ -113,6 +113,6 @@ namespace BusinessLayer.Views
 
 		public short? ApuUtizationPerFlightinMinutes { get; set; }
 
-		public ModelView Model { get; set; }
+		public AircraftModelView Model { get; set; }
 	}
 }

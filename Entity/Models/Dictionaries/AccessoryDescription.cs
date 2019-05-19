@@ -6,7 +6,7 @@ using Entity.Models.General;
 namespace Entity.Models.Dictionaries
 {
     [Table("AccessoryDescriptions", Schema = "Dictionaries")]
-    public class AccessoryDescription : BaseEntity
+    public abstract class AccessoryDescription : BaseEntity
     {
         [Column("Description")]
         public string Description { get; set; }
@@ -117,7 +117,6 @@ namespace Entity.Models.Dictionaries
 
         #region Navigation Property
 
-        
         public ICollection<DamageChart> DamageCharts { get; set; }
         
         public ICollection<LifeLimitCategorie> LifeLimitCategories { get; set; }
@@ -125,10 +124,6 @@ namespace Entity.Models.Dictionaries
         public ICollection<DefferedCategorie> DefferedCategories { get; set; }
         
         public ICollection<AccessoryRequired> AccessoryRequireds { get; set; }
-        
-        public ICollection<Aircraft> Aircrafts { get; set; }
-        
-        public ICollection<Component> Components { get; set; }
         
         public ICollection<Vehicle> Vehicles { get; set; }
         

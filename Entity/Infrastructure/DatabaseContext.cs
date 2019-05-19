@@ -41,6 +41,7 @@ namespace Entity.Infrastructure
         public DbSet<ServiceType> ServiceTypes { get; set; }
         public DbSet<Specialization> Specializations { get; set; }
         public DbSet<TripNames> TripNameses { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         #endregion
 
@@ -158,7 +159,13 @@ namespace Entity.Infrastructure
 		#region protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+		{
+			modelBuilder.Entity<AccessoryDescription>()
+				.HasDiscriminator<int>(nameof(AccessoryDescription.ModelingObjectTypeId))
+				.HasValue<Product>(-1)
+				.HasValue<ComponentModel>(5)
+				.HasValue<AircraftModel>(7);
+
 	        #region AccessoryRequired
 
 	        modelBuilder.Entity<AccessoryRequired>()

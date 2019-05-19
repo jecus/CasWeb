@@ -240,7 +240,7 @@ namespace Entity.Models.General
 
 		public ATAChapter ATAChapter { get; set; }
 
-        public AccessoryDescription Model { get; set; }
+        public ComponentModel Model { get; set; }
 
         public Location Location { get; set; }
 

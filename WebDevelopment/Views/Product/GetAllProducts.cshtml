@@ -1,0 +1,110 @@
+﻿@using BusinessLayer.Views
+
+@{
+    ViewData["Title"] = "EquipmentAndMaterials";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var equipment = (List<ProductView>)ViewData["EquipmentAndMaterials"];
+}
+
+    <div class="card">
+        <div class="card-header">
+            <h5>Initial Order</h5>
+        </div>
+        <div class="card-block">
+            <div class="dt-responsive table-responsive">
+                <table id="footer-search" class="table table-striped table-bordered nowrap">
+                    <thead>
+                        <tr>
+                            <th> </th>
+                            <th>Name</th>
+                            <th>Reference</th>
+                            @*<th>Standard</th>*@
+                            <th>Part Number</th>
+                            <th>Alt Part Number</th>
+                            <th>Description</th>
+                            <th>Manufacturer</th>
+                            <th>Code</th>
+                            <th>Description Rus</th>
+                            <th>Class</th>
+                            <th>ATA</th>
+                            <th>Cost new</th>
+                            <th>Cost OH</th>
+                            <th>Cost Serv.</th>
+                            <th>Remarks</th>
+                            <th>Effectivity</th>
+                            <th>IsDangerous</th>
+                            @*<th>Signer</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <div class="modal fade" id="large-Modal" tabindex="-1" role="dialog" style="display: none; z-index: 1050;" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div id="dialogContent" class="modal-content">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        @foreach (var equip in equipment)
+                        {
+                            <tr>
+                                <td>
+
+                                    @*<a href=@Url.Action("Modal", "Document", new {id = spec.Id}) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>*@
+
+                                    @*@Html.ActionLink("", "Modal", "Document", new { id = spec.Id}, new { @class = "modalLargeBtn btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" })*@
+                                </td>
+                                <td>@equip.Model</td>
+                                <td>@equip.Reference</td>
+                                @*<td>@equip.</td>*@
+                                <td>@equip.PartNumber</td>
+                                <td>@equip.AltPartNumber</td>
+                                <td>@equip.Description</td>
+                                <td>@equip.Manufacturer</td>
+                               @* <td>@equip.SupplierRelations</td>*@
+                                <td>@equip.Code</td>
+                                <td>@equip.DescRus</td>
+                                <td>@equip.ComponentClass</td>
+                                <td>@equip.AtaChapter</td>
+                                <td>@equip.CostNew</td>
+                                <td>@equip.CostOverhaul</td>
+                                <td>@equip.CostServiceable</td>
+                                <td>@equip.Remarks</td>
+                                <td>@equip.IsEffectivity</td>
+                                <td>@equip.IsDangerous</td>
+                               @* <td>@equip.Signer</td>*@
+                            </tr>
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th> </th>
+                            <th>Name</th>
+                            <th>Reference</th>
+                            @*<th>Standard</th>*@
+                            <th>Part Number</th>
+                            <th>Alt Part Number</th>
+                            <th>Description</th>
+                            <th>Manufacturer</th>
+                            <th>Code</th>
+                            <th>Description Rus</th>
+                            <th>Class</th>
+                            <th>ATA</th>
+                            <th>Cost new</th>
+                            <th>Cost OH</th>
+                            <th>Cost Serv.</th>
+                            <th>Remarks</th>
+                            <th>Effectivity</th>
+                            <th>IsDangerous</th>
+                            @*<th>Signer</th>*@
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+

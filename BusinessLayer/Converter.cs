@@ -484,13 +484,13 @@ namespace BusinessLayer
             return new List<LocationsType>(locationsType.Select(i => i.ToEntity()));
         }
 
-        #endregion
+		#endregion
 
-        #region AccessoryDescription
+		#region AircraftModelView
 
-        public static AccessoryDescription ToEntity(this ModelView acc)
+		public static AircraftModel ToEntity(this AircraftModelView acc)
         {
-            return new AccessoryDescription
+            return new AircraftModel()
             {
                 Id = acc.Id,
                 IsDeleted = acc.IsDeleted,
@@ -499,9 +499,9 @@ namespace BusinessLayer
             };
         }
 
-        public static ModelView ToBlView(this AccessoryDescription acc)
+        public static AircraftModelView ToBlView(this AircraftModel acc)
         {
-            return new ModelView()
+            return new AircraftModelView()
             {
                 Id = acc.Id,
                 IsDeleted = acc.IsDeleted,
@@ -510,21 +510,125 @@ namespace BusinessLayer
             };
         }
 
-        public static List<ModelView> ToBlView(this IEnumerable<AccessoryDescription> models)
+        public static List<AircraftModelView> ToBlView(this IEnumerable<AircraftModel> models)
         {
-            return new List<ModelView>(models.Select(i => i.ToBlView()));
+            return new List<AircraftModelView>(models.Select(i => i.ToBlView()));
         }
 
-        public static List<AccessoryDescription> ToEntity(this IEnumerable<ModelView> models)
+        public static List<AircraftModel> ToEntity(this IEnumerable<AircraftModelView> models)
         {
-            return new List<AccessoryDescription>(models.Select(i => i.ToEntity()));
+            return new List<AircraftModel>(models.Select(i => i.ToEntity()));
         }
 
-        #endregion
+		#endregion
 
-        #region Nomenclature
+		#region ComponentModelView
 
-        public static Nomenclature ToEntity(this NomenclatureView nomenclature)
+		public static ComponentModel ToEntity(this ComponentModelView acc)
+		{
+			return new ComponentModel()
+			{
+				Id = acc.Id,
+				IsDeleted = acc.IsDeleted,
+				ShortName = acc.ShortName,
+				FullName = acc.FullName
+			};
+		}
+
+		public static ComponentModelView ToBlView(this ComponentModel acc)
+		{
+			return new ComponentModelView()
+			{
+				Id = acc.Id,
+				IsDeleted = acc.IsDeleted,
+				ShortName = acc.ShortName,
+				FullName = acc.FullName
+			};
+		}
+
+		public static List<ComponentModelView> ToBlView(this IEnumerable<ComponentModel> models)
+		{
+			return new List<ComponentModelView>(models.Select(i => i.ToBlView()));
+		}
+
+		public static List<ComponentModel> ToEntity(this IEnumerable<ComponentModelView> models)
+		{
+			return new List<ComponentModel>(models.Select(i => i.ToEntity()));
+		}
+
+		#endregion
+
+		#region Product
+
+		public static Product ToEntity(this ProductView acc)
+		{
+			return new Product()
+			{
+				Id = acc.Id,
+				IsDeleted = acc.IsDeleted,
+				Model = acc.Model,
+				PartNumber = acc.PartNumber,
+				AltPartNumber = acc.AltPartNumber,
+				Description = acc.Description,
+				Manufacturer = acc.Manufacturer,
+				CostNew = acc.CostNew,
+				CostOverhaul = acc.CostOverhaul,
+				CostServiceable = acc.CostServiceable,
+				Measure = acc.Measure,
+				Remarks = acc.Remarks,
+				Code = acc.Code,
+				ComponentClass = acc.ComponentClass,
+				IsDangerous = acc.IsDangerous,
+				DescRus = acc.DescRus,
+				HTS = acc.HTS,
+				Reference = acc.Reference,
+				IsEffectivity = acc.IsEffectivity,
+				AtaChapterId = acc.AtaChapter.Id
+			};
+		}
+
+		public static ProductView ToBlView(this Product acc)
+		{
+			return new ProductView()
+			{
+				Id = acc.Id,
+				IsDeleted = acc.IsDeleted,
+				Model = acc.Model,
+				PartNumber = acc.PartNumber,
+				AltPartNumber = acc.AltPartNumber,
+				Description = acc.Description,
+				Manufacturer = acc.Manufacturer,
+				CostNew = acc.CostNew,
+				CostOverhaul = acc.CostOverhaul,
+				CostServiceable = acc.CostServiceable,
+				Measure = acc.Measure,
+				Remarks = acc.Remarks,
+				Code = acc.Code,
+				ComponentClass = acc.ComponentClass,
+				IsDangerous = acc.IsDangerous,
+				DescRus = acc.DescRus,
+				HTS = acc.HTS,
+				Reference = acc.Reference,
+				IsEffectivity = acc.IsEffectivity,
+				AtaChapter = acc.ATAChapter?.ToBlView()
+			};
+		}
+
+		public static List<ProductView> ToBlView(this IEnumerable<Product> models)
+		{
+			return new List<ProductView>(models.Select(i => i.ToBlView()));
+		}
+
+		public static List<Product> ToEntity(this IEnumerable<ProductView> models)
+		{
+			return new List<Product>(models.Select(i => i.ToEntity()));
+		}
+
+		#endregion
+
+		#region Nomenclature
+
+		public static Nomenclature ToEntity(this NomenclatureView nomenclature)
         {
             return new Nomenclature
             {

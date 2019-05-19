@@ -11,7 +11,7 @@ namespace BusinessLayer.Views
 		private BaseComponentType _baseComponentType;
 
 
-		public ModelView ModelId { get; set; }
+		public AircraftModelView ModelId { get; set; }
 
 		public string Manufacturer { get; set; }
 
@@ -43,7 +43,7 @@ namespace BusinessLayer.Views
 			get => BaseComponentType.GetComponentTypeById(BaseComponentTypeId);
 		}
 
-		public ModelView Model { get; set; }
+		public ComponentModelView Model { get; set; }
 
 		public List<TransferRecordView> TransferRecords { get; set; }
 

@@ -174,7 +174,7 @@ namespace Entity.Models.General
         public short? ApuUtizationPerFlightinMinutes { get; set; }
 
         
-        public AccessoryDescription Model { get; set; }
+        public AircraftModel Model { get; set; }
 
         //[Child(RelationType.OneToMany, "ParentAircraftId", "ParentAircraft")]
         public ICollection<MaintenanceProgramChangeRecord> MaintenanceProgramChangeRecords { get; set; }

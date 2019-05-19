@@ -1,6 +1,6 @@
 ﻿namespace BusinessLayer.Views
 {
-	public class ModelView : BaseView
+	public class ComponentModelView : BaseView
 	{
 		public string FullName { get; set; }
 
