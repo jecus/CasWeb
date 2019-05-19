@@ -35,5 +35,21 @@ namespace WebDevelopment.Controllers
 
 			return View();
 		}
+
+		[HttpGet("component-model")]
+		public async Task<IActionResult> GetAllModels()
+		{
+			var model = await _db.ComponentModels
+				.Include(i => i.GoodStandart)
+				.Include(i => i.ATAChapter)
+				.OnlyActive()
+				.AsNoTracking()
+				.ToListAsync();
+			var mod = model.ToBlView();
+
+			ViewData["ComponentModels"] = mod;
+
+			return View();
+		}
 	}
 }

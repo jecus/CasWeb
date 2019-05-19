@@ -42,6 +42,7 @@ namespace Entity.Infrastructure
         public DbSet<Specialization> Specializations { get; set; }
         public DbSet<TripNames> TripNameses { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ComponentModel> ComponentModels { get; set; }
 
         #endregion
 

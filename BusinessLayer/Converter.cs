@@ -524,25 +524,63 @@ namespace BusinessLayer
 
 		#region ComponentModelView
 
-		public static ComponentModel ToEntity(this ComponentModelView acc)
+		public static ComponentModel ToEntity(this ComponentModelView componentModel)
 		{
 			return new ComponentModel()
 			{
-				Id = acc.Id,
-				IsDeleted = acc.IsDeleted,
-				ShortName = acc.ShortName,
-				FullName = acc.FullName
+				Id = componentModel.Id,
+				IsDeleted = componentModel.IsDeleted,
+				Model = componentModel.Model,
+				PartNumber = componentModel.PartNumber,
+				AltPartNumber = componentModel.AltPartNumber,
+				AtaChapterId = componentModel.AtaChapter.Id,
+				Description = componentModel.Description,
+				Manufacturer = componentModel.Manufacturer,
+				CostNew = componentModel.CostNew,
+				CostOverhaul = componentModel.CostOverhaul,
+				CostServiceable = componentModel.CostServiceable,
+				Measure = componentModel.Measure,
+				Remarks = componentModel.Remarks,
+				SubModel = componentModel.SubModel,
+				FullName = componentModel.FullName,
+				ShortName = componentModel.ShortName,
+				Designer = componentModel.Designer,
+				Code = componentModel.Code,
+				DescRus = componentModel.DescRus,
+				IsEffectivity = componentModel.IsEffectivity,
+				HTS = componentModel.HTS,
+				ComponentClass = componentModel.ComponentClass,
+				IsDangerous = componentModel.IsDangerous
 			};
 		}
 
-		public static ComponentModelView ToBlView(this ComponentModel acc)
+		public static ComponentModelView ToBlView(this ComponentModel componentModel)
 		{
 			return new ComponentModelView()
 			{
-				Id = acc.Id,
-				IsDeleted = acc.IsDeleted,
-				ShortName = acc.ShortName,
-				FullName = acc.FullName
+				Id = componentModel.Id,
+				IsDeleted = componentModel.IsDeleted,
+				Model = componentModel.Model,
+				PartNumber = componentModel.PartNumber,
+				AltPartNumber = componentModel.AltPartNumber,
+				Description = componentModel.Description,
+				Manufacturer = componentModel.Manufacturer,
+				CostNew = componentModel.CostNew,
+				CostOverhaul = componentModel.CostOverhaul,
+				CostServiceable = componentModel.CostServiceable,
+				Measure = componentModel.Measure,
+				Remarks = componentModel.Remarks,
+				SubModel = componentModel.SubModel,
+				FullName = componentModel.FullName,
+				ShortName = componentModel.ShortName,
+				Designer = componentModel.Designer,
+				Code = componentModel.Code,
+				DescRus = componentModel.DescRus,
+				IsEffectivity = componentModel.IsEffectivity,
+				HTS = componentModel.HTS,
+				ComponentClass = componentModel.ComponentClass,
+				IsDangerous = componentModel.IsDangerous,
+				AtaChapter = componentModel.ATAChapter?.ToBlView()
 			};
 		}
 
