@@ -42,12 +42,14 @@ namespace WebDevelopment
 			services.AddDbContext<DatabaseContext>(builder => builder.UseSqlServer(Configuration.GetConnectionString("CORE_CONNECTION_STRING")));
 			services.AddProviders();
 			services.AddRepositories();
+			services.AddKendo();
 		}
 
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
 			Setup(app, env);
+			app.UseKendo(env);
 		}
 
 		protected void Setup(IApplicationBuilder app, IHostingEnvironment env)
