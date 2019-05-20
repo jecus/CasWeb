@@ -1,4 +1,6 @@
-﻿namespace BusinessLayer.Views
+﻿using Entity.Extentions;
+
+namespace BusinessLayer.Views
 {
 	public class ProductView : BaseView
 	{
@@ -43,6 +45,7 @@
 		public int? ComponentType { get; set; }
 
 		public bool IsDangerous { get; set; }
+		public string IsDangerousString => IsDangerous.ToYesNo();
 
 		public string DescRus { get; set; }
 
@@ -53,5 +56,6 @@
 		public string IsEffectivity { get; set; }
 		
 		public ATAChapterView AtaChapter { get; set; }
+		public string AtaChapterString => AtaChapter?.ToString();
 	}
 }
