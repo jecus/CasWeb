@@ -1,4 +1,5 @@
-﻿using Entity.Extentions;
+﻿using BusinessLayer.Dictionaties;
+using Entity.Extentions;
 
 namespace BusinessLayer.Views
 {
@@ -9,8 +10,6 @@ namespace BusinessLayer.Views
 		public string PartNumber { get; set; }
 
 		public string AltPartNumber { get; set; }
-
-		public int? StandartId { get; set; }
 
 		public string Manufacturer { get; set; }
 
@@ -24,8 +23,6 @@ namespace BusinessLayer.Views
 
 		public string Remarks { get; set; }
 
-		public string DefaultProduct { get; set; }
-
 		public string Model { get; set; }
 
 		public string SubModel { get; set; }
@@ -38,11 +35,8 @@ namespace BusinessLayer.Views
 
 		public string Code { get; set; }
 
-		public short? ComponentClass { get; set; }
-
-		public int? ComponentModel { get; set; }
-
-		public int? ComponentType { get; set; }
+		public GoodsClass ComponentClass { get; set; }
+		public string ComponentClassString => ComponentClass?.ToString();
 
 		public bool IsDangerous { get; set; }
 		public string IsDangerousString => IsDangerous.ToYesNo();

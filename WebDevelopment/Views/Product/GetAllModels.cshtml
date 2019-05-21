@@ -27,7 +27,7 @@
                   columns.Bound(p => p.Manufacturer).Title("Manufacturer").Width(130);
                   columns.Bound(p => p.Code).Title("Code").Width(130);
                   columns.Bound(p => p.DescRus).Title("Description Rus").Width(130);
-                  columns.Bound(p => p.ComponentClass).Title("Class").Width(130);
+                  columns.Bound(p => p.ComponentClassString).Title("Class").Width(130);
                   columns.Bound(p => p.AtaChapterString).Title("ATA").Width(130);
                   columns.Bound(p => p.CostNew).Title("Cost new").Width(130);
                   columns.Bound(p => p.CostOverhaul).Title("Cost OH").Width(130);
@@ -36,16 +36,20 @@
                   columns.Bound(p => p.IsEffectivity).Title("Effectivity").Width(130);
                   columns.Bound(p => p.IsDangerousString).Title("IsDangerous").Width(130);
               })
-              .Resizable(builder => builder.Columns(true))
-              .Pageable()
-              .Sortable()
-              .Scrollable(scr=>scr.Height(630)) 
-              .Filterable()    
               .DataSource(dataSource => dataSource        
                   .Ajax()
                   .PageSize(20)
                   .ServerOperation(false)
-              ))
+              )
+              .Scrollable(scrollable => scrollable.Height(630))
+              .Reorderable(reorderable => reorderable.Columns(true))
+              .Resizable(resizable => resizable.Columns(true))
+              .Pageable()
+              .Filterable()
+              .Sortable()
+              .Groupable()
+              .ColumnMenu()
+              )
     </div>
 </div>
 

@@ -549,7 +549,7 @@ namespace BusinessLayer
 				DescRus = componentModel.DescRus,
 				IsEffectivity = componentModel.IsEffectivity,
 				HTS = componentModel.HTS,
-				ComponentClass = componentModel.ComponentClass,
+				ComponentClass = (short)(componentModel.ComponentClass?.ItemId ?? -1),
 				IsDangerous = componentModel.IsDangerous
 			};
 		}
@@ -578,7 +578,7 @@ namespace BusinessLayer
 				DescRus = componentModel.DescRus,
 				IsEffectivity = componentModel.IsEffectivity,
 				HTS = componentModel.HTS,
-				ComponentClass = componentModel.ComponentClass,
+				ComponentClass = componentModel.ComponentClass.HasValue ? GoodsClass.GetItemById(componentModel.ComponentClass.Value) : GoodsClass.Unknown,
 				IsDangerous = componentModel.IsDangerous,
 				AtaChapter = componentModel.ATAChapter?.ToBlView()
 			};
@@ -615,7 +615,7 @@ namespace BusinessLayer
 				Measure = acc.Measure,
 				Remarks = acc.Remarks,
 				Code = acc.Code,
-				ComponentClass = acc.ComponentClass,
+				ComponentClass = (short)(acc.ComponentClass?.ItemId ?? -1),
 				IsDangerous = acc.IsDangerous,
 				DescRus = acc.DescRus,
 				HTS = acc.HTS,
@@ -642,7 +642,7 @@ namespace BusinessLayer
 				Measure = acc.Measure,
 				Remarks = acc.Remarks,
 				Code = acc.Code,
-				ComponentClass = acc.ComponentClass,
+				ComponentClass = acc.ComponentClass.HasValue ? GoodsClass.GetItemById(acc.ComponentClass.Value) : GoodsClass.Unknown,
 				IsDangerous = acc.IsDangerous,
 				DescRus = acc.DescRus,
 				HTS = acc.HTS,
