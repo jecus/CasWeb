@@ -27,5 +27,14 @@ namespace WebDevelopment.Controllers
 
             return View(); 
         }
-    }
+
+		[HttpGet("{storeID}")]
+        public async Task<IActionResult> Index(int storeId)
+        {
+	        var result = await _componentRepository.GetStoreComponent(storeId);
+	        ViewData["Components"] = result.Where(i => i.ParentStore != null).ToList();
+
+	        return View();
+        }
+	}
 }
