@@ -181,6 +181,7 @@ namespace BusinessLayer.Views
 
 		public double Current { get; set; }
 		public double ShouldBeOnStock { get; set; }
+		public string ShouldBeOnStockString => ShouldBeOnStock > 0 ? "Yes" : "No";
 
 		public List<ItemFileLink> Files
 		{

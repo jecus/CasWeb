@@ -1,4 +1,5 @@
 ﻿@using BusinessLayer.Views
+@using Kendo.Mvc.UI
 
 @{
     ViewData["Title"] = "Index";
@@ -8,116 +9,51 @@
     var fileShip = @Url.Action("OpenPdf", "File", new { fileId = "_FILEID_" });
 }
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-header">
-                <h5>Inventory Control</h5>
-            </div>
-            <div class="card-block">
-                <div class="dt-responsive table-responsive">
-                    <table id="footer-search" class="table table-striped table-bordered nowrap">
-
-                        <thead>
-                            <tr>
-                                <th>  </th>
-                                <th>Store</th>
-                                <th>Part. №</th>
-                                <th>Description</th>
-                                <th>Serial №</th>
-                                <th>State</th>
-                                <th>Status</th>
-                                <th>Location</th>
-                                <th>Facility</th>
-                                <th>Current</th>
-                                <th>Should be</th>
-                                <th>Qty in</th>
-                                <th>Supplier</th>
-                                <th>Remarks</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-
-                            <div class="modal fade" id="large-Modal" tabindex="-1" role="dialog" style="display: none; z-index: 1050;" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div id="dialogContent" class="modal-content">
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            @foreach (var str in components)
-                            {
-                                <tr>
-                                    <td>
-
-                                        @if (@str.CRSFileId > 0)
-                                        {
-                                            <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" data-toggle="tooltip" data-placement="top" title="CRS Document" value="@str.CRSFileId" onclick="location.href = '@fileCrs.Replace("_FILEID_", str.CRSFileId.ToString())'">
-                                                <i class="fa fa-file-pdf-o"></i>
-                                            </button>
-                                        }
-                                        else
-                                        {
-                                            <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-pdf-o"></i></button>
-                                        }
-
-                                        @if (@str.ShippingFileId > 0)
-                                        {
-                                            <button class="btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon" data-toggle="tooltip" data-placement="top" title="Shipping Document" value="@str.ShippingFileId" onclick="location.href = '@fileCrs.Replace("_FILEID_", str.ShippingFileId.ToString())'">
-                                                <i class="fa fa-file-pdf-o"></i>
-                                            </button>
-                                        }
-                                        else
-                                        {
-                                            <button class="btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled"><i class="fa fa-file-pdf-o"></i></button>
-                                        }
-
-                                    </td>
-                                    <td>@str.ParentStore.StoreName</td>
-                                    <td>@str.PartNumber</td>
-                                    <td>@str.Description</td>
-                                    <td>@str.SerialNumber</td>
-                                    <td>@str.State</td>
-                                    <td>@str.Status</td>
-                                    <td>@str.Location?.FullName</td>
-                                    <td>@str.Location?.LocationsType.FullName</td>
-                                    <td>1</td>
-                                    <td>@(str.ShouldBeOnStock > 0 ? "Yes" : "No")</td>
-                                    <td>@str.Quantity</td>
-                                    <td>@str.FromSupplier.Name</td>
-                                    <td>@str.Remarks</td>
-                                   
-
-
-                                </tr>
-                            }
-
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>  </th>
-                                <th>Store</th>
-                                <th>Part. №</th>
-                                <th>Description</th>
-                                <th>Serial №</th>
-                                <th>State</th>
-                                <th>Status</th>
-                                <th>Location</th>
-                                <th>Facility</th>
-                                <th>Current</th>
-                                <th>Should be</th>
-                                <th>Qty in</th>
-                                <th>Supplier</th>
-                                <th>Remarks</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
-        </div>
+<<div class="card">
+    <div class="card-header">
+        <h5>Inventory Control</h5>
+    </div>
+    <div class="card-block">
+        @(Html.Kendo().Grid(components)
+              .Name("Grid")
+              .Columns(columns =>
+              {
+                  columns.Bound(p => p.ParentStore.StoreName).Title("Store").Width(130);
+                  columns.Bound(p => p.PartNumber).Title("Part. №").Width(130);
+                  columns.Bound(p => p.Description).Title("Description").Width(130);
+                  columns.Bound(p => p.SerialNumber).Title("Serial №").Width(130);
+                  columns.Bound(p => p.State.FullName).Title("State").Width(130);
+                  columns.Bound(p => p.Status).Title("Status").Width(130);
+                  columns.Bound(p => p.Location.FullName).Title("Location").Width(130);
+                  columns.Bound(p => p.Location.LocationsType.FullName).Title("Facility").Width(130);
+                  columns.Bound(p => p.Current).Title("Current").Width(130);
+                  columns.Bound(p => p.ShouldBeOnStockString).Title("Should be").Width(130);
+                  columns.Bound(p => p.Quantity).Title("Qty in").Width(130);
+                  columns.Bound(p => p.FromSupplier.Name).Title("Supplier").Width(130);
+                  columns.Bound(p => p.Remarks).Title("Remarks").Width(130);
+              })
+              .ToolBar(tools => tools.Excel())
+              .Excel(excel => excel
+                  .FileName("Inventory Control.xlsx")
+                  .Filterable(true)
+                  .AllPages(true)
+                  .ProxyURL(Url.Action("ExcelExport", "Excel"))
+              )
+              .Scrollable(scrollable => scrollable.Height(630))
+              .Reorderable(reorderable => reorderable.Columns(true))
+              .Resizable(resizable => resizable.Columns(true))
+              .Pageable()
+              .Filterable()
+              .Sortable()
+              .Groupable()
+              .ColumnMenu()
+              .DataSource(dataSource => dataSource
+                  .Ajax()
+                  .PageSize(20)
+                  .ServerOperation(false)
+                  .Read(read => read.Action("", ""))
+              ))
     </div>
 </div>
+
 
