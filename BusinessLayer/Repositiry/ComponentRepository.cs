@@ -7,6 +7,7 @@ using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
+using Entity.Models.General;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLayer.Repositiry
@@ -22,70 +23,83 @@ namespace BusinessLayer.Repositiry
 	        _stockCalculator = stockCalculator;
         }
 
-        public async Task<List<ComponentView>> GetAllStoreComponent()
+		public async Task<List<ComponentView>> GetStoreComponent(int storeId)
+		{
+			var stores = await _db.Stores.AsNoTracking()
+				.FirstOrDefaultAsync(i => i.Id == storeId);
+
+			return await LoadChild(new List<Store> {stores});
+		}
+
+		public async Task<List<ComponentView>> GetAllStoreComponent()
         {
 	        var stores = await _db.Stores
 		        .AsNoTracking()
 		        .ToListAsync();
 
+			return await LoadChild(new List<Store>(stores));
+		}
+
+		private async Task<List<ComponentView>> LoadChild(List<Store> stores)
+		{
 			var transferRecordId = await _db.TransferRecords
-                .Where(i => i.DestinationObjectType == SmartCoreType.Store.ItemId)
-                .Select(i => i.ParentID).ToListAsync();
+				.Where(i => i.DestinationObjectType == SmartCoreType.Store.ItemId)
+				.Select(i => i.ParentID).ToListAsync();
 
-            var components = await _db.Components
-                .OnlyActive()
-                .AsNoTracking()
-                .Include(i => i.Location)
-                .Include(i => i.Location.LocationsType)
-                .Include(i => i.SupplierRelations)
-                .Include(i => i.TransferRecords)
-                .Include(i => i.FromSupplier)
-                .Where(i => transferRecordId.Contains(i.Id))
-                .ToListAsync();
+			var components = await _db.Components
+				.OnlyActive()
+				.AsNoTracking()
+				.Include(i => i.Location)
+				.Include(i => i.Location.LocationsType)
+				.Include(i => i.SupplierRelations)
+				.Include(i => i.TransferRecords)
+				.Include(i => i.FromSupplier)
+				.Where(i => transferRecordId.Contains(i.Id))
+				.ToListAsync();
 
-            
-            var documents = await _db.Documents
-	            .Where(i => i.ParentTypeId == SmartCoreType.Component.ItemId)
-	            .ToListAsync();
 
-            var documentsView = documents.ToBlView();
+			var documents = await _db.Documents
+				.Where(i => i.ParentTypeId == SmartCoreType.Component.ItemId)
+				.ToListAsync();
 
-            var docIds = documents.Select(i => i.Id);
-            var fileLinks = await _db.ItemFileLinks
-	            .AsNoTracking()
-	            .Where(i => i.ParentTypeId == SmartCoreType.Document.ItemId && docIds.Contains(i.ParentId))
-	            .ToListAsync();
+			var documentsView = documents.ToBlView();
 
-            foreach (var documentView in documentsView)
+			var docIds = documents.Select(i => i.Id);
+			var fileLinks = await _db.ItemFileLinks
+				.AsNoTracking()
+				.Where(i => i.ParentTypeId == SmartCoreType.Document.ItemId && docIds.Contains(i.ParentId))
+				.ToListAsync();
+
+			foreach (var documentView in documentsView)
 				documentView.ItemFileLink = fileLinks.FirstOrDefault(i => i.ParentId == documentView.Id);
 
 			var ids = components.Select(i => i.Id);
-            var componentLinks = await _db.ItemFileLinks
-	            .AsNoTracking()
-	            .Where(i => ids.Contains(i.ParentId) && i.ParentTypeId == SmartCoreType.Component.ItemId)
-	            .ToListAsync();
+			var componentLinks = await _db.ItemFileLinks
+				.AsNoTracking()
+				.Where(i => ids.Contains(i.ParentId) && i.ParentTypeId == SmartCoreType.Component.ItemId)
+				.ToListAsync();
 
-            var crs = await _db.DocumentSubTypes.AsNoTracking().FirstOrDefaultAsync(i => i.Name == "Component CRS Form");
-            var shipping = await _db.DocumentSubTypes.AsNoTracking().FirstOrDefaultAsync(i => i.Name == "Shipping document");
+			var crs = await _db.DocumentSubTypes.AsNoTracking().FirstOrDefaultAsync(i => i.Name == "Component CRS Form");
+			var shipping = await _db.DocumentSubTypes.AsNoTracking().FirstOrDefaultAsync(i => i.Name == "Shipping document");
 
-            var storeView = stores.ToBlView();
-            var result = components.ToBlView();
+			var storeView = stores.ToBlView();
+			var result = components.ToBlView();
 
 			foreach (var componentView in result)
 			{
 				componentView.Files.AddRange(componentLinks.Where(i => i.ParentId == componentView.Id));
-                SetDestinations(componentView, storeView);
+				SetDestinations(componentView, storeView);
 
 
-                if (componentView.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.MaintenanceMaterials) ||
-                    componentView.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Tools) ||
-                    componentView.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Protection))
-                {
-	                componentView.ShippingFileId = componentView.Files.GetFileIdByFileLinkType(FileLinkType.IncomingFile) ?? -1;
-	                componentView.CRSFileId = componentView.Files.GetFileIdByFileLinkType(FileLinkType.FaaFormFile) ?? -1;
-                }
-                else
-                {
+				if (componentView.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.MaintenanceMaterials) ||
+					componentView.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Tools) ||
+					componentView.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Protection))
+				{
+					componentView.ShippingFileId = componentView.Files.GetFileIdByFileLinkType(FileLinkType.IncomingFile) ?? -1;
+					componentView.CRSFileId = componentView.Files.GetFileIdByFileLinkType(FileLinkType.FaaFormFile) ?? -1;
+				}
+				else
+				{
 					var docShipping = documentsView.FirstOrDefault(d =>
 						d.ParentID == componentView.Id && d.ParentTypeId == SmartCoreType.Component.ItemId &&
 						d.SubTypeId == shipping.Id);
@@ -98,14 +112,13 @@ namespace BusinessLayer.Repositiry
 						d.SubTypeId == crs.Id);
 					if (docCrs != null)
 						componentView.CRSFileId = docCrs.ItemFileLink?.FileId ?? -1;
-				}	
+				}
 			}
 
 			await _stockCalculator.CalculateStock(result, stores.Select(i => i.Id).ToList());
 
-
 			return result;
-        }
+		}
 
         private void SetDestinations(ComponentView component, List<StoreView> storeViews)
         {
