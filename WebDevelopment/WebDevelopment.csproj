@@ -39,7 +39,6 @@
     <PackageReference Include="Serilog.Formatting.Compact" Version="1.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
-    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2019.1.115" />
   </ItemGroup>
 
   <ItemGroup>
@@ -2200,6 +2199,12 @@
     <None Include="wwwroot\lib\kendo-ui\styles\kendo.silver.mobile.min.css.map" />
     <None Include="wwwroot\lib\kendo-ui\styles\kendo.uniform.min.css.map" />
     <None Include="wwwroot\lib\kendo-ui\styles\kendo.uniform.mobile.min.css.map" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Kendo.Mvc">
+      <HintPath>KendoNuget\Kendo.Mvc.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
