@@ -107,6 +107,7 @@ namespace BusinessLayer.Views
         public string IdNumber { get; set; }
 
 		public ItemFileLink ItemFileLink { get; set; }
+		public int FileId => ItemFileLink?.FileId ?? -1;
 
         public DocumentSubTypeView DocumentSubType
         {
