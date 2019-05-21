@@ -34,12 +34,14 @@
                   columns.Bound(p => p.Remarks).Title("Remarks").Width(130);
                   columns.Bound(p => p.IsEffectivity).Title("Effectivity").Width(130);
                   columns.Bound(p => p.IsDangerousString).Title("IsDangerous").Width(130);
-                  
+
               })
-              .DataSource(dataSource => dataSource
-                  .Ajax()
-                  .PageSize(20)
-                  .ServerOperation(false)
+              .ToolBar(tools => tools.Excel())
+              .Excel(excel => excel
+                  .FileName("Products.xlsx")
+                  .Filterable(true)
+                  .AllPages(true)
+                  .ProxyURL(Url.Action("ExcelExport", "Excel"))
               )
               .Scrollable(scrollable => scrollable.Height(630))
               .Reorderable(reorderable => reorderable.Columns(true))
@@ -48,6 +50,12 @@
               .Filterable()
               .Sortable()
               .Groupable()
-              .ColumnMenu())
+              .ColumnMenu()
+              .DataSource(dataSource => dataSource
+                  .Ajax()
+                  .PageSize(20)
+                  .ServerOperation(false)
+                  .Read(read => read.Action("ExcelExportProducts", "Product"))
+              ))
     </div>
 </div>

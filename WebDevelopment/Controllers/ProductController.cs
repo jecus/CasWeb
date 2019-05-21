@@ -2,6 +2,8 @@
 using BusinessLayer;
 using Entity.Extentions;
 using Entity.Infrastructure;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebDevelopment.Helper;
@@ -50,6 +52,34 @@ namespace WebDevelopment.Controllers
 			ViewData["ComponentModels"] = mod;
 
 			return View();
+		}
+
+		[HttpGet("modelexport")]
+		public async Task<ActionResult> ExcelExportModel([DataSourceRequest]DataSourceRequest request)
+		{
+			var model = await _db.ComponentModels
+				.Include(i => i.GoodStandart)
+				.Include(i => i.ATAChapter)
+				.OnlyActive()
+				.AsNoTracking()
+				.ToListAsync();
+			var mod = model.ToBlView();
+
+			return Json(mod.ToDataSourceResult(request));
+		}
+
+		[HttpGet("productexport")]
+		public async Task<ActionResult> ExcelExportProducts([DataSourceRequest]DataSourceRequest request)
+		{
+			var equipment = await _db.Products
+				.Include(i => i.GoodStandart)
+				.Include(i => i.ATAChapter)
+				.OnlyActive()
+				.AsNoTracking()
+				.ToListAsync();
+			var equip = equipment.ToBlView();
+
+			return Json(equip.ToDataSourceResult(request));
 		}
 	}
 }

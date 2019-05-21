@@ -7,8 +7,6 @@
     var model = (List<ComponentModelView>)ViewData["ComponentModels"];
 }
 
-
-
 <div class="card">
     <div class="card-header">
         <h5>Component Models</h5>
@@ -36,10 +34,12 @@
                   columns.Bound(p => p.IsEffectivity).Title("Effectivity").Width(130);
                   columns.Bound(p => p.IsDangerousString).Title("IsDangerous").Width(130);
               })
-              .DataSource(dataSource => dataSource        
-                  .Ajax()
-                  .PageSize(20)
-                  .ServerOperation(false)
+              .ToolBar(tools => tools.Excel())
+              .Excel(excel => excel
+                  .FileName("ComponenModels.xlsx")
+                  .Filterable(true)
+                  .AllPages(true)
+                  .ProxyURL(Url.Action("ExcelExport", "Excel"))
               )
               .Scrollable(scrollable => scrollable.Height(630))
               .Reorderable(reorderable => reorderable.Columns(true))
@@ -49,7 +49,12 @@
               .Sortable()
               .Groupable()
               .ColumnMenu()
-              )
+              .DataSource(dataSource => dataSource        
+                  .Ajax()
+                  .PageSize(20)
+                  .ServerOperation(false)
+                  .Read(read => read.Action("ExcelExportModel", "Product"))
+              ))
     </div>
 </div>
 
