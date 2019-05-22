@@ -130,7 +130,8 @@ namespace WebDevelopment.Helper
                 new MainMenu(15, "Products", "#!", "feather icon-clipboard", subMenu: new List<MainMenu>()
                 {
                     new MainMenu(1, "Component Models", url.Action("GetAllModels","Product")),
-                    new MainMenu(2, "Equipment and Materials", url.Action("GetAllProducts", "Product"))
+                    new MainMenu(2, "Equipment and Materials", url.Action("GetAllProducts", "Product")),
+                    new MainMenu(3, "Products", url.Action("GetAll", "Product"))
 
                 }),
 

@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using BusinessLayer;
+using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
 using Kendo.Mvc.Extensions;
@@ -54,8 +56,7 @@ namespace WebDevelopment.Controllers
 			return View();
 		}
 
-		[HttpGet("modelexport")]
-		public async Task<ActionResult> ExcelExportModel([DataSourceRequest]DataSourceRequest request)
+		public async Task<IActionResult> GetAll()
 		{
 			var model = await _db.ComponentModels
 				.Include(i => i.GoodStandart)
@@ -65,12 +66,6 @@ namespace WebDevelopment.Controllers
 				.ToListAsync();
 			var mod = model.ToBlView();
 
-			return Json(mod.ToDataSourceResult(request));
-		}
-
-		[HttpGet("productexport")]
-		public async Task<ActionResult> ExcelExportProducts([DataSourceRequest]DataSourceRequest request)
-		{
 			var equipment = await _db.Products
 				.Include(i => i.GoodStandart)
 				.Include(i => i.ATAChapter)
@@ -79,7 +74,12 @@ namespace WebDevelopment.Controllers
 				.ToListAsync();
 			var equip = equipment.ToBlView();
 
-			return Json(equip.ToDataSourceResult(request));
+			var res = new List<IProductView>();
+			res.AddRange(equip);
+			res.AddRange(mod);
+			ViewData["All"] = res;
+
+			return View();
 		}
 	}
 }

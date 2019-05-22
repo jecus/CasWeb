@@ -3,7 +3,7 @@ using Entity.Extentions;
 
 namespace BusinessLayer.Views
 {
-	public class ComponentModelView : BaseView
+	public class ComponentModelView : BaseView, IProductView
 	{
 		public string Description { get; set; }
 
