@@ -679,7 +679,8 @@ namespace BusinessLayer
                 Id = nomenclature.Id,
                 IsDeleted = nomenclature.IsDeleted,
                 Name = nomenclature.Name,
-                FullName = nomenclature.FullName
+                FullName = nomenclature.FullName,
+				DepartmentId = nomenclature?.Department.Id
             };
         }
 
@@ -691,6 +692,7 @@ namespace BusinessLayer
                 IsDeleted = nomenclature.IsDeleted,
                 Name = nomenclature.Name,
                 FullName = nomenclature.FullName,
+				Department = nomenclature?.Department.ToBlView() ?? DepartmentView.Unknown
             };
         }
 
