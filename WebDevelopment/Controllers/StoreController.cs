@@ -9,6 +9,7 @@ using WebDevelopment.Infrastructude.JWT;
 namespace WebDevelopment.Controllers
 {
 	[Auth(Roles.Sender)]
+	[Route("store")]
 	public class StoreController : Controller
     {
         private readonly DatabaseContext _db;
@@ -20,7 +21,8 @@ namespace WebDevelopment.Controllers
             _componentRepository = componentRepository;
         }
 
-        public async Task <IActionResult> Index()
+        [HttpGet("inventory")]
+		public async Task <IActionResult> Inventory()
         {
             var result = await _componentRepository.GetAllStoreComponent();
             ViewData["Components"] = result.Where(i => i.ParentStore != null).ToList();
@@ -28,7 +30,7 @@ namespace WebDevelopment.Controllers
             return View(); 
         }
 
-		[HttpGet("{storeID}")]
+		[HttpGet("{storeId}")]
         public async Task<IActionResult> Index(int storeId)
         {
 	        var result = await _componentRepository.GetStoreComponent(storeId);

@@ -28,7 +28,83 @@ namespace BusinessLayer.Repositiry
 			var stores = await _db.Stores.AsNoTracking()
 				.FirstOrDefaultAsync(i => i.Id == storeId);
 
-			return await LoadChild(new List<Store> {stores});
+			var transferRecordId = await _db.TransferRecords
+				.Where(i => i.DestinationObjectType == SmartCoreType.Store.ItemId && i.DestinationObjectID == storeId)
+				.Select(i => i.ParentID).ToListAsync();
+
+			var components = await _db.Components
+				.OnlyActive()
+				.AsNoTracking()
+				.Include(i => i.Location)
+				.Include(i => i.Location.LocationsType)
+				.Include(i => i.SupplierRelations)
+				.Include(i => i.TransferRecords)
+				.Include(i => i.FromSupplier)
+				.Where(i => transferRecordId.Contains(i.Id))
+				.ToListAsync();
+
+			var compIds = components.Select(i => i.Id).ToArray();
+
+			var documents = await _db.Documents
+				.Where(i => i.ParentTypeId == SmartCoreType.Component.ItemId && compIds.Contains(i.ParentID.Value))
+				.ToListAsync();
+
+			var documentsView = documents.ToBlView();
+
+			var docIds = documents.Select(i => i.Id);
+			var fileLinks = await _db.ItemFileLinks
+				.AsNoTracking()
+				.Where(i => i.ParentTypeId == SmartCoreType.Document.ItemId && docIds.Contains(i.ParentId))
+				.ToListAsync();
+
+			foreach (var documentView in documentsView)
+				documentView.ItemFileLink = fileLinks.FirstOrDefault(i => i.ParentId == documentView.Id);
+
+			var ids = components.Select(i => i.Id);
+			var componentLinks = await _db.ItemFileLinks
+				.AsNoTracking()
+				.Where(i => ids.Contains(i.ParentId) && i.ParentTypeId == SmartCoreType.Component.ItemId)
+				.ToListAsync();
+
+			var crs = await _db.DocumentSubTypes.AsNoTracking().FirstOrDefaultAsync(i => i.Name == "Component CRS Form");
+			var shipping = await _db.DocumentSubTypes.AsNoTracking().FirstOrDefaultAsync(i => i.Name == "Shipping document");
+
+			var storeView = stores.ToBlView();
+			var result = components.ToBlView();
+
+			foreach (var componentView in result)
+			{
+				componentView.Files.AddRange(componentLinks.Where(i => i.ParentId == componentView.Id));
+				SetDestinations(componentView, new List<StoreView>(){ storeView });
+
+
+				if (componentView.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.MaintenanceMaterials) ||
+					componentView.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Tools) ||
+					componentView.GoodsClass.IsNodeOrSubNodeOf(GoodsClass.Protection))
+				{
+					componentView.ShippingFileId = componentView.Files.GetFileIdByFileLinkType(FileLinkType.IncomingFile) ?? -1;
+					componentView.CRSFileId = componentView.Files.GetFileIdByFileLinkType(FileLinkType.FaaFormFile) ?? -1;
+				}
+				else
+				{
+					var docShipping = documentsView.FirstOrDefault(d =>
+						d.ParentID == componentView.Id && d.ParentTypeId == SmartCoreType.Component.ItemId &&
+						d.SubTypeId == shipping.Id);
+					if (docShipping != null)
+						componentView.ShippingFileId = docShipping.ItemFileLink?.FileId ?? -1;
+
+					var docCrs = documentsView.FirstOrDefault(d =>
+						d.ParentID == componentView.Id &&
+						d.ParentTypeId == SmartCoreType.Component.ItemId &&
+						d.SubTypeId == crs.Id);
+					if (docCrs != null)
+						componentView.CRSFileId = docCrs.ItemFileLink?.FileId ?? -1;
+				}
+			}
+
+			await _stockCalculator.CalculateStock(result, new List<int>{ storeView.Id});
+
+			return result;
 		}
 
 		public async Task<List<ComponentView>> GetAllStoreComponent()
@@ -37,11 +113,6 @@ namespace BusinessLayer.Repositiry
 		        .AsNoTracking()
 		        .ToListAsync();
 
-			return await LoadChild(new List<Store>(stores));
-		}
-
-		private async Task<List<ComponentView>> LoadChild(List<Store> stores)
-		{
 			var transferRecordId = await _db.TransferRecords
 				.Where(i => i.DestinationObjectType == SmartCoreType.Store.ItemId)
 				.Select(i => i.ParentID).ToListAsync();
@@ -120,7 +191,7 @@ namespace BusinessLayer.Repositiry
 			return result;
 		}
 
-        private void SetDestinations(ComponentView component, List<StoreView> storeViews)
+		private void SetDestinations(ComponentView component, List<StoreView> storeViews)
         {
             var lastTransfer = component.TransferRecords
                 .OrderBy(i => i.TransferDate)

@@ -162,7 +162,7 @@
                                         {
                                             <ul class="pcoded-submenu">
                                                 <li class="">
-                                                    <a href="#!" class="waves-effect waves-dark">
+                                                    <a href="@Url.Action("Index", "Store", new {storeId = store.Id})" class="waves-effect waves-dark">
                                                         <span class="pcoded-mtext">@store.StoreName</span>
                                                     </a>
                                                 </li>
@@ -170,7 +170,7 @@
                                         }
                                         <ul class="pcoded-submenu">
                                             <li class="">
-                                                <a href="@Url.Action("Index", "Store")" class="waves-effect waves-dark">
+                                                <a href="@Url.Action("Inventory", "Store")" class="waves-effect waves-dark">
                                                     <span class="pcoded-mtext">Inventory Control</span>
                                                 </a>
                                             </li>
