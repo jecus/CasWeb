@@ -22,7 +22,7 @@
                 .Columns(columns =>
                 {
 
-                    columns.Bound(p => p.FileId).ClientTemplate(KendoHelper.PdfButton(Url.Action("OpenPdf", "File", new {fileId = "#=FileId#"}))).Title(" ");
+                    columns.Bound(p => p.FileId).ClientTemplate(KendoHelper.PdfButton(Url.Action("OpenPdf", "File"), "FileId")).Title(" ");
                     columns.Bound(p => p.DocumentSubType.Name).Title("Title").Width(130);
                     columns.Bound(p => p.ShortContractNumber).Title("№ Doc").Width(130);
                     columns.Bound(p => p.Description).Title("Description").Width(130);
