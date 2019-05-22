@@ -11,7 +11,7 @@ namespace WebDevelopment.Helper
 			var sb = new StringBuilder();
 			foreach (var property in properties)
 			{
-				sb.Append("<a class=" +
+				sb.AppendLine("<a class=" +
 				          "#if ("+ property +" > 0) {# 'btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon' #}" +
 				          "else {# 'btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled' #}#" +
 				          " href=" + url + $@"?fileId=#={property}#" + @"><i class=""fa fa-file-pdf-o""></i></a>");
