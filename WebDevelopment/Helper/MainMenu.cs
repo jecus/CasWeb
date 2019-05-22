@@ -35,7 +35,7 @@ namespace WebDevelopment.Helper
                 {
                     //new MainMenu(1, "Personnel", url.Action("Index", "Specialist")),
                     new MainMenu(2, "Occupation", "#!"),
-                    new MainMenu(3, "Departments", "#!"),
+                    new MainMenu(3, "Departments", url.Action("Index", "Department")),
 
                 }),
 

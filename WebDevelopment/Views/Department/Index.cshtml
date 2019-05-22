@@ -1,0 +1,46 @@
+﻿@using BusinessLayer.Views
+@using Kendo.Mvc.UI
+
+@{
+    ViewData["Title"] = "Nomenclatures";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var equipment = (List<DepartmentView>)ViewData["Departments"];
+}
+
+<div class="card">
+    
+    <div class="card-header">
+        <h5>Equipment and Materials</h5>
+    </div>
+    <div class="card-block">
+
+        @(Html.Kendo().Grid(equipment)
+              .Name("Grid")
+              .Columns(columns =>
+              {
+                  columns.Bound(p => p.Name).Title("Name").Width(130);
+                  columns.Bound(p => p.FullName).Title("FullName").Width(130);
+              })
+              .ToolBar(tools => tools.Excel())
+              .Excel(excel => excel
+                  .FileName("Departments.xlsx")
+                  .Filterable(true)
+                  .AllPages(true)
+                  .ProxyURL(Url.Action("ExcelExport", "Excel"))
+              )
+              .Scrollable(scrollable => scrollable.Height(630))
+              .Reorderable(reorderable => reorderable.Columns(true))
+              .Resizable(resizable => resizable.Columns(true))
+              .Pageable()
+              .Filterable()
+              .Sortable()
+              .Groupable()
+              .ColumnMenu()
+              .DataSource(dataSource => dataSource
+                  .Ajax()
+                  .PageSize(20)
+                  .ServerOperation(false)
+                  .Read(read => read.Action("", ""))
+              ))
+    </div>
+</div>
