@@ -34,7 +34,7 @@ namespace WebDevelopment.Helper
                 new MainMenu(3, "Personnel", "#!", "feather icon-clipboard", subMenu: new List<MainMenu>()
                 {
                     //new MainMenu(1, "Personnel", url.Action("Index", "Specialist")),
-                    new MainMenu(2, "Occupation", "#!"),
+                    new MainMenu(2, "Occupation", url.Action("Index", "Specialization")),
                     new MainMenu(3, "Departments", url.Action("Index", "Department")),
 
                 }),

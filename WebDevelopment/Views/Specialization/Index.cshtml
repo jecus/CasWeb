@@ -2,9 +2,9 @@
 @using Kendo.Mvc.UI
 
 @{
-    ViewData["Title"] = "<Departments";
+    ViewData["Title"] = "Specialization";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var equipment = (List<DepartmentView>)ViewData["Departments"];
+    var equipment = (List<SpecializationView>)ViewData["Specialization"];
 }
 
 <div class="card">
@@ -18,12 +18,15 @@
               .Name("Grid")
               .Columns(columns =>
               {
-                  columns.Bound(p => p.Name).Title("Name").Width(130);
+                  columns.Bound(p => p.ShortName).Title("ShortName").Width(130);
                   columns.Bound(p => p.FullName).Title("FullName").Width(130);
+                  columns.Bound(p => p.Department.FullName).Title("Department").Width(130);
+                  columns.Bound(p => p.Level).Title("Level").Width(130);
+                  columns.Bound(p => p.KeyPersonelString).Title("Key Personel").Width(130);
               })
               .ToolBar(tools => tools.Excel())
               .Excel(excel => excel
-                  .FileName("Departments.xlsx")
+                  .FileName("Specializations.xlsx")
                   .Filterable(true)
                   .AllPages(true)
                   .ProxyURL(Url.Action("ExcelExport", "Excel"))

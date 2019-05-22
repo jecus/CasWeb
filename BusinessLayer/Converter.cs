@@ -912,7 +912,8 @@ namespace BusinessLayer
                 ShortName = specialization.ShortName,
                 FullName = specialization.FullName,
                 Level = specialization.Level,
-                KeyPersonel = specialization.KeyPersonel
+                KeyPersonel = specialization.KeyPersonel,
+				Department = specialization.Department?.ToBlView() ?? DepartmentView.Unknown
             };
         }
 

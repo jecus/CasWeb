@@ -1,4 +1,6 @@
-﻿namespace BusinessLayer.Views
+﻿using Entity.Extentions;
+
+namespace BusinessLayer.Views
 {
     public class SpecializationView : BaseView
     {
@@ -14,6 +16,7 @@
         public int Level { get; set; }
 
         public bool KeyPersonel { get; set; }
+        public string KeyPersonelString => KeyPersonel.ToYesNo();
 
         public DepartmentView Department
         {
