@@ -598,57 +598,63 @@ namespace BusinessLayer
 
 		#region Product
 
-		public static Product ToEntity(this ProductView acc)
+		public static Product ToEntity(this ProductView componentModel)
 		{
 			return new Product()
 			{
-				Id = acc.Id,
-				IsDeleted = acc.IsDeleted,
-				Model = acc.Model,
-				PartNumber = acc.PartNumber,
-				AltPartNumber = acc.AltPartNumber,
-				Description = acc.Description,
-				Manufacturer = acc.Manufacturer,
-				CostNew = acc.CostNew,
-				CostOverhaul = acc.CostOverhaul,
-				CostServiceable = acc.CostServiceable,
-				Measure = acc.Measure,
-				Remarks = acc.Remarks,
-				Code = acc.Code,
-				ComponentClass = (short)(acc.ComponentClass?.ItemId ?? -1),
-				IsDangerous = acc.IsDangerous,
-				DescRus = acc.DescRus,
-				HTS = acc.HTS,
-				Reference = acc.Reference,
-				IsEffectivity = acc.IsEffectivity,
-				AtaChapterId = acc.AtaChapter.Id
+				Id = componentModel.Id,
+				IsDeleted = componentModel.IsDeleted,
+				Model = componentModel.Model,
+				PartNumber = componentModel.PartNumber,
+				AltPartNumber = componentModel.AltPartNumber,
+				AtaChapterId = componentModel.AtaChapter.Id,
+				Description = componentModel.Description,
+				Manufacturer = componentModel.Manufacturer,
+				CostNew = componentModel.CostNew,
+				CostOverhaul = componentModel.CostOverhaul,
+				CostServiceable = componentModel.CostServiceable,
+				Measure = componentModel.Measure,
+				Remarks = componentModel.Remarks,
+				SubModel = componentModel.SubModel,
+				FullName = componentModel.FullName,
+				ShortName = componentModel.ShortName,
+				Designer = componentModel.Designer,
+				Code = componentModel.Code,
+				DescRus = componentModel.DescRus,
+				IsEffectivity = componentModel.IsEffectivity,
+				HTS = componentModel.HTS,
+				ComponentClass = (short)(componentModel.ComponentClass?.ItemId ?? -1),
+				IsDangerous = componentModel.IsDangerous
 			};
 		}
 
-		public static ProductView ToBlView(this Product acc)
+		public static ProductView ToBlView(this Product componentModel)
 		{
 			return new ProductView()
 			{
-				Id = acc.Id,
-				IsDeleted = acc.IsDeleted,
-				Model = acc.Model,
-				PartNumber = acc.PartNumber,
-				AltPartNumber = acc.AltPartNumber,
-				Description = acc.Description,
-				Manufacturer = acc.Manufacturer,
-				CostNew = acc.CostNew,
-				CostOverhaul = acc.CostOverhaul,
-				CostServiceable = acc.CostServiceable,
-				Measure = acc.Measure,
-				Remarks = acc.Remarks,
-				Code = acc.Code,
-				ComponentClass = acc.ComponentClass.HasValue ? GoodsClass.GetItemById(acc.ComponentClass.Value) : GoodsClass.Unknown,
-				IsDangerous = acc.IsDangerous,
-				DescRus = acc.DescRus,
-				HTS = acc.HTS,
-				Reference = acc.Reference,
-				IsEffectivity = acc.IsEffectivity,
-				AtaChapter = acc.ATAChapter?.ToBlView()
+				Id = componentModel.Id,
+				IsDeleted = componentModel.IsDeleted,
+				Model = componentModel.Model,
+				PartNumber = componentModel.PartNumber,
+				AltPartNumber = componentModel.AltPartNumber,
+				Description = componentModel.Description,
+				Manufacturer = componentModel.Manufacturer,
+				CostNew = componentModel.CostNew,
+				CostOverhaul = componentModel.CostOverhaul,
+				CostServiceable = componentModel.CostServiceable,
+				Measure = componentModel.Measure,
+				Remarks = componentModel.Remarks,
+				SubModel = componentModel.SubModel,
+				FullName = componentModel.FullName,
+				ShortName = componentModel.ShortName,
+				Designer = componentModel.Designer,
+				Code = componentModel.Code,
+				DescRus = componentModel.DescRus,
+				IsEffectivity = componentModel.IsEffectivity,
+				HTS = componentModel.HTS,
+				ComponentClass = componentModel.ComponentClass.HasValue ? GoodsClass.GetItemById(componentModel.ComponentClass.Value) : GoodsClass.Unknown,
+				IsDangerous = componentModel.IsDangerous,
+				AtaChapter = componentModel.ATAChapter?.ToBlView()
 			};
 		}
 
