@@ -1245,7 +1245,7 @@ namespace BusinessLayer
                 Code = comp.Code,
                 Status = (ComponentStatus?)comp.Status,
                 IsBaseComponent = comp.IsBaseComponent,
-                Location = comp.Location?.ToBlView(),
+                Location = comp.Location?.ToBlView()  ?? LocationView.Unknown,
 
                 Incoming = comp.Incoming,
                 Discrepancy = comp.Discrepancy,

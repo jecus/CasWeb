@@ -16,9 +16,9 @@
             set => _locationsType = value;
         }
 
-        #region public static Nomenclatures Unknown
+		#region public static LocationView Unknown
 
-        public static LocationView Unknown
+		public static LocationView Unknown
         {
             get
             {
