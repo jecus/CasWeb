@@ -1,6 +1,7 @@
 ﻿@using BusinessLayer
 @using BusinessLayer.Views
 @using Entity.Models.General
+@using Kendo.Mvc.UI
 @model AircraftView
 @{
     Layout = "_AircraftLayout";
@@ -25,78 +26,77 @@
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Aircraft Model</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.Model.FullName, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.Model.FullName).Enable(false)
                                         @Html.ValidationMessageFor(i => i.Model.FullName)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Owner</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.Owner, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.Owner).Enable(false)
                                         @Html.ValidationMessageFor(i => i.Owner)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Serial Number</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.SerialNumber, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.SerialNumber).Enable(false)
                                         @Html.ValidationMessageFor(i => i.SerialNumber)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Operator</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => oper.Name, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => oper.Name).Enable(false)
                                         @Html.ValidationMessageFor(i => oper.Name)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Registration Number</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.RegistrationNumber, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.RegistrationNumber).Enable(false)
                                         @Html.ValidationMessageFor(i => i.RegistrationNumber)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Variable Number</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.VariableNumber, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.VariableNumber).Enable(false)
                                         @Html.ValidationMessageFor(i => i.VariableNumber)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Aircraft Type Certificate №</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.TypeCertificateNumber, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.TypeCertificateNumber).Enable(false)
                                         @Html.ValidationMessageFor(i => i.TypeCertificateNumber)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Line Number</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.LineNumber, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.LineNumber).Enable(false)
                                         @Html.ValidationMessageFor(i => i.LineNumber)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">MSG</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.DropDownListFor(i => i.MSG, Html.GetEnumSelectList(typeof(MSG)), new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().DropDownListFor(i => i.MSG).BindTo(Enum.GetNames(typeof(MSG)))
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">APU Util.(FH/APUFH)</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.APUFH, new { @class = "form-control", @*type = "number", min = "0" , step = "0.01"*@ @readonly = "readonly" })
+                                        @Html.Kendo().NumericTextBoxFor(i => i.APUFH)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Manufacture Date</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.EditorFor(i => i.ManufactureDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.Kendo().DateTimePickerFor(i => i.ManufactureDate)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Start</label>
                                     <div class="col-sm-12 col-lg-4">
-                                       @* @Html.EditorFor( i => startDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })*@
-                                        <input class="form-control" type="date"/>
+                                        @Html.Kendo().DateTimePicker().Name("Start")
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Today</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        <input class="form-control" type="date" />
+                                        @Html.Kendo().DateTimePicker().Name("Today")
                                     </div>
                                 </div>
 
@@ -119,7 +119,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">Engine Model</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    @Html.TextBoxFor(i => baseComponent.Model.FullName, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.Kendo().TextBoxFor(i => baseComponent.Model.FullName).Enable(false)
                                                     @Html.ValidationMessageFor(i => i.LineNumber)
                                                 
                                                 </div>
@@ -127,41 +127,41 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">Manufacturer</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    @Html.TextBoxFor(i => baseComponent.Manufacturer, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.Kendo().TextBoxFor(i => baseComponent.Manufacturer).Enable(false)
                                                     @Html.ValidationMessageFor(i => baseComponent.Manufacturer)
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">Position</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    @Html.TextBoxFor(i => baseComponent.Position, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.Kendo().TextBoxFor(i => baseComponent.Position).Enable(false)
                                                     @Html.ValidationMessageFor(i => baseComponent.Position)
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">Serial Number</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    @Html.TextBoxFor(i => baseComponent.SerialNumber, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.Kendo().TextBoxFor(i => baseComponent.SerialNumber).Enable(false)
                                                     @Html.ValidationMessageFor(i => baseComponent.SerialNumber)
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">Part Number</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    @Html.TextBoxFor(i => baseComponent.PartNumber, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.Kendo().TextBoxFor(i => baseComponent.PartNumber).Enable(false)
                                                     @Html.ValidationMessageFor(i => baseComponent.PartNumber)
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">TSN/CSN</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    <input type="text" class="form-control" placeholder="You can't change me" readonly>
+                                                    @Html.Kendo().TextBox().Name("TSN/CSN").Enable(false)
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">Manufacture Date</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    @Html.EditorFor(i => baseComponent.ManufactureDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    @Html.Kendo().DateTimePickerFor(i => baseComponent.ManufactureDate)
                                                 </div>
                                             </div>
                                         </div>
@@ -181,55 +181,55 @@
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Cockpit Seating</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.CockpitSeating, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.CockpitSeating).Enable(false)
                                         @Html.ValidationMessageFor(i => i.CockpitSeating)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Oven</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.Oven, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.Oven).Enable(false)
                                         @Html.ValidationMessageFor(i => i.Oven)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Galleys</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.Galleys, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.Galleys).Enable(false)
                                         @Html.ValidationMessageFor(i => i.Galleys)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Boiler</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.Boiler, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.Boiler).Enable(false)
                                         @Html.ValidationMessageFor(i => i.Boiler)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Lavatory</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.Lavatory, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.Lavatory).Enable(false)
                                         @Html.ValidationMessageFor(i => i.Lavatory)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Air Stair Doors</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.AirStairDoors, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.AirStairDoors).Enable(false)
                                         @Html.ValidationMessageFor(i => i.AirStairDoors)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Seating Economy</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.SeatingEconomy, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.SeatingEconomy).Enable(false)
                                         @Html.ValidationMessageFor(i => i.SeatingEconomy)
                                     </div>
                                     <label class="col-sm-12 col-lg-2 col-form-label">Seating Business</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.SeatingBusiness, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.SeatingBusiness).Enable(false)
                                         @Html.ValidationMessageFor(i => i.SeatingBusiness)
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-lg-2 col-form-label">Seating First</label>
                                     <div class="col-sm-12 col-lg-4">
-                                        @Html.TextBoxFor(i => i.SeatingFirst, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.Kendo().TextBoxFor(i => i.SeatingFirst).Enable(false)
                                         @Html.ValidationMessageFor(i => i.SeatingFirst)
                                     </div>
                                 </div>
