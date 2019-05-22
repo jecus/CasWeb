@@ -18,8 +18,7 @@ namespace WebDevelopment.Helper
                 new MainMenu(1, "Documents", "#!", "feather icon-clipboard", subMenu: new List<MainMenu>()
                 {
                     new MainMenu(1, "Registry", url.Action("Index", "Document")),
-                    new MainMenu(2, "Correspondence", "#!"),
-                    new MainMenu(3, "Internal Documents", "#!")
+                    new MainMenu(2, "Nomenclatures", "#!"),
 
                 }),
 
@@ -35,16 +34,14 @@ namespace WebDevelopment.Helper
                 new MainMenu(3, "Personnel", "#!", "feather icon-clipboard", subMenu: new List<MainMenu>()
                 {
                     //new MainMenu(1, "Personnel", url.Action("Index", "Specialist")),
-                    new MainMenu(2, "Technical Training", "#!"),
-                    new MainMenu(3, "Regularity Training", "#!"),
-                    new MainMenu(4, "Testing", "#!")
+                    new MainMenu(2, "Occupation", "#!"),
+                    new MainMenu(3, "Departments", "#!"),
 
                 }),
 
                 new MainMenu(4, "Reliability", "#!", "feather icon-clipboard", subMenu: new List<MainMenu>()
                 {
-                    new MainMenu(1, "General", "#!"),
-                    new MainMenu(2, "Occurrences and Interruptions", "#!"),
+	                new MainMenu(2, "Occurrences and Interruptions", "#!"),
                     new MainMenu(3, "System reliability", "#!"),
                     new MainMenu(4, "Components reliability", "#!"),
                     new MainMenu(5, "Engines and APU", "#!"),
