@@ -6,6 +6,12 @@
 //  </div>
 // </div>
 //В каждом html где вызывается модальное окно должен быть этот отрезок
+
+function ShowModal(windowName) {
+    var w = $("#" + windowName).data("kendoWindow");
+    w.open();
+}
+
 $(function () {
     $.ajaxSetup({ cache: false });
     $(".modalLargeBtn").click(function (e) {
@@ -62,31 +68,3 @@ $(function () {
 });
 
 
-//TODO: подумать как слить в один метод
-function BetweenTime() {
-        var ldg = document.getElementById('Start');
-        var ldg2 = document.getElementById('End');
-        var res = document.getElementById('Res');
-        var start = moment.utc(ldg.value, 'HH:mm');
-        var end = moment.utc(ldg2.value, 'HH:mm');
-
-        if (moment(start.isSameOrAfter(end))) {
-            res.value = (moment.utc(end.diff(start)).format('HH:mm'));
-        } else {
-            res.value = (moment.utc(start.diff(end)).format('HH:mm'));
-        }
-};
-
-function BetweenTime() {
-    var ldg = document.getElementById('Start1');
-    var ldg2 = document.getElementById('End1');
-    var res = document.getElementById('Res1');
-    var start = moment.utc(ldg.value, 'HH:mm');
-    var end = moment.utc(ldg2.value, 'HH:mm');
-
-    if (moment(start.isSameOrAfter(end))) {
-        res.value = (moment.utc(end.diff(start)).format('HH:mm'));
-    } else {
-        res.value = (moment.utc(start.diff(end)).format('HH:mm'));
-    }
-};
