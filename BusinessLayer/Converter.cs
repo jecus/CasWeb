@@ -580,7 +580,8 @@ namespace BusinessLayer
 				HTS = componentModel.HTS,
 				ComponentClass = componentModel.ComponentClass.HasValue ? GoodsClass.GetItemById(componentModel.ComponentClass.Value) : GoodsClass.Unknown,
 				IsDangerous = componentModel.IsDangerous,
-				AtaChapter = componentModel.ATAChapter?.ToBlView()
+				AtaChapter = componentModel.ATAChapter?.ToBlView(),
+				Standard = componentModel.GoodStandart?.ToBlView()
 			};
 		}
 
@@ -654,7 +655,8 @@ namespace BusinessLayer
 				HTS = componentModel.HTS,
 				ComponentClass = componentModel.ComponentClass.HasValue ? GoodsClass.GetItemById(componentModel.ComponentClass.Value) : GoodsClass.Unknown,
 				IsDangerous = componentModel.IsDangerous,
-				AtaChapter = componentModel.ATAChapter?.ToBlView()
+				AtaChapter = componentModel.ATAChapter?.ToBlView(),
+				Standard = componentModel.GoodStandart?.ToBlView()
 			};
 		}
 
@@ -984,7 +986,7 @@ namespace BusinessLayer
                 Products = supplier.Products,
                 Approved = supplier.Approved,
                 Remarks = supplier.Remarks,
-                SupplierClassId = supplier.SupplierClassId,
+                SupplierClassId = supplier.SupplierClass?.ItemId ?? -1,
                 Subject = supplier.Subject,
                 
             };
@@ -1010,7 +1012,7 @@ namespace BusinessLayer
                 Products = supplier.Products,
                 Approved = supplier.Approved ?? default(bool),
                 Remarks = supplier.Remarks,
-                SupplierClassId = supplier.SupplierClassId,
+                SupplierClass = SupplierClass.GetItemById(supplier.SupplierClassId),
                 Subject = supplier.Subject
             };
         }
@@ -2186,6 +2188,48 @@ namespace BusinessLayer
 		public static List<PurchaseOrder> ToEntity(this IEnumerable<PurchaseOrderView> init)
 		{
 			return new List<PurchaseOrder>(init.Select(i => i.ToEntity()));
+		}
+
+		#endregion
+
+		#region MyRegion
+
+		public static GoodStandart ToEntity(this GoodStandartView standart)
+		{
+			return new GoodStandart
+			{
+				Id = standart.Id,
+				IsDeleted = standart.IsDeleted,
+				Name = standart.Name,
+				PartNumber = standart.PartNumber,
+				Description = standart.Description,
+				Remarks = standart.Remarks,
+				DefaultProductId = standart.DefaultProductId
+			};
+		}
+
+		public static GoodStandartView ToBlView(this GoodStandart standart)
+		{
+			return new GoodStandartView
+			{
+				Id = standart.Id,
+				IsDeleted = standart.IsDeleted,
+				Name = standart.Name,
+				PartNumber = standart.PartNumber,
+				Description = standart.Description,
+				Remarks = standart.Remarks,
+				DefaultProductId = standart.DefaultProductId ?? default
+			};
+		}
+
+		public static List<GoodStandartView> ToBlView(this IEnumerable<GoodStandart> standart)
+		{
+			return new List<GoodStandartView>(standart.Select(i => i.ToBlView()));
+		}
+
+		public static List<GoodStandart> ToEntity(this IEnumerable<GoodStandartView> standart)
+		{
+			return new List<GoodStandart>(standart.Select(i => i.ToEntity()));
 		}
 
 		#endregion

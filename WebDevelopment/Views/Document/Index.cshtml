@@ -23,15 +23,18 @@
                 {
 
                     columns.Bound(p => p.FileId).ClientTemplate(KendoHelper.PdfButton(Url.Action("OpenPdf", "File"), "FileId")).Title(" ").Width(60);
+                    columns.Bound(p => p.DocumentType.FullName).Title("Type").Width(130);
                     columns.Bound(p => p.DocumentSubType.Name).Title("Title").Width(130);
                     columns.Bound(p => p.ContractNumber).Title("№ Doc").Width(130);
                     columns.Bound(p => p.Description).Title("Description").Width(130);
                     columns.Bound(p => p.IssueDateValidFrom).Title("Issue").Width(130).ClientTemplate("#= kendo.toString(IssueDateValidFrom, \"dd.MM.yyyy\") #");
                     columns.Bound(p => p.IssueNumber).Title("№ Issue").Width(130);
                     columns.Bound(p => p.IssueDateValidTo).Title("Valid To").Width(130).ClientTemplate("#= kendo.toString(IssueDateValidTo, \"dd.MM.yyyy\") #");
+                    
                     columns.Bound(p => p.RevisionDateFrom).Title("Rev.Date").Width(130).ClientTemplate("#= kendo.toString(RevisionDateFrom, \"dd.MM.yyyy\") #");
                     columns.Bound(p => p.RevNumber).Title("№ Rev.").Width(130);
                     columns.Bound(p => p.RevisionDateValidTo).Title("Valid To").Width(130).ClientTemplate("#= kendo.toString(RevisionDateValidTo, \"dd.MM.yyyy\") #");
+
                 })
                 .ToolBar(tools => tools.Excel())
                 .Excel(excel => excel
