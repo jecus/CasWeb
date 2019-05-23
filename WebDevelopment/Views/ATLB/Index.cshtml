@@ -1,6 +1,7 @@
 ﻿@using BusinessLayer
 @using Entity.Models.Dictionaries
 @using Kendo.Mvc.UI
+@using WebDevelopment.Helper
 @using WebDevelopment.Infrastructude
 @model List<BusinessLayer.Views.ATLBView>
 @{
@@ -50,10 +51,14 @@
                   .Name("Grid")
                   .Columns(columns =>
                   {
-                      columns.Bound(p => p.ATLBNo).Title("ATLB №").Width(130);
-                      columns.Bound(p => p.Pages).Title("Pages").Width(130);
-                      columns.Bound(p => p.Dates).Title("Date").Width(130).ClientTemplate("#= kendo.toString(OpeningDate, \"dd.MM.yyyy\") #");
-                      columns.Bound(p => p.AtlbStatusString).Title("Status").Width(130);
+                      columns.Bound(p => p.Id)
+                          .ClientTemplate(
+                              KendoHelper.Button(Url.Action("Index","AircraftFlight", new {GlobalObject.AircraftId}),"atlbId","Id",ButtonType.Open)
+                      ).Width(90).Title(" ");
+                      columns.Bound(p => p.ATLBNo).Title("ATLB №").Width(120);
+                      columns.Bound(p => p.Pages).Title("Pages").Width(120);
+                      columns.Bound(p => p.Dates).Title("Date").ClientTemplate("#= kendo.toString(OpeningDate, \"dd.MM.yyyy\") #").Width(120);
+                      columns.Bound(p => p.AtlbStatusString).Title("Status").Width(120);
                   })
                   .ToolBar(tools => tools.Excel())
                   .Excel(excel => excel
