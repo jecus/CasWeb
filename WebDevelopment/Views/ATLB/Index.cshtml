@@ -1,4 +1,5 @@
 ﻿@using BusinessLayer
+@using Entity.Models.Dictionaries
 @using Kendo.Mvc.UI
 @using WebDevelopment.Infrastructude
 @model List<BusinessLayer.Views.ATLBView>
@@ -13,13 +14,13 @@
 
 @(Html.Kendo().Window()
       .Name("EditAtlb")
-      .Title("Details Report")
+      .Title("ATLB Adding Form")
       .LoadContentFrom("ModalCreate", "ATLB", new {GlobalObject.AircraftId})
       .Modal(true)
       .Visible(false)
-      .Height(375)
+      .Height(550)
+      .Width(555)
       .Draggable()
-      .Resizable()
       .Animation(animation =>
       {
           animation.Open(open =>
@@ -37,87 +38,44 @@
       })
       )
 
+    <div class="card">
+        <div class="card-header">
+            <h5>ATLBs</h5>
+        </div>
+        <div class="card-block">
+            <a href="!#" , class="modalLargeBtn btn btn-primary m-b-5 m-t-5" onclick="ShowModal('EditAtlb')">
+                + Add New
+            </a>
+            @(Html.Kendo().Grid(Model)
+                  .Name("Grid")
+                  .Columns(columns =>
+                  {
+                      columns.Bound(p => p.ATLBNo).Title("ATLB №").Width(130);
+                      columns.Bound(p => p.Pages).Title("Pages").Width(130);
+                      columns.Bound(p => p.Dates).Title("Date").Width(130).ClientTemplate("#= kendo.toString(OpeningDate, \"dd.MM.yyyy\") #");
+                      columns.Bound(p => p.AtlbStatusString).Title("Status").Width(130);
+                  })
+                  .ToolBar(tools => tools.Excel())
+                  .Excel(excel => excel
+                      .FileName("ATLBs.xlsx")
+                      .Filterable(true)
+                      .AllPages(true)
+                      .ProxyURL(Url.Action("ExcelExport", "Excel"))
+                  )
+                  .Scrollable(scrollable => scrollable.Height(630))
+                  .Reorderable(reorderable => reorderable.Columns(true))
+                  .Resizable(resizable => resizable.Columns(true))
+                  .Pageable()
+                  .Filterable()
+                  .Sortable()
+                  .Groupable()
+                  .ColumnMenu()
+                  .DataSource(dataSource => dataSource
+                      .Ajax()
+                      .PageSize(20)
+                      .ServerOperation(false)
+                      .Read(read => read.Action("", ""))
+                  ))
 
-
-
-<div class="row">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-header">
-                <h5>ATLBs</h5>
-            </div>
-            <div class="card-block">
-               <a href="!#" , class="modalLargeBtn btn btn-primary m-b-20" onclick="ShowModal('EditAtlb')">
-                    + Add New
-                </a>
-                <div class="dt-responsive table-responsive">
-                    <table id="footer-search" class="table table-striped table-bordered nowrap">
-
-                        <thead>
-                            <tr>
-                                <th> </th>
-                                <th>ATLB №</th>
-                                <th>Pages</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-
-                            <div class="modal fade" id="large-Modal" tabindex="-1" role="dialog" style="display: none; z-index: 1050;" aria-hidden="true">
-                                <div class="modal-dialog modal-md" role="document">
-                                    <div id="dialogContent" class="modal-content">
-
-                                    </div>
-                                </div>
-                            </div>
-                        <div class="modal fade" id="small-Modal" tabindex="-1" role="dialog" style="display: none; z-index: 1050;" aria-hidden="true">
-                            <div class="modal-dialog modal-md" role="document">
-                                <div id="dialogDeleteContent" class="modal-content">
-
-                                </div>
-                            </div>
-                        </div>
-                            @foreach (var atlb in Model)
-                            {
-                                <tr>
-                                    <td style="width: 80px">
-                                        <a href=@aircraftFlightUrl.Replace("_AIRFLIGHTID_", atlb.Id.ToString()) , class="btn waves-effect waves-dark btn-success btn-outline-success btn-icon">
-                                            <i class="fa fa-folder-open-o"></i>
-                                        </a>
-                                        <a href=@modalUrl.Replace("_ATLBID_", atlb.Id.ToString()) , class="modalLargeBtn btn waves-effect waves-dark btn-primary btn-outline-primary btn-icon">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-
-                                        <a href=@confirmModalUrl.Replace("_ATLBID_", atlb.Id.ToString()) , class="modalConfirmDeleteBtn btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </td>
-                                    <td>@atlb.ATLBNo</td>
-                                    <td>@atlb.Pages</td>
-                                    <td><span style="display: none">@atlb.DateFrom.ToUniversalFilterString()</span>@atlb.Dates</td>
-                                    <td>@atlb.AtlbStatus.ToString()</td>
-                                </tr>
-                            }
-
-
-
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th> </th>
-                                <th>ATLB №</th>
-                                <th>Pages</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
         </div>
     </div>
-</div>
-

@@ -1,4 +1,5 @@
 ﻿@using BusinessLayer
+@using Kendo.Mvc.UI
 @model BusinessLayer.Views.ATLBView
 
 @using (Html.BeginForm("Create", "ATLB", FormMethod.Post))
@@ -6,78 +7,64 @@
     @Html.HiddenFor(i => i.Id);
     @Html.HiddenFor(i => i.IsDeleted);
 
-    <div class="modal-content">
-
-        <div class="modal-header">
-            <h4 class="modal-title">ATLB Adding Form</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
+    <div class="form-group row">
+        <label class="col-sm-5 col-form-label">ATLB №:</label>
+        <div class="col-sm-7">
+            @Html.Kendo().TextBoxFor(i => i.ATLBNo)
+            @Html.ValidationMessageFor(i => i.ATLBNo)
         </div>
+    </div>
 
-        <div class="modal-body">
-            
-            <div class="form-group row">
-                <label class="col-sm-5 col-form-label">ATLB №:</label>
-                <div class="col-sm-7">
-                    @Html.TextBoxFor(i => i.ATLBNo, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(i => i.ATLBNo)
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Start Page №:</label>
-                <div class="col-sm-7">
-                    @Html.TextBoxFor(i => i.StartPageNo, new { @class = "form-control", type = "number" })
-                    @Html.ValidationMessageFor(i => i.StartPageNo)
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Count flight on page:</label>
-                <div class="col-sm-7">
-                    @Html.TextBoxFor(i => i.PageFlightCount, new { @class = "form-control", type = "number" })
-                    @Html.ValidationMessageFor(i => i.PageFlightCount)
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Opening date:</label>
-                <div class="col-sm-7">
-                    @Html.EditorFor(i => i.OpeningDate, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Revison №:</label>
-                <div class="col-sm-7">
-                    @Html.TextBoxFor(i => i.Revision, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(i => i.Revision)
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Remarks:</label>
-                <div class="col-sm-7">
-                    @Html.TextBoxFor(i => i.Remarks, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(i => i.Remarks)
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-5 col-form-label">Atlb Status:</label>
-                <div class="col-sm-7">
-                    @Html.DropDownListFor(i => i.AtlbStatus, Html.GetEnumSelectList(typeof(AtlbStatus)), new { @class = "form-control" })
-                </div>
-            </div>
+    <div class="form-group row">
+        <label class="col-sm-5 col-form-label">Start Page №:</label>
+        <div class="col-sm-7">
+            @Html.Kendo().NumericTextBoxFor(i => i.StartPageNo)
+            @Html.ValidationMessageFor(i => i.StartPageNo)
         </div>
+    </div>
+    
+    <div class="form-group row">
+        <label class="col-sm-5 col-form-label">Count flight on page:</label>
+        <div class="col-sm-7">
+            @Html.Kendo().NumericTextBoxFor(i => i.PageFlightCount)
+            @Html.ValidationMessageFor(i => i.PageFlightCount)
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <label class="col-sm-5 col-form-label">Opening date:</label>
+        <div class="col-sm-7">
+            @Html.Kendo().DateTimePickerFor(i => i.OpeningDate)
+        </div>
+    </div>
 
+    <div class="form-group row">
+        <label class="col-sm-5 col-form-label">Revison №:</label>
+        <div class="col-sm-7">
+            @Html.Kendo().TextBoxFor(i => i.Revision)
+            @Html.ValidationMessageFor(i => i.Revision)
+        </div>
+    </div>
 
+    <div class="form-group row">
+        <label class="col-sm-5 col-form-label">Remarks:</label>
+        <div class="col-sm-7">
+            @Html.Kendo().TextBoxFor(i => i.Remarks)
+            @Html.ValidationMessageFor(i => i.Remarks)
+        </div>
+    </div>
 
+    <div class="form-group row">
+        <label class="col-sm-5 col-form-label">Atlb Status:</label>
+        <div class="col-sm-7">
+            @Html.Kendo().DropDownListFor(i => i.AtlbStatus).BindTo(Enum.GetNames(typeof(AtlbStatus)))
+        </div>
+    </div>
+    
         <div class="modal-footer">
-            <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
+            <button type="button" onclick="CloseModal('EditAtlb')"  class="btn btn-default waves-effect">Close</button>
             <button type="submit"  class="btn btn-primary waves-effect waves-light ">Save changes</button>
         </div>
 
-    </div>
+    
 }
