@@ -7,26 +7,25 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AircraftLayout.cshtml";
-    var modalUrl = @Url.Action("ModalEdit", "ATLB", new {GlobalObject.AircraftId, atlbId = "_ATLBID_" });
-    var aircraftFlightUrl = @Url.Action("Index", "AircraftFlight", new {GlobalObject.AircraftId, atlbId = "_AIRFLIGHTID_" });
+    var modalUrl = @Url.Action("ModalEdit", "ATLB", new { GlobalObject.AircraftId, atlbId = "_ATLBID_" });
+    var aircraftFlightUrl = @Url.Action("Index", "AircraftFlight", new { GlobalObject.AircraftId, atlbId = "_AIRFLIGHTID_" });
     var confirmModalUrl = @Url.Action("ConfirmDelete", "ATLB", new { GlobalObject.AircraftId, atlbId = "_ATLBID_" });
- }
+}
 
 
 @(Html.Kendo().Window()
       .Name("EditAtlb")
       .Title("ATLB Adding Form")
-      .LoadContentFrom("ModalCreate", "ATLB", new {GlobalObject.AircraftId})
       .Modal(true)
       .Visible(false)
       .Height(550)
       .Width(555)
       .Draggable()
       .Animation(animation =>
-      {
-          animation.Open(open =>
           {
-              open.Expand(ExpandDirection.Vertical);
+              animation.Open(open =>
+              {
+                  open.Expand(ExpandDirection.Vertical);
               open.Fade(FadeDirection.In);
           });
 
@@ -37,50 +36,76 @@
               close.Fade(FadeDirection.In);
           });
       })
-      )
+)
 
-    <div class="card">
-        <div class="card-header">
-            <h5>ATLBs</h5>
-        </div>
-        <div class="card-block">
-            <a href="!#" , class="modalLargeBtn btn btn-primary m-b-5 m-t-5" onclick="ShowModal('EditAtlb')">
-                + Add New
-            </a>
-            @(Html.Kendo().Grid(Model)
-                  .Name("Grid")
-                  .Columns(columns =>
-                  {
-                      columns.Bound(p => p.Id)
-                          .ClientTemplate(
-                              KendoHelper.Button(Url.Action("Index","AircraftFlight", new {GlobalObject.AircraftId}),"atlbId","Id",ButtonType.Open)
-                      ).Width(90).Title(" ");
-                      columns.Bound(p => p.ATLBNo).Title("ATLB №").Width(120);
-                      columns.Bound(p => p.Pages).Title("Pages").Width(120);
-                      columns.Bound(p => p.Dates).Title("Date").ClientTemplate("#= kendo.toString(OpeningDate, \"dd.MM.yyyy\") #").Width(120);
-                      columns.Bound(p => p.AtlbStatusString).Title("Status").Width(120);
-                  })
-                  .ToolBar(tools => tools.Excel())
-                  .Excel(excel => excel
-                      .FileName("ATLBs.xlsx")
-                      .Filterable(true)
-                      .AllPages(true)
-                      .ProxyURL(Url.Action("ExcelExport", "Excel"))
-                  )
-                  .Scrollable(scrollable => scrollable.Height(630))
-                  .Reorderable(reorderable => reorderable.Columns(true))
-                  .Resizable(resizable => resizable.Columns(true))
-                  .Pageable()
-                  .Filterable()
-                  .Sortable()
-                  .Groupable()
-                  .ColumnMenu()
-                  .DataSource(dataSource => dataSource
-                      .Ajax()
-                      .PageSize(20)
-                      .ServerOperation(false)
-                      .Read(read => read.Action("", ""))
-                  ))
+@(Html.Kendo().Window()
+      .Name("123")
+      .Title("123")
+      .Modal(true)
+      .Visible(false)
+      .Height(550)
+      .Width(555)
+      .Draggable()
+      .Animation(animation =>
+          {
+              animation.Open(open =>
+              {
+                  open.Expand(ExpandDirection.Vertical);
+              open.Fade(FadeDirection.In);
+          });
 
-        </div>
+          animation.Close(close =>
+          {
+              close.Reverse(true);
+              close.Expand(ExpandDirection.Vertical);
+              close.Fade(FadeDirection.In);
+          });
+      })
+)
+
+<div class="card">
+    <div class="card-header">
+        <h5>ATLBs</h5>
     </div>
+    <div class="card-block">
+        <a href="!#" , class="modalLargeBtn btn btn-primary m-b-5 m-t-5" onclick="ShowModal('EditAtlb')">
+            + Add New
+        </a>
+        @(Html.Kendo().Grid(Model)
+              .Name("Grid")
+              .Columns(columns =>
+              {
+                  columns.Bound(p => p.Id)
+                      .ClientTemplate(
+                          KendoHelper.Button(Url.Action("Index", "AircraftFlight", new { GlobalObject.AircraftId }), "atlbId", "Id", ButtonType.Open)+
+                          KendoHelper.ButtonModal(Url.Action("ModalEdit", "ATLB", new { GlobalObject.AircraftId },Context.Request.Scheme), "atlbId", "Id", ButtonType.Edit, "123")
+                  ).Width(90).Title(" ");
+                  columns.Bound(p => p.ATLBNo).Title("ATLB №").Width(120);
+                  columns.Bound(p => p.Pages).Title("Pages").Width(120);
+                  columns.Bound(p => p.Dates).Title("Date").ClientTemplate("#= kendo.toString(OpeningDate, \"dd.MM.yyyy\") #").Width(120);
+                  columns.Bound(p => p.AtlbStatusString).Title("Status").Width(120);
+              })
+              .ToolBar(tools => tools.Excel())
+              .Excel(excel => excel
+                  .FileName("ATLBs.xlsx")
+                  .Filterable(true)
+                  .AllPages(true)
+                  .ProxyURL(Url.Action("ExcelExport", "Excel"))
+              )
+              .Scrollable(scrollable => scrollable.Height(630))
+              .Reorderable(reorderable => reorderable.Columns(true))
+              .Resizable(resizable => resizable.Columns(true))
+              .Pageable()
+              .Filterable()
+              .Sortable()
+              .Groupable()
+              .ColumnMenu()
+              .DataSource(dataSource => dataSource
+                  .Ajax()
+                  .PageSize(20)
+                  .ServerOperation(false)
+                  .Read(read => read.Action("", ""))
+              ))
+
+    </div>
+</div>

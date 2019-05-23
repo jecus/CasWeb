@@ -12,6 +12,16 @@ function ShowModal(windowName) {
     w.open();
 }
 
+
+function OpenModal(redirect, windowName) {
+    $.ajaxSetup({ cache: false });
+    $.get(redirect, function (data) {
+        var w = $("#" + windowName).data("kendoWindow");
+            w.content(data);
+            w.open();
+        });
+};
+
 function CloseModal(windowName) {
     var w = $("#" + windowName).data("kendoWindow");
     w.close();

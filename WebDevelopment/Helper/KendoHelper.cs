@@ -65,5 +65,31 @@ namespace WebDevelopment.Helper
 			return "<a class= 'btn waves-effect waves-dark " + typeClass + " btn-icon'" +
 			       " href=" + url + $@"?{paramName}=#={property}#" + @"><i class=""" + icon + @"""></i></a>";
 		}
+
+		public static string ButtonModal(string url, string paramName, string property, ButtonType type, string windowName)
+		{
+			var typeClass = "";
+			var icon = "";
+			switch (type)
+			{
+				case ButtonType.Open:
+					typeClass = "btn-success btn-outline-success";
+					icon = "fa fa-folder-open-o";
+					break;
+				case ButtonType.Edit:
+					typeClass = "btn-primary btn-outline-primary";
+					icon = "fa fa-pencil";
+					break;
+				default:
+					typeClass = "btn-danger btn-outline-danger";
+					icon = "fa fa-times";
+					break;
+			}
+
+			var res = "<button class= 'btn waves-effect waves-dark " + typeClass + " btn-icon'" +
+				   @" onclick=""OpenModal('" + url + $@"?{paramName}=#={property}#', {windowName})""" + @"><i class=""" + icon + @"""></i></button>";
+
+			return res;
+		}
 	}
 }
