@@ -43,9 +43,7 @@ namespace WebDevelopment.Helper
                     new MainMenu(1, "Initial Orders", url.Action("Initial", "Order")),
                     new MainMenu(2, "Purchase Orders", url.Action("Purchase", "Order")),
 					new MainMenu(3, "Quotation Orders", url.Action("Quotation", "Order")),
-					new MainMenu(4, "Suppliers", "#!"),
-                    new MainMenu(5, "Processing", "#!"),
-
+					new MainMenu(4, "Suppliers", url.Action("Suppliers","Purchase"))
                 }),
             });
         }

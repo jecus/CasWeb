@@ -12,6 +12,11 @@ function ShowModal(windowName) {
     w.open();
 }
 
+function CloseModal(windowName) {
+    var w = $("#" + windowName).data("kendoWindow");
+    w.close();
+}
+
 $(function () {
     $.ajaxSetup({ cache: false });
     $(".modalLargeBtn").click(function (e) {

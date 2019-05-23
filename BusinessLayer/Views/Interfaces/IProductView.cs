@@ -53,5 +53,8 @@ namespace BusinessLayer.Views
 
 		ATAChapterView AtaChapter { get; }
 		string AtaChapterString { get; }
+
+		GoodStandartView Standard { get; }
+		string StandardString { get; }
 	}
 }

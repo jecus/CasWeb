@@ -1,0 +1,61 @@
+﻿@using BusinessLayer.Views
+@using Kendo.Mvc.UI
+
+@{
+    ViewData["Title"] = "Suppliers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var supplier = (List<SupplierView>)ViewData["Suppliers"];
+}
+
+    <div class="card">
+        <div class="card-header">
+            <h5>Initial Order</h5>
+        </div>
+        <div class="card-block">
+
+            @(Html.Kendo().Grid(supplier)
+                  .Name("Grid")
+                  .Columns(columns =>
+                  {
+
+                      columns.Bound(p => p.Name).Title("Name").Width(130);
+                      columns.Bound(p => p.AirCode).Title("AirCode").Width(130);
+                      columns.Bound(p => p.Subject).Title("Subject").Width(130);
+                      columns.Bound(p => p.Phone).Title("Phone").Width(130);
+                      columns.Bound(p => p.Fax).Title("Fax").Width(130);
+                      columns.Bound(p => p.Address).Title("Address").Width(130);
+                      columns.Bound(p => p.ContactPerson).Title("Contact Person").Width(130);
+                      columns.Bound(p => p.Email).Title("Email").Width(130);
+                      columns.Bound(p => p.WebSite).Title("Web Site").Width(130);
+                      columns.Bound(p => p.Products).Title("Products").Width(130);
+                      columns.Bound(p => p.SupplierClass.ShortName).Title("SupplierType").Width(130);
+                      columns.Bound(p => p.ListViewApproved).Title("Approved").Width(130);
+                      columns.Bound(p => p.Remarks).Title("Remarks").Width(130);
+                      columns.Bound(p => p.ShortName).Title("Short Name").Width(130);
+                      columns.Bound(p => p.VendorCode).Title("Vendor Code").Width(130);
+                  })
+                  .ToolBar(tools => tools.Excel())
+                  .Excel(excel => excel
+                      .FileName("Suppliers.xlsx")
+                      .Filterable(true)
+                      .AllPages(true)
+                      .ProxyURL(Url.Action("ExcelExport", "Excel"))
+                  )
+                  .Scrollable(scrollable => scrollable.Height(630))
+                  .Reorderable(reorderable => reorderable.Columns(true))
+                  .Resizable(resizable => resizable.Columns(true))
+                  .Pageable()
+                  .Filterable()
+                  .Sortable()
+                  .Groupable()
+                  .ColumnMenu()
+                  .DataSource(dataSource => dataSource
+                      .Ajax()
+                      .PageSize(20)
+                      .ServerOperation(false)
+                      .Read(read => read.Action("", ""))
+                  ))
+
+        </div>
+    </div>
+

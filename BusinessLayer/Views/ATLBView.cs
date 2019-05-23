@@ -29,8 +29,10 @@ namespace BusinessLayer.Views
         public int? PageFlightCount { get; set; }
 
         public AtlbStatus AtlbStatus { get; set; }
+        public string AtlbStatusString => AtlbStatus.ToString();
 
-        public string Pages { get; set; }
+
+		public string Pages { get; set; }
 
         public string Dates { get; set; }
 
