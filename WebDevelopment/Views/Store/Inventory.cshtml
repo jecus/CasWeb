@@ -19,7 +19,11 @@
               .Name("Grid")
               .Columns(columns =>
               {
-                  columns.Bound(p => p.ShippingFileId).ClientTemplate(KendoHelper.PdfButton(Url.Action("OpenPdf", "File"), "CRSFileId", "ShippingFileId")).Title(" ").Width(120);
+                  columns.Bound(p => p.ShippingFileId).ClientTemplate(KendoHelper.PdfButton(Url.Action("OpenPdf", "File"), new Dictionary<string, string>
+                  {
+                      {"CRSFileId", "CRS" },
+                      {"ShippingFileId", "Shipping" }
+                  })).Title(" ").Width(120);
                   columns.Bound(p => p.ParentStore.StoreName).Title("Store").Width(130);
                   columns.Bound(p => p.PartNumber).Title("Part. №").Width(130);
                   columns.Bound(p => p.Description).Title("Description").Width(130);
