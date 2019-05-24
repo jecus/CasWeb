@@ -20,6 +20,7 @@ namespace WebDevelopment
 			services.AddScoped<IAircraftRepository, AircraftRepository>();
 			services.AddScoped<IComponentRepository, ComponentRepository>();
 			services.AddScoped<IStockCalculator, StockCalculator>();
+			services.AddScoped<IProductRepository, ProductRepository>();
 			return services;
 		}
 	}
