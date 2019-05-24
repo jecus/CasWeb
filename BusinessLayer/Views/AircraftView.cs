@@ -20,7 +20,7 @@ namespace BusinessLayer.Views
 
         [DataType(DataType.Date)]
         [DisplayName("ManufactureDate")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime ManufactureDate { get; set; }
 
 		public string RegistrationNumber { get; set; }
@@ -85,12 +85,12 @@ namespace BusinessLayer.Views
 
         [DataType(DataType.Date)]
         [DisplayName("DeliveryDate")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? DeliveryDate { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayName("AcceptanceDate")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? AcceptanceDate { get; set; }
 
 		public bool Schedule { get; set; }

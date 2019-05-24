@@ -41,14 +41,14 @@ namespace BusinessLayer.Views
 
         [DataType(DataType.Date)]
         [DisplayName("IssueDateValidFrom")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime IssueDateValidFrom { get; set; }
 
         public bool? IssueValidTo { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayName("IssueDateValidTo")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime IssueDateValidTo { get; set; }
 
         public int? IssueNotify { get; set; }
@@ -66,7 +66,7 @@ namespace BusinessLayer.Views
 
         [DataType(DataType.Date)]
         [DisplayName("RevisionDateFrom")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? RevisionDateFrom { get; set; }
 
         public bool? IsClosed { get; set; }
@@ -77,7 +77,7 @@ namespace BusinessLayer.Views
 
         [DataType(DataType.Date)]
         [DisplayName("RevisionDateValidTo")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? RevisionDateValidTo { get; set; }
 
         public int? RevisionNotify { get; set; }

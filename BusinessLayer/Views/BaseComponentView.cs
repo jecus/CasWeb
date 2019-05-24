@@ -21,12 +21,12 @@ namespace BusinessLayer.Views
 
         [DataType(DataType.Date)]
         [DisplayName("ManufactureDate")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? ManufactureDate { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayName("StartDate")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? StartDate { get; set; }
 
 		public bool IsBaseComponent { get; set; }

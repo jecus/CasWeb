@@ -26,10 +26,10 @@ namespace BusinessLayer.Views
 
         public string Remarks { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayName("FlightDate")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime FlightDate { get; set; }
+		[DataType(DataType.Date)]
+		[DisplayName("FlightDate")]
+		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+		public DateTime FlightDate { get; set; }
 
         public string StationFrom { get; set; }
 
@@ -40,13 +40,13 @@ namespace BusinessLayer.Views
         public int? DelayReasonId { get; set; }
 
         public int OutTime { get; set; }
-        #region public TimeSpan TimespanOutTime
-        /// <summary>
-        /// Время посадки воздушного судна
-        /// </summary>
-        [DataType(DataType.Time)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:hh\:mm}")]
-        public TimeSpan TimespanOutTime => new TimeSpan(OutTime / 60, OutTime - (OutTime / 60) * 60, 0);
+		#region public TimeSpan TimespanOutTime
+		/// <summary>
+		/// Время посадки воздушного судна
+		/// </summary>
+		[DataType(DataType.Time)]
+		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:HH:mm}")]
+		public TimeSpan TimespanOutTime => new TimeSpan(OutTime / 60, OutTime - (OutTime / 60) * 60, 0);
 
         #endregion
 
@@ -56,7 +56,7 @@ namespace BusinessLayer.Views
         /// Время посадки воздушного судна
         /// </summary>
         [DataType(DataType.Time)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:hh\:mm}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:HH:mm}")]
         public TimeSpan TimespanInTime => new TimeSpan(InTime / 60, InTime - (InTime / 60) * 60, 0);
 
         #endregion
@@ -68,7 +68,7 @@ namespace BusinessLayer.Views
         /// Время посадки воздушного судна
         /// </summary>
         [DataType(DataType.Time)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:hh\:mm}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:HH:mm}")]
         public TimeSpan TimespanTakeOffTime => new TimeSpan(TakeOffTime / 60, TakeOffTime - (TakeOffTime / 60) * 60, 0);
 
         #endregion
@@ -80,13 +80,13 @@ namespace BusinessLayer.Views
         /// Время посадки воздушного судна
         /// </summary>
         [DataType(DataType.Time)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:hh\:mm}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:HH:mm}")]
         public TimeSpan TimespanLDGTime => new TimeSpan(LDGTime / 60, LDGTime - (LDGTime / 60) * 60, 0);
         #endregion
 
         public int NightTime { get; set; }
         [DataType(DataType.Time)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:hh\:mm}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:HH:mm}")]
         public TimeSpan TimeSpanNightTime => FlightDate.Date.AddMinutes(NightTime).TimeOfDay;
 
         public int? CRSID { get; set; }
@@ -169,7 +169,7 @@ namespace BusinessLayer.Views
         /// Время полета ВС по Out-In
         /// </summary>
         [DataType(DataType.Time)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:hh\:mm}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:HH:mm}")]
         public TimeSpan BlockTime
         {
             get
@@ -187,7 +187,7 @@ namespace BusinessLayer.Views
         /// Время полета ВС по Takeoff-LDG
         /// </summary>
         [DataType(DataType.Time)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:hh\:mm}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"{0:HH:mm}")]
         public TimeSpan FlightTime
         {
             get

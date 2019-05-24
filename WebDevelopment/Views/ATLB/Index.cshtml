@@ -1,15 +1,10 @@
-﻿@using BusinessLayer
-@using Entity.Models.Dictionaries
-@using Kendo.Mvc.UI
+﻿@using Kendo.Mvc.UI
 @using WebDevelopment.Helper
 @using WebDevelopment.Infrastructude
 @model List<BusinessLayer.Views.ATLBView>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AircraftLayout.cshtml";
-    var modalUrl = @Url.Action("ModalEdit", "ATLB", new { GlobalObject.AircraftId, atlbId = "_ATLBID_" });
-    var aircraftFlightUrl = @Url.Action("Index", "AircraftFlight", new { GlobalObject.AircraftId, atlbId = "_AIRFLIGHTID_" });
-    var confirmModalUrl = @Url.Action("ConfirmDelete", "ATLB", new { GlobalObject.AircraftId, atlbId = "_ATLBID_" });
 }
 
 
@@ -39,12 +34,12 @@
 )
 
 @(Html.Kendo().Window()
-      .Name("abc")
-      .Title("123")
+      .Name("Delete")
+      .Title("Confirm Delete")
       .Modal(true)
       .Visible(false)
-      .Height(550)
-      .Width(555)
+      .Height(180)
+      .Width(350)
       .Draggable()
       .Animation(animation =>
           {
@@ -68,7 +63,7 @@
         <h5>ATLBs</h5>
     </div>
     <div class="card-block">
-        <a href="!#" , class="modalLargeBtn btn btn-primary m-b-5 m-t-5" onclick="ShowModal('EditAtlb')">
+        <a href="" , class="modalLargeBtn btn btn-primary m-b-5 m-t-5" onclick="OpenModal('@Url.Action("ModalCreate","ATLB",new {GlobalObject.AircraftId},Context.Request.Scheme)', 'EditAtlb')">
             + Add New
         </a>
         @(Html.Kendo().Grid(Model)
@@ -78,7 +73,8 @@
                   columns.Bound(p => p.Id)
                       .ClientTemplate(
                           KendoHelper.Button(Url.Action("Index", "AircraftFlight", new { GlobalObject.AircraftId }), "atlbId", "Id", ButtonType.Open)+
-                          KendoHelper.ButtonModal(Url.Action("ModalEdit", "ATLB", new { GlobalObject.AircraftId },Context.Request.Scheme), "atlbId", "Id", ButtonType.Edit, "abc")
+                          KendoHelper.ButtonModal(Url.Action("ModalEdit", "ATLB", new { GlobalObject.AircraftId },Context.Request.Scheme), "atlbId", "Id", ButtonType.Edit, "EditAtlb")
+                          //KendoHelper.ButtonModal(Url.Action("ConfirmDelete", "ATLB", new { GlobalObject.AircraftId },Context.Request.Scheme), "id", "Id", ButtonType.Delete, "Delete")
                   ).Width(90).Title(" ");
                   columns.Bound(p => p.ATLBNo).Title("ATLB №").Width(120);
                   columns.Bound(p => p.Pages).Title("Pages").Width(120);

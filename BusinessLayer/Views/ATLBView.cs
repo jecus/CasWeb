@@ -19,7 +19,7 @@ namespace BusinessLayer.Views
 
         [DataType(DataType.Date)]
         [DisplayName("OpeningDate")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? OpeningDate { get; set; }
 
         public string Remarks { get; set; }

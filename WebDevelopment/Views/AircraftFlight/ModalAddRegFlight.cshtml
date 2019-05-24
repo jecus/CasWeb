@@ -1,6 +1,7 @@
 ﻿@using BusinessLayer
 @using BusinessLayer.Dictionaties
 @using BusinessLayer.Views
+@using Kendo.Mvc.UI
 @model BusinessLayer.Views.AircraftFlightView
 
 @{
@@ -13,7 +14,7 @@
     var q = new List<SelectListItem>();
     foreach (var station in stations)
     {
-        q.Add(new SelectListItem(station.FullName, station.Id.ToString()));
+        q.Add(new SelectListItem(station.FullName, station.Iata));
     }
 
     var ata = new List<SelectListItem>();
@@ -37,27 +38,18 @@
     @Html.HiddenFor(i => i.Id);
     @Html.HiddenFor(i => i.IsDeleted);
 
-    <div class="modal-content">
 
-        <div class="modal-header">
-            <h4 class="modal-title">Add Reg Flight</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#FlGen" role="tab">Flight General</a>
 
-        <div class="modal-body">
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#FlGen" role="tab">Flight General</a>
-                
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#discrepancies" role="tab">Disсrepancies</a>
-                
-                </li>
-            
-            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#discrepancies" role="tab">Disсrepancies</a>
+
+        </li>
+
+    </ul>
         <div class="tab-content modal-body">
 
         <div class="tab-pane active" id="FlGen" role="tabpanel">
@@ -67,56 +59,56 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-lg-5 col-form-label">FL./Maint.</label>
                         <div class="col-sm-12 col-lg-7">
-                            @Html.DropDownListFor(i => i.AtlbRecordType, Html.GetEnumSelectList(typeof(AtlbRecordType)), new {@class = "form-control"})
+                            @Html.Kendo().DropDownListFor(i => i.AtlbRecordType).BindTo(Enum.GetNames(typeof(AtlbRecordType)))
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-lg-5 col-form-label">Aircraft Code</label>
                         <div class="col-sm-12 col-lg-7">
-                            @Html.DropDownListFor(i => i.FlightAircraftCode, Html.GetEnumSelectList(typeof(FlightAircraftCode)), new {@class = "form-control"})
+                            @Html.Kendo().DropDownListFor(i => i.FlightAircraftCode).BindTo(Enum.GetNames(typeof(FlightAircraftCode)))
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-lg-5 col-form-label">Page №</label>
                         <div class="col-sm-12 col-lg-7">
-                            @Html.TextBoxFor(i => i.PageNo, new {@class = "form-control"})
+                            @Html.Kendo().TextBoxFor(i => i.PageNo)
                             @Html.ValidationMessageFor(i => i.PageNo)
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-lg-5 col-form-label">Flight Type</label>
                         <div class="col-sm-12 col-lg-7">
-                            @Html.DropDownListFor(i => i.FlightType.FullName, new SelectList(FlightType.Items.ToList()), new {@class = "form-control"})
+                            @Html.Kendo().DropDownListFor(i => i.FlightType.FullName).BindTo(new SelectList(FlightType.Items.ToList()))
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-lg-5 col-form-label">Flight Cat.</label>
                         <div class="col-sm-12 col-lg-7">
-                            @Html.DropDownListFor(i => i.FlightCategory, Html.GetEnumSelectList(typeof(FlightCategory)), new {@class = "form-control"})
+                            @Html.Kendo().DropDownListFor(i => i.FlightCategory).BindTo(Enum.GetNames(typeof(FlightCategory)))
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-lg-5 col-form-label">Flight №</label>
                         <div class="col-sm-12 col-lg-7">
-                            @Html.DropDownListFor(i => i.FlightNumber.FlightNumber, new SelectList(flightNum, Model.FlightNumber.FlightNumber), new { @class = "form-control" })
+                            @Html.Kendo().DropDownListFor(i => i.FlightNumber.FlightNumber).BindTo(new SelectList(flightNum, Model.FlightNumber.FlightNumber))
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-lg-5 col-form-label">Date</label>
                         <div class="col-sm-12 col-lg-7">
-                            @Html.EditorFor(i => i.FlightDate, new {htmlAttributes = new {@class = "form-control"}})
+                            @Html.Kendo().DateTimePickerFor(i => i.FlightDate)
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-lg-5 col-form-label">From</label>
                         <div class="col-sm-12 col-lg-7">
-                            @Html.DropDownListFor(i => i.StationFromId, q, new { @class = "form-control" })
+                            @Html.Kendo().DropDownListFor(i => i.StationFroms.Iata).BindTo(q)
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-12 col-lg-5 col-form-label">To</label>
                         <div class="col-sm-12 col-lg-7">
-                            @Html.DropDownListFor(i => i.StationToId, q, new { @class = "form-control" })
+                            @Html.Kendo().DropDownListFor(i => i.StationTos.Iata).BindTo(q)
                         </div>
                     </div>
                 </div>
@@ -126,7 +118,7 @@
                     <div class="form-group row">
                         <label class="col-sm-12 col-lg-3 col-form-label">Out - In</label>
                         <div class="col-sm-12 col-lg-3">
-                            @Html.TextBoxFor(i => i.TimespanOutTime, new {@class = "form-control", id = "Start", type = "time", onchange= "BetweenTime()" })
+                            @Html.Kendo().TimePickerFor(i => i.TimespanOutTime)
                             @Html.ValidationMessageFor(i => i.TimespanOutTime)
                         </div>
                         <div class="col-sm-12 col-lg-3">
@@ -190,11 +182,6 @@
                             <div id="@colId@y" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                 <div class="accordion-content accordion-desc">
                                     <div class="form-group row">
-                                        @*<label class="col-sm-12 col-lg-1 col-form-label">Discrepancy:</label>
-                        <div class="col-sm-12 col-lg-1">
-                            @Html.TextBoxFor(i => i.ATLBID, new { @class = "form-control", type = "number" })
-                            @Html.ValidationMessageFor(i => i.ATLBID)
-                        </div>*@
                                         <label class="col-sm-12 col-lg-2 col-form-label">Filled by:</label>
                                         <div class="col-sm-12 col-lg-4 col-form-label">
                                             <div class="form-radio row">
@@ -214,29 +201,26 @@
                                         </div>
                                         <label class="col-sm-12 col-lg-3 col-form-label">Corrective Action Add №</label>
                                         <div class="col-sm-12 col-lg-2">
-                                            @Html.TextBoxFor(i => i.Discrepancy[y].CorrectiveAction.ADDNo, new {@class = "form-control"})
+                                            @Html.Kendo().TextBoxFor(i => i.Discrepancy[y].CorrectiveAction.ADDNo)
                                             @Html.ValidationMessageFor(i => i.Discrepancy[y].CorrectiveAction.ADDNo)
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        @*<label class="col-sm-12 col-lg-1 col-form-label">Deffered</label>
-        <div class="col-sm-12 col-lg-2">
-            @Html.DropDownListFor(i => i.StationFromId, new SelectList(colId), new {@class = "form-control"})
-        </div>*@
+                                        
                                         <label class="col-sm-12 col-lg-1 col-form-label">ATA</label>
                                         <div class="col-sm-12 col-lg-3">
-                                            @Html.DropDownListFor(i => i.Discrepancy[y].ATAChapterID.Value, ata , new { @class = "form-control" })
+                                            @Html.Kendo().DropDownListFor(i => i.Discrepancy[y].ATAChapterID.Value).BindTo(ata)
                                         </div>
                                         <label class="col-sm-12 col-lg-1 col-form-label">Comp:</label>
                                         <div class="col-sm-12 col-lg-3">
-                                            @Html.DropDownListFor(i => i.ATLBID, new SelectList(""), new { @class = "form-control" })
+                                            @Html.Kendo().DropDownListFor(i => i.ATLBID).BindTo(new SelectList(" "))
                                         </div>
                                         <label class="col-sm-12 col-lg-1 col-form-label">Status:</label>
                                         <div class="col-sm-12 col-lg-3 col-form-label">
                                             <div class="form-radio row">
                                                 <div class="radio radio-inline">
                                                     <label>
-                                                        @Html.RadioButtonFor(i => i.Discrepancy[y].Status, "", new { @Name = "2" })
+                                                        @Html.RadioButtonFor(i => i.IsDeleted, "", new { @Name = "2" })
                                                         <i class="helper"> </i><span>Open</span>
                                                     </label>
                                                 </div>
@@ -257,17 +241,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @*<div class="form-group row">
-                                        <label class="col-form-label m-l-15" style="width: 72px">Use Templ</label>
-                                        <div class="col-sm-12 col-lg-2">
-                                            @Html.DropDownListFor(i => i.ATLBID, new SelectList(colId), new {@class = "form-control"})
-                                        </div>
-                                        <label class="col-sm-12 col-lg-1 col-form-label">WP:</label>
-                                        <div class="col-sm-12 col-lg-3">
-                                            @Html.DropDownListFor(i => i.ATLBID, new SelectList(colId), new {@class = "form-control"})
-                                        </div>
-                                        
-                                    </div>*@
+                                   
                                     <div class="row">
                                         <div class="form-group col-sm-6">
                                             <label class="col-sm-12 col-form-label" style="text-align: center">Description:</label>
@@ -287,12 +261,12 @@
                                                 <label class="col-sm-12 col-form-label p-b-30" style="text-align: center">Component Change</label>
                                                 <label class="col-sm-12 col-lg-2 col-form-label">P/N On</label>
                                                 <div class="col-sm-12 col-lg-4">
-                                                    @Html.TextBoxFor(i => i.Discrepancy[y].CorrectiveAction.PartNumberOn, new {@class = "form-control"})
+                                                    @Html.Kendo().TextBoxFor(i => i.Discrepancy[y].CorrectiveAction.PartNumberOn)
                                                     @Html.ValidationMessageFor(i => i.Discrepancy[y].CorrectiveAction.PartNumberOn)
                                                 </div>
                                                 <label class="col-sm-12 col-lg-2 col-form-label">P/N Off</label>
                                                 <div class="col-sm-12 col-lg-4">
-                                                    @Html.TextBoxFor(i => i.Discrepancy[y].CorrectiveAction.PartNumberOff, new {@class = "form-control"})
+                                                    @Html.Kendo().TextBoxFor(i => i.Discrepancy[y].CorrectiveAction.PartNumberOff)
                                                     @Html.ValidationMessageFor(i => i.Discrepancy[y].CorrectiveAction.PartNumberOff)
                                                 </div>
                                             </div>
@@ -300,12 +274,12 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-2 col-form-label">S/N On</label>
                                                 <div class="col-sm-12 col-lg-4">
-                                                    @Html.TextBoxFor(i => i.Discrepancy[y].CorrectiveAction.SerialNumberOn, new {@class = "form-control"})
+                                                    @Html.Kendo().TextBoxFor(i => i.Discrepancy[y].CorrectiveAction.SerialNumberOn)
                                                     @Html.ValidationMessageFor(i => i.Discrepancy[y].CorrectiveAction.SerialNumberOn)
                                                 </div>
                                                 <label class="col-sm-12 col-lg-2 col-form-label">S/N Off</label>
                                                 <div class="col-sm-12 col-lg-4">
-                                                    @Html.TextBoxFor(i => i.Discrepancy[y].CorrectiveAction.SerialNumberOff, new {@class = "form-control"})
+                                                    @Html.Kendo().TextBoxFor(i => i.Discrepancy[y].CorrectiveAction.SerialNumberOff)
                                                     @Html.ValidationMessageFor(i => i.Discrepancy[y].CorrectiveAction.SerialNumberOff)
                                                 </div>
                                             </div>
@@ -314,24 +288,24 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-2 col-form-label">MRO</label>
                                                 <div class="col-sm-2">
-                                                    @Html.TextBoxFor(i => i.Discrepancy[y].CorrectiveAction.CertificateOfReleaseToService.Station, new {@class = "form-control"})
+                                                    @Html.Kendo().TextBoxFor(i => i.Discrepancy[y].CorrectiveAction.CertificateOfReleaseToService.Station)
                                                     @Html.ValidationMessageFor(i => i.Discrepancy[y].CorrectiveAction.CertificateOfReleaseToService.Station)
                                                 </div>
                                                 <label class="col-sm-12 col-lg-2 col-form-label">Date</label>
                                                 <div class="col-sm-12 col-lg-6">
-                                                    @Html.EditorFor(i => i.FlightDate, new {htmlAttributes = new {@class = "form-control"}})
+                                                    @Html.Kendo().DateTimePickerFor(i => i.FlightDate)
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">Auth B1</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    @Html.DropDownListFor(i => i.Discrepancy[y].CorrectiveAction.CertificateOfReleaseToService.AuthorizationB1Id, s, new {@class = "form-control"})
+                                                    @Html.Kendo().DropDownListFor(i => i.Discrepancy[y].CorrectiveAction.CertificateOfReleaseToService.AuthorizationB1Id).BindTo(s)
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-12 col-lg-4 col-form-label">Auth B2</label>
                                                 <div class="col-sm-12 col-lg-8">
-                                                    @Html.DropDownListFor(i => i.Discrepancy[y].CorrectiveAction.CertificateOfReleaseToService.AuthorizationB2Id, s, new {@class = "form-control"})
+                                                    @Html.Kendo().DropDownListFor(i => i.Discrepancy[y].CorrectiveAction.CertificateOfReleaseToService.AuthorizationB2Id).BindTo(s)
                                                 </div>
                                             </div>
                                         </div>
@@ -352,11 +326,10 @@
 
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect " data-dismiss="modal">Close</button>
+                <button type="button" onclick="CloseModal('RegFlight')" class="btn btn-default waves-effect">Close</button>
                 <button type="submit" class="btn btn-primary waves-effect waves-light ">Save changes</button>
             </div>
 
-        </div>
-    </div>
+        
 
 }
