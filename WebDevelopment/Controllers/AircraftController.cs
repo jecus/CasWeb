@@ -17,11 +17,13 @@ namespace WebDevelopment.Controllers
     public class AircraftController : Controller
     {
 	    private readonly IAircraftRepository _aircraftRepository;
-        private readonly DatabaseContext _db;
+	    private readonly IComponentRepository _componentRepository;
+	    private readonly DatabaseContext _db;
 
-        public AircraftController(IAircraftRepository aircraftRepository, DatabaseContext db)
+        public AircraftController(IAircraftRepository aircraftRepository, IComponentRepository componentRepository, DatabaseContext db)
         {
             _aircraftRepository = aircraftRepository;
+            _componentRepository = componentRepository;
             _db = db;
         }
 
@@ -32,19 +34,10 @@ namespace WebDevelopment.Controllers
 	        GlobalObject.AircraftMainMenu = new AircraftMainMenu(Url, aircraftId);
 
             var aircraft = await _aircraftRepository.GetById(aircraftId);
-            var bc = await _db.Components
-	            .AsNoTracking()
-	            .OnlyActive()
-	            .Where(i => i.IsBaseComponent && i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectID == aircraftId &&
-	                        i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectType == 7)
-	            .Include(i => i.TransferRecords)
-	            .Include(i => i.Model)
-	            .ToListAsync();
-
 
             ViewData["Operator"] = await _db.Operators.FirstOrDefaultAsync();
-            ViewData["BaseComponents"] = bc.ToBaseComponentView();
-            return View(aircraft);
+            ViewData["BaseComponents"] = await _componentRepository.GetAircraftBaseComponents(aircraftId);
+			return View(aircraft);
         }
     }
 }
