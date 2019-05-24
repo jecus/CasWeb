@@ -24,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Kendo.Mvc">
+      <HintPath>..\WebDevelopment\KendoNuget\Kendo.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
       <HintPath>C:\Users\Evgenii\.nuget\packages\microsoft.aspnetcore.http.abstractions\2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
     </Reference>

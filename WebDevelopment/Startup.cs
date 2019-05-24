@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
 namespace WebDevelopment
 {
@@ -37,6 +38,7 @@ namespace WebDevelopment
 					options.SerializerSettings.Converters.Add(new StringEnumConverter());
 					options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 				})
+				.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 			services.AddDbContext<DatabaseContext>(builder => builder.UseSqlServer(Configuration.GetConnectionString("CORE_CONNECTION_STRING")));

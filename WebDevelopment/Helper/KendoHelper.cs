@@ -87,7 +87,7 @@ namespace WebDevelopment.Helper
 			}
 
 			var res = "<button class= 'btn waves-effect waves-dark " + typeClass + " btn-icon'" +
-				   @" onclick=""OpenModal('" + url + $@"?{paramName}=#={property}#', {windowName})""" + @"><i class=""" + icon + @"""></i></button>";
+				   @" onclick=""OpenModal('" + url + $@"?{paramName}=#={property}#', '{windowName}')""" + @"><i class=""" + icon + @"""></i></button>";
 
 			return res;
 		}

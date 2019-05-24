@@ -39,7 +39,7 @@
 )
 
 @(Html.Kendo().Window()
-      .Name("123")
+      .Name("abc")
       .Title("123")
       .Modal(true)
       .Visible(false)
@@ -78,7 +78,7 @@
                   columns.Bound(p => p.Id)
                       .ClientTemplate(
                           KendoHelper.Button(Url.Action("Index", "AircraftFlight", new { GlobalObject.AircraftId }), "atlbId", "Id", ButtonType.Open)+
-                          KendoHelper.ButtonModal(Url.Action("ModalEdit", "ATLB", new { GlobalObject.AircraftId },Context.Request.Scheme), "atlbId", "Id", ButtonType.Edit, "123")
+                          KendoHelper.ButtonModal(Url.Action("ModalEdit", "ATLB", new { GlobalObject.AircraftId },Context.Request.Scheme), "atlbId", "Id", ButtonType.Edit, "abc")
                   ).Width(90).Title(" ");
                   columns.Bound(p => p.ATLBNo).Title("ATLB №").Width(120);
                   columns.Bound(p => p.Pages).Title("Pages").Width(120);
