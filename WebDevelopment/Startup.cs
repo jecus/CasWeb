@@ -38,7 +38,16 @@ namespace WebDevelopment
 					options.SerializerSettings.Converters.Add(new StringEnumConverter());
 					options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 				})
-				.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
+				.AddJsonOptions(options =>
+				{
+					options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+					options.AllowInputFormatterExceptionMessages = true;
+					//options.SerializerSettings.Converters.Add(new StringEnumConverter());
+					options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+					options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Error;
+					options.SerializerSettings.ObjectCreationHandling = ObjectCreationHandling.Reuse;
+					options.UseMemberCasing();
+				})
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 			services.AddDbContext<DatabaseContext>(builder => builder.UseSqlServer(Configuration.GetConnectionString("CORE_CONNECTION_STRING")));
