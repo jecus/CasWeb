@@ -53,7 +53,7 @@
               .Groupable()
               .ColumnMenu()
               .DataSource(dataSource => dataSource
-                  .Ajax().Group(i => i.Add(p => p.ATAChapterString))
+                  .Ajax()
                   .PageSize(250)
                   .ServerOperation(false)
                   .Read(read => read.Action("", ""))
