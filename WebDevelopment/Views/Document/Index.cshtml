@@ -21,7 +21,7 @@
                 .Columns(columns =>
                 {
 
-                    columns.Bound(p => p.FileId).ClientTemplate(KendoHelper.PdfButton(Url.Action("OpenPdf", "File"), "FileId")).Title(" ").Width(60);
+                    columns.Bound(p => p.FileId).ClientTemplate(KendoHelper.PdfButton(Url.Action("OpenPdf", "File"), "FileId")).Title(" ").Width(60).Sortable(false).Groupable(false);
                     columns.Bound(p => p.DocumentType.FullName).Title("Type").Width(130);
                     columns.Bound(p => p.DocumentSubType.Name).Title("Title").Width(130);
                     columns.Bound(p => p.ContractNumber).Title("№ Doc").Width(130);

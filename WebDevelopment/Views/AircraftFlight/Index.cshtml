@@ -76,7 +76,7 @@
                       .ClientTemplate(
                           KendoHelper.ButtonModal(Url.Action("ModalEditRegFlight", "AircraftFlight", new { GlobalObject.AircraftId }, Context.Request.Scheme), "flightId", "Id", ButtonType.Edit,"RegFlight")
                           //KendoHelper.ButtonModal(Url.Action("ConfirmDelete", "AircraftFlight", new { GlobalObject.AircraftId }, Context.Request.Scheme), "flightId", "Id", ButtonType.Delete, "123")
-                      ).Width(90).Title(" ");
+                      ).Width(90).Title(" ").Sortable(false).Groupable(false);
                   columns.Bound(p => p.PageNo).Title("Page №").Width(120);
                   columns.Bound(p => p.FlightNumber.FlightNumber).Title("Flight №").Width(120);
                   columns.Bound(p => p.FlightDate).Title("Date").ClientTemplate("#= kendo.toString(FlightDate, \"dd.MM.yyyy\") #").Width(120);
