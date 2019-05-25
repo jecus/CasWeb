@@ -129,7 +129,7 @@ namespace BusinessLayer.Dictionaties
         /// </summary>
         /// <param name="conditionStateId"></param>
         /// <returns></returns>
-        public static NDTType GetItemById(Int32 conditionStateId)
+        public static NDTType GetItemById(int conditionStateId)
         {
             foreach (NDTType t in _Items)
                 if (t.ItemId == conditionStateId)
@@ -162,7 +162,7 @@ namespace BusinessLayer.Dictionaties
         /// <param name="itemId"></param>
         /// <param name="shortName"></param>
         /// <param name="fullName"></param>
-        public NDTType(Int32 itemId, String shortName, String fullName)
+        public NDTType(int itemId, string shortName, string fullName)
         {
             ItemId = itemId;
             ShortName = shortName;

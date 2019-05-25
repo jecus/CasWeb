@@ -33,7 +33,7 @@ namespace BusinessLayer.Dictionaties
         /// </summary>
         /// <param name="maintenanceTypeId"></param>
         /// <returns></returns>
-        public static DeffectConfirm GetItemById(Int32 maintenanceTypeId)
+        public static DeffectConfirm GetItemById(int maintenanceTypeId)
         {
             foreach (DeffectConfirm t in _Items)
                 if (t.ItemId == maintenanceTypeId)
@@ -88,7 +88,7 @@ namespace BusinessLayer.Dictionaties
         /// <param name="itemId"></param>
         /// <param name="shortName"></param>
         /// <param name="fullName"></param>
-        public DeffectConfirm(Int32 itemId, String shortName, String fullName)
+        public DeffectConfirm(int itemId, string shortName, string fullName)
         {
             ItemId = itemId;
             ShortName = shortName;

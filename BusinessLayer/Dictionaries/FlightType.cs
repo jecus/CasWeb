@@ -71,7 +71,7 @@ namespace BusinessLayer.Dictionaties
         /// <param name="recordTypeId"></param>
         /// <param name="shortName"></param>
         /// <param name="fullName"></param>
-        public FlightType(Int32 recordTypeId, String shortName, String fullName, string recoredType)
+        public FlightType(int recordTypeId, string shortName, string fullName, string recoredType)
         {
             ShortName = shortName;
             FullName = fullName;
@@ -102,7 +102,7 @@ namespace BusinessLayer.Dictionaties
         /// </summary>
         /// <param name="conditionStateId"></param>
         /// <returns></returns>
-        public static FlightType GetItemById(Int32 conditionStateId)
+        public static FlightType GetItemById(int conditionStateId)
         {
             foreach (FlightType t in _Items)
                 if (t.ItemId == conditionStateId)

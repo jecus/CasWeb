@@ -52,7 +52,7 @@ namespace BusinessLayer.Dictionaties
         /// </summary>
         /// <param name="maintenanceTypeId"></param>
         /// <returns></returns>
-        public static ComponentStorePosition GetItemById(Int32 maintenanceTypeId)
+        public static ComponentStorePosition GetItemById(int maintenanceTypeId)
         {
             foreach (ComponentStorePosition t in _Items)
                 if (t.ItemId == maintenanceTypeId)
@@ -108,7 +108,7 @@ namespace BusinessLayer.Dictionaties
         /// <param name="shortName"></param>
         /// <param name="fullName"></param>
         /// <param name="weight"></param>
-        public ComponentStorePosition(Int32 itemId, String shortName, String fullName, int weight)
+        public ComponentStorePosition(int itemId, string shortName, string fullName, int weight)
         {
             ItemId = itemId;
             ShortName = shortName;

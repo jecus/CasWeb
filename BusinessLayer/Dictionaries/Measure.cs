@@ -291,7 +291,7 @@ namespace BusinessLayer.Dictionaties
         /// <param name="shortName"></param>
         /// <param name="fullName"></param>
         /// <param name="mc"></param>
-        public Measure(Int32 itemId, String shortName, String fullName, MeasureCategory mc)
+        public Measure(int itemId, string shortName, string fullName, MeasureCategory mc)
         {
             ItemId = itemId;
             ShortName = shortName;
@@ -368,7 +368,7 @@ namespace BusinessLayer.Dictionaties
         /// </summary>
         /// <param name="measureId"></param>
         /// <returns></returns>
-        public static Measure GetItemById(Int32 measureId)
+        public static Measure GetItemById(int measureId)
         {
             foreach (Measure t in _Items)
                 if (t.ItemId == measureId)
@@ -516,7 +516,7 @@ namespace BusinessLayer.Dictionaties
         /// <param name="itemId"></param>
         /// <param name="shortName"></param>
         /// <param name="fullName"></param>
-        public MeasureCategory(Int32 itemId, String shortName, String fullName)
+        public MeasureCategory(int itemId, string shortName, string fullName)
         {
             ItemId = itemId;
             ShortName = shortName;

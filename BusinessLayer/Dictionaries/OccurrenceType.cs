@@ -29,7 +29,7 @@ namespace BusinessLayer.Dictionaties
         /// </summary>
         /// <param name="maintenanceTypeId"></param>
         /// <returns></returns>
-        public static OccurrenceType GetItemById(Int32 maintenanceTypeId)
+        public static OccurrenceType GetItemById(int maintenanceTypeId)
         {
             foreach (OccurrenceType t in _Items)
                 if (t.ItemId == maintenanceTypeId)
@@ -84,7 +84,7 @@ namespace BusinessLayer.Dictionaties
         /// <param name="itemId"></param>
         /// <param name="shortName"></param>
         /// <param name="fullName"></param>
-        public OccurrenceType(Int32 itemId, String shortName, String fullName)
+        public OccurrenceType(int itemId, string shortName, string fullName)
         {
             ItemId = itemId;
             ShortName = shortName;

@@ -35,7 +35,7 @@ namespace BusinessLayer.Dictionaties
             /// </summary>
             /// <param name="maintenanceTypeId"></param>
             /// <returns></returns>
-            public static Education GetItemById(Int32 maintenanceTypeId)
+            public static Education GetItemById(int maintenanceTypeId)
             {
                 foreach (Education t in _Items)
                     if (t.ItemId == maintenanceTypeId)
@@ -88,7 +88,7 @@ namespace BusinessLayer.Dictionaties
             /// <param name="itemId"></param>
             /// <param name="shortName"></param>
             /// <param name="fullName"></param>
-            public Education(Int32 itemId, String shortName, String fullName)
+            public Education(int itemId, string shortName, string fullName)
             {
                 ItemId = itemId;
                 ShortName = shortName;

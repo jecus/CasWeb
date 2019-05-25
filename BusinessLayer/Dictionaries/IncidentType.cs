@@ -94,7 +94,7 @@ namespace BusinessLayer.Dictionaties
         /// </summary>
         /// <param name="maintenanceTypeId"></param>
         /// <returns></returns>
-        public static IncidentType GetItemById(Int32 maintenanceTypeId)
+        public static IncidentType GetItemById(int maintenanceTypeId)
         {
             foreach (IncidentType t in _Items)
                 if (t.ItemId == maintenanceTypeId)
@@ -149,7 +149,7 @@ namespace BusinessLayer.Dictionaties
         /// <param name="itemId"></param>
         /// <param name="shortName"></param>
         /// <param name="fullName"></param>
-        public IncidentType(Int32 itemId, String shortName, String fullName)
+        public IncidentType(int itemId, string shortName, string fullName)
         {
             ItemId = itemId;
             ShortName = shortName;

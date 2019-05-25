@@ -35,7 +35,7 @@ namespace BusinessLayer.Dictionaties
         /// </summary>
         /// <param name="maintenanceTypeId"></param>
         /// <returns></returns>
-        public static DeffeсtCategory GetItemById(Int32 maintenanceTypeId)
+        public static DeffeсtCategory GetItemById(int maintenanceTypeId)
         {
             foreach (DeffeсtCategory t in _Items)
                 if (t.ItemId == maintenanceTypeId)
@@ -90,7 +90,7 @@ namespace BusinessLayer.Dictionaties
         /// <param name="itemId"></param>
         /// <param name="shortName"></param>
         /// <param name="fullName"></param>
-        public DeffeсtCategory(Int32 itemId, String shortName, String fullName)
+        public DeffeсtCategory(int itemId, string shortName, string fullName)
         {
             ItemId = itemId;
             ShortName = shortName;

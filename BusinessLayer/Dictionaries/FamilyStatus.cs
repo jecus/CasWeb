@@ -35,7 +35,7 @@ namespace BusinessLayer.Dictionaties
         /// </summary>
         /// <param name="maintenanceTypeId"></param>
         /// <returns></returns>
-        public static FamilyStatus GetItemById(Int32 maintenanceTypeId)
+        public static FamilyStatus GetItemById(int maintenanceTypeId)
         {
             foreach (FamilyStatus t in _Items)
                 if (t.ItemId == maintenanceTypeId)
@@ -89,7 +89,7 @@ namespace BusinessLayer.Dictionaties
         /// <param name="itemId"></param>
         /// <param name="shortName"></param>
         /// <param name="fullName"></param>
-        public FamilyStatus(Int32 itemId, String shortName, String fullName)
+        public FamilyStatus(int itemId, string shortName, string fullName)
         {
             ItemId = itemId;
             ShortName = shortName;

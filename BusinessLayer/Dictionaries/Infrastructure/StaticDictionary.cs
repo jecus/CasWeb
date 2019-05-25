@@ -10,7 +10,7 @@ namespace BusinessLayer.Dictionaties
 		/// <summary>
 		/// Короткое имя
 		/// </summary>
-		public String ShortName { get; set; }
+		public string ShortName { get; set; }
 
 		#endregion
 
@@ -18,7 +18,7 @@ namespace BusinessLayer.Dictionaties
 		/// <summary>
 		/// Полное имя
 		/// </summary>
-		public String FullName { get; set; }
+		public string FullName { get; set; }
 
 		#endregion
 
@@ -26,7 +26,7 @@ namespace BusinessLayer.Dictionaties
 		/// <summary>
 		/// Общее имя 
 		/// </summary>
-		public String CommonName { get; set; }
+		public string CommonName { get; set; }
 
 		#endregion
 

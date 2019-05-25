@@ -33,7 +33,7 @@ namespace BusinessLayer.Views
 
 		public int BaseComponentTypeId { get; set; }
 
-		public String Position
+		public string Position
 		{
 			get { return TransferRecords.GetLast() != null ? TransferRecords.GetLast().Position : ""; }
 		}

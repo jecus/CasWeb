@@ -22,6 +22,7 @@ namespace WebDevelopment
 			services.AddScoped<IStockCalculator, StockCalculator>();
 			services.AddScoped<IProductRepository, ProductRepository>();
 			services.AddScoped<IAtlbRepository, AtlbRepository>();
+			services.AddScoped<IMaintenanceDirectiveRepository, MaintenanceDirectiveRepository>();
 			return services;
 		}
 	}

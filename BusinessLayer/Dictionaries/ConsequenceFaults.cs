@@ -33,7 +33,7 @@ namespace BusinessLayer.Dictionaties
         /// </summary>
         /// <param name="maintenanceTypeId"></param>
         /// <returns></returns>
-        public static ConsequenceFaults GetItemById(Int32 maintenanceTypeId)
+        public static ConsequenceFaults GetItemById(int maintenanceTypeId)
         {
             foreach (ConsequenceFaults t in _Items)
                 if (t.ItemId == maintenanceTypeId)
@@ -88,7 +88,7 @@ namespace BusinessLayer.Dictionaties
         /// <param name="itemId"></param>
         /// <param name="shortName"></param>
         /// <param name="fullName"></param>
-        public ConsequenceFaults(Int32 itemId, String shortName, String fullName)
+        public ConsequenceFaults(int itemId, string shortName, string fullName)
         {
             ItemId = itemId;
             ShortName = shortName;

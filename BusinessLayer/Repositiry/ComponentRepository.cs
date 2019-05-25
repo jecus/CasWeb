@@ -22,7 +22,20 @@ namespace BusinessLayer.Repositiry
 	        _stockCalculator = stockCalculator;
         }
 
-        public async Task<List<BaseComponentView>> GetAircraftBaseComponents(int aircraftId)
+        public async Task<List<int>> GetAircraftBaseComponentIds(int aircraftId)
+        {
+	        var ids = await _db.Components
+		        .AsNoTracking()
+		        .OnlyActive()
+		        .Where(i => i.IsBaseComponent && i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectID == aircraftId &&
+		                    i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectType == 7)
+		        .Select(i => i.Id)
+		        .ToListAsync();
+
+	        return ids;
+        }
+
+		public async Task<List<BaseComponentView>> GetAircraftBaseComponents(int aircraftId)
         {
 	        var baseComponents = await _db.Components
 		        .AsNoTracking()

@@ -61,7 +61,7 @@ namespace BusinessLayer
 
         #region public Int32? Days
 
-        public Int32? Days
+        public int? Days
         {
             get
             {
@@ -88,7 +88,7 @@ namespace BusinessLayer
 
         #region public Int32? Months
 
-        public Int32? Months
+        public int? Months
         {
             get
             {
@@ -115,7 +115,7 @@ namespace BusinessLayer
 
         #region public Int32? Years
 
-        public Int32? Years
+        public int? Years
         {
             get
             {

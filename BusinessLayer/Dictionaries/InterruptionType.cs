@@ -39,7 +39,7 @@ namespace BusinessLayer.Dictionaties
         /// </summary>
         /// <param name="maintenanceTypeId"></param>
         /// <returns></returns>
-        public static InterruptionType GetItemById(Int32 maintenanceTypeId)
+        public static InterruptionType GetItemById(int maintenanceTypeId)
         {
             foreach (InterruptionType t in _Items)
                 if (t.ItemId == maintenanceTypeId)
@@ -101,7 +101,7 @@ namespace BusinessLayer.Dictionaties
         /// <param name="itemId"></param>
         /// <param name="shortName"></param>
         /// <param name="fullName"></param>
-        public InterruptionType(Int32 itemId, String shortName, String fullName, string code, string description)
+        public InterruptionType(int itemId, string shortName, string fullName, string code, string description)
         {
             _code = code;
             _description = description;

@@ -340,7 +340,7 @@ namespace BusinessLayer.Dictionaties
         /// </summary>
         /// <param name="smartCoreTypeId"></param>
         /// <returns></returns>
-        public static SmartCoreType GetSmartCoreTypeById(Int32 smartCoreTypeId)
+        public static SmartCoreType GetSmartCoreTypeById(int smartCoreTypeId)
         {
             for (int i = 0; i < _Items.Count; i++)
                 if (_Items[i].ItemId == smartCoreTypeId)

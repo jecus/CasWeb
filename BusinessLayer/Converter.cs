@@ -2193,6 +2193,124 @@ namespace BusinessLayer
 
 		#endregion
 
+		#region MaintenanceDirective
+
+		public static MaintenanceDirective ToEntity(this MaintenanceDirectiveView view)
+		{
+
+			return new MaintenanceDirective
+			{
+				Id = view.ItemId,
+				IsDeleted = view.IsDeleted,
+				IsApplicability = view.IsApplicability,
+				IsOperatorTask = view.IsOperatorTask,
+				ProgramIndicator = view.ProgramIndicator?.ItemId ?? -1,
+				TaskNumberCheck = view.TaskNumberCheck,
+				DirectiveTypeId = view.WorkType?.ItemId,
+				MPDTaskNumber = view.MPDTaskNumber,
+				MPDNumber = view.MPDNumber,
+				MaintenanceManual = view.MaintenanceManual,
+				Zone = view.Zone,
+				Access = view.Access,
+				Applicability = view.Applicability,
+				ATAChapterId = view.ATAChapter?.Id,
+				Description = view.Description,
+				EngineeringOrders = view.EngineeringOrders,
+				ServiceBulletinNo = view.ServiceBulletinNo,
+				//Threshold = view.Threshold?.ToBinary(),
+				Remarks = view.Remarks,
+				HiddenRemarks = view.HiddenRemarks,
+				IsClosed = view.IsClosed,
+				ManHours = view.ManHours,
+				Cost = view.Cost,
+				Elapsed = view.Elapsed,
+				MRB = view.MRB,
+				TaskCardNumber = view.TaskCardNumber,
+				Program = view.Program?.ItemId,
+				CriticalSystem = view.CriticalSystem?.ItemId,
+				PrintInWP = view.PrintInWP,
+				NDTType = (short)(view.NDTType?.ItemId ?? -1),
+				KitsApplicable = view.KitsApplicable,
+				ComponentId = view.BaseComponent?.Id,
+				ForComponentId = view.ForComponentId,
+				MpdRef = view.MpdRef,
+				MpdRevisionNum = view.MpdRevisionNum,
+				MpdOldTaskCard = view.MpdOldTaskCard,
+				Workarea = view.Workarea,
+				MpdRevisionDate = view.MpdRevisionDate,
+				Category = view.Category?.ItemId ?? -1,
+				Skill = view.Skill?.ItemId ?? -1,
+				ScheduleItem = view.ScheduleItem,
+				ScheduleRef = view.ScheduleRef,
+				ScheduleRevisionNum = view.ScheduleRevisionNum,
+				ScheduleRevisionDate = view.ScheduleRevisionDate,
+			};
+		}
+
+
+		public static MaintenanceDirectiveView ToBlView(this MaintenanceDirective entity)
+		{
+			return new MaintenanceDirectiveView()
+			{
+				Id = entity.Id,
+				IsDeleted = entity.IsDeleted,
+				IsApplicability = entity.IsApplicability,
+				ProgramIndicator = MaintenanceDirectiveProgramIndicator.GetItemById(entity.ProgramIndicator),
+				IsOperatorTask = entity.IsOperatorTask,
+				TaskNumberCheck = entity.TaskNumberCheck,
+				WorkType = entity.DirectiveTypeId.HasValue ? MaintenanceDirectiveTaskType.GetItemById(entity.DirectiveTypeId.Value) : MaintenanceDirectiveTaskType.Unknown,
+				MPDTaskNumber = entity.MPDTaskNumber,
+				MPDNumber = entity.MPDNumber,
+				MaintenanceManual = entity.MaintenanceManual,
+				Zone = entity.Zone,
+				Access = entity.Access,
+				Applicability = entity.Applicability,
+				ATAChapter = entity.ATAChapter?.ToBlView(),
+				Description = entity.Description,
+				EngineeringOrders = entity.EngineeringOrders,
+				ServiceBulletinNo = entity.ServiceBulletinNo,
+				//Threshold = MaintenanceDirectiveThreshold.ConvertFromByteArray(maindirecdto.Threshold),
+				Remarks = entity.Remarks,
+				HiddenRemarks = entity.HiddenRemarks,
+				IsClosed = entity.IsClosed ?? default(bool),
+				ManHours = entity.ManHours ?? default(double),
+				Cost = entity.Cost ?? default(double),
+				Elapsed = entity.Elapsed ?? default(double),
+				MRB = entity.MRB,
+				TaskCardNumber = entity.TaskCardNumber,
+				Program = entity.Program.HasValue ? MaintenanceDirectiveProgramType.GetItemById(entity.Program.Value) : MaintenanceDirectiveProgramType.Unknown,
+				CriticalSystem = entity.CriticalSystem.HasValue ? CriticalSystemList.GetItemById(entity.CriticalSystem.Value) : CriticalSystemList.Unknown,
+				PrintInWP = entity.PrintInWP,
+				NDTType = NDTType.GetItemById(entity.NDTType),
+				KitsApplicable = entity.KitsApplicable,
+				BaseComponent = entity.BaseComponent?.ToBaseComponentView(),
+				ForComponentId = entity.ForComponentId ?? default(int),
+				MpdRef = entity.MpdRef,
+				MpdRevisionNum = entity.MpdRevisionNum,
+				MpdOldTaskCard = entity.MpdOldTaskCard,
+				Workarea = entity.Workarea,
+				MpdRevisionDate = entity.MpdRevisionDate ?? DateTimeExtend.GetCASMinDateTime(),
+				Category = MpdCategory.GetItemById(entity.Category),
+				Skill = Skill.GetItemById(entity.Skill),
+				ScheduleItem = entity.ScheduleItem,
+				ScheduleRef = entity.ScheduleRef,
+				ScheduleRevisionNum = entity.ScheduleRevisionNum,
+				ScheduleRevisionDate = entity.ScheduleRevisionDate ?? DateTimeExtend.GetCASMinDateTime()
+			};
+		}
+
+		public static List<MaintenanceDirectiveView> ToBlView(this IEnumerable<MaintenanceDirective> entity)
+		{
+			return new List<MaintenanceDirectiveView>(entity.Select(i => i.ToBlView()));
+		}
+
+		public static List<MaintenanceDirective> ToEntity(this IEnumerable<MaintenanceDirectiveView> view)
+		{
+			return new List<MaintenanceDirective>(view.Select(i => i.ToEntity()));
+		}
+
+		#endregion
+
 		#region MyRegion
 
 		public static GoodStandart ToEntity(this GoodStandartView standart)

@@ -28,7 +28,7 @@ namespace BusinessLayer.Dictionaties
         /// </summary>
         /// <param name="maintenanceTypeId"></param>
         /// <returns></returns>
-        public static ConsequenceOPS GetItemById(Int32 maintenanceTypeId)
+        public static ConsequenceOPS GetItemById(int maintenanceTypeId)
         {
             foreach (ConsequenceOPS t in _Items)
                 if (t.ItemId == maintenanceTypeId)
@@ -83,7 +83,7 @@ namespace BusinessLayer.Dictionaties
         /// <param name="itemId"></param>
         /// <param name="shortName"></param>
         /// <param name="fullName"></param>
-        public ConsequenceOPS(Int32 itemId, String shortName, String fullName)
+        public ConsequenceOPS(int itemId, string shortName, string fullName)
         {
             ItemId = itemId;
             ShortName = shortName;
