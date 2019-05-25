@@ -50,11 +50,11 @@
               .Pageable()
               .Filterable()
               .Sortable()
-              //.Groupable()
+              .Groupable()
               .ColumnMenu()
               .DataSource(dataSource => dataSource
                   .Ajax().Group(i => i.Add(p => p.ATAChapterString))
-                  .PageSize(20)
+                  .PageSize(250)
                   .ServerOperation(false)
                   .Read(read => read.Action("", ""))
               ))
