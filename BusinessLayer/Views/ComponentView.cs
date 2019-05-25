@@ -83,7 +83,7 @@ namespace BusinessLayer.Views
         public int? Measure { get; set; }
 
         public double Quantity { get; set; }
-        public string QuantityInString => (IsComponent ? 1.ToString() : $"{QuantityIn:0.##} ") + $"{MeasureView}(s)";
+        public string QuantityInString => (IsComponent ? 1.ToString() : $"{QuantityIn:0.##} ") + $" {MeasureView}(s)";
 
         public bool IsComponent
         {
