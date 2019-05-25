@@ -48,9 +48,9 @@
               .Reorderable(reorderable => reorderable.Columns(true))
               .Resizable(resizable => resizable.Columns(true))
               .Pageable()
-              //.Filterable()
+              .Filterable()
               .Sortable()
-              .Groupable()
+              //.Groupable()
               .ColumnMenu()
               .DataSource(dataSource => dataSource
                   .Ajax().Group(i => i.Add(p => p.ATAChapterString))
