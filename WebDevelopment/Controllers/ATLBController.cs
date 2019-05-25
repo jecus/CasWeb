@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BusinessLayer;
 using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
-using Entity.Extentions;
 using Entity.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

@@ -580,7 +580,7 @@ namespace BusinessLayer
 				HTS = componentModel.HTS,
 				ComponentClass = componentModel.ComponentClass.HasValue ? GoodsClass.GetItemById(componentModel.ComponentClass.Value) : GoodsClass.Unknown,
 				IsDangerous = componentModel.IsDangerous,
-				AtaChapter = componentModel.ATAChapter?.ToBlView(),
+				AtaChapter = componentModel.ATAChapter?.ToBlView() ?? ATAChapterView.Unknown,
 				Standard = componentModel.GoodStandart?.ToBlView()
 			};
 		}
@@ -655,7 +655,7 @@ namespace BusinessLayer
 				HTS = componentModel.HTS,
 				ComponentClass = componentModel.ComponentClass.HasValue ? GoodsClass.GetItemById(componentModel.ComponentClass.Value) : GoodsClass.Unknown,
 				IsDangerous = componentModel.IsDangerous,
-				AtaChapter = componentModel.ATAChapter?.ToBlView(),
+				AtaChapter = componentModel.ATAChapter?.ToBlView() ?? ATAChapterView.Unknown,
 				Standard = componentModel.GoodStandart?.ToBlView()
 			};
 		}
@@ -1204,7 +1204,8 @@ namespace BusinessLayer
                 IsDeleted = comp.IsDeleted,
                 StartDate = comp.StartDate ,
 
-                ATAChapter = comp.ATAChapter,
+                ATAChapter = comp.ATAChapter?.ToBlView() ?? ATAChapterView.Unknown,
+                Model = comp.Model?.ToBlView(),
                 PartNumber = comp.PartNumber,
                 Description = comp.Description,
                 SerialNumber = comp.SerialNumber,
@@ -1742,7 +1743,7 @@ namespace BusinessLayer
                 Messages = disc.Messages,
                 Auth = disc.Auth?.ToBlView(),
                 PilotRemarks = disc.PilotRemarks,
-                ATAChapter = disc.ATAChapter?.ToBlView(),
+                ATAChapter = disc.ATAChapter?.ToBlView() ?? ATAChapterView.Unknown,
                 DirectiveId = disc.DirectiveId,
                 Num = disc.Num ?? default(int),
                 WorkPackageId = disc.WorkPackageId ?? default(int),

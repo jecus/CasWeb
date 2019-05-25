@@ -35,16 +35,11 @@ namespace WebDevelopment
 			services.AddMvc()
 				.AddJsonOptions(options =>
 				{
-					options.SerializerSettings.Converters.Add(new StringEnumConverter());
-					options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-				})
-				.AddJsonOptions(options =>
-				{
 					options.SerializerSettings.ContractResolver = new DefaultContractResolver();
 					options.AllowInputFormatterExceptionMessages = true;
-					//options.SerializerSettings.Converters.Add(new StringEnumConverter());
 					options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
-					options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Error;
+					options.SerializerSettings.Converters.Add(new StringEnumConverter());
+					options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 					options.SerializerSettings.ObjectCreationHandling = ObjectCreationHandling.Reuse;
 					options.UseMemberCasing();
 				})

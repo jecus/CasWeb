@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Policy;
+﻿using System.Collections.Generic;
 using System.Text;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Internal;
 
 namespace WebDevelopment.Helper
 {
@@ -33,7 +30,7 @@ namespace WebDevelopment.Helper
 			foreach (var property in properties)
 			{
 				sb.AppendLine("<a class=" +
-				             "#if (" + property + " > 0) {# 'btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon' #}" +
+				             "#if (" + property.Key + " > 0) {# 'btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon' #}" +
 				             "else {# 'btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled' #}#" +
 				             " href=" + url + $@"?fileId=#={property.Key}#" + @"><i class=""fa fa-file-pdf-o""></i></a>");
 			}

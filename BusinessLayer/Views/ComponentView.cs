@@ -83,6 +83,16 @@ namespace BusinessLayer.Views
         public int? Measure { get; set; }
 
         public double Quantity { get; set; }
+        public string QuantityInString => (IsComponent ? 1.ToString() : $"{QuantityIn:0.##} ") + $"{MeasureView}(s)";
+
+        public bool IsComponent
+        {
+	        get
+	        {
+		        return GoodsClass.IsNodeOrSubNodeOf(GoodsClass.ComponentsAndParts) || 
+		        GoodsClass.IsNodeOrSubNodeOf(GoodsClass.ProductionAuxiliaryEquipment);
+			}
+        }
 
         public double? ManHours { get; set; }
 
@@ -140,9 +150,12 @@ namespace BusinessLayer.Views
 
         public int FromSupplierId { get; set; }
 
+		public ComponentModelView Model { get; set; }
+
         public DateTime? FromSupplierReciveDate { get; set; }
 
-        public ATAChapter ATAChapter { get; set; }
+        public ATAChapterView ATAChapter { get; set; }
+        public string ATAChapterString => Model != null ? Model.AtaChapter?.ToString() : ATAChapter?.ToString();
 
         public LocationView Location { get; set; }
 
@@ -174,6 +187,16 @@ namespace BusinessLayer.Views
                 return ComponentStorePosition.UNK;
             }
 
+        }
+
+        public Measure MeasureView
+        {
+	        get
+	        {
+		        return Measure.HasValue
+			        ? Dictionaties.Measure.GetItemById(Measure.Value)
+			        : Dictionaties.Measure.Unknown;
+	        }
         }
 
         public int ShippingFileId { get; set;}

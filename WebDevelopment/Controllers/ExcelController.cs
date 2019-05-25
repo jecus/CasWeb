@@ -1,6 +1,4 @@
 ﻿using System;
-using Kendo.Mvc.Extensions;
-using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebDevelopment.Controllers

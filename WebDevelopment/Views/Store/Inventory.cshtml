@@ -25,6 +25,7 @@
                       {"ShippingFileId", "Shipping" }
                   })).Title(" ").Width(120);
                   columns.Bound(p => p.ParentStore.StoreName).Title("Store").Width(130);
+                  columns.Bound(p => p.ATAChapterString).Title("ATA").Width(130);
                   columns.Bound(p => p.PartNumber).Title("Part. №").Width(130);
                   columns.Bound(p => p.Description).Title("Description").Width(130);
                   columns.Bound(p => p.SerialNumber).Title("Serial №").Width(130);
@@ -34,7 +35,7 @@
                   columns.Bound(p => p.Location.LocationsType.FullName).Title("Facility").Width(130);
                   columns.Bound(p => p.Current).Title("Current").Width(130);
                   columns.Bound(p => p.ShouldBeOnStockString).Title("Should be").Width(130);
-                  columns.Bound(p => p.Quantity).Title("Qty in").Width(130);
+                  columns.Bound(p => p.QuantityInString).Title("Qty in").Width(130);
                   columns.Bound(p => p.FromSupplier.Name).Title("Supplier").Width(130);
                   columns.Bound(p => p.Remarks).Title("Remarks").Width(130);
               })

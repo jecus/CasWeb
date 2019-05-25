@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using BusinessLayer.Views;
+using Entity.Models.General;
 
 namespace BusinessLayer.Repositiry.Interfaces
 {

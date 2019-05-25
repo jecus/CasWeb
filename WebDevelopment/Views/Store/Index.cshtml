@@ -6,24 +6,24 @@
     ViewData["Title"] = "Store";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var components = (List<ComponentView>)ViewData["Components"];
-    var fileCrs = @Url.Action("OpenPdf", "File", new { fileId = "_FILEID_" });
-    var fileShip = @Url.Action("OpenPdf", "File", new { fileId = "_FILEID_" });
+    var store = (StoreView)ViewData["Store"];
 }
 
 <div class="card">
     <div class="card-header">
-        <h5>Inventory Control</h5>
+        <h5>@store.StoreName</h5>
     </div>
     <div class="card-block">
         @(Html.Kendo().Grid(components)
               .Name("Grid")
               .Columns(columns =>
               {
-                  columns.Bound(p => p.ShippingFileId).ClientTemplate(KendoHelper.PdfButton(Url.Action("OpenPdf", "File"), new Dictionary<string, string>
+                  columns.Bound(p => p.Id).ClientTemplate(KendoHelper.PdfButton(Url.Action("OpenPdf", "File"), new Dictionary<string, string>
                   {
                       {"CRSFileId", "CRS" },
                       {"ShippingFileId", "Shipping" },
                   })).Title(" ").Width(120);
+                  columns.Bound(p => p.ATAChapterString).Title("ATA").Width(130);
                   columns.Bound(p => p.PartNumber).Title("Part. №").Width(130);
                   columns.Bound(p => p.Description).Title("Description").Width(130);
                   columns.Bound(p => p.SerialNumber).Title("Serial №").Width(130);
@@ -33,13 +33,13 @@
                   columns.Bound(p => p.Location.LocationsType.FullName).Title("Facility").Width(130);
                   columns.Bound(p => p.Current).Title("Current").Width(130);
                   columns.Bound(p => p.ShouldBeOnStockString).Title("Should be").Width(130);
-                  columns.Bound(p => p.Quantity).Title("Qty in").Width(130);
+                  columns.Bound(p => p.QuantityInString).Title("Qty in").Width(130);
                   columns.Bound(p => p.FromSupplier.Name).Title("Supplier").Width(130);
                   columns.Bound(p => p.Remarks).Title("Remarks").Width(130);
               })
               .ToolBar(tools => tools.Excel())
               .Excel(excel => excel
-                  .FileName("Inventory Control.xlsx")
+                  .FileName($"{store.StoreName}.xlsx")
                   .Filterable(true)
                   .AllPages(true)
                   .ProxyURL(Url.Action("ExcelExport", "Excel"))
@@ -48,12 +48,12 @@
               .Reorderable(reorderable => reorderable.Columns(true))
               .Resizable(resizable => resizable.Columns(true))
               .Pageable()
-              .Filterable()
+              //.Filterable()
               .Sortable()
               .Groupable()
               .ColumnMenu()
               .DataSource(dataSource => dataSource
-                  .Ajax()
+                  .Ajax().Group(i => i.Add(p => p.ATAChapterString))
                   .PageSize(20)
                   .ServerOperation(false)
                   .Read(read => read.Action("", ""))

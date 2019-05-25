@@ -7,7 +7,6 @@ using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
-using Entity.Models.General;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLayer.Repositiry
@@ -49,6 +48,9 @@ namespace BusinessLayer.Repositiry
 			var components = await _db.Components
 				.OnlyActive()
 				.AsNoTracking()
+				.Include(i => i.ATAChapter)
+				.Include(i => i.Model)
+				.Include(i => i.Model.ATAChapter)
 				.Include(i => i.Location)
 				.Include(i => i.Location.LocationsType)
 				.Include(i => i.SupplierRelations)
@@ -135,6 +137,7 @@ namespace BusinessLayer.Repositiry
 				.OnlyActive()
 				.AsNoTracking()
 				.Include(i => i.Location)
+				.Include(i => i.ATAChapter)
 				.Include(i => i.Location.LocationsType)
 				.Include(i => i.SupplierRelations)
 				.Include(i => i.TransferRecords)

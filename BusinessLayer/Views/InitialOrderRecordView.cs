@@ -1,6 +1,4 @@
 ﻿using System;
-using Entity.Models.Dictionaries;
-using Entity.Models.General;
 
 namespace BusinessLayer.Views
 {
