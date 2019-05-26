@@ -2200,7 +2200,7 @@ namespace BusinessLayer
 
 			return new MaintenanceDirective
 			{
-				Id = view.ItemId,
+				Id = view.Id,
 				IsDeleted = view.IsDeleted,
 				IsApplicability = view.IsApplicability,
 				IsOperatorTask = view.IsOperatorTask,

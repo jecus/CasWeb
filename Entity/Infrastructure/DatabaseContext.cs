@@ -751,8 +751,8 @@ namespace Entity.Infrastructure
 		        .HasMany(i => i.CategoriesRecords).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.ParentId);
 	        modelBuilder.Entity<MaintenanceCheck>()
 		        .HasMany(i => i.Kits).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.ParentId);
-	        modelBuilder.Entity<MaintenanceCheck>()
-		        .HasMany(i => i.BindMpds).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.MaintenanceCheckId);
+	        //modelBuilder.Entity<MaintenanceCheck>()
+		       // .HasMany(i => i.BindMpds).WithOne(i => i.MaintenanceCheck).HasForeignKey(i => i.MaintenanceCheckId);
 
 	        #endregion
 

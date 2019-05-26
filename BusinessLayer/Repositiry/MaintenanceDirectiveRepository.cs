@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLayer.Dictionaties;
 using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Entity.Extentions;
@@ -27,7 +28,18 @@ namespace BusinessLayer.Repositiry
 				.Where(i => basecomponentIds.Contains(i.ComponentId.Value))
 				.AsNoTracking().OnlyActive().ToListAsync();
 
-			return mpds.ToBlView();
+			var mpdIds = mpds.Select(i => i.Id);
+			var fileLinks = await _db.ItemFileLinks
+				.AsNoTracking()
+				.Where(i => i.ParentTypeId == SmartCoreType.MaintenanceDirective.ItemId && mpdIds.Contains(i.ParentId))
+				.ToListAsync();
+
+			var view = mpds.ToBlView();
+			
+			foreach (var directiveView in view)
+				directiveView.ItemFileLink = fileLinks.FirstOrDefault(i => i.ParentId == directiveView.Id && i.LinkType == (int) FileLinkType.MaintenanceTaskCardNumberFile);
+			
+			return view;
 		}
 	}
 }

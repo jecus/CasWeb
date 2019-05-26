@@ -184,13 +184,5 @@ namespace Entity.Models.General
         //[Child(FilterType.Equal, "ParentTypeId", 14)]
         public ICollection<AccessoryRequired> Kits { get; set; }
 
-        public ICollection<MaintenanceDirective> BindMpds { get; set; }
-
-		#region Navigation Property
-
-		//[DataMember]
-		public MaintenanceCheck MaintenanceCheck { get; set; }
-
-		#endregion
-	}
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using BusinessLayer.Dictionaties;
+using Entity.Models.General;
 
 namespace BusinessLayer.Views
 {
@@ -46,6 +47,7 @@ namespace BusinessLayer.Views
 		public string TaskCardNumber { get; set; }
 
 		public MaintenanceDirectiveProgramType Program { get; set; }
+		public string ProgramString => Program?.ToString();
 
 		public CriticalSystemList CriticalSystem { get; set; }
 
@@ -90,10 +92,13 @@ namespace BusinessLayer.Views
 		public bool IsOperatorTask { get; set; }
 
 		public MaintenanceDirectiveProgramIndicator ProgramIndicator { get; set; }
-
+		public string ProgramIndicatorString => ProgramIndicator.ToString();
 
 		public ATAChapterView ATAChapter { get; set; }
 
 		public BaseComponentView BaseComponent { get; set; }
+
+		public ItemFileLink ItemFileLink { get; set; }
+		public int FileId => ItemFileLink?.FileId ?? -1;
 	}
 }

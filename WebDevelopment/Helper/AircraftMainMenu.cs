@@ -49,7 +49,7 @@ namespace WebDevelopment.Helper
                 new AircraftMainMenu(5, "Maintenance Program", "#!", "feather icon-clipboard", subMenu: new List<AircraftMainMenu>()
                 {
                     new AircraftMainMenu(1, "MTOP", "#!"),
-                    new AircraftMainMenu(2, "Routine Tasks", "#!"),
+                    new AircraftMainMenu(2, "Routine Tasks", url.Action("Index","MaintenanceDirective",new {GlobalObject.AircraftId})),
                     new AircraftMainMenu(3, "Non-Routine Tasks", "#!"),
                     new AircraftMainMenu(4, "Non-Routine Status", "#!")
 

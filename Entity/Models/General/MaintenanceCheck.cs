@@ -51,12 +51,6 @@ namespace Entity.Models.General
         public ICollection<AccessoryRequired> Kits { get; set; }
 
         public ICollection<MaintenanceDirective> BindMpds { get; set; }
-
-
-        #region Navigation Property
-
-        public ICollection<MaintenanceDirective> MaintenanceDirectives { get; set; }
-
-        #endregion
+		
     }
 }
