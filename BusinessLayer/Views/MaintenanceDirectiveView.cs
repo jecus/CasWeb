@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using BusinessLayer.Dictionaties;
 using Entity.Models.General;
 
@@ -6,6 +8,7 @@ namespace BusinessLayer.Views
 {
 	public class MaintenanceDirectiveView : BaseView
 	{
+		private List<ItemFileLink> _itemFileLink;
 		public string TaskNumberCheck { get; set; }
 
 		public MaintenanceDirectiveTaskType WorkType { get; set; }
@@ -98,7 +101,12 @@ namespace BusinessLayer.Views
 
 		public BaseComponentView BaseComponent { get; set; }
 
-		public ItemFileLink ItemFileLink { get; set; }
-		public int FileId => ItemFileLink?.FileId ?? -1;
+		public List<ItemFileLink> ItemFileLink
+		{
+			get => _itemFileLink ?? (_itemFileLink = new List<ItemFileLink>());
+			set => _itemFileLink = value;
+		}
+
+		public int FileId => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.MaintenanceTaskCardNumberFile)?.FileId ?? -1;
 	}
 }

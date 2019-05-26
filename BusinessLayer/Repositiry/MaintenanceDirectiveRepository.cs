@@ -37,7 +37,7 @@ namespace BusinessLayer.Repositiry
 			var view = mpds.ToBlView();
 			
 			foreach (var directiveView in view)
-				directiveView.ItemFileLink = fileLinks.FirstOrDefault(i => i.ParentId == directiveView.Id && i.LinkType == (int) FileLinkType.MaintenanceTaskCardNumberFile);
+				directiveView.ItemFileLink.AddRange(fileLinks.Where(i => i.ParentId == directiveView.Id));
 			
 			return view;
 		}
