@@ -60,6 +60,7 @@ namespace WebDevelopment.Helper
 
                 new AircraftMainMenu(6, "Planning", "#!", "feather icon-clipboard", subMenu: new List<AircraftMainMenu>()
                 {
+                    new AircraftMainMenu(1, "ATLB Event", url.Action("AtlbEvent", "ATLB", new {GlobalObject.AircraftId})),
                     new AircraftMainMenu(1, "ATLBs", url.Action("Index", "ATLB", new {GlobalObject.AircraftId})),
                     new AircraftMainMenu(2, "Forecast MTOP Report", "#!"),
                     new AircraftMainMenu(3, "Forecast Report Kits", "#!"),
