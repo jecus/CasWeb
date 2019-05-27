@@ -474,7 +474,7 @@ namespace BusinessLayer
 				StcNo = entity.StcNo,
 				IsClosed = entity.IsClosed ?? default(bool),
 				AircraftFlight = entity.AircraftFlight ?? default(int),
-				NDTType = NDTType.GetItemById(entity.NDTType),
+				NDTType = NDTType.GetItemById((int) entity.NDTType),
 				DirectiveOrder = DirectiveOrder.GetDirectiveOrderById(entity.DirectiveOrder),
 				Zone = entity.Zone,
 				Access = entity.Access,

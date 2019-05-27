@@ -92,7 +92,7 @@ namespace Entity.Models.General
         public int? AircraftFlight { get; set; }
 
         [Column("NDTType")]
-        public short NDTType { get; set; }
+        public short? NDTType { get; set; }
 
         [Column("ComponentId")]
         public int? ComponentId { get; set; }
@@ -116,34 +116,34 @@ namespace Entity.Models.General
         public string Location { get; set; }
 
         [Column("IsTemporary")]
-        public bool IsTemporary { get; set; }
+        public bool? IsTemporary { get; set; }
 
         [Column("DamageLenght")]
-        public double DamageLenght { get; set; }
+        public double? DamageLenght { get; set; }
 
         [Column("DamageWidth")]
-        public double DamageWidth { get; set; }
+        public double? DamageWidth { get; set; }
 
         [Column("DamageDepth")]
-        public double DamageDepth { get; set; }
+        public double? DamageDepth { get; set; }
 
         [Column("DamageLenghtLimit")]
-        public double DamageLenghtLimit { get; set; }
+        public double? DamageLenghtLimit { get; set; }
 
         [Column("DamageWidthLimit")]
-        public double DamageWidthLimit { get; set; }
+        public double? DamageWidthLimit { get; set; }
 
         [Column("DamageDepthLimit")]
-        public double DamageDepthLimit { get; set; }
+        public double? DamageDepthLimit { get; set; }
 
         [Column("DamageMeasure")]
-        public int DamageMeasure { get; set; }
+        public int? DamageMeasure { get; set; }
 
         [Column("DamageType")]
-        public int DamageType { get; set; }
+        public short? DamageType { get; set; }
 
         [Column("DamageClass")]
-        public int DamageClass { get; set; }
+        public int? DamageClass { get; set; }
 
         [Column("CorrectiveAction")]
         public string CorrectiveAction { get; set; }
