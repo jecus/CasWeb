@@ -109,7 +109,7 @@ namespace BusinessLayer.Dictionaties
 		/// </summary>
 		/// <param name="directiveTypeId"></param>
 		/// <returns></returns>
-		public static DirectiveType GetDirectiveTypeById(Int32 directiveTypeId)
+		public static DirectiveType GetDirectiveTypeById(int directiveTypeId)
 		{
 			foreach (DirectiveType t in _Items)
 				if (t.ItemId == directiveTypeId)

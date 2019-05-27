@@ -32,7 +32,7 @@
                     
                     columns.Bound(p => p.RevisionDateFrom).Title("Rev.Date").Width(130).ClientTemplate("#= kendo.toString(RevisionDateFrom, \"dd.MM.yyyy\") #");
                     columns.Bound(p => p.RevNumber).Title("№ Rev.").Width(130);
-                    columns.Bound(p => p.RevisionDateValidTo).Title("Valid To").Width(130).ClientTemplate("#= kendo.toString(RevisionDateValidTo, \"dd.MM.yyyy\") #");
+                    columns.Bound(p => p.RevisionDateValidToString).Title("Valid To").Width(130);
 
                 })
                 .ToolBar(tools => tools.Excel())

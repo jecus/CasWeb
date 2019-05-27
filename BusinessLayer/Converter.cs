@@ -482,7 +482,7 @@ namespace BusinessLayer
 				SupersedesId = entity.SupersedesId,
 				Workarea = entity.Workarea,
 				BaseComponent = entity.BaseComponent?.ToBaseComponentView(),
-				ATAChapter = entity.ATAChapter?.ToBlView()
+				ATAChapter = entity.ATAChapter?.ToBlView() ?? ATAChapterView.Unknown
 			};
 		}
 
@@ -2355,7 +2355,7 @@ namespace BusinessLayer
 				Zone = entity.Zone,
 				Access = entity.Access,
 				Applicability = entity.Applicability,
-				ATAChapter = entity.ATAChapter?.ToBlView(),
+				ATAChapter = entity.ATAChapter?.ToBlView() ?? ATAChapterView.Unknown,
 				Description = entity.Description,
 				EngineeringOrders = entity.EngineeringOrders,
 				ServiceBulletinNo = entity.ServiceBulletinNo,

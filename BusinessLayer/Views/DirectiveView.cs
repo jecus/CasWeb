@@ -10,6 +10,7 @@ namespace BusinessLayer.Views
 		private List<ItemFileLink> _itemFileLink;
 
 		public string Title { get; set; }
+		public string AdNo => Title + "  §: " + Paragraph;
 
 		public bool IsApplicability { get; set; }
 
@@ -28,6 +29,7 @@ namespace BusinessLayer.Views
 		public string Description { get; set; }
 
 		public string EngineeringOrders { get; set; }
+		public string EoNo => EngineeringOrders != "" ? EngineeringOrders : "N/A";
 
 		public double? Cost { get; set; }
 
@@ -42,6 +44,7 @@ namespace BusinessLayer.Views
 		public DirectiveWorkType WorkType { get; set; }
 
 		public string ServiceBulletinNo { get; set; }
+		public string SbNo => ServiceBulletinNo != "" ? ServiceBulletinNo : "N/A";
 
 		public string StcNo { get; set; }
 
@@ -63,9 +66,9 @@ namespace BusinessLayer.Views
 		public string Workarea { get; set; }
 
 		public ATAChapterView ATAChapter { get; set; }
+		public string AtaString => ATAChapter.ToString(); 
 
 		public BaseComponentView BaseComponent { get; set; }
-
 
 		public List<ItemFileLink> ItemFileLink
 		{
@@ -73,10 +76,10 @@ namespace BusinessLayer.Views
 			set => _itemFileLink = value;
 		}
 
-		public int? EngineeringOrderFileID  => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.EOFile)?.FileId ?? -1;
+		public int EngineeringOrderFileID  => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.EOFile)?.FileId ?? -1;
 
-		public int? ServiceBulletinFileID => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.SBFile)?.FileId ?? -1;
+		public int ServiceBulletinFileID => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.SBFile)?.FileId ?? -1;
 
-		public int? ADFileID => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.ADFile)?.FileId ?? -1;
+		public int ADFileID => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.ADFile)?.FileId ?? -1;
 	}
 }

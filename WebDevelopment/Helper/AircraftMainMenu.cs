@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using BusinessLayer;
+using BusinessLayer.Dictionaties;
 using Microsoft.AspNetCore.Mvc;
 using WebDevelopment.Infrastructude;
 
@@ -33,11 +35,11 @@ namespace WebDevelopment.Helper
 
                 new AircraftMainMenu(3, "Directives", "#!", "feather icon-clipboard", subMenu: new List<AircraftMainMenu>()
                 {
-                    new AircraftMainMenu(1, "AD Status All", "#!"),
-                    new AircraftMainMenu(2, "AD Status AF", "#!"),
-                    new AircraftMainMenu(3, "AD Status AP", "#!"),
-                    new AircraftMainMenu(5, "EO Status", "#!"),
-                    new AircraftMainMenu(6, "SB Status", "#!")
+                    new AircraftMainMenu(1, "AD Status All", url.Action("All","Directive", new {GlobalObject.AircraftId, directiveType = DirectiveType.AirworthenessDirectives.ItemId})),
+                    new AircraftMainMenu(2, "AD Status AF",  url.Action("All","Directive", new {GlobalObject.AircraftId, directiveType = DirectiveType.AirworthenessDirectives.ItemId})),
+                    new AircraftMainMenu(3, "AD Status AP",  url.Action("All","Directive", new {GlobalObject.AircraftId, directiveType = DirectiveType.AirworthenessDirectives.ItemId})),
+                    new AircraftMainMenu(5, "EO Status", url.Action("Eo","Directive", new {GlobalObject.AircraftId, directiveType = DirectiveType.EngineeringOrders.ItemId})),
+                    new AircraftMainMenu(6, "SB Status", url.Action("Sb","Directive", new {GlobalObject.AircraftId, directiveType = DirectiveType.SB.ItemId}))
 
                 }),
 

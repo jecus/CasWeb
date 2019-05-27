@@ -20,7 +20,7 @@ namespace BusinessLayer
 
         public static string ToUniversalString(this DateTime? dateTime)
         {
-            return dateTime.HasValue ? dateTime.Value.ToString("dd.MM.yyyy") : "";
+            return dateTime.HasValue ? (dateTime != DateTimeExtend.GetCASMinDateTime() ? dateTime.Value.ToString("dd.MM.yyyy") : "")  : "";
         }
 
         #region public static string TimeToString(TimeSpan time)

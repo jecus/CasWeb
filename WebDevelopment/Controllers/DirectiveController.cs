@@ -18,10 +18,24 @@ namespace WebDevelopment.Controllers
 		{
 			_directiveRepository = directiveRepository;
 		}
-
-		public async Task<IActionResult> Index([FromRoute]int aircraftId, DirectiveType directiveType)
+		[HttpGet("ad")]
+		public async Task<IActionResult> All([FromRoute]int aircraftId, int directiveType)
 		{
-			var view = await _directiveRepository.GetDirectives(aircraftId, directiveType);
+			var view = await _directiveRepository.GetDirectives(aircraftId, DirectiveType.GetDirectiveTypeById(directiveType));
+			return View(view);
+		}
+
+		[HttpGet("eo")]
+		public async Task<IActionResult> Eo([FromRoute]int aircraftId, int directiveType)
+		{
+			var view = await _directiveRepository.GetDirectives(aircraftId, DirectiveType.GetDirectiveTypeById(directiveType));
+			return View(view);
+		}
+
+		[HttpGet("sb")]
+		public async Task<IActionResult> Sb([FromRoute]int aircraftId, int directiveType)
+		{
+			var view = await _directiveRepository.GetDirectives(aircraftId, DirectiveType.GetDirectiveTypeById(directiveType));
 			return View(view);
 		}
 	}

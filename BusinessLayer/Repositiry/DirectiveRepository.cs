@@ -31,6 +31,7 @@ namespace BusinessLayer.Repositiry
 			var basecomponentIds = await _componentRepository.GetAircraftBaseComponentIds(aircraftId);
 			var directives = await _db.Directives
 				.Where(FilterByType(basecomponentIds,directiveType))
+				.Include(i => i.ATAChapter)
 				.AsNoTracking()
 				.OnlyActive()
 				.ToListAsync();
@@ -44,9 +45,11 @@ namespace BusinessLayer.Repositiry
 			var view = directives.ToBlView();
 
 			foreach (var directiveView in view)
+			{
 				directiveView.ItemFileLink.AddRange(fileLinks.Where(i => i.ParentId == directiveView.Id));
+			}
 
-			return directives.ToBlView();
+			return view;
 		}
 
 
@@ -84,7 +87,7 @@ namespace BusinessLayer.Repositiry
 			else
 			{
 				res = d => baseComponentIds.Contains(d.ComponentId.Value) && 
-				           (d.Title != "N/A" ||
+				           (d.Title != "N/A" &&
 				           d.DirectiveType == directiveType.ItemId);
 			}
 

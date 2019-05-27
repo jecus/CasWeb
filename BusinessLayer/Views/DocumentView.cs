@@ -80,7 +80,10 @@ namespace BusinessLayer.Views
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? RevisionDateValidTo { get; set; }
 
-        public int? RevisionNotify { get; set; }
+        public string RevisionDateValidToString => RevisionDateValidTo.ToUniversalString();
+
+
+		public int? RevisionNotify { get; set; }
 
         public bool Aboard { get; set; }
 

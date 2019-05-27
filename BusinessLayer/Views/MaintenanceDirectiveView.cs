@@ -98,6 +98,7 @@ namespace BusinessLayer.Views
 		public string ProgramIndicatorString => ProgramIndicator.ToString();
 
 		public ATAChapterView ATAChapter { get; set; }
+		public string AtaString => ATAChapter.ToString();
 
 		public BaseComponentView BaseComponent { get; set; }
 

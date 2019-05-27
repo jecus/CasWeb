@@ -26,6 +26,7 @@ namespace BusinessLayer.Repositiry
 			var basecomponentIds = await _componentRepository.GetAircraftBaseComponentIds(aircraftId);
 			var mpds = await _db.MaintenanceDirectives
 				.Where(i => basecomponentIds.Contains(i.ComponentId.Value))
+				.Include(i => i.ATAChapter)
 				.AsNoTracking()
 				.OnlyActive()
 				.ToListAsync();
