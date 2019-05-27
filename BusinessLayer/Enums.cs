@@ -1,5 +1,18 @@
 ﻿namespace BusinessLayer
 {
+	#region public enum ADType : short
+	public enum ADType : short
+	{
+		Airframe = 0,
+		Apliance = 1,
+		None = 2,
+		LandingGear = 3,
+		Engine = 4,
+		APU = 5
+
+	}
+	#endregion
+
 	#region public enum MSG : short
 
 	public enum MSG : short

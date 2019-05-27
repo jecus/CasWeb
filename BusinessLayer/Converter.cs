@@ -406,11 +406,101 @@ namespace BusinessLayer
             return new List<DocumentSubType>(document.Select(i => i.ToEntity()));
         }
 
-        #endregion
+		#endregion
 
-        #region Location
+		#region Directive
 
-        public static Location ToEntity(this LocationView location)
+		public static Directive ToEntity(this DirectiveView view)
+		{
+			return new Directive
+			{
+				Id = view.Id,
+				IsDeleted = view.IsDeleted,
+				Title = view.Title,
+				IsApplicability = view.IsApplicability,
+				ManHours = view.ManHours,
+				Remarks = view.Remarks,
+				//Threshold = view.Threshold?.ToBinary(),
+				ThldTypeCond = view.ThldTypeCond,
+				Applicability = view.Applicability,
+				DirectiveType = view.DirectiveType?.ItemId,
+				Description = view.Description,
+				EngineeringOrders = view.EngineeringOrders,
+				Cost = view.Cost,
+				Paragraph = view.Paragraph,
+				KitRequired = view.KitRequired,
+				HiddenRemarks = view.HiddenRemarks,
+				ADType = (short?)view.ADType,
+				WorkType = view.WorkType?.ItemId,
+				ServiceBulletinNo = view.ServiceBulletinNo,
+				StcNo = view.StcNo,
+				IsClosed = view.IsClosed,
+				AircraftFlight = view.AircraftFlight,
+				NDTType = (short)(view.NDTType?.ItemId ?? -1),
+				DirectiveOrder = (short)(view.DirectiveOrder?.ItemId ?? -1),
+				Zone = view.Zone,
+				Access = view.Access,
+				SupersededId = view.SupersededId,
+				SupersedesId = view.SupersedesId,
+				Workarea = view.Workarea,
+				ComponentId = view.BaseComponent?.Id,
+				ATAChapterId = view.ATAChapter?.Id ?? -1,
+			};
+		}
+
+		public static DirectiveView ToBlView(this Directive entity)
+		{
+			return new DirectiveView()
+			{
+				Id = entity.Id,
+				IsDeleted = entity.IsDeleted,
+				IsApplicability = entity.IsApplicability,
+				Title = entity.Title,
+				ManHours = entity.ManHours ?? default(double),
+				Remarks = entity.Remarks,
+				//Threshold = DirectiveThreshold.ConvertFromByteArray(entity.Threshold),
+				ThldTypeCond = entity.ThldTypeCond,
+				Applicability = entity.Applicability,
+				DirectiveType = entity.DirectiveType.HasValue ? DirectiveType.GetDirectiveTypeById(entity.DirectiveType.Value) : DirectiveType.Unknown,
+				Description = entity.Description,
+				EngineeringOrders = entity.EngineeringOrders,
+				Cost = entity.Cost ?? default(double),
+				Paragraph = entity.Paragraph,
+				KitRequired = entity.KitRequired,
+				HiddenRemarks = entity.HiddenRemarks,
+				ADType = entity.ADType.HasValue ? (ADType)entity.ADType.Value : ADType.None,
+				WorkType = entity.WorkType.HasValue ? DirectiveWorkType.GetItemById(entity.WorkType.Value) : DirectiveWorkType.Unknown,
+				ServiceBulletinNo = entity.ServiceBulletinNo,
+				StcNo = entity.StcNo,
+				IsClosed = entity.IsClosed ?? default(bool),
+				AircraftFlight = entity.AircraftFlight ?? default(int),
+				NDTType = NDTType.GetItemById(entity.NDTType),
+				DirectiveOrder = DirectiveOrder.GetDirectiveOrderById(entity.DirectiveOrder),
+				Zone = entity.Zone,
+				Access = entity.Access,
+				SupersededId = entity.SupersededId,
+				SupersedesId = entity.SupersedesId,
+				Workarea = entity.Workarea,
+				BaseComponent = entity.BaseComponent?.ToBaseComponentView(),
+				ATAChapter = entity.ATAChapter?.ToBlView()
+			};
+		}
+
+		public static List<DirectiveView> ToBlView(this IEnumerable<Directive> entity)
+		{
+			return new List<DirectiveView>(entity.Select(i => i.ToBlView()));
+		}
+
+		public static List<Directive> ToEntity(this IEnumerable<DirectiveView> view)
+		{
+			return new List<Directive>(view.Select(i => i.ToEntity()));
+		}
+
+		#endregion
+
+		#region Location
+
+		public static Location ToEntity(this LocationView location)
         {
             return new Location
             {

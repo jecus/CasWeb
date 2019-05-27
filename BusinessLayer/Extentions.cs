@@ -18,24 +18,9 @@ namespace BusinessLayer
 			return files.FirstOrDefault(i => i.LinkType == (short)fileLinkType)?.FileId;
 		}
 
-        public static string ToUniversalFilterString(this DateTime? dateTime)
-        {
-            return dateTime.HasValue ? dateTime.Value.ToString("yyyy.MM.dd") : "";
-        }
-
-        public static string ToUniversalFilterString(this DateTime dateTime)
-        {
-            return dateTime.ToString("yyyy.MM.dd");
-        }
-
         public static string ToUniversalString(this DateTime? dateTime)
         {
             return dateTime.HasValue ? dateTime.Value.ToString("dd.MM.yyyy") : "";
-        }
-
-        public static string ToUniversalString(this DateTime dateTime)
-        {
-            return dateTime.ToString("dd.MM.yyyy");
         }
 
         #region public static string TimeToString(TimeSpan time)

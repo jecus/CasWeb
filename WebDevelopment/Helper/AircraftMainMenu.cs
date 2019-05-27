@@ -33,8 +33,11 @@ namespace WebDevelopment.Helper
 
                 new AircraftMainMenu(3, "Directives", "#!", "feather icon-clipboard", subMenu: new List<AircraftMainMenu>()
                 {
-                    new AircraftMainMenu(1, "Modification Status", "#!"),
-                    new AircraftMainMenu(2, "Out of Phase Requirements", "#!")
+                    new AircraftMainMenu(1, "AD Status All", "#!"),
+                    new AircraftMainMenu(2, "AD Status AF", "#!"),
+                    new AircraftMainMenu(3, "AD Status AP", "#!"),
+                    new AircraftMainMenu(5, "EO Status", "#!"),
+                    new AircraftMainMenu(6, "SB Status", "#!")
 
                 }),
 

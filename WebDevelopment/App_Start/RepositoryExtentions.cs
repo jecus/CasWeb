@@ -23,6 +23,7 @@ namespace WebDevelopment
 			services.AddScoped<IProductRepository, ProductRepository>();
 			services.AddScoped<IAtlbRepository, AtlbRepository>();
 			services.AddScoped<IMaintenanceDirectiveRepository, MaintenanceDirectiveRepository>();
+			services.AddScoped<IDirectiveRepository, DirectiveRepository>();
 			return services;
 		}
 	}
