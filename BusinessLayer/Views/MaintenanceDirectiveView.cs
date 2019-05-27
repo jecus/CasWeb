@@ -107,6 +107,10 @@ namespace BusinessLayer.Views
 			set => _itemFileLink = value;
 		}
 
-		public int FileId => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.MaintenanceTaskCardNumberFile)?.FileId ?? -1;
+		public int TaskNumberCheckId => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.MaintenanceTaskNumberCheckFile)?.FileId ?? -1;
+		public int TaskCardNumberId => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.MaintenanceTaskCardNumberFile)?.FileId ?? -1;
+		public int MRBId => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.MaintenanceMRBFile)?.FileId ?? -1;
+		public int MaintenanceManualId => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.MaintenanceManualFile)?.FileId ?? -1;
+		public int EOId => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.EOFile)?.FileId ?? -1;
 	}
 }
