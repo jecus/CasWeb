@@ -29,7 +29,7 @@ namespace WebDevelopment.Helper
 			var sb = new StringBuilder();
 			foreach (var property in properties)
 			{
-				sb.AppendLine("<a class=" +
+				sb.AppendLine($"<a  data-toggle=\"tooltip\" data-placement=\"top\" title=\"{property.Value}\" class=" +
 				             "#if (" + property.Key + " > 0) {# 'btn waves-effect waves-dark btn-danger btn-outline-danger btn-icon' #}" +
 				             "else {# 'btn waves-effect waves-dark btn-disabled btn-outline-danger btn-icon disabled' #}#" +
 				             " href=" + url + $@"?fileId=#={property.Key}#" + @"><i class=""fa fa-file-pdf-o""></i></a>");
