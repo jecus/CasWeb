@@ -20,7 +20,7 @@ namespace BusinessLayer.Repositiry
 			_db = db;
 		}
 
-		public async Task<List<ATLBView>> GetAircraftOpenAtlbs(int aircraftId, AtlbStatus? status = null)
+		public async Task<List<ATLBView>> GetAircraftAtlbs(int aircraftId, AtlbStatus? status = null)
 		{
 			IQueryable<ATLB> query;
 			if (status == null)
