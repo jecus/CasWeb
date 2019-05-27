@@ -2,11 +2,11 @@
 @using WebDevelopment.Helper
 @using WebDevelopment.Infrastructude
 @model List<BusinessLayer.Views.ATLBView>
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "AtlbEvent";
     Layout = "~/Views/Shared/_AircraftLayout.cshtml";
 }
-
 
 @(Html.Kendo().Window()
       .Name("EditAtlb")
@@ -17,10 +17,10 @@
       .Width(555)
       .Draggable()
       .Animation(animation =>
+      {
+          animation.Open(open =>
           {
-              animation.Open(open =>
-              {
-                  open.Expand(ExpandDirection.Vertical);
+              open.Expand(ExpandDirection.Vertical);
               open.Fade(FadeDirection.In);
           });
 
@@ -31,36 +31,11 @@
               close.Fade(FadeDirection.In);
           });
       })
-)
-
-@(Html.Kendo().Window()
-      .Name("Delete")
-      .Title("Confirm Delete")
-      .Modal(true)
-      .Visible(false)
-      .Height(180)
-      .Width(350)
-      .Draggable()
-      .Animation(animation =>
-          {
-              animation.Open(open =>
-              {
-                  open.Expand(ExpandDirection.Vertical);
-              open.Fade(FadeDirection.In);
-          });
-
-          animation.Close(close =>
-          {
-              close.Reverse(true);
-              close.Expand(ExpandDirection.Vertical);
-              close.Fade(FadeDirection.In);
-          });
-      })
-)
+      )
 
 <div class="card">
     <div class="card-header">
-        <h5>ATLBs</h5>
+        <h5>ATLB Event</h5>
     </div>
     <div class="card-block">
         <a href="" , class="modalLargeBtn btn btn-primary m-b-5 m-t-5" onclick="OpenModal('@Url.Action("ModalCreate","ATLB",new {GlobalObject.AircraftId},Context.Request.Scheme)', 'EditAtlb')">
@@ -72,14 +47,13 @@
               {
                   columns.Bound(p => p.Id)
                       .ClientTemplate(
-                          KendoHelper.Button(Url.Action("Index", "AircraftFlight", new { GlobalObject.AircraftId }), "atlbId", "Id", ButtonType.Open)+
-                          KendoHelper.ButtonModal(Url.Action("ModalEdit", "ATLB", new { GlobalObject.AircraftId },Context.Request.Scheme), "atlbId", "Id", ButtonType.Edit, "EditAtlb")
-                          //KendoHelper.ButtonModal(Url.Action("ConfirmDelete", "ATLB", new { GlobalObject.AircraftId },Context.Request.Scheme), "id", "Id", ButtonType.Delete, "Delete")
-                  ).Width(90).Title(" ").Sortable(false).Groupable(false);
+                          KendoHelper.Button(Url.Action("Index", "AircraftFlight", new { GlobalObject.AircraftId }), "atlbId", "Id", ButtonType.Open)
+                        + KendoHelper.ButtonModal(Url.Action("ModalEdit", "ATLB", new { GlobalObject.AircraftId }, Context.Request.Scheme), "atlbId", "Id", ButtonType.Edit, "EditAtlb")
+                      //KendoHelper.ButtonModal(Url.Action("ConfirmDelete", "ATLB", new { GlobalObject.AircraftId },Context.Request.Scheme), "id", "Id", ButtonType.Delete, "Delete")
+                      ).Width(90).Title(" ").Sortable(false).Groupable(false);
                   columns.Bound(p => p.ATLBNo).Title("ATLB №").Width(120);
                   columns.Bound(p => p.Pages).Title("Pages").Width(120);
                   columns.Bound(p => p.Dates).Title("Date").ClientTemplate("#= kendo.toString(Dates, \"dd.MM.yyyy\") #").Width(120);
-                  columns.Bound(p => p.AtlbStatusString).Title("Status").Width(120);
               })
               .ToolBar(tools => tools.Excel())
               .Excel(excel => excel
@@ -105,3 +79,5 @@
 
     </div>
 </div>
+
+

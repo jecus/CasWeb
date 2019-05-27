@@ -25,13 +25,20 @@ namespace WebDevelopment.Controllers
 	        _db = db;
         }
 
-        public async Task<IActionResult> Index([FromRoute]int aircraftId)
+		public async Task<IActionResult> Index([FromRoute]int aircraftId)
+		{
+			var view = await _atlbRepository.GetAircraftAtlbs(aircraftId);
+			return View(view);
+		}
+
+		[Route("atlbevent")]
+		public async Task<IActionResult> AtlbEvent([FromRoute]int aircraftId)
         {
-	        var view = await _atlbRepository.GetAircraftAtlbs(aircraftId);
+	        var view = await _atlbRepository.GetAircraftAtlbs(aircraftId, 0);
 	        return View(view);
         }
 
-        [Route("edit")]
+		[Route("edit")]
         public async Task<IActionResult> ModalEdit(int atlbId)
         {
 	        var view = await _atlbRepository.GetById(atlbId);
