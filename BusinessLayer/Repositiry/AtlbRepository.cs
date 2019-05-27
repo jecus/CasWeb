@@ -6,6 +6,7 @@ using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
+using Entity.Models.General;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLayer.Repositiry
@@ -19,14 +20,26 @@ namespace BusinessLayer.Repositiry
 			_db = db;
 		}
 
-		public async Task<List<ATLBView>> GetAircraftAtlbs(int aircraftId)
+		public async Task<List<ATLBView>> GetAircraftOpenAtlbs(int aircraftId, AtlbStatus? status = null)
 		{
-			var atlbs = await _db.Atlbs
-				.Where(i => i.AircraftID == aircraftId)
-				.AsNoTracking()
-				.OnlyActive()
-				.ToListAsync();
+			IQueryable<ATLB> query;
+			if (status == null)
+			{
+				query = _db.Atlbs
+					.Where(i => i.AircraftID == aircraftId)
+					.AsNoTracking()
+					.OnlyActive();
+			}
+			else
+			{
+				query = _db.Atlbs
+					.Where(i => i.AircraftID == aircraftId && i.AtlbStatus == (int) status)
+					.AsNoTracking()
+					.OnlyActive();
 
+			}
+
+			var atlbs = await query.ToListAsync();
 			var view = atlbs.ToBlView();
 
 

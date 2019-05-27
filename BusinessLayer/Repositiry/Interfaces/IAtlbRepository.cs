@@ -6,7 +6,7 @@ namespace BusinessLayer.Repositiry.Interfaces
 {
 	public interface IAtlbRepository
 	{
-		Task<List<ATLBView>> GetAircraftAtlbs(int aircraftId);
+		Task<List<ATLBView>> GetAircraftAtlbs(int aircraftId, AtlbStatus? status = null);
 		Task<ATLBView> GetById(int atlbId);
 	}
 }
