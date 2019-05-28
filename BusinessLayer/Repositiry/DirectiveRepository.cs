@@ -26,15 +26,20 @@ namespace BusinessLayer.Repositiry
 			_db = db;
 		}
 
-		public async Task<List<DirectiveView>> GetDirectives(int aircraftId, DirectiveType directiveType)
+		public async Task<List<DirectiveView>> GetDirectives(int aircraftId, DirectiveType directiveType,
+			ADType? adType = null)
 		{
 			var basecomponentIds = await _componentRepository.GetAircraftBaseComponentIds(aircraftId);
-			var directives = await _db.Directives
+			var query = _db.Directives
 				.Where(FilterByType(basecomponentIds,directiveType))
 				.Include(i => i.ATAChapter)
 				.AsNoTracking()
-				.OnlyActive()
-				.ToListAsync();
+				.OnlyActive();
+
+			if (adType != null)
+				query = query.Where(i => i.ADType == (short)adType);
+
+			var directives = await query.ToListAsync();
 
 			var ids = directives.Select(i => i.Id);
 			var fileLinks = await _db.ItemFileLinks

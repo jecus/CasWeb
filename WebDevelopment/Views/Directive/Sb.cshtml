@@ -19,9 +19,9 @@
               {
                   columns.Bound(p => p).ClientTemplate(KendoHelper.PdfButton(Url.Action("OpenPdf", "File"), new Dictionary<string, string>
                   {
-                      {"EngineeringOrderFileID", "Engineering Order" },
+                      { "ADFileID", "AD File" },
                       {"ServiceBulletinFileID", "Service Bulletin" },
-                      {"ADFileID", "AD File" }
+                      {"EngineeringOrderFileID", "Engineering Order" }
                   })).Title(" ").Width(140).Sortable(false).Groupable(false);
                   columns.Bound(p => p.SbNo).Title("SB No").Width(120);
                   columns.Bound(p => p.EoNo).Title("EO No").Width(120);

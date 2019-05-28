@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using BusinessLayer;
 using BusinessLayer.Dictionaties;
 using BusinessLayer.Repositiry.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +20,9 @@ namespace WebDevelopment.Controllers
 			_directiveRepository = directiveRepository;
 		}
 		[HttpGet("ad")]
-		public async Task<IActionResult> All([FromRoute]int aircraftId, int directiveType)
+		public async Task<IActionResult> All([FromRoute]int aircraftId, int directiveType, ADType? adType)
 		{
-			var view = await _directiveRepository.GetDirectives(aircraftId, DirectiveType.GetDirectiveTypeById(directiveType));
+			var view = await _directiveRepository.GetDirectives(aircraftId, DirectiveType.GetDirectiveTypeById(directiveType), adType);
 			return View(view);
 		}
 

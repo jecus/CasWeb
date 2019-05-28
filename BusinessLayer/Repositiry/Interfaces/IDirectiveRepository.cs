@@ -7,6 +7,6 @@ namespace BusinessLayer.Repositiry.Interfaces
 {
 	public interface IDirectiveRepository
 	{
-		Task<List<DirectiveView>> GetDirectives(int aircraftId, DirectiveType directiveType);
+		Task<List<DirectiveView>> GetDirectives(int aircraftId, DirectiveType directiveType, ADType? adType = null);
 	}
 }
