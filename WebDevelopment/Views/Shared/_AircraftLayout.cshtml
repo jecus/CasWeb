@@ -1,4 +1,6 @@
-﻿@using WebDevelopment.Infrastructude
+﻿@using Kendo.Mvc.UI
+@using WebDevelopment.Infrastructude
+@model BusinessLayer.Views.AircraftView
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,9 +73,11 @@
             <nav class="navbar header-navbar pcoded-header">
                 <div class="navbar-wrapper">
                     <div class="navbar-logo">
-                        <a href="@Url.Action("Index","Home")">
-                            <img class="img-fluid" src="~/images/logocas.png" alt="Theme-Logo" />
+                        <a href="@Url.Action("Index","Home")" class="p-t-5">
+                            <img class="img-fluid p-b-10" src="~/images/logocasair.png" alt="Theme-Logo" />
+                            <span class="f-18 p-r-15">@Html.DisplayTextFor(i => i.RegistrationNumber)</span>
                         </a>
+                        
                         <a class="mobile-menu" id="mobile-collapse" href="#!">
                             <i class="feather icon-menu icon-toggle-right"></i>
                         </a>
@@ -83,6 +87,7 @@
                     </div>
                     <div class="navbar-container container-fluid">
                         <ul class="nav-left">
+                            
                             @*<li class="header-search">
                                     <div class="main-search morphsearch-search">
                                         <div class="input-group">
@@ -193,7 +198,7 @@
     </div>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
-    
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
