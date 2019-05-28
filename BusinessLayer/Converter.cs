@@ -2401,7 +2401,7 @@ namespace BusinessLayer
 
 		#endregion
 
-		#region MyRegion
+		#region GoodStandart
 
 		public static GoodStandart ToEntity(this GoodStandartView standart)
 		{
@@ -2439,6 +2439,89 @@ namespace BusinessLayer
 		public static List<GoodStandart> ToEntity(this IEnumerable<GoodStandartView> standart)
 		{
 			return new List<GoodStandart>(standart.Select(i => i.ToEntity()));
+		}
+
+		#endregion
+
+		#region WorkPackage
+
+		public static WorkPackage ToEntity(this WorkPackageView view)
+		{
+			return new WorkPackage
+			{
+				Id = view.Id,
+				IsDeleted = view.IsDeleted,
+				ParentId = view.ParentId,
+				Title = view.Title,
+				Description = view.Description,
+				Status = (int)view.Status,
+				Author = view.Author,
+				OpeningDate = view.OpeningDate,
+				PublishingDate = view.PublishingDate,
+				ClosingDate = view.ClosingDate,
+				Remarks = view.Remarks,
+				PublishingRemarks = view.PublishingRemarks,
+				ClosingRemarks = view.ClosingRemarks,
+				OnceClosed = view.OnceClosed,
+				ReleaseCertificateNo = view.ReleaseCertificateNo,
+				CheckType = view.CheckType,
+				Station = view.Station,
+				MaintenanceReportNo = view.MaintenanceReportNo,
+				Number = view.Number,
+				Revision = view.Revision,
+				CreateDate = view.CreateDate,
+				PublishedBy = view.PublishedBy,
+				ClosedBy = view.ClosedBy,
+				EmployeesRemark = view.EmployeesRemark,
+				WpWorkType = view.WpWorkType.ItemId,
+				KMH = view.KMH,
+				PerformAfter = view.PerformAfter,
+				ProviderJSON = view.ProviderJSON
+			};
+		}
+
+		public static WorkPackageView ToBlView(this WorkPackage entity)
+		{
+			return new WorkPackageView
+			{
+				Id = entity.Id,
+				IsDeleted = entity.IsDeleted,
+				ParentId = entity.ParentId ?? default(int),
+				Title = entity.Title,
+				Description = entity.Description,
+				Status = (WorkPackageStatus)entity.Status,
+				Author = entity.Author,
+				OpeningDate = entity.OpeningDate,
+				PublishingDate = entity.PublishingDate ?? DateTimeExtend.GetCASMinDateTime(),
+				ClosingDate = entity.ClosingDate ?? DateTimeExtend.GetCASMinDateTime(),
+				Remarks = entity.Remarks,
+				PublishingRemarks = entity.PublishingRemarks,
+				ClosingRemarks = entity.ClosingRemarks,
+				OnceClosed = entity.OnceClosed,
+				ReleaseCertificateNo = entity.ReleaseCertificateNo,
+				CheckType = entity.CheckType,
+				Station = entity.Station,
+				MaintenanceReportNo = entity.MaintenanceReportNo,
+				Number = entity.Number,
+				Revision = entity.Revision,
+				CreateDate = entity.CreateDate ?? DateTimeExtend.GetCASMinDateTime(),
+				PublishedBy = entity.PublishedBy,
+				ClosedBy = entity.ClosedBy,
+				WpWorkType = WpWorkType.GetComponentTypeById(entity.WpWorkType),
+				KMH = entity.KMH,
+				ProviderJSON = entity.ProviderJSON,
+				EmployeesRemark = entity.EmployeesRemark
+			};
+		}
+
+		public static List<WorkPackageView> ToBlView(this IEnumerable<WorkPackage> entity)
+		{
+			return new List<WorkPackageView>(entity.Select(i => i.ToBlView()));
+		}
+
+		public static List<WorkPackage> ToEntity(this IEnumerable<WorkPackageView> view)
+		{
+			return new List<WorkPackage>(view.Select(i => i.ToEntity()));
 		}
 
 		#endregion

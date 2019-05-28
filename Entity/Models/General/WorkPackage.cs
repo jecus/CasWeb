@@ -89,7 +89,7 @@ namespace Entity.Models.General
         public int WpWorkType { get; set; }
 
         [Column("KMH")]
-        public float KMH { get; set; }
+        public double KMH { get; set; }
 
         [Column("PerformAfter")]
         public string PerformAfter { get; set; }

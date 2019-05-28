@@ -1,6 +1,5 @@
-﻿@using Kendo.Mvc.UI
-@using WebDevelopment.Infrastructude
-@model BusinessLayer.Views.AircraftView
+﻿@using WebDevelopment.Infrastructude
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,7 +74,7 @@
                     <div class="navbar-logo">
                         <a href="@Url.Action("Index","Home")" class="p-t-5">
                             <img class="img-fluid p-b-10" src="~/images/logocasair.png" alt="Theme-Logo" />
-                            <span class="f-18 p-r-15">@Html.DisplayTextFor(i => i.RegistrationNumber)</span>
+                            <span class="f-18 p-r-15">@GlobalObject.RegistrationNumber</span>
                         </a>
                         
                         <a class="mobile-menu" id="mobile-collapse" href="#!">

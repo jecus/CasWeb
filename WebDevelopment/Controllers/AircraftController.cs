@@ -31,7 +31,7 @@ namespace WebDevelopment.Controllers
 	        GlobalObject.AircraftMainMenu = new AircraftMainMenu(Url, aircraftId);
 
             var aircraft = await _aircraftRepository.GetById(aircraftId);
-
+            GlobalObject.RegistrationNumber = aircraft.RegistrationNumber;
             ViewData["Operator"] = await _db.Operators.FirstOrDefaultAsync();
             ViewData["BaseComponents"] = await _componentRepository.GetAircraftBaseComponents(aircraftId);
 			return View(aircraft);

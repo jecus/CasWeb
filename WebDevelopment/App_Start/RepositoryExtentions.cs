@@ -24,6 +24,7 @@ namespace WebDevelopment
 			services.AddScoped<IAtlbRepository, AtlbRepository>();
 			services.AddScoped<IMaintenanceDirectiveRepository, MaintenanceDirectiveRepository>();
 			services.AddScoped<IDirectiveRepository, DirectiveRepository>();
+			services.AddScoped<IWorkPackageRepository, WorkPackageRepository>();
 			return services;
 		}
 	}

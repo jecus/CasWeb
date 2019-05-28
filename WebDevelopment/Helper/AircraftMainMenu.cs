@@ -67,7 +67,7 @@ namespace WebDevelopment.Helper
                     new AircraftMainMenu(2, "Forecast MTOP Report", "#!"),
                     new AircraftMainMenu(3, "Forecast Report Kits", "#!"),
                     new AircraftMainMenu(4, "Monthly Utilization", "#!"),
-                    new AircraftMainMenu(5, "Work Packages", "#!")
+                    new AircraftMainMenu(5, "Work Packages", url.Action("Index","WorkPackage", new {GlobalObject.AircraftId}))
 
                 }),
 
