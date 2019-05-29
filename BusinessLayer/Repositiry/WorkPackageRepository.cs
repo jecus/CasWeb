@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer.Repositiry.Interfaces;
@@ -11,10 +12,12 @@ namespace BusinessLayer.Repositiry
 {
 	public class WorkPackageRepository : IWorkPackageRepository
 	{
+		private readonly IAircraftRepository _aircraftRepository;
 		private readonly DatabaseContext _db;
 
-		public WorkPackageRepository(DatabaseContext db)
+		public WorkPackageRepository(IAircraftRepository aircraftRepository, DatabaseContext db)
 		{
+			_aircraftRepository = aircraftRepository;
 			_db = db;
 		}
 
@@ -33,6 +36,9 @@ namespace BusinessLayer.Repositiry
 					continue;
 
 				var view = wp.ToBlView();
+
+
+				var aircraft = await _aircraftRepository.GetById(aircraftId);
 
 				var airportIds = new List<int>();
 				airportIds.AddRange(view.Select(i => i.PerfAfter.AirportFromId));
@@ -58,6 +64,7 @@ namespace BusinessLayer.Repositiry
 				foreach (var workPackageView in view)
 				{
 					await CalculateMh(workPackageView);
+					workPackageView.RegistrationNumber = aircraft.RegistrationNumber;
 					workPackageView.PerfAfter.AirportFrom = airportView.FirstOrDefault(i => i.Id == workPackageView.PerfAfter.AirportFromId);
 					workPackageView.PerfAfter.AirportTo = airportView.FirstOrDefault(i => i.Id == workPackageView.PerfAfter.AirportToId);
 					workPackageView.PerfAfter.FlightNum = flightNum.FirstOrDefault(i => i.Id == workPackageView.PerfAfter.FlightNumId);
@@ -71,7 +78,9 @@ namespace BusinessLayer.Repositiry
 
 		private async Task CalculateMh(WorkPackageView view)
 		{
-			var res =  await _db.ManHourses.FromSql($@"select sum(Manhours) as ManHours 
+			try
+			{
+				var res =  await _db.ManHourses.FromSql($@"select sum(Manhours) as ManHours 
             from (SELECT manhours 
                   FROM directives 
                   where directives.itemId in (select DirectivesId 
@@ -129,7 +138,13 @@ namespace BusinessLayer.Repositiry
                                                     Cas3WorkPakageRecord.WorkPackageItemType = 14 and 
                                                     Cas3WorkPakageRecord.WorkPakageId = {view.Id})) MH").ToListAsync();
 
-			view.ManHours = res.FirstOrDefault()?.ManHours ?? 0;
+				view.ManHours = res?.FirstOrDefault()?.ManHours ?? 0;
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e);
+				throw;
+			}
 		}
 	}
 }

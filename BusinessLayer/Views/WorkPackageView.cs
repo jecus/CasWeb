@@ -110,6 +110,7 @@ namespace BusinessLayer.Views
 		}
 
 		public string PerformAfterString => PerfAfter.ToString();
+		public string RegistrationNumber { get; set; }
 	}
 
 	[JsonObject]

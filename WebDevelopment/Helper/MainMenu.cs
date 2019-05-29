@@ -44,7 +44,12 @@ namespace WebDevelopment.Helper
 					new MainMenu(3, "Quotation Orders", url.Action("Quotation", "Order")),
 					new MainMenu(4, "Suppliers", url.Action("Suppliers","Purchase"))
                 }),
-            });
+
+                new MainMenu(50, "PPCD", "#!", "feather icon-clipboard", subMenu: new List<MainMenu>()
+                {
+	                new MainMenu(1, "Work Packages", url.Action("AllWorkPackages", "WorkPackage", new {aircraftId = 0})),
+                }),
+			});
         }
 
         private MainMenu(int order, string header, string url)

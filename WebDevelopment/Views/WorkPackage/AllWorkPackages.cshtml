@@ -1,0 +1,70 @@
+﻿@using Kendo.Mvc.UI
+@model System.Collections.Generic.List<BusinessLayer.Views.WorkPackageView>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+    <div class="card">
+        <div class="card-header">
+            <h5>Work Package</h5>
+        </div>
+        <div class="card-block">
+            @(Html.Kendo().Grid(Model)
+                  .Name("Grid")
+                  .Columns(columns =>
+                  {
+                      //columns.Bound(p => p.Id)
+                      //    .ClientTemplate(
+                      //        KendoHelper.Button(Url.Action("Index", "AircraftFlight", new { GlobalObject.AircraftId }), "atlbId", "Id", ButtonType.Open)
+                      //      + KendoHelper.ButtonModal(Url.Action("ModalEdit", "ATLB", new { GlobalObject.AircraftId }, Context.Request.Scheme), "atlbId", "Id", ButtonType.Edit, "EditAtlb")
+                      //    //KendoHelper.ButtonModal(Url.Action("ConfirmDelete", "ATLB", new { GlobalObject.AircraftId },Context.Request.Scheme), "id", "Id", ButtonType.Delete, "Delete")
+                      //    ).Width(90).Title(" ").Sortable(false).Groupable(false);
+                      columns.Bound(p => p.RegistrationNumber).Title("Aircraft").Width(120);
+                      columns.Bound(p => p.Status).Title("Status").Width(120);
+                      columns.Bound(p => p.Number).Title("WP/WO №").Width(120);
+                      columns.Bound(p => p.Title).Title("Title").Width(120);
+                      columns.Bound(p => p.Description).Title("Description").Width(120);
+                      columns.Bound(p => p.CreateDate).Title("Create Date").Width(120).ClientTemplate("#= kendo.toString(CreateDate, \"dd.MM.yyyy\") #").Width(120);
+                      columns.Bound(p => p.OpeningDate).Title("Opening Date").Width(120).ClientTemplate("#= kendo.toString(OpeningDate, \"dd.MM.yyyy\") #").Width(120);
+                      columns.Bound(p => p.PublishingDate).Title("Publishing Date").Width(120).ClientTemplate("#= kendo.toString(PublishingDate, \"dd.MM.yyyy\") #").Width(120);
+                      columns.Bound(p => p.PerformAfterString).Title("Perform After").Width(120);
+                      columns.Bound(p => p.PerfAfter.PerformDate).Title("Perform Date").Width(120);
+                      columns.Bound(p => p.ClosingDate).Title("Closing Date").Width(120).ClientTemplate("#= kendo.toString(ClosingDate, \"dd.MM.yyyy\") #").Width(120);
+                      columns.Bound(p => p.ManHours).Title("MH").Width(120);
+                      columns.Bound(p => p.KMH).Title("K for MH").Width(120);
+                      columns.Bound(p => p.KMLW).Title("K * MH").Width(120);
+                      columns.Bound(p => p.WorkTimeString).Title("Work Time").Width(120);
+                      columns.Bound(p => p.Station).Title("Station").Width(120);
+                      columns.Bound(p => p.MaintenanceReportNo).Title("MRO").Width(120);
+                      columns.Bound(p => p.Persent).Title("Persent").Width(120);
+                      columns.Bound(p => p.Author).Title("Author").Width(120);
+                      columns.Bound(p => p.PublishedBy).Title("Published By").Width(120);
+                      columns.Bound(p => p.ClosedBy).Title("Closed By").Width(120);
+                      columns.Bound(p => p.Remarks).Title("Remarks");
+                  })
+                  .ToolBar(tools => tools.Excel())
+                  .Excel(excel => excel
+                      .FileName("AllWorkPackage.xlsx")
+                      .Filterable(true)
+                      .AllPages(true)
+                      .ProxyURL(Url.Action("ExcelExport", "Excel"))
+                  )
+                  .Scrollable(scrollable => scrollable.Height(630))
+                  .Reorderable(reorderable => reorderable.Columns(true))
+                  .Resizable(resizable => resizable.Columns(true))
+                  .Pageable()
+                  .Filterable()
+                  .Sortable()
+                  .Groupable()
+                  .ColumnMenu()
+                  .DataSource(dataSource => dataSource
+                      .Ajax()
+                      .PageSize(250)
+                      .ServerOperation(false)
+                      .Read(read => read.Action("", ""))
+                  ))
+
+        </div>
+    </div>

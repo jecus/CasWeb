@@ -2,6 +2,6 @@
 {
 	public class WpManHours
 	{
-		public double ManHours { get; set; }
+		public double? ManHours { get; set; }
 	}
 }
