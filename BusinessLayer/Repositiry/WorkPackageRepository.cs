@@ -73,7 +73,7 @@ namespace BusinessLayer.Repositiry
 				res.AddRange(view);
 			}
 	
-			return res.OrderBy(i => i.WpWorkType).ToList();
+			return res.ToList();
 		}
 
 		private async Task CalculateMh(WorkPackageView view)
