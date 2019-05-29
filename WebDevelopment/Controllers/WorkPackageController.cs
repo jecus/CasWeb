@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using BusinessLayer.Repositiry.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using WebDevelopment.Helper;
@@ -19,9 +20,8 @@ namespace WebDevelopment.Controllers
 	    }
         public async Task<IActionResult> Index(int aircraftId)
         {
-	        var wp = await _workPackageRepository.GetWorkPackages(aircraftId); 
-
-            return View(wp);
+	        var wp = await _workPackageRepository.GetWorkPackages(new List<int> { aircraftId });
+	        return View(wp);
         }
     }
 }

@@ -6,14 +6,17 @@ using Entity.Models.Dictionaries;
 using Entity.Models.General;
 using Microsoft.EntityFrameworkCore;
 using EFCore.BulkExtensions;
+using Entity.Models.Calculated;
 
 namespace Entity.Infrastructure
 {
 	public sealed class DatabaseContext : DbContext
 	{
-        #region Dictionaries
+		public DbQuery<WpManHours> ManHourses { get; set; }
 
-        public DbSet<AccessoryDescription> AccessoryDescriptions { get; set; }
+		#region Dictionaries
+
+		public DbSet<AccessoryDescription> AccessoryDescriptions { get; set; }
         public DbSet<AGWCategorie> AgwCategories { get; set; }
         public DbSet<AircraftOtherParameter> AircraftOtherParameters { get; set; }
         public DbSet<Airport> Airports { get; set; }
@@ -1106,19 +1109,19 @@ namespace Entity.Infrastructure
 	        modelBuilder.Entity<WorkOrder>()
 		        .HasMany(i => i.PackageRecords).WithOne(i => i.WorkOrder).HasForeignKey(i => i.ParentId);
 
-	        #endregion
+			#endregion
 
-	        #region WorkPackage
+			#region WorkPackage
 
-	        //modelBuilder.Entity<WorkPackage>()
-	        //	.HasMany(i => i.Files).WithOne(i => i.WorkPackage).HasForeignKey(i => i.ParentId);
+			//modelBuilder.Entity<WorkPackage>()
+			//	.HasMany(i => i.Files).WithOne(i => i.WorkPackage).HasForeignKey(i => i.ParentId);
+			
+			#endregion
 
-	        #endregion
 
+			#region AccessoryDescription
 
-	        #region AccessoryDescription
-
-	        modelBuilder.Entity<AccessoryDescription>()
+			modelBuilder.Entity<AccessoryDescription>()
 		        .HasOne(i => i.ATAChapter)
 		        .WithMany(i => i.AccessoryDescriptions)
 		        .HasForeignKey(i => i.AtaChapterId);
