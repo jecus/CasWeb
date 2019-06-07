@@ -33,7 +33,7 @@
                       columns.Bound(p => p.PerformAfterString).Title("Perform After").Width(120);
                       columns.Bound(p => p.PerfAfter.PerformDate).Title("Perform Date").Width(120);
                       columns.Bound(p => p.ClosingDate).Title("Closing Date").Width(120).ClientTemplate("#= kendo.toString(ClosingDate, \"dd.MM.yyyy\") #").Width(120);
-                      columns.Bound(p => p.ManHours).Title("MH").Width(120);
+                      columns.Bound(p => p.ManHours).Title("MH").Width(120).Format("{0:n2}");
                       columns.Bound(p => p.KMH).Title("K for MH").Width(120);
                       columns.Bound(p => p.KMLW).Title("K * MH").Width(120);
                       columns.Bound(p => p.WorkTimeString).Title("Work Time").Width(120);
@@ -62,6 +62,7 @@
                   .ColumnMenu()
                   .DataSource(dataSource => dataSource
                       .Ajax()
+                      .Sort(sort => sort.Add("Status").Ascending())
                       .PageSize(250)
                       .ServerOperation(false)
                       .Read(read => read.Action("", ""))

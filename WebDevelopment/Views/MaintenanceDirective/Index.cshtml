@@ -19,12 +19,8 @@
                   {
                       columns.Bound(p => p).ClientTemplate(KendoHelper.PdfButton(Url.Action("OpenPdf", "File"), new Dictionary<string, string>
                       {
-                          {"TaskCardNumberId", "Task Card No" },
-                          {"TaskNumberCheckId", "Task Card No Check" },
-                          {"MRBId", "MRB" },
-                          {"MaintenanceManualId", "Maintenance Manual" },
-                          {"EOId", "EO" }
-                      })).Title(" ").Width(180).Sortable(false).Groupable(false);
+                          {"TaskCardNumberId", "Task Card No" }
+                      })).Title(" ").Width(60).Sortable(false).Groupable(false);
                       columns.Bound(p => p.ScheduleItem).Title("AMP").Width(130);
                       columns.Bound(p => p.TaskNumberCheck).Title("MPD Item").Width(130);
                       columns.Bound(p => p.TaskCardNumber).Title("Task Card №").Width(130);
