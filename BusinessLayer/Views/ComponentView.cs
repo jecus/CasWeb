@@ -205,6 +205,10 @@ namespace BusinessLayer.Views
 		public double Current { get; set; }
 		public double ShouldBeOnStock { get; set; }
 		public string ShouldBeOnStockString => ShouldBeOnStock > 0 ? "Yes" : "No";
+		public string ReferenceProduct => Model?.Reference;
+		public string AltPartNumberProduct => Model?.AltPartNumber;
+		public string StandardProduct => Model?.StandardString;
+		public string ModelProduct => Model?.Model;
 
 		public List<ItemFileLink> Files
 		{

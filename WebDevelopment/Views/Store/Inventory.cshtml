@@ -26,9 +26,16 @@
                   })).Title(" ").Width(120).Sortable(false).Groupable(false);
                   columns.Bound(p => p.ParentStore.StoreName).Title("Store").Width(130);
                   columns.Bound(p => p.ATAChapterString).Title("ATA").Width(130);
+                  columns.Bound(p => p.ReferenceProduct).Title("Reference").Width(130);
                   columns.Bound(p => p.PartNumber).Title("Part. №").Width(130);
+                  columns.Bound(p => p.AltPartNumberProduct).Title("Alt Part. №").Width(130);
+                  columns.Bound(p => p.StandardProduct).Title("Standart").Width(130);
+                  columns.Bound(p => p.ModelProduct).Title("Name").Width(130);
                   columns.Bound(p => p.Description).Title("Description").Width(130);
                   columns.Bound(p => p.SerialNumber).Title("Serial №").Width(130);
+                  columns.Bound(p => p.BatchNumber).Title("Batch №").Width(130);
+                  columns.Bound(p => p.IdNumber).Title("ID №").Width(130);
+                  columns.Bound(p => p.GoodsClass.ShortName).Title("Class").Width(130);
                   columns.Bound(p => p.State.FullName).Title("State").Width(130);
                   columns.Bound(p => p.Status).Title("Status").Width(130);
                   columns.Bound(p => p.Location.FullName).Title("Location").Width(130);
