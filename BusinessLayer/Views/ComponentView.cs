@@ -150,7 +150,7 @@ namespace BusinessLayer.Views
 
         public int FromSupplierId { get; set; }
 
-		public ComponentModelView Model { get; set; }
+		public IProductView Model { get; set; }
 
         public DateTime? FromSupplierReciveDate { get; set; }
 

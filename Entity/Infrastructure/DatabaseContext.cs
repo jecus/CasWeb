@@ -341,6 +341,11 @@ namespace Entity.Infrastructure
 		        .HasForeignKey(i => i.ModelId);
 
 	        modelBuilder.Entity<Component>()
+		        .HasOne(i => i.Product)
+		        .WithMany(i => i.Components)
+		        .HasForeignKey(i => i.ModelId);
+
+			modelBuilder.Entity<Component>()
 		        .HasOne(i => i.Location)
 		        .WithMany(i => i.Components)
 		        .HasForeignKey(i => i.LocationId);
