@@ -1,4 +1,5 @@
-﻿using Entity.Infrastructure;
+﻿using BusinessLayer.Providers;
+using Entity.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -49,6 +50,8 @@ namespace WebDevelopment
 			services.AddProviders();
 			services.AddRepositories();
 			services.AddKendo();
+
+			services.AddHttpClient<ICalculationHttpClient, CalculationHttpClient>();
 		}
 
 
