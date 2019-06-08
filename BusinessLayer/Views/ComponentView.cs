@@ -32,7 +32,7 @@ namespace BusinessLayer.Views
 
         public int? ComponentLabel { get; set; }
 
-        public int? QuantityIn { get; set; }
+        public double QuantityIn { get; set; }
 
         public int? ATAChapterId { get; set; }
 
@@ -146,11 +146,7 @@ namespace BusinessLayer.Views
 
         public bool IsDangerous { get; set; }
 
-        public double? QuantityInput { get; set; }
-
-        public int FromSupplierId { get; set; }
-
-		public IProductView Model { get; set; }
+        public IProductView Model { get; set; }
 
         public DateTime? FromSupplierReciveDate { get; set; }
 

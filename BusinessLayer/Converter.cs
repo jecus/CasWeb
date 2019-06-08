@@ -1349,7 +1349,7 @@ namespace BusinessLayer
                 Discrepancy = comp.Discrepancy,
                 IsPool = comp.IsPool,
                 IsDangerous = comp.IsDangerous,
-                QuantityIn = comp.QuantityIn,
+                QuantityIn = comp.QuantityInput.HasValue ? comp.QuantityInput.Value : 0,
                 FromSupplier = comp.FromSupplier?.ToBlView() ?? SupplierView.Unknown,
                 TransferRecords = comp.TransferRecords?.ToBlView(),
                 FromSupplierReciveDate = comp.FromSupplierReciveDate
