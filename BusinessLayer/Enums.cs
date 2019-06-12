@@ -302,4 +302,32 @@
 
 	}
 	#endregion
+
+	#region LifelengthSubResource
+
+	public enum LifelengthSubResource
+	{
+		/// <summary>
+		/// минуты
+		/// </summary>
+		Minutes = 0,
+
+		/// <summary>
+		/// часы
+		/// </summary>
+		Hours = 1,
+
+		/// <summary>
+		/// Циклы
+		/// </summary>
+		Cycles = 2,
+
+		/// <summary>
+		/// Дни
+		/// </summary>
+		Calendar = 3,
+
+	}
+
+	#endregion
 }

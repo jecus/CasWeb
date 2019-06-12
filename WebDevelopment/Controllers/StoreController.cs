@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer;
+using BusinessLayer.Providers;
 using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Entity.Infrastructure;
@@ -17,11 +18,13 @@ namespace WebDevelopment.Controllers
     {
         private readonly DatabaseContext _db;
         private readonly IComponentRepository _componentRepository;
+        private readonly ICalculationHttpClient _calculationHttpClient;
 
-        public StoreController(DatabaseContext db, IComponentRepository componentRepository)
+        public StoreController(DatabaseContext db, IComponentRepository componentRepository, ICalculationHttpClient calculationHttpClient)
         {
             _db = db;
             _componentRepository = componentRepository;
+            _calculationHttpClient = calculationHttpClient;
         }
 
         [HttpGet("inventory")]
@@ -40,7 +43,9 @@ namespace WebDevelopment.Controllers
 	        ViewData["Components"] = result.Where(i => i.ParentStore != null).ToList();
 	        ViewData["Store"] = _db.Stores.FirstOrDefault(i => i.Id == storeId).ToBlView();
 
-	        return View();
+	        //await _calculationHttpClient.NextPerformanceForComponentDirectives(result.Select(i => i.Id).ToList());
+			
+			return View();
         }
 	}
 }

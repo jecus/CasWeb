@@ -17,11 +17,24 @@ namespace BusinessLayer.Providers
 			{
 				IsSuccessful = res.IsSuccessStatusCode,
 				StatusCode = res.StatusCode,
-				Data = res.IsSuccessStatusCode ? JsonConvert.DeserializeObject<TResult>(content) : default(TResult),
+				Data = res.IsSuccessStatusCode && content != "[]" ? JsonConvert.DeserializeObject<TResult>(content) : default(TResult),
 				Error = res.IsSuccessStatusCode ? null : (content ?? res.ReasonPhrase)
 			};
 		}
 
+		public static async Task<ApiResult<TResult>> PostJsonAsync<TResult>(this HttpClient client, string requestUri)
+		{
+			var res = await client.PostAsync(requestUri, null);
+			var content = await res.Content.ReadAsStringAsync();
+
+			return new ApiResult<TResult>
+			{
+				IsSuccessful = res.IsSuccessStatusCode,
+				StatusCode = res.StatusCode,
+				Data = res.IsSuccessStatusCode && content != "[]" ? JsonConvert.DeserializeObject<TResult>(content) : default(TResult),
+				Error = res.IsSuccessStatusCode ? null : (content ?? res.ReasonPhrase)
+			};
+		}
 
 		public static async Task<ApiResult<TResult>> SendJsonAsync<TModel, TResult>(this HttpClient client, HttpMethod httpMethod, string requestUri, TModel model)
 		{
@@ -36,7 +49,7 @@ namespace BusinessLayer.Providers
 			{
 				IsSuccessful = res.IsSuccessStatusCode,
 				StatusCode = res.StatusCode,
-				Data = res.IsSuccessStatusCode
+				Data = res.IsSuccessStatusCode && content != "[]"
 					? (string.IsNullOrWhiteSpace(content) ? default(TResult) : JsonConvert.DeserializeObject<TResult>(content))
 					: default(TResult),
 				Error = res.IsSuccessStatusCode ? null : (content ?? res.ReasonPhrase)
