@@ -11,70 +11,70 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLayer.Repositiry
 {
-    public class ComponentRepository : IComponentRepository
-    {
-        private readonly DatabaseContext _db;
-        private readonly IStockCalculator _stockCalculator;
+	public class ComponentRepository : IComponentRepository
+	{
+		private readonly DatabaseContext _db;
+		private readonly IStockCalculator _stockCalculator;
 
-        public ComponentRepository(DatabaseContext db, IStockCalculator stockCalculator)
-        {
-	        _db = db;
-	        _stockCalculator = stockCalculator;
-        }
+		public ComponentRepository(DatabaseContext db, IStockCalculator stockCalculator)
+		{
+			_db = db;
+			_stockCalculator = stockCalculator;
+		}
 
-        public async Task<List<ComponentView>> GetComponentsByBaseComponentIds(IEnumerable<int> baseComponentIds)
-        {
-	        var query = $@"Select ItemId from[dbo].Components where Components.IsBaseComponent = 0 and Components.IsDeleted = 0 and
+		public async Task<List<ComponentView>> GetComponentsByBaseComponentIds(IEnumerable<int> baseComponentIds)
+		{
+			var query = $@"Select ItemId from[dbo].Components where Components.IsBaseComponent = 0 and Components.IsDeleted = 0 and
 						(((select top 1 destinationobjectId from dbo.TransferRecords where 
-                                 dbo.Components.ItemId=Parentid and isdeleted=0 
+								 dbo.Components.ItemId=Parentid and isdeleted=0 
 								 and parenttype = 5 and destinationobjecttype = 6 
-							     order by transferDate desc ) in ({string.Join(',', baseComponentIds)})
+								 order by transferDate desc ) in ({string.Join(',', baseComponentIds)})
 
 						and  6 in (select top 1 destinationobjecttype 
-                                        from dbo.TransferRecords 
-                                        where dbo.Components.ItemId=Parentid and isdeleted=0 and 
-                                        parenttype = 5
-                                        order by transferDate desc )))";
+										from dbo.TransferRecords 
+										where dbo.Components.ItemId=Parentid and isdeleted=0 and 
+										parenttype = 5
+										order by transferDate desc )))";
 
-	        var itemIdModel = await _db.ItemIds.FromSql(query).ToListAsync();
-	        var ids = itemIdModel.Select(i => i.Id);
+			var itemIdModel = await _db.ItemIds.FromSql(query).ToListAsync();
+			var ids = itemIdModel.Select(i => i.Id);
 			var res =  await _db.Components
 				.AsNoTracking()
 				.Where(i => ids.Contains(i.Id))
 				.Include(i => i.ATAChapter)
 				.Include(i => i.Location)
-				.Include(i => i.Location)
+				.Include(i => i.TransferRecords)
 				.ToListAsync();
 
 			return res.ToBlView();
-        }
+		}
 
-        public async Task<List<int>> GetAircraftBaseComponentIds(int aircraftId)
-        {
-	        var ids = await _db.Components
-		        .AsNoTracking()
-		        .OnlyActive()
-		        .Where(i => i.IsBaseComponent && i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectID == aircraftId &&
-		                    i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectType == 7)
-		        .Select(i => i.Id)
-		        .ToListAsync();
+		public async Task<List<int>> GetAircraftBaseComponentIds(int aircraftId)
+		{
+			var ids = await _db.Components
+				.AsNoTracking()
+				.OnlyActive()
+				.Where(i => i.IsBaseComponent && i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectID == aircraftId &&
+							i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectType == 7)
+				.Select(i => i.Id)
+				.ToListAsync();
 
-	        return ids;
-        }
+			return ids;
+		}
 
 		public async Task<List<BaseComponentView>> GetAircraftBaseComponents(int aircraftId)
-        {
-	        var baseComponents = await _db.Components
-		        .AsNoTracking()
-		        .OnlyActive()
-		        .Where(i => i.IsBaseComponent && i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectID == aircraftId &&
-		                    i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectType == 7)
-		        .Include(i => i.TransferRecords)
-		        .Include(i => i.Model)
-		        .ToListAsync();
+		{
+			var baseComponents = await _db.Components
+				.AsNoTracking()
+				.OnlyActive()
+				.Where(i => i.IsBaseComponent && i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectID == aircraftId &&
+							i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectType == 7)
+				.Include(i => i.TransferRecords)
+				.Include(i => i.Model)
+				.ToListAsync();
 
-	        return baseComponents.ToBaseComponentView();
-        }
+			return baseComponents.ToBaseComponentView();
+		}
 
 		public async Task<List<ComponentView>> GetStoreComponent(int storeId)
 		{
@@ -166,10 +166,10 @@ namespace BusinessLayer.Repositiry
 		}
 
 		public async Task<List<ComponentView>> GetAllStoreComponent()
-        {
-	        var stores = await _db.Stores
-		        .AsNoTracking()
-		        .ToListAsync();
+		{
+			var stores = await _db.Stores
+				.AsNoTracking()
+				.ToListAsync();
 
 			var transferRecordId = await _db.TransferRecords
 				.Where(i => i.DestinationObjectType == SmartCoreType.Store.ItemId)
@@ -255,30 +255,30 @@ namespace BusinessLayer.Repositiry
 		}
 
 		private void SetDestinations(ComponentView component, List<StoreView> storeViews)
-        {
-            var lastTransfer = component.TransferRecords
-                .OrderBy(i => i.TransferDate)
-                .LastOrDefault();
+		{
+			var lastTransfer = component.TransferRecords
+				.OrderBy(i => i.TransferDate)
+				.LastOrDefault();
 
-            if (lastTransfer == null)
-            {
-                var msg = $"Component {component.Id} has no transfer records";
-                //_logger.LogError(msg);
-                throw new Exception(msg);
-            }
+			if (lastTransfer == null)
+			{
+				var msg = $"Component {component.Id} has no transfer records";
+				//_logger.LogError(msg);
+				throw new Exception(msg);
+			}
 
-            if (lastTransfer.DestinationType == SmartCoreType.Store)
-            {
-                var store = storeViews.FirstOrDefault(i => i.Id == lastTransfer.DestinationObjectID);
-                if (store == null)
-                {
-                    var msg = $"Destination object ID:{lastTransfer.DestinationObjectID} was not found";
-                   // _logger.LogError(msg);
-                    throw new Exception(msg);
-                }
-                component.ParentStore = store;
-            }
-                
-        }
-    }
+			if (lastTransfer.DestinationType == SmartCoreType.Store)
+			{
+				var store = storeViews.FirstOrDefault(i => i.Id == lastTransfer.DestinationObjectID);
+				if (store == null)
+				{
+					var msg = $"Destination object ID:{lastTransfer.DestinationObjectID} was not found";
+				   // _logger.LogError(msg);
+					throw new Exception(msg);
+				}
+				component.ParentStore = store;
+			}
+				
+		}
+	}
 }

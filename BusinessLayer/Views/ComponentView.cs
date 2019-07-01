@@ -4,6 +4,7 @@ using System.Linq;
 using BusinessLayer.Dictionaties;
 using Entity.Models.Dictionaries;
 using Entity.Models.General;
+using Newtonsoft.Json;
 
 namespace BusinessLayer.Views
 {
@@ -169,6 +170,7 @@ namespace BusinessLayer.Views
 	        }
         }
 
+		[JsonIgnore]
         public ComponentStorePosition State
         {
             get

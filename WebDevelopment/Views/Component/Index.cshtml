@@ -1,6 +1,6 @@
-﻿@using Kendo.Mvc.UI
-@using WebDevelopment.Helper
-@using WebDevelopment.Infrastructude
+﻿@using BusinessLayer
+@using BusinessLayer.Views
+@using Kendo.Mvc.UI
 @model List<BusinessLayer.Views.ComponentView>
 @{
     ViewData["Title"] = "Index";
@@ -8,4 +8,91 @@
 }
 
 
-<h1>Кодер тут табла должна быть!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</h1>
+<div class="card">
+    <div class="card-header">
+        <h5>Component Status All</h5>
+    </div>
+    <div class="card-block">
+        @(Html.Kendo().Grid(Model)
+              .Name("Grid")
+              .Columns(columns =>
+              {
+                  //columns.Bound(p => p.Id).ClientTemplate(KendoHelper.PdfButton(Url.Action("OpenPdf", "File"), new Dictionary<string, string>
+                  //{
+                  //    {"CRSFileId", "CRS" },
+                  //    {"ShippingFileId", "Shipping" },
+                  //})).Title(" ").Width(120).Sortable(false).Groupable(false);
+                  columns.Bound(p => p.ATAChapterString).Title("ATA").Width(130);
+                  columns.Bound(p => p.PartNumber).Title("Part. No").Width(130);
+                  columns.Bound(p => p.Description).Title("Description").Width(130);
+                  //columns.Bound(p => p.).Title("Work Type").Width(130);
+                  columns.Bound(p => p.SerialNumber).Title("Serial No").Width(130);
+                  columns.Bound(p => p.TransferRecords.Count).Title("MPD Item").Width(130);
+                  //columns.Bound(p => p.).Title("Task Card №").Width(130);
+                  //columns.Bound(p => p.).Title("Pos. No").Width(130);
+                  //columns.Bound(p => p.).Title("M.P.").Width(130);
+                  //columns.Bound(p => p.).Title("Zone-Area").Width(130);
+                  //columns.Bound(p => p.).Title("Access").Width(130);
+                  columns.Bound(p => p.TransferRecords.GetLast().TransferDate).Title("Inst. date").Width(130);
+
+              })
+              .ToolBar(tools => tools.Excel())
+              .Excel(excel => excel
+                  .FileName($"Component Status All.xlsx")
+                  .Filterable(true)
+                  .AllPages(true)
+                  .ProxyURL(Url.Action("ExcelExport", "Excel"))
+              )
+              .Scrollable(scrollable => scrollable.Height(630))
+              .Reorderable(reorderable => reorderable.Columns(true))
+              .Resizable(resizable => resizable.Columns(true))
+              .Pageable()
+              .Filterable()
+              .Sortable()
+              .ClientDetailTemplateId("template")
+              .Groupable()
+              .ColumnMenu()
+              .DataSource(dataSource => dataSource
+                  .Ajax()
+                  .PageSize(250)
+                  .ServerOperation(false)
+                  .Read(read => read.Action("TransferRecord_HierarchyBinding", "Component"))
+            ).Events(events => events.DataBound("dataBound")))
+
+        <script id="template" type="text/kendo-tmpl">
+                @(Html.Kendo().TabStrip()
+                      .Name("tabStrip_#=Id#")
+                      .SelectedIndex(0)
+                      .Animation(animation => animation.Open(open => open.Fade(FadeDirection.In)))
+                      .Items(items =>
+                      {
+                          items.Add().Text("Orders").Content(@<text>
+                                        @(Html.Kendo().Grid<TransferRecordView>()
+                                              .Name("grid_#=Id#") // template expression, to be evaluated in the master context
+                                              .Columns(columns =>
+                                              {
+                                                  columns.Bound(o => o.Position).Title("Id").Width(100);
+                                                  
+                                              })
+                                              .DataSource(dataSource => dataSource
+                                                  .Ajax()
+                                                  .PageSize(5)
+                                                  .ServerOperation(false)
+                                                  .Read(read => read.Action("TransferRecord_HierarchyBinding", "Component", new { componentId = "#=Id#" })
+                                                      .Type(HttpVerbs.Get))
+                                              )
+                                              .Pageable()
+                                              .Sortable()
+                                              .ToClientTemplate())
+                            </text>
+                              );
+                      })
+                      .ToClientTemplate())
+            </script>
+        <script>
+            function dataBound() {
+                this.expandRow(this.tbody.find("tr.k-master-row").first());
+            }
+        </script>
+    </div>
+</div>
