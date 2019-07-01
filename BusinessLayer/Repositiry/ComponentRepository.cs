@@ -81,9 +81,20 @@ namespace BusinessLayer.Repositiry
 			var stores = await _db.Stores.AsNoTracking()
 				.FirstOrDefaultAsync(i => i.Id == storeId);
 
-			var transferRecordId = await _db.TransferRecords
-				.Where(i => i.DestinationObjectType == SmartCoreType.Store.ItemId && i.DestinationObjectID == storeId)
-				.Select(i => i.ParentID).ToListAsync();
+			var query = $@"Select ItemId from[dbo].Components where Components.IsBaseComponent = 0 and Components.IsDeleted = 0 and 
+										(({storeId} in (select top 1 destinationobjectId 
+                                        from dbo.TransferRecords 
+                                        where dbo.Components.ItemId=Parentid and isdeleted=0 and 
+                                        parenttype = 5 and destinationobjecttype = 9 
+                                        order by transferDate desc ) 
+                                            and  9 in (select top 1 [destinationobjecttype] 
+                                        from dbo.TransferRecords 
+                                        where dbo.Components.ItemId=Parentid and isdeleted=0 and 
+                                        parenttype = 5
+                                        order by transferDate desc )))";
+
+			var itemIdModel = await _db.ItemIds.FromSql(query).ToListAsync();
+			var transferRecordId = itemIdModel.Select(i => i.Id);
 
 			var components = await _db.Components
 				.OnlyActive()
@@ -171,9 +182,20 @@ namespace BusinessLayer.Repositiry
 		        .AsNoTracking()
 		        .ToListAsync();
 
-			var transferRecordId = await _db.TransferRecords
-				.Where(i => i.DestinationObjectType == SmartCoreType.Store.ItemId)
-				.Select(i => i.ParentID).ToListAsync();
+	        var query = $@"Select ItemId from[dbo].Components where Components.IsBaseComponent = 0 and Components.IsDeleted = 0 and 
+										(({string.Join(',', stores.Select(i => i.Id))} in (select top 1 destinationobjectId 
+                                        from dbo.TransferRecords 
+                                        where dbo.Components.ItemId=Parentid and isdeleted=0 and 
+                                        parenttype = 5 and destinationobjecttype = 9 
+                                        order by transferDate desc ) 
+                                            and  9 in (select top 1 [destinationobjecttype] 
+                                        from dbo.TransferRecords 
+                                        where dbo.Components.ItemId=Parentid and isdeleted=0 and 
+                                        parenttype = 5
+                                        order by transferDate desc )))";
+
+	        var itemIdModel = await _db.ItemIds.FromSql(query).ToListAsync();
+	        var transferRecordId = itemIdModel.Select(i => i.Id);
 
 			var components = await _db.Components
 				.OnlyActive()
