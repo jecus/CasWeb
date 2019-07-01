@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Views;
+﻿using System.Collections.Generic;
+using BusinessLayer.Views;
 using WebDevelopment.Helper;
 
 namespace WebDevelopment.Infrastructude
@@ -10,6 +11,8 @@ namespace WebDevelopment.Infrastructude
         public static int AtlbId { get; set; }
 
         public static AircraftMainMenu AircraftMainMenu { get; set; }
+
+		public static List<int> BaseComponentIds { get; set; }
 
 		public static string RegistrationNumber { get; set; }
         

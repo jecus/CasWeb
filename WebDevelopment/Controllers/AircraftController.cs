@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using BusinessLayer.Repositiry.Interfaces;
 using Entity.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -30,10 +32,13 @@ namespace WebDevelopment.Controllers
 	        GlobalObject.AircraftId = aircraftId;
 	        GlobalObject.AircraftMainMenu = new AircraftMainMenu(Url, aircraftId);
 
-            var aircraft = await _aircraftRepository.GetById(aircraftId);
+	        var bc = await _componentRepository.GetAircraftBaseComponents(aircraftId);
+	        GlobalObject.BaseComponentIds = new List<int>(bc.Select(i => i.Id));
+
+			var aircraft = await _aircraftRepository.GetById(aircraftId);
             GlobalObject.RegistrationNumber = aircraft.RegistrationNumber;
             ViewData["Operator"] = await _db.Operators.FirstOrDefaultAsync();
-            ViewData["BaseComponents"] = await _componentRepository.GetAircraftBaseComponents(aircraftId);
+            ViewData["BaseComponents"] = bc;
 			return View(aircraft);
         }
     }

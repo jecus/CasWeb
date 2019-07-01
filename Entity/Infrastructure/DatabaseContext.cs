@@ -6,6 +6,7 @@ using Entity.Models.Dictionaries;
 using Entity.Models.General;
 using Microsoft.EntityFrameworkCore;
 using EFCore.BulkExtensions;
+using Entity.Models;
 using Entity.Models.Calculated;
 
 namespace Entity.Infrastructure
@@ -13,6 +14,7 @@ namespace Entity.Infrastructure
 	public sealed class DatabaseContext : DbContext
 	{
 		public DbQuery<WpManHours> ManHourses { get; set; }
+		public DbQuery<ItemIdModel> ItemIds { get; set; }
 
 		#region Dictionaries
 

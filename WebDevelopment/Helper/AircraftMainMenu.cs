@@ -27,9 +27,10 @@ namespace WebDevelopment.Helper
                 new AircraftMainMenu(2, "Components", "#!", "feather icon-clipboard", subMenu: new List<AircraftMainMenu>()
                 {
                     new AircraftMainMenu(1, "Avionics Inventory", "#!"),
-                    new AircraftMainMenu(2, "Component Tracking", "#!"),
-                    new AircraftMainMenu(3, "Component Change Status", "#!"),
-                    new AircraftMainMenu(4, "Landing Gear Status", "#!")
+                    new AircraftMainMenu(2, "Component Status All", url.Action("Index", "Component", new {GlobalObject.AircraftId})),
+                    new AircraftMainMenu(3, "Component Tracking", "#!"),
+                    new AircraftMainMenu(4, "Component Change Status", "#!"),
+                    new AircraftMainMenu(5, "Landing Gear Status", "#!")
 
                 }),
 

@@ -22,6 +22,33 @@ namespace BusinessLayer.Repositiry
 	        _stockCalculator = stockCalculator;
         }
 
+        public async Task<List<ComponentView>> GetComponentsByBaseComponentIds(IEnumerable<int> baseComponentIds)
+        {
+	        var query = $@"Select ItemId from[dbo].Components where Components.IsBaseComponent = 0 and Components.IsDeleted = 0 and
+						(((select top 1 destinationobjectId from dbo.TransferRecords where 
+                                 dbo.Components.ItemId=Parentid and isdeleted=0 
+								 and parenttype = 5 and destinationobjecttype = 6 
+							     order by transferDate desc ) in ({string.Join(',', baseComponentIds)})
+
+						and  6 in (select top 1 destinationobjecttype 
+                                        from dbo.TransferRecords 
+                                        where dbo.Components.ItemId=Parentid and isdeleted=0 and 
+                                        parenttype = 5
+                                        order by transferDate desc )))";
+
+	        var itemIdModel = await _db.ItemIds.FromSql(query).ToListAsync();
+	        var ids = itemIdModel.Select(i => i.Id);
+			var res =  await _db.Components
+				.AsNoTracking()
+				.Where(i => ids.Contains(i.Id))
+				.Include(i => i.ATAChapter)
+				.Include(i => i.Location)
+				.Include(i => i.Location)
+				.ToListAsync();
+
+			return res.ToBlView();
+        }
+
         public async Task<List<int>> GetAircraftBaseComponentIds(int aircraftId)
         {
 	        var ids = await _db.Components

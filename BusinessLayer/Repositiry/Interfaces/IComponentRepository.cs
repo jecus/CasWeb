@@ -8,7 +8,9 @@ namespace BusinessLayer.Repositiry.Interfaces
 {
     public interface IComponentRepository
     {
-	    Task<List<int>> GetAircraftBaseComponentIds(int aircraftId);
+	    Task<List<ComponentView>> GetComponentsByBaseComponentIds(IEnumerable<int> baseComponentIds);
+
+		Task<List<int>> GetAircraftBaseComponentIds(int aircraftId);
 
 		Task<List<BaseComponentView>> GetAircraftBaseComponents(int aircraftId);
 
