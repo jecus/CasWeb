@@ -1,6 +1,7 @@
 ﻿@using BusinessLayer
 @using BusinessLayer.Views
 @using Kendo.Mvc.UI
+@using WebDevelopment.Infrastructude
 @model List<BusinessLayer.Views.ComponentView>
 @{
     ViewData["Title"] = "Index";
@@ -17,22 +18,11 @@
               .Name("Grid")
               .Columns(columns =>
               {
-                  //columns.Bound(p => p.Id).ClientTemplate(KendoHelper.PdfButton(Url.Action("OpenPdf", "File"), new Dictionary<string, string>
-                  //{
-                  //    {"CRSFileId", "CRS" },
-                  //    {"ShippingFileId", "Shipping" },
-                  //})).Title(" ").Width(120).Sortable(false).Groupable(false);
                   columns.Bound(p => p.ATAChapterString).Title("ATA").Width(130);
                   columns.Bound(p => p.PartNumber).Title("Part. No").Width(130);
                   columns.Bound(p => p.Description).Title("Description").Width(130);
-                  //columns.Bound(p => p.).Title("Work Type").Width(130);
                   columns.Bound(p => p.SerialNumber).Title("Serial No").Width(130);
                   columns.Bound(p => p.TransferRecords.Count).Title("MPD Item").Width(130);
-                  //columns.Bound(p => p.).Title("Task Card №").Width(130);
-                  //columns.Bound(p => p.).Title("Pos. No").Width(130);
-                  //columns.Bound(p => p.).Title("M.P.").Width(130);
-                  //columns.Bound(p => p.).Title("Zone-Area").Width(130);
-                  //columns.Bound(p => p.).Title("Access").Width(130);
                   columns.Bound(p => p.TransferRecords.GetLast().TransferDate).Title("Inst. date").Width(130);
 
               })
@@ -56,7 +46,7 @@
                   .Ajax()
                   .PageSize(250)
                   .ServerOperation(false)
-                  .Read(read => read.Action("TransferRecord_HierarchyBinding", "Component"))
+                  .Read(read => read.Action("", "" ))
             ).Events(events => events.DataBound("dataBound")))
 
         <script id="template" type="text/kendo-tmpl">
@@ -67,18 +57,18 @@
                       .Items(items =>
                       {
                           items.Add().Text("Orders").Content(@<text>
-                                        @(Html.Kendo().Grid<TransferRecordView>()
+                                        @(Html.Kendo().Grid<ComponentDirectiveView>()
                                               .Name("grid_#=Id#") // template expression, to be evaluated in the master context
                                               .Columns(columns =>
                                               {
-                                                  columns.Bound(o => o.Position).Title("Id").Width(100);
+                                                  columns.Bound(o => o.AccessDirective).Title("Id").Width(100);
                                                   
                                               })
                                               .DataSource(dataSource => dataSource
                                                   .Ajax()
                                                   .PageSize(5)
                                                   .ServerOperation(false)
-                                                  .Read(read => read.Action("TransferRecord_HierarchyBinding", "Component", new { componentId = "#=Id#" })
+                                                  .Read(read => read.Action("ComponentDirective_HierarchyBinding", "Component", new {GlobalObject.AircraftId, componentId = "#=Id#" })
                                                       .Type(HttpVerbs.Get))
                                               )
                                               .Pageable()

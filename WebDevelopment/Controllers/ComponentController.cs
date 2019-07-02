@@ -27,16 +27,16 @@ namespace WebDevelopment.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Index([FromRoute]int aircraftId)
+		public async Task<IActionResult> Index()
 		{
 			var view = await _componentRepository.GetComponentsByBaseComponentIds(GlobalObject.BaseComponentIds);
 			return View(view);
 		}
 
 		[HttpGet("transfer")]
-		public async Task<ActionResult> TransferRecord_HierarchyBinding(int componentId, [DataSourceRequest] DataSourceRequest request)
+		public async Task<ActionResult> ComponentDirective_HierarchyBinding(int componentId, [DataSourceRequest] DataSourceRequest request)
 		{
-			var tr = await _context.TransferRecords.AsNoTracking().Where(i => i.ParentID == componentId).ToListAsync();
+			var tr = await _context.ComponentDirectives.AsNoTracking().Where(i => i.ComponentId == componentId).ToListAsync();
 			return Json(tr.ToBlView().ToDataSourceResult(request));
 		}
 	}
