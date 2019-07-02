@@ -75,7 +75,7 @@ namespace BusinessLayer.Views
 
         public string HushKit { get; set; }
 
-        public double? Cost { get; set; }
+        public double Cost { get; set; }
 
         public double? CostServiceable { get; set; }
 
@@ -95,7 +95,7 @@ namespace BusinessLayer.Views
 			}
         }
 
-        public double? ManHours { get; set; }
+        public double ManHours { get; set; }
 
         public int? FaaFormFileID { get; set; }
 

@@ -39,9 +39,9 @@ namespace BusinessLayer.Views
 
 		public bool? IsClosed { get; set; }
 
-		public double? ManHours { get; set; }
+		public double ManHours { get; set; }
 
-		public double? Cost { get; set; }
+		public double Cost { get; set; }
 
 		public double? Elapsed { get; set; }
 

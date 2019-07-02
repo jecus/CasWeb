@@ -1,0 +1,47 @@
+﻿@using Kendo.Mvc.UI
+@using WebDevelopment.Helper
+@using WebDevelopment.Infrastructude
+@model List<BusinessLayer.Views.WorkPackageRecordView>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AircraftLayout.cshtml";
+}
+
+    <div class="card">
+        <div class="card-header">
+            <h5>Work Package</h5>
+        </div>
+        <div class="card-block">
+            @(Html.Kendo().Grid(Model)
+                  .Name("Grid")
+                  .Columns(columns =>
+                  {
+                      columns.Bound(p => p.Task.Type).Title("Type").Width(120);
+
+                  })
+                  .ToolBar(tools => tools.Excel())
+                  .Excel(excel => excel
+                      .FileName("WorkPackageRecord.xlsx")
+                      .Filterable(true)
+                      .AllPages(true)
+                      .ProxyURL(Url.Action("ExcelExport", "Excel"))
+                  )
+                  .Scrollable(scrollable => scrollable.Height(630))
+                  .Reorderable(reorderable => reorderable.Columns(true))
+                  .Resizable(resizable => resizable.Columns(true))
+                  .Pageable()
+                  .Filterable()
+                  .Sortable()
+                  .Groupable()
+                  .ColumnMenu()
+                  .DataSource(dataSource => dataSource
+                      .Ajax()
+                      .PageSize(250)
+                      .ServerOperation(false)
+                      .Read(read => read.Action("", ""))
+                  ))
+
+        </div>
+    </div>
+

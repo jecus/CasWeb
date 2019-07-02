@@ -2527,5 +2527,54 @@ namespace BusinessLayer
 		}
 
 		#endregion
+
+		#region WorkPackageRecord
+
+		public static WorkPackageRecord ToEntity(this WorkPackageRecordView view)
+		{
+			return new WorkPackageRecord
+			{
+				Id = view.Id,
+				IsDeleted = view.IsDeleted,
+				WorkPakageId = view.WorkPakage?.Id ?? -1,
+				DirectivesId = view.DirectivesId,
+				FromRecordId = view.FromRecordId,
+				Group = view.Group,
+				JobCardNumber = view.JobCardNumber,
+				ParentCheckId = view.ParentCheckId,
+				PerfNumFromRecord = view.PerfNumFromRecord,
+				PerfNumFromStart = view.PerfNumFromStart,
+				WorkPackageItemType = view.WorkPackageItemType,
+			};
+		}
+
+		public static WorkPackageRecordView ToBlView(this WorkPackageRecord entity)
+		{
+			return new WorkPackageRecordView
+			{
+				Id = entity.Id,
+				IsDeleted = entity.IsDeleted,
+				DirectivesId = entity.DirectivesId ?? -1,
+				FromRecordId = entity.FromRecordId,
+				Group = entity.Group ?? -1,
+				JobCardNumber = entity.JobCardNumber,
+				ParentCheckId = entity.ParentCheckId ?? -1,
+				PerfNumFromRecord = entity.PerfNumFromRecord ?? -1,
+				PerfNumFromStart = entity.PerfNumFromStart ?? -1,
+				WorkPackageItemType = entity.WorkPackageItemType ?? -1,
+			};
+		}
+
+		public static List<WorkPackageRecordView> ToBlView(this IEnumerable<WorkPackageRecord> entity)
+		{
+			return new List<WorkPackageRecordView>(entity.Select(i => i.ToBlView()));
+		}
+
+		public static List<WorkPackageRecord> ToEntity(this IEnumerable<WorkPackageRecordView> view)
+		{
+			return new List<WorkPackageRecord>(view.Select(i => i.ToEntity()));
+		}
+
+		#endregion
 	}
 }

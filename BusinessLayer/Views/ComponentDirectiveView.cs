@@ -8,11 +8,11 @@ namespace BusinessLayer.Views
 
         public byte[] Threshold { get; set; }
 
-        public double? ManHours { get; set; }
+        public double ManHours { get; set; }
 
         public string Remarks { get; set; }
 
-        public double? Cost { get; set; }
+        public double Cost { get; set; }
 
         public int? Highlight { get; set; }
 

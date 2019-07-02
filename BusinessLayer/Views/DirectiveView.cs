@@ -14,7 +14,7 @@ namespace BusinessLayer.Views
 
 		public bool IsApplicability { get; set; }
 
-		public double? ManHours { get; set; }
+		public double ManHours { get; set; }
 
 		public string Remarks { get; set; }
 
@@ -31,7 +31,7 @@ namespace BusinessLayer.Views
 		public string EngineeringOrders { get; set; }
 		public string EoNo => EngineeringOrders != "" ? EngineeringOrders : "N/A";
 
-		public double? Cost { get; set; }
+		public double Cost { get; set; }
 
 		public string Paragraph { get; set; }
 

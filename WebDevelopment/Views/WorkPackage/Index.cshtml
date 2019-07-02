@@ -17,12 +17,10 @@
                   .Name("Grid")
                   .Columns(columns =>
                   {
-                      //columns.Bound(p => p.Id)
-                      //    .ClientTemplate(
-                      //        KendoHelper.Button(Url.Action("Index", "AircraftFlight", new { GlobalObject.AircraftId }), "atlbId", "Id", ButtonType.Open)
-                      //      + KendoHelper.ButtonModal(Url.Action("ModalEdit", "ATLB", new { GlobalObject.AircraftId }, Context.Request.Scheme), "atlbId", "Id", ButtonType.Edit, "EditAtlb")
-                      //    //KendoHelper.ButtonModal(Url.Action("ConfirmDelete", "ATLB", new { GlobalObject.AircraftId },Context.Request.Scheme), "id", "Id", ButtonType.Delete, "Delete")
-                      //    ).Width(90).Title(" ").Sortable(false).Groupable(false);
+                      columns.Bound(p => p.Id)
+                          .ClientTemplate(
+                              KendoHelper.Button(Url.Action("Index", "WorkPackageRecord", new { GlobalObject.AircraftId }), "wpId", "Id", ButtonType.Open)
+                          ).Width(90).Title(" ").Sortable(false).Groupable(false);
                       columns.Bound(p => p.Status).Title("Status").Width(120);
                       columns.Bound(p => p.Number).Title("WP/WO №").Width(120);
                       columns.Bound(p => p.Title).Title("Title").Width(120);
