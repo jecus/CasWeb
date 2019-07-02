@@ -29,15 +29,9 @@
                       columns.Bound(p => p.ProgramIndicatorString).Title("Program Indicator").Width(130);
                       columns.Bound(p => p.WorkType.FullName).Title("Work Type").Width(130);
                       columns.Bound(p => p.MaintenanceCheckId).Title("Check").Width(130);
-                      //columns.Bound(p => p.).Title("1st. Perf.").Width(130);
-                      //columns.Bound(p => p.).Title("Rpt. Intv.").Width(130);
-                      //columns.Bound(p => p.).Title("Next").Width(130);
-                      //columns.Bound(p => p.).Title("Remain/Overdue").Width(130);
-                      //columns.Bound(p => p.).Title("Last").Width(130);
                       columns.Bound(p => p.Zone).Title("Zone").Width(130);
                       columns.Bound(p => p.Workarea).Title("Work Area").Width(130);
                       columns.Bound(p => p.Access).Title("Access").Width(130);
-                      //columns.Bound(p => p.).Title("Status").Width(130);
                       columns.Bound(p => p.MPDTaskNumber).Title("Doc. No").Width(130);
                       columns.Bound(p => p.MaintenanceManual).Title("Maint. Manual").Width(130);
                       columns.Bound(p => p.MRB).Title("MRB").Width(130);
@@ -66,7 +60,7 @@
                   .Reorderable(reorderable => reorderable.Columns(true))
                   .Resizable(resizable => resizable.Columns(true))
                   .Pageable()
-                  .Filterable()
+                  .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                   .Sortable()
                   .Groupable()
                   .ColumnMenu()
