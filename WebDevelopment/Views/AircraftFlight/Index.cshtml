@@ -94,7 +94,7 @@
               .Reorderable(reorderable => reorderable.Columns(true))
               .Resizable(resizable => resizable.Columns(true))
               .Pageable()
-              .Filterable()
+              .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
               .Sortable()
               .Groupable()
               .ColumnMenu()

@@ -37,7 +37,7 @@
               .Reorderable(reorderable => reorderable.Columns(true))
               .Resizable(resizable => resizable.Columns(true))
               .Pageable()
-              .Filterable()
+              .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
               .Sortable()
               .ClientDetailTemplateId("template")
               .Groupable()
@@ -58,7 +58,7 @@
                       {
                           items.Add().Text("Orders").Content(@<text>
                                         @(Html.Kendo().Grid<ComponentDirectiveView>()
-                                              .Name("grid_#=Id#") // template expression, to be evaluated in the master context
+                                              .Name("grid_#=Id#")
                                               .Columns(columns =>
                                               {
                                                   columns.Bound(o => o.AccessDirective).Title("Id").Width(100);

@@ -29,7 +29,6 @@
                     columns.Bound(p => p.IssueDateValidFrom).Title("Issue").Width(130).ClientTemplate("#= kendo.toString(IssueDateValidFrom, \"dd.MM.yyyy\") #");
                     columns.Bound(p => p.IssueNumber).Title("№ Issue").Width(130);
                     columns.Bound(p => p.IssueDateValidTo).Title("Valid To").Width(130).ClientTemplate("#= kendo.toString(IssueDateValidTo, \"dd.MM.yyyy\") #");
-                    
                     columns.Bound(p => p.RevisionDateFrom).Title("Rev.Date").Width(130).ClientTemplate("#= kendo.toString(RevisionDateFrom, \"dd.MM.yyyy\") #");
                     columns.Bound(p => p.RevNumber).Title("№ Rev.").Width(130);
                     columns.Bound(p => p.RevisionDateValidToString).Title("Valid To").Width(130);
@@ -46,7 +45,7 @@
                 .Reorderable(reorderable => reorderable.Columns(true))
                 .Resizable(resizable => resizable.Columns(true))
                 .Pageable()
-                .Filterable()
+                .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                 .Sortable()
                 .Groupable()
                 .ColumnMenu()

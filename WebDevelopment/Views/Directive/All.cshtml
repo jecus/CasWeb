@@ -28,22 +28,13 @@
                       columns.Bound(p => p.EoNo).Title("EO No").Width(120);
                       columns.Bound(p => p.Applicability).Title("Applicabilty").Width(120);
                       columns.Bound(p => p.Description).Title("Description").Width(120);
-                      //columns.Bound(p => p.).Title("Next").Width(120);
-                      //columns.Bound(p => p.AtlbStatusString).Title("Last").Width(120);
-                      //columns.Bound(p => p.AtlbStatusString).Title("Rpt. Intv.").Width(120);
-                      //columns.Bound(p => p.AtlbStatusString).Title("Remain/Overdue").Width(120);
-                      //columns.Bound(p => p.st).Title("Status").Width(120);
                       columns.Bound(p => p.Remarks).Title("Remarks").Width(120);
-                      //columns.Bound(p => p.).Title("Effective date").Width(120);
                       columns.Bound(p => p.Zone).Title("Zone").Width(120);
                       columns.Bound(p => p.Workarea).Title("Work Area").Width(120);
                       columns.Bound(p => p.Access).Title("Access").Width(120);
                       columns.Bound(p => p.WorkType.FullName).Title("Work Type").Width(120);
                       columns.Bound(p => p.StcNo).Title("STC No").Width(120);
-                      //columns.Bound(p => p.AtlbStatusString).Title("1st. Perf.").Width(120);
                       columns.Bound(p => p.AtaString).Title("ATA Chapter").Width(120);
-                      //columns.Bound(p => p.ba).Title("Base Detail").Width(120);
-                      //columns.Bound(p => p.Kits).Title("Kit").Width(120);
                       columns.Bound(p => p.NDTType.ShortName).Title("NDT").Width(120);
                       columns.Bound(p => p.ManHours).Title("M.H.").Width(120);
                       columns.Bound(p => p.Cost).Title("Cost").Width(120);
@@ -60,7 +51,7 @@
                   .Reorderable(reorderable => reorderable.Columns(true))
                   .Resizable(resizable => resizable.Columns(true))
                   .Pageable()
-                  .Filterable()
+                  .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                   .Sortable()
                   .Groupable()
                   .ColumnMenu()
