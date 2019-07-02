@@ -28,7 +28,7 @@ namespace BusinessLayer.Views
 
 	public interface IWprTask
 	{
-		ATAChapterView AtaChapterView { get; }
+		string AtaChapterView { get; }
 		string Title { get; }
 		string Description { get; }
 		Lifelength FirstPerformance { get; }
@@ -44,7 +44,7 @@ namespace BusinessLayer.Views
 
 	public class WprTask:IWprTask
 	{
-		public ATAChapterView AtaChapterView { get; set; }
+		public string AtaChapterView { get; set; }
 		public string Title { get; set; }
 		public string Description { get; set; }
 		public Lifelength FirstPerformance { get; set; }

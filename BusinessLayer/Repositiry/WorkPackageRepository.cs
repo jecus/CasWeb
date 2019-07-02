@@ -111,7 +111,7 @@ namespace BusinessLayer.Repositiry
 						adWpr.Task = new WprTask()
 						{
 							Type = "Directive",
-							AtaChapterView = directive.ATAChapter,
+							AtaChapterView = directive.AtaString,
 							Title = $"{directive.EngineeringOrders} {directive.Title}",
 							Description = directive.Description,
 							FirstPerformance = Lifelength.Null,
@@ -130,7 +130,7 @@ namespace BusinessLayer.Repositiry
 			var detWprs = res.Where(w => w.WorkPackageItemType == SmartCoreType.Component.ItemId).ToList();
 			if (detWprs.Count > 0)
 			{
-				var componentIds = adWprs.Select(i => i.DirectivesId);
+				var componentIds = detWprs.Select(i => i.DirectivesId);
 				var components = await _db.Components
 					.AsNoTracking()
 					.Include(i => i.ATAChapter)
@@ -147,7 +147,7 @@ namespace BusinessLayer.Repositiry
 						adWpr.Task = new WprTask()
 						{
 							Type = "Component",
-							AtaChapterView = component.ATAChapter,
+							AtaChapterView = component.ATAChapterString,
 							Title = component.PartNumber,
 							Description = component.Description,
 							FirstPerformance = Lifelength.Null,
@@ -166,7 +166,7 @@ namespace BusinessLayer.Repositiry
 			var baseDetWprs = res.Where(w => w.WorkPackageItemType == SmartCoreType.BaseComponent.ItemId).ToList();
 			if (baseDetWprs.Count > 0)
 			{
-				var componentIds = adWprs.Select(i => i.DirectivesId);
+				var componentIds = baseDetWprs.Select(i => i.DirectivesId);
 				var components = await _db.Components
 					.AsNoTracking()
 					.Include(i => i.ATAChapter)
@@ -183,7 +183,7 @@ namespace BusinessLayer.Repositiry
 						adWpr.Task = new WprTask()
 						{
 							Type = "BaseComponent",
-							AtaChapterView = component.ATAChapter,
+							AtaChapterView = component.ATAChapterString,
 							Title = component.PartNumber,
 							Description = component.Description,
 							FirstPerformance = Lifelength.Null,
@@ -202,7 +202,7 @@ namespace BusinessLayer.Repositiry
 			var detDirWprs = res.Where(w => w.WorkPackageItemType == SmartCoreType.ComponentDirective.ItemId).ToList();
 			if (detDirWprs.Count > 0)
 			{
-				var componentDirectiveIds = adWprs.Select(i => i.DirectivesId);
+				var componentDirectiveIds = detDirWprs.Select(i => i.DirectivesId);
 				var componentDirectives = await _db.ComponentDirectives
 					.AsNoTracking()
 					.Include(i => i.Component)
@@ -220,7 +220,7 @@ namespace BusinessLayer.Repositiry
 						adWpr.Task = new WprTask()
 						{
 							Type = "Component Directive",
-							AtaChapterView = directive.Component.ATAChapter,
+							AtaChapterView = directive.Component.ATAChapterString,
 							Title = "",
 							Description = directive.Remarks,
 							FirstPerformance = Lifelength.Null,
@@ -246,7 +246,7 @@ namespace BusinessLayer.Repositiry
 			var mpdWprs = res.Where(w => w.WorkPackageItemType == SmartCoreType.MaintenanceDirective.ItemId).ToList();
 			if (mpdWprs.Count > 0)
 			{
-				var mpdIds = adWprs.Select(i => i.DirectivesId);
+				var mpdIds = mpdWprs.Select(i => i.DirectivesId);
 				var mpds = await _db.MaintenanceDirectives
 					.AsNoTracking()
 					.Include(i => i.ATAChapter)
@@ -263,7 +263,7 @@ namespace BusinessLayer.Repositiry
 						adWpr.Task = new WprTask()
 						{
 							Type = "Maintenance Directive",
-							AtaChapterView = mpd.ATAChapter,
+							AtaChapterView = mpd.AtaString,
 							Title = $"{mpd.TaskCardNumber} {mpd.TaskNumberCheck} {mpd.Description}",
 							Description = mpd.Description,
 							FirstPerformance = Lifelength.Null,
