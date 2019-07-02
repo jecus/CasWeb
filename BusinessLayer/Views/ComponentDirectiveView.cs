@@ -6,7 +6,7 @@ namespace BusinessLayer.Views
         
         public int DirectiveType { get; set; }
 
-        public byte[] Threshold { get; set; }
+        public Threshold Threshold { get; set; }
 
         public double ManHours { get; set; }
 

@@ -106,6 +106,19 @@ namespace BusinessLayer.Repositiry
 				{
 					adWpr.WorkPakage = wpView;
 					var directive = directiveView.FirstOrDefault(i => i.Id == adWpr.DirectivesId);
+
+					var firstPerf = "";
+					if (directive.Threshold.FirstPerformanceSinceNew != null && !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+						firstPerf = "s/n: " + directive.Threshold.FirstPerformanceSinceNew;
+					if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+					    !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+					{
+						if (firstPerf != "") firstPerf += " or ";
+						else firstPerf = "";
+						firstPerf += "s/e.d: " + directive.Threshold.FirstPerformanceSinceEffectiveDate;
+					}
+
+
 					if (directive != null)
 					{
 						adWpr.Task = new WprTask()
@@ -114,8 +127,8 @@ namespace BusinessLayer.Repositiry
 							AtaChapterView = directive.AtaString,
 							Title = $"{directive.EngineeringOrders} {directive.Title}",
 							Description = directive.Description,
-							FirstPerformance = Lifelength.Null,
-							RepeatInterval = Lifelength.Null,
+							FirstPerformance = firstPerf,
+							RepeatInterval = directive.Threshold.RepeatInterval.ToString(),
 							WorkType = directive.WorkType.FullName,
 							NDT = directive.NDTType.ShortName,
 							PerfDate = wpView.PerfAfter.PerformDate.ToUniversalString(),
@@ -150,8 +163,8 @@ namespace BusinessLayer.Repositiry
 							AtaChapterView = component.ATAChapterString,
 							Title = component.PartNumber,
 							Description = component.Description,
-							FirstPerformance = Lifelength.Null,
-							RepeatInterval = Lifelength.Null,
+							FirstPerformance = component.LifeLimit != null ? component.LifeLimit.ToString() : "",
+							RepeatInterval = "",
 							WorkType = "Remove",
 							NDT = "",
 							PerfDate = wpView.PerfAfter.PerformDate.ToUniversalString(),
@@ -186,8 +199,8 @@ namespace BusinessLayer.Repositiry
 							AtaChapterView = component.ATAChapterString,
 							Title = component.PartNumber,
 							Description = component.Description,
-							FirstPerformance = Lifelength.Null,
-							RepeatInterval = Lifelength.Null,
+							FirstPerformance = component.LifeLimit != null ? component.LifeLimit.ToString() : "",
+							RepeatInterval = "",
 							WorkType = "Remove",
 							NDT = "",
 							PerfDate = wpView.PerfAfter.PerformDate.ToUniversalString(),
@@ -215,6 +228,13 @@ namespace BusinessLayer.Repositiry
 				{
 					adWpr.WorkPakage = wpView;
 					var directive = componentDirectiveViews.FirstOrDefault(i => i.Id == adWpr.DirectivesId);
+
+					var first = "";
+					if (directive.Threshold.FirstPerformanceSinceNew != null && !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+					{
+						first = "s/n: " + directive.Threshold.FirstPerformanceSinceNew;
+					}
+
 					if (directive != null)
 					{
 						adWpr.Task = new WprTask()
@@ -223,8 +243,8 @@ namespace BusinessLayer.Repositiry
 							AtaChapterView = directive.Component.ATAChapterString,
 							Title = "",
 							Description = directive.Remarks,
-							FirstPerformance = Lifelength.Null,
-							RepeatInterval = Lifelength.Null,
+							FirstPerformance = first,
+							RepeatInterval = directive.Threshold.RepeatInterval?.ToString(),
 							WorkType = "",
 							NDT = NDTType.GetItemById(directive.NDTType).ShortName,
 							PerfDate = wpView.PerfAfter.PerformDate.ToUniversalString(),
@@ -258,6 +278,23 @@ namespace BusinessLayer.Repositiry
 				{
 					adWpr.WorkPakage = wpView;
 					var mpd = componentDirectiveViews.FirstOrDefault(i => i.Id == adWpr.DirectivesId);
+
+					var first = "";
+					if (mpd.Threshold.FirstPerformanceSinceNew != null && !mpd.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
+					{
+						first = "s/n: " + mpd.Threshold.FirstPerformanceSinceNew;
+					}
+					if (mpd.Threshold.FirstPerformanceSinceEffectiveDate != null &&
+					    !mpd.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+					{
+						if (first != "") first += " or ";
+						else
+						{
+							first = "";
+						}
+						first += "s/e.d: " + mpd.Threshold.FirstPerformanceSinceEffectiveDate;
+					}
+
 					if (mpd != null)
 					{
 						adWpr.Task = new WprTask()
@@ -266,8 +303,8 @@ namespace BusinessLayer.Repositiry
 							AtaChapterView = mpd.AtaString,
 							Title = $"{mpd.TaskCardNumber} {mpd.TaskNumberCheck} {mpd.Description}",
 							Description = mpd.Description,
-							FirstPerformance = Lifelength.Null,
-							RepeatInterval = Lifelength.Null,
+							FirstPerformance = first,
+							RepeatInterval = mpd.Threshold.RepeatInterval?.ToString(),
 							WorkType = mpd.WorkType.FullName,
 							NDT = mpd.NDTType.ShortName,
 							PerfDate = wpView.PerfAfter.PerformDate.ToUniversalString(),

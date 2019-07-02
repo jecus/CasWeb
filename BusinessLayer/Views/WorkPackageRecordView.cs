@@ -31,8 +31,8 @@ namespace BusinessLayer.Views
 		string AtaChapterView { get; }
 		string Title { get; }
 		string Description { get; }
-		Lifelength FirstPerformance { get; }
-		Lifelength RepeatInterval { get; }
+		string FirstPerformance { get; }
+		string RepeatInterval { get; }
 		string WorkType { get; }
 		string NDT { get; }
 		string PerfDate { get; }
@@ -47,8 +47,8 @@ namespace BusinessLayer.Views
 		public string AtaChapterView { get; set; }
 		public string Title { get; set; }
 		public string Description { get; set; }
-		public Lifelength FirstPerformance { get; set; }
-		public Lifelength RepeatInterval { get; set; }
+		public string FirstPerformance { get; set; }
+		public string RepeatInterval { get; set; }
 		public string WorkType { get; set; }
 		public string NDT { get; set; }
 		public string PerfDate { get; set; }

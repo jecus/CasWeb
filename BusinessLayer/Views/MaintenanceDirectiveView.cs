@@ -31,7 +31,7 @@ namespace BusinessLayer.Views
 
 		public string ServiceBulletinNo { get; set; }
 
-		public byte[] Threshold { get; set; }
+		public Threshold Threshold { get; set; }
 
 		public string Remarks { get; set; }
 

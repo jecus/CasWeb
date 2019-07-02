@@ -458,7 +458,7 @@ namespace BusinessLayer
 				Title = entity.Title,
 				ManHours = entity.ManHours ?? default(double),
 				Remarks = entity.Remarks,
-				//Threshold = DirectiveThreshold.ConvertFromByteArray(entity.Threshold),
+				Threshold = Threshold.ConvertForDirective(entity.Threshold),
 				ThldTypeCond = entity.ThldTypeCond,
 				Applicability = entity.Applicability,
 				DirectiveType = entity.DirectiveType.HasValue ? DirectiveType.GetDirectiveTypeById(entity.DirectiveType.Value) : DirectiveType.Unknown,
@@ -1379,7 +1379,6 @@ namespace BusinessLayer
                 Id = comdir.Id,
                 IsDeleted = comdir.IsDeleted,
                 DirectiveType = comdir.DirectiveType,
-                Threshold = comdir.Threshold,
                 ManHours = comdir.ManHours,
                 Remarks = comdir.Remarks,
                 Cost = comdir.Cost,
@@ -1394,6 +1393,7 @@ namespace BusinessLayer
                 AccessDirective = comdir.AccessDirective,
                 AAM = comdir.AAM,
                 CMM = comdir.CMM,
+				
                 
             };
         }
@@ -1406,10 +1406,8 @@ namespace BusinessLayer
                 Id = comdir.Id,
                 IsDeleted = comdir.IsDeleted,
                 DirectiveType = comdir.DirectiveType,
-
                 //TODO:Разобраться почему private set
-                //Threshold = new ComponentDirectiveThreshold(comdirdto.Threshold),
-
+                Threshold = Threshold.ConvertForComponentDirective(comdir.Threshold),
                 ManHours = comdir.ManHours ?? default(double),
                 Remarks = comdir.Remarks,
                 Cost = comdir.Cost ?? default(double),
@@ -2361,7 +2359,7 @@ namespace BusinessLayer
 				Description = entity.Description,
 				EngineeringOrders = entity.EngineeringOrders,
 				ServiceBulletinNo = entity.ServiceBulletinNo,
-				//Threshold = MaintenanceDirectiveThreshold.ConvertFromByteArray(maindirecdto.Threshold),
+				Threshold = Threshold.ConvertForCMaintenanceDirective(entity.Threshold),
 				Remarks = entity.Remarks,
 				HiddenRemarks = entity.HiddenRemarks,
 				IsClosed = entity.IsClosed ?? default(bool),

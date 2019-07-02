@@ -18,7 +18,7 @@ namespace BusinessLayer.Views
 
 		public string Remarks { get; set; }
 
-		public byte[] Threshold { get; set; }
+		public Threshold Threshold { get; set; }
 
 		public byte[] ThldTypeCond { get; set; }
 

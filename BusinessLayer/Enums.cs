@@ -1,5 +1,21 @@
 ﻿namespace BusinessLayer
 {
+	#region public enum ThresholdConditionType
+
+	public enum ThresholdConditionType
+	{
+		/// <summary>
+		/// Директива выполнится при выполнении одного из условий
+		/// </summary>
+		WhicheverFirst = 0,
+		/// <summary>
+		/// Директива выполнится при выполнении всех условий 
+		/// </summary>
+		WhicheverLater = 1,
+	}
+
+	#endregion
+
 	#region public enum ADType : short
 	public enum ADType : short
 	{
