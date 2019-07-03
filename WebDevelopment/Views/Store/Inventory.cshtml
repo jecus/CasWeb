@@ -23,28 +23,28 @@
                   {
                       {"CRSFileId", "CRS" },
                       {"ShippingFileId", "Shipping" }
-                  })).Title(" ").Width(120).Sortable(false).Groupable(false);
-                  columns.Bound(p => p.ParentStore.StoreName).Title("Store").Width(130);
-                  columns.Bound(p => p.ATAChapterString).Title("ATA").Width(130);
-                  columns.Bound(p => p.ReferenceProduct).Title("Reference").Width(130);
-                  columns.Bound(p => p.PartNumber).Title("Part. №").Width(130);
-                  columns.Bound(p => p.AltPartNumberProduct).Title("Alt Part. №").Width(130);
-                  columns.Bound(p => p.StandardProduct).Title("Standart").Width(130);
-                  columns.Bound(p => p.ModelProduct).Title("Name").Width(130);
-                  columns.Bound(p => p.Description).Title("Description").Width(130);
-                  columns.Bound(p => p.SerialNumber).Title("Serial №").Width(130);
-                  columns.Bound(p => p.BatchNumber).Title("Batch №").Width(130);
-                  columns.Bound(p => p.IdNumber).Title("ID №").Width(130);
-                  columns.Bound(p => p.GoodsClass.ShortName).Title("Class").Width(130);
-                  columns.Bound(p => p.State.FullName).Title("State").Width(130);
-                  columns.Bound(p => p.Status).Title("Status").Width(130);
-                  columns.Bound(p => p.Location.FullName).Title("Location").Width(130);
-                  columns.Bound(p => p.Location.LocationsType.FullName).Title("Facility").Width(130);
-                  columns.Bound(p => p.Quantity).Title("Current").Width(130);
-                  columns.Bound(p => p.ShouldBeOnStockString).Title("Should be").Width(130);
-                  columns.Bound(p => p.QuantityInString).Title("Qty in").Width(130);
-                  columns.Bound(p => p.FromSupplier.Name).Title("Supplier").Width(130);
-                  columns.Bound(p => p.Remarks).Title("Remarks").Width(130);
+                  })).Title(" ").Width(120).Sortable(false).Groupable(false).Filterable(false);
+                  columns.Bound(p => p.ParentStore.StoreName).Title("Store").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.ATAChapterString).Title("ATA").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.ReferenceProduct).Title("Reference").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.PartNumber).Title("Part. №").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.AltPartNumberProduct).Title("Alt Part. №").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.StandardProduct).Title("Standart").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.ModelProduct).Title("Name").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Description).Title("Description").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.SerialNumber).Title("Serial №").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.BatchNumber).Title("Batch №").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.IdNumber).Title("ID №").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.GoodsClass.ShortName).Title("Class").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.State.FullName).Title("State").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Status).Title("Status").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Location.FullName).Title("Location").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Location.LocationsType.FullName).Title("Facility").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Quantity).Title("Current").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.ShouldBeOnStockString).Title("Should be").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.QuantityInString).Title("Qty in").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.FromSupplier.Name).Title("Supplier").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Remarks).Title("Remarks").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
               })
               .ToolBar(tools => tools.Excel())
               .Excel(excel => excel
@@ -53,7 +53,7 @@
                   .AllPages(true)
                   .ProxyURL(Url.Action("ExcelExport", "Excel"))
               )
-              .Scrollable(scrollable => scrollable.Height(630))
+              .Scrollable(scrollable => scrollable.Height(550))
               .Reorderable(reorderable => reorderable.Columns(true))
               .Resizable(resizable => resizable.Columns(true))
               .Pageable()

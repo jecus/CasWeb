@@ -20,28 +20,28 @@
                       columns.Bound(p => p.Id)
                           .ClientTemplate(
                               KendoHelper.Button(Url.Action("Index", "WorkPackageRecord", new { GlobalObject.AircraftId }), "wpId", "Id", ButtonType.Open)
-                          ).Width(90).Title(" ").Sortable(false).Groupable(false);
-                      columns.Bound(p => p.Status).Title("Status").Width(120);
-                      columns.Bound(p => p.Number).Title("WP/WO №").Width(120);
-                      columns.Bound(p => p.Title).Title("Title").Width(120);
-                      columns.Bound(p => p.Description).Title("Description").Width(120);
-                      columns.Bound(p => p.CreateDate).Title("Create Date").Width(120).ClientTemplate("#= kendo.toString(CreateDate, \"dd.MM.yyyy\") #").Width(120);
-                      columns.Bound(p => p.OpeningDate).Title("Opening Date").Width(120).ClientTemplate("#= kendo.toString(OpeningDate, \"dd.MM.yyyy\") #").Width(120);
-                      columns.Bound(p => p.PublishingDate).Title("Publishing Date").Width(120).ClientTemplate("#= kendo.toString(PublishingDate, \"dd.MM.yyyy\") #").Width(120);
-                      columns.Bound(p => p.PerformAfterString).Title("Perform After").Width(120);
-                      columns.Bound(p => p.PerfAfter.PerformDate).Title("Perform Date").Width(120);
-                      columns.Bound(p => p.ClosingDate).Title("Closing Date").Width(120).ClientTemplate("#= kendo.toString(ClosingDate, \"dd.MM.yyyy\") #").Width(120);
-                      columns.Bound(p => p.ManHours).Title("MH").Width(120).Format("{0:n2}");
-                      columns.Bound(p => p.KMH).Title("K for MH").Width(120);
-                      columns.Bound(p => p.KMLW).Title("K * MH").Width(120);
-                      columns.Bound(p => p.WorkTimeString).Title("Work Time").Width(120);
-                      columns.Bound(p => p.Station).Title("Station").Width(120);
-                      columns.Bound(p => p.MaintenanceReportNo).Title("MRO").Width(120);
-                      columns.Bound(p => p.Persent).Title("Persent").Width(120);
-                      columns.Bound(p => p.Author).Title("Author").Width(120);
-                      columns.Bound(p => p.PublishedBy).Title("Published By").Width(120);
-                      columns.Bound(p => p.ClosedBy).Title("Closed By").Width(120);
-                      columns.Bound(p => p.Remarks).Title("Remarks");
+                          ).Width(90).Title(" ").Sortable(false).Groupable(false).Filterable(false);
+                      columns.Bound(p => p.Status).Title("Status").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Number).Title("WP/WO №").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Title).Title("Title").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Description).Title("Description").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.CreateDate).Title("Create Date").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200).ClientTemplate("#= kendo.toString(CreateDate, \"dd.MM.yyyy\") #");
+                      columns.Bound(p => p.OpeningDate).Title("Opening Date").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200).ClientTemplate("#= kendo.toString(OpeningDate, \"dd.MM.yyyy\") #");
+                      columns.Bound(p => p.PublishingDate).Title("Publishing Date").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200).ClientTemplate("#= kendo.toString(PublishingDate, \"dd.MM.yyyy\") #");
+                      columns.Bound(p => p.PerformAfterString).Title("Perform After").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.PerfAfter.PerformDate).Title("Perform Date").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.ClosingDate).Title("Closing Date").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200).ClientTemplate("#= kendo.toString(ClosingDate, \"dd.MM.yyyy\") #");
+                      columns.Bound(p => p.ManHours).Title("MH").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200).Format("{0:n2}");
+                      columns.Bound(p => p.KMH).Title("K for MH").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.KMLW).Title("K * MH").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.WorkTimeString).Title("Work Time").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Station).Title("Station").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.MaintenanceReportNo).Title("MRO").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Persent).Title("Persent").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Author).Title("Author").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.PublishedBy).Title("Published By").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.ClosedBy).Title("Closed By").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Remarks).Title("Remarks").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
                   })
                   .ToolBar(tools => tools.Excel())
                   .Excel(excel => excel
@@ -50,7 +50,7 @@
                       .AllPages(true)
                       .ProxyURL(Url.Action("ExcelExport", "Excel"))
                   )
-                  .Scrollable(scrollable => scrollable.Height(630))
+                  .Scrollable(scrollable => scrollable.Height(550))
                   .Reorderable(reorderable => reorderable.Columns(true))
                   .Resizable(resizable => resizable.Columns(true))
                   .Pageable()

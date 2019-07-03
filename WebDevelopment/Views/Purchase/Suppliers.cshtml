@@ -18,21 +18,21 @@
                   .Columns(columns =>
                   {
 
-                      columns.Bound(p => p.Name).Title("Name").Width(130);
-                      columns.Bound(p => p.AirCode).Title("AirCode").Width(130);
-                      columns.Bound(p => p.Subject).Title("Subject").Width(130);
-                      columns.Bound(p => p.Phone).Title("Phone").Width(130);
-                      columns.Bound(p => p.Fax).Title("Fax").Width(130);
-                      columns.Bound(p => p.Address).Title("Address").Width(130);
-                      columns.Bound(p => p.ContactPerson).Title("Contact Person").Width(130);
-                      columns.Bound(p => p.Email).Title("Email").Width(130);
-                      columns.Bound(p => p.WebSite).Title("Web Site").Width(130);
-                      columns.Bound(p => p.Products).Title("Products").Width(130);
-                      columns.Bound(p => p.SupplierClass.ShortName).Title("SupplierType").Width(130);
-                      columns.Bound(p => p.ListViewApproved).Title("Approved").Width(130);
-                      columns.Bound(p => p.Remarks).Title("Remarks").Width(130);
-                      columns.Bound(p => p.ShortName).Title("Short Name").Width(130);
-                      columns.Bound(p => p.VendorCode).Title("Vendor Code").Width(130);
+                      columns.Bound(p => p.Name).Title("Name").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.AirCode).Title("AirCode").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Subject).Title("Subject").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Phone).Title("Phone").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Fax).Title("Fax").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Address).Title("Address").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.ContactPerson).Title("Contact Person").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Email).Title("Email").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.WebSite).Title("Web Site").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Products).Title("Products").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.SupplierClass.ShortName).Title("SupplierType").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.ListViewApproved).Title("Approved").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Remarks).Title("Remarks").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.ShortName).Title("Short Name").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.VendorCode).Title("Vendor Code").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
                   })
                   .ToolBar(tools => tools.Excel())
                   .Excel(excel => excel
@@ -41,7 +41,7 @@
                       .AllPages(true)
                       .ProxyURL(Url.Action("ExcelExport", "Excel"))
                   )
-                  .Scrollable(scrollable => scrollable.Height(630))
+                  .Scrollable(scrollable => scrollable.Height(550))
                   .Reorderable(reorderable => reorderable.Columns(true))
                   .Resizable(resizable => resizable.Columns(true))
                   .Pageable()

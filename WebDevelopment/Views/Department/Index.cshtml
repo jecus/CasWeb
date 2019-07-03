@@ -18,8 +18,8 @@
               .Name("Grid")
               .Columns(columns =>
               {
-                  columns.Bound(p => p.Name).Title("Name").Width(130);
-                  columns.Bound(p => p.FullName).Title("FullName").Width(130);
+                  columns.Bound(p => p.Name).Title("Name").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.FullName).Title("FullName").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
               })
               .ToolBar(tools => tools.Excel())
               .Excel(excel => excel
@@ -28,7 +28,7 @@
                   .AllPages(true)
                   .ProxyURL(Url.Action("ExcelExport", "Excel"))
               )
-              .Scrollable(scrollable => scrollable.Height(630))
+              .Scrollable(scrollable => scrollable.Height(550))
               .Reorderable(reorderable => reorderable.Columns(true))
               .Resizable(resizable => resizable.Columns(true))
               .Pageable()

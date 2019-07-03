@@ -76,12 +76,12 @@
                       .ClientTemplate(
                           KendoHelper.ButtonModal(Url.Action("ModalEditRegFlight", "AircraftFlight", new { GlobalObject.AircraftId }, Context.Request.Scheme), "flightId", "Id", ButtonType.Edit,"RegFlight")
                           //KendoHelper.ButtonModal(Url.Action("ConfirmDelete", "AircraftFlight", new { GlobalObject.AircraftId }, Context.Request.Scheme), "flightId", "Id", ButtonType.Delete, "123")
-                      ).Width(90).Title(" ").Sortable(false).Groupable(false);
-                  columns.Bound(p => p.PageNo).Title("Page №").Width(120);
-                  columns.Bound(p => p.FlightNumber.FlightNumber).Title("Flight №").Width(120);
-                  columns.Bound(p => p.FlightDate).Title("Date").ClientTemplate("#= kendo.toString(FlightDate, \"dd.MM.yyyy\") #").Width(120);
-                  columns.Bound(p => p.Times).Title("Time").Width(120);
-                  columns.Bound(p => p.Route).Title("Route").Width(120);
+                      ).Width(90).Title(" ").Sortable(false).Groupable(false).Filterable(false);
+                  columns.Bound(p => p.PageNo).Title("Page №").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.FlightNumber.FlightNumber).Title("Flight №").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.FlightDate).Title("Date").ClientTemplate("#= kendo.toString(FlightDate, \"dd.MM.yyyy\") #").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Times).Title("Time").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Route).Title("Route").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
               })
               .ToolBar(tools => tools.Excel())
               .Excel(excel => excel
@@ -90,7 +90,7 @@
                   .AllPages(true)
                   .ProxyURL(Url.Action("ExcelExport", "Excel"))
               )
-              .Scrollable(scrollable => scrollable.Height(630))
+              .Scrollable(scrollable => scrollable.Height(550))
               .Reorderable(reorderable => reorderable.Columns(true))
               .Resizable(resizable => resizable.Columns(true))
               .Pageable()

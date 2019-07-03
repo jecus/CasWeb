@@ -17,18 +17,18 @@
                   .Name("Grid")
                   .Columns(columns =>
                   {
-                      columns.Bound(p => p.Task.Type).Title("Type").Width(120);
-                      columns.Bound(p => p.Task.AtaChapterView).Title("ATA").Width(120);
-                      columns.Bound(p => p.Task.Title).Title("Title").Width(120);
-                      columns.Bound(p => p.Task.Description).Title("Description").Width(120);
-                      columns.Bound(p => p.Task.FirstPerformance).Title("Performance").Width(120);
-                      columns.Bound(p => p.Task.RepeatInterval).Title("Rpt. Intv.").Width(120);
-                      columns.Bound(p => p.Task.WorkType).Title("Work Type").Width(120);
-                      columns.Bound(p => p.Task.NDT).Title("NDT").Width(120);
-                      columns.Bound(p => p.Task.PerfDate).Title("Perf. Date").Width(120);
-                      columns.Bound(p => p.Task.MH).Title("MH").Width(120);
-                      columns.Bound(p => p.Task.KMH).Title("K*MH").Width(120);
-                      columns.Bound(p => p.Task.Cost).Title("Cost").Width(120);
+                      columns.Bound(p => p.Task.Type).Title("Type").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Task.AtaChapterView).Title("ATA").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Task.Title).Title("Title").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Task.Description).Title("Description").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Task.FirstPerformance).Title("Performance").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Task.RepeatInterval).Title("Rpt. Intv.").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Task.WorkType).Title("Work Type").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Task.NDT).Title("NDT").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Task.PerfDate).Title("Perf. Date").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Task.MH).Title("MH").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Task.KMH).Title("K*MH").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      columns.Bound(p => p.Task.Cost).Title("Cost").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
 
                   })
                   .ToolBar(tools => tools.Excel())
@@ -38,7 +38,7 @@
                       .AllPages(true)
                       .ProxyURL(Url.Action("ExcelExport", "Excel"))
                   )
-                  .Scrollable(scrollable => scrollable.Height(630))
+                  .Scrollable(scrollable => scrollable.Height(550))
                   .Reorderable(reorderable => reorderable.Columns(true))
                   .Resizable(resizable => resizable.Columns(true))
                   .Pageable()

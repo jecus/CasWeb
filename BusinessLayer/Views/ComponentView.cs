@@ -170,8 +170,7 @@ namespace BusinessLayer.Views
 	        }
         }
 
-		[JsonIgnore]
-        public ComponentStorePosition State
+		public ComponentStorePosition State
         {
             get
             {

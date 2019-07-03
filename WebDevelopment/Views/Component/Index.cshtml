@@ -18,12 +18,12 @@
               .Name("Grid")
               .Columns(columns =>
               {
-                  columns.Bound(p => p.ATAChapterString).Title("ATA").Width(130);
-                  columns.Bound(p => p.PartNumber).Title("Part. No").Width(130);
-                  columns.Bound(p => p.Description).Title("Description").Width(130);
-                  columns.Bound(p => p.SerialNumber).Title("Serial No").Width(130);
-                  columns.Bound(p => p.TransferRecords.Count).Title("MPD Item").Width(130);
-                  columns.Bound(p => p.TransferRecords.GetLast().TransferDate).Title("Inst. date").Width(130);
+                  columns.Bound(p => p.ATAChapterString).Title("ATA").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.PartNumber).Title("Part. No").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Description).Title("Description").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.SerialNumber).Title("Serial No").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.TransferRecords.Count).Title("MPD Item").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.TransferRecords.GetLast().TransferDate).Title("Inst. date").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
 
               })
               .ToolBar(tools => tools.Excel())
@@ -33,7 +33,7 @@
                   .AllPages(true)
                   .ProxyURL(Url.Action("ExcelExport", "Excel"))
               )
-              .Scrollable(scrollable => scrollable.Height(630))
+              .Scrollable(scrollable => scrollable.Height(550))
               .Reorderable(reorderable => reorderable.Columns(true))
               .Resizable(resizable => resizable.Columns(true))
               .Pageable()

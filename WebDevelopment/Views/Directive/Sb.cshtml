@@ -22,23 +22,23 @@
                       { "ADFileID", "AD File" },
                       {"ServiceBulletinFileID", "Service Bulletin" },
                       {"EngineeringOrderFileID", "Engineering Order" }
-                  })).Title(" ").Width(140).Sortable(false).Groupable(false);
-                  columns.Bound(p => p.SbNo).Title("SB No").Width(120);
-                  columns.Bound(p => p.EoNo).Title("EO No").Width(120);
-                  columns.Bound(p => p.AdNo).Title("AD No").Width(120);
-                  columns.Bound(p => p.Applicability).Title("Applicabilty").Width(120);
-                  columns.Bound(p => p.Description).Title("Description").Width(120);
-                  columns.Bound(p => p.Remarks).Title("Remarks").Width(120);
-                  columns.Bound(p => p.Zone).Title("Zone").Width(120);
-                  columns.Bound(p => p.Workarea).Title("Work Area").Width(120);
-                  columns.Bound(p => p.Access).Title("Access").Width(120);
-                  columns.Bound(p => p.WorkType.FullName).Title("Work Type").Width(120);
-                  columns.Bound(p => p.StcNo).Title("STC No").Width(120);
-                  columns.Bound(p => p.AtaString).Title("ATA Chapter").Width(120);
-                  columns.Bound(p => p.NDTType.ShortName).Title("NDT").Width(120);
-                  columns.Bound(p => p.ManHours).Title("M.H.").Width(120);
-                  columns.Bound(p => p.Cost).Title("Cost").Width(120);
-                  columns.Bound(p => p.HiddenRemarks).Title("Hidden remarks").Width(120);
+                  })).Title(" ").Width(140).Sortable(false).Groupable(false).Filterable(false);
+                  columns.Bound(p => p.SbNo).Title("SB No").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.EoNo).Title("EO No").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.AdNo).Title("AD No").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Applicability).Title("Applicabilty").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Description).Title("Description").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Remarks).Title("Remarks").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Zone).Title("Zone").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Workarea).Title("Work Area").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Access).Title("Access").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.WorkType.FullName).Title("Work Type").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.StcNo).Title("STC No").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.AtaString).Title("ATA Chapter").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.NDTType.ShortName).Title("NDT").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.ManHours).Title("M.H.").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Cost).Title("Cost").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.HiddenRemarks).Title("Hidden remarks").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
               })
               .ToolBar(tools => tools.Excel())
               .Excel(excel => excel
@@ -47,7 +47,7 @@
                   .AllPages(true)
                   .ProxyURL(Url.Action("ExcelExport", "Excel"))
               )
-              .Scrollable(scrollable => scrollable.Height(630))
+              .Scrollable(scrollable => scrollable.Height(550))
               .Reorderable(reorderable => reorderable.Columns(true))
               .Resizable(resizable => resizable.Columns(true))
               .Pageable()
