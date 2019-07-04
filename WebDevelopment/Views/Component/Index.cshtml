@@ -55,50 +55,38 @@
             ).Events(events => events.DataBound("dataBound")))
 
         <script id="template" type="text/kendo-tmpl">
-                @(Html.Kendo().TabStrip()
-                      .Name("tabStrip_#=Id#")
-                      .SelectedIndex(0)
-                      .Animation(animation => animation.Open(open => open.Fade(FadeDirection.In)))
-                      .Items(items =>
-                      {
-                          items.Add().HtmlAttributes(new {@class = "k-reset k-tabstrip-items hid"}).Text("Component Directive").Content(@<text>
-                                        @(Html.Kendo().Grid<ComponentDirectiveView>()
-                                              .Name("grid_#=Id#")
-                                              .Columns(columns =>
-                                              {
-                                                  columns.Bound(o => o.ATAChapterString).Title("ATA").Width(100);
-                                                  columns.Bound(o => o.PartNumberString).Title("Part. No").Width(100);
-                                                  columns.Bound(o => o.DescriptionString).Title("Description").Width(100);
-                                                  columns.Bound(o => o.SerialNumberString).Title("Serial No").Width(100);
-                                                  columns.Bound(o => o.MPDItemString).Title("MPD Item").Width(100);
-                                                  columns.Bound(o => o.PositionString).Title("Pos. No").Width(100);
-                                                  columns.Bound(o => o.TransferDateString).Title("Inst. date").Width(100);
-                                                  columns.Bound(o => o.ZoneArea).Title("Zone-Area").Width(100);
-                                                  columns.Bound(o => o.AccessDirective).Title("Access").Width(100);
-                                                  columns.Bound(o => o.Threshold.Warranty).Title("Warranty").Width(100);
-                                                  columns.Bound(o => o.NDTTypeString).Title("NDT").Width(100);
-                                                  columns.Bound(o => o.ManHours).Title("M.H").Width(100);
-                                                  columns.Bound(o => o.Cost).Title("Cost(new)").Width(100);
-                                                  columns.Bound(o => o.Remarks).Title("Remarks").Width(100);
-                                                  columns.Bound(o => o.HiddenRemarks).Title("Hidden Remarks").Width(100);
-                                                  
+            @(Html.Kendo().Grid<ComponentDirectiveView>()
+                  .Name("grid_#=Id#")
+                  .Columns(columns =>
+                  {
+                      columns.Bound(o => o.ATAChapterString).Title("ATA").Width(100);
+                      columns.Bound(o => o.PartNumberString).Title("Part. No").Width(100);
+                      columns.Bound(o => o.DescriptionString).Title("Description").Width(100);
+                      columns.Bound(o => o.SerialNumberString).Title("Serial No").Width(100);
+                      columns.Bound(o => o.MPDItemString).Title("MPD Item").Width(100);
+                      columns.Bound(o => o.PositionString).Title("Pos. No").Width(100);
+                      columns.Bound(o => o.TransferDateString).Title("Inst. date").Width(100);
+                      columns.Bound(o => o.ZoneArea).Title("Zone-Area").Width(100);
+                      columns.Bound(o => o.AccessDirective).Title("Access").Width(100);
+                      columns.Bound(o => o.NDTTypeString).Title("NDT").Width(100);
+                      columns.Bound(o => o.ManHours).Title("M.H").Width(100);
+                      columns.Bound(o => o.Cost).Title("Cost(new)").Width(100);
+                      columns.Bound(o => o.Remarks).Title("Remarks").Width(100);
+                      columns.Bound(o => o.HiddenRemarks).Title("Hidden Remarks").Width(100);
 
-                                              })
-                                              .DataSource(dataSource => dataSource
-                                                  .Ajax()
-                                                  .PageSize(5)
-                                                  .ServerOperation(false)
-                                                  .Read(read => read.Action("ComponentDirective_HierarchyBinding", "Component", new {GlobalObject.AircraftId, componentId = "#=Id#" })
-                                                      .Type(HttpVerbs.Get))
-                                              )
-                                              .Pageable()
-                                              .Sortable()
-                                              .ToClientTemplate())
-                            </text>
-                              );
-                      })
-                      .ToClientTemplate())
-            </script>
+
+                  })
+                  .DataSource(dataSource => dataSource
+                      .Ajax()
+                      .PageSize(5)
+                      .ServerOperation(false)
+                      .Read(read => read.Action("ComponentDirective_HierarchyBinding", "Component", new {GlobalObject.AircraftId, componentId = "#=Id#"})
+                          .Type(HttpVerbs.Get))
+                )
+                  .Pageable()
+                  .Sortable()
+                  .ToClientTemplate())
+        </script>
         <script>
             function dataBound() {
                 this.expandRow(this.tbody.find("tr.k-master-row").first());
