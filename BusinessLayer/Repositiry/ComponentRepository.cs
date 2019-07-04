@@ -44,6 +44,8 @@ namespace BusinessLayer.Repositiry
 				.Include(i => i.ATAChapter)
 				.Include(i => i.Location)
 				.Include(i => i.TransferRecords)
+				.Include(i => i.Model)
+				.Include(i => i.Product)
 				.ToListAsync();
 
 			return res.ToBlView();
@@ -70,7 +72,9 @@ namespace BusinessLayer.Repositiry
 				.Where(i => i.IsBaseComponent && i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectID == aircraftId &&
 							i.TransferRecords.OrderBy(t => t.TransferDate).FirstOrDefault(t => t.ParentID == i.Id).DestinationObjectType == 7)
 				.Include(i => i.TransferRecords)
+				.Include(i => i.ATAChapter)
 				.Include(i => i.Model)
+				.Include(i => i.Product)
 				.ToListAsync();
 
 			return baseComponents.ToBaseComponentView();
@@ -83,15 +87,15 @@ namespace BusinessLayer.Repositiry
 
 			var query = $@"Select ItemId from[dbo].Components where Components.IsBaseComponent = 0 and Components.IsDeleted = 0 and 
 										(({storeId} in (select top 1 destinationobjectId 
-                                        from dbo.TransferRecords 
-                                        where dbo.Components.ItemId=Parentid and isdeleted=0 and 
-                                        parenttype = 5 and destinationobjecttype = 9 
-                                        order by transferDate desc ) 
-                                            and  9 in (select top 1 [destinationobjecttype] 
-                                        from dbo.TransferRecords 
-                                        where dbo.Components.ItemId=Parentid and isdeleted=0 and 
-                                        parenttype = 5
-                                        order by transferDate desc )))";
+										from dbo.TransferRecords 
+										where dbo.Components.ItemId=Parentid and isdeleted=0 and 
+										parenttype = 5 and destinationobjecttype = 9 
+										order by transferDate desc ) 
+											and  9 in (select top 1 [destinationobjecttype] 
+										from dbo.TransferRecords 
+										where dbo.Components.ItemId=Parentid and isdeleted=0 and 
+										parenttype = 5
+										order by transferDate desc )))";
 
 			var itemIdModel = await _db.ItemIds.FromSql(query).ToListAsync();
 			var transferRecordId = itemIdModel.Select(i => i.Id);
@@ -182,13 +186,13 @@ namespace BusinessLayer.Repositiry
 				.AsNoTracking()
 				.ToListAsync();
 
-	        var result = new List<ComponentView>();
+			var result = new List<ComponentView>();
 
-	        foreach (var store in stores)
-	        {
-		        result.AddRange(await GetStoreComponent(store.Id));
+			foreach (var store in stores)
+			{
+				result.AddRange(await GetStoreComponent(store.Id));
 
-	        }
+			}
 
 			return result;
 		}

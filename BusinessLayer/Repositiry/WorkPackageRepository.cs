@@ -246,7 +246,7 @@ namespace BusinessLayer.Repositiry
 							FirstPerformance = first,
 							RepeatInterval = directive.Threshold.RepeatInterval?.ToString(),
 							WorkType = "",
-							NDT = NDTType.GetItemById(directive.NDTType).ShortName,
+							NDT = directive.NDTTypeString,
 							PerfDate = wpView.PerfAfter.PerformDate.ToUniversalString(),
 							MH = directive.ManHours,
 							KMH = directive.ManHours * wp.KMH,

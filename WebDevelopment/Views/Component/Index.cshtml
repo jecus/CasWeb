@@ -20,11 +20,16 @@
               {
                   columns.Bound(p => p.ATAChapterString).Title("ATA").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
                   columns.Bound(p => p.PartNumber).Title("Part. No").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.Description).Title("Description").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.DescriptionString).Title("Description").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
                   columns.Bound(p => p.SerialNumber).Title("Serial No").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.TransferRecords.Count).Title("MPD Item").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.TransferRecords.GetLast().TransferDate).Title("Inst. date").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-
+                  columns.Bound(p => p.MPDItem).Title("MPD Item").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.PositionString).Title("Pos. No").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.TransferDateString).Title("Inst. date").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.GoodsClassString).Title("Class").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200); 
+                  columns.Bound(p => p.CostOverhaul).Title("Cost overhaul").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.CostServiceable).Title("Cost serviceable").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Remarks).Title("Remarks").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.HiddenRemarks).Title("Hidden Remarks").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
               })
               .ToolBar(tools => tools.Excel())
               .Excel(excel => excel
@@ -56,13 +61,28 @@
                       .Animation(animation => animation.Open(open => open.Fade(FadeDirection.In)))
                       .Items(items =>
                       {
-                          items.Add().Text("Orders").Content(@<text>
+                          items.Add().HtmlAttributes(new {@class = "k-reset k-tabstrip-items hid"}).Text("Component Directive").Content(@<text>
                                         @(Html.Kendo().Grid<ComponentDirectiveView>()
                                               .Name("grid_#=Id#")
                                               .Columns(columns =>
                                               {
-                                                  columns.Bound(o => o.AccessDirective).Title("Id").Width(100);
+                                                  columns.Bound(o => o.ATAChapterString).Title("ATA").Width(100);
+                                                  columns.Bound(o => o.PartNumberString).Title("Part. No").Width(100);
+                                                  columns.Bound(o => o.DescriptionString).Title("Description").Width(100);
+                                                  columns.Bound(o => o.SerialNumberString).Title("Serial No").Width(100);
+                                                  columns.Bound(o => o.MPDItemString).Title("MPD Item").Width(100);
+                                                  columns.Bound(o => o.PositionString).Title("Pos. No").Width(100);
+                                                  columns.Bound(o => o.TransferDateString).Title("Inst. date").Width(100);
+                                                  columns.Bound(o => o.ZoneArea).Title("Zone-Area").Width(100);
+                                                  columns.Bound(o => o.AccessDirective).Title("Access").Width(100);
+                                                  columns.Bound(o => o.Threshold.Warranty).Title("Warranty").Width(100);
+                                                  columns.Bound(o => o.NDTTypeString).Title("NDT").Width(100);
+                                                  columns.Bound(o => o.ManHours).Title("M.H").Width(100);
+                                                  columns.Bound(o => o.Cost).Title("Cost(new)").Width(100);
+                                                  columns.Bound(o => o.Remarks).Title("Remarks").Width(100);
+                                                  columns.Bound(o => o.HiddenRemarks).Title("Hidden Remarks").Width(100);
                                                   
+
                                               })
                                               .DataSource(dataSource => dataSource
                                                   .Ajax()

@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer;
 using BusinessLayer.Repositiry.Interfaces;
+using BusinessLayer.Views;
+using Entity.Extentions;
 using Entity.Infrastructure;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -30,13 +33,27 @@ namespace WebDevelopment.Controllers
 		public async Task<IActionResult> Index()
 		{
 			var view = await _componentRepository.GetComponentsByBaseComponentIds(GlobalObject.BaseComponentIds);
-			return View(view);
+			var bcView = await _componentRepository.GetAircraftBaseComponents(GlobalObject.AircraftId);
+			var res = new List<ComponentView>();
+			res.AddRange(view);
+			res.AddRange(bcView);
+			
+			return View(res);
 		}
 
 		[HttpGet("transfer")]
 		public async Task<ActionResult> ComponentDirective_HierarchyBinding(int componentId, [DataSourceRequest] DataSourceRequest request)
 		{
-			var tr = await _context.ComponentDirectives.AsNoTracking().Where(i => i.ComponentId == componentId).ToListAsync();
+			var tr = await _context.ComponentDirectives
+				.AsNoTracking()
+				.Where(i => i.ComponentId == componentId)
+				.OnlyActive()
+				.Include(i => i.Component)
+				.Include(i => i.Component.Model)
+				.Include(i => i.Component.Product)
+				.Include(i => i.Component.ATAChapter)
+				.Include(i => i.Component.TransferRecords)
+				.ToListAsync();
 			return Json(tr.ToBlView().ToDataSourceResult(request));
 		}
 	}

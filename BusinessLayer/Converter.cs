@@ -237,8 +237,9 @@ namespace BusinessLayer
 				PartNumber = com.PartNumber,
 				SerialNumber = com.SerialNumber,
 				BaseComponentTypeId = com.BaseComponentTypeId,
+				ATAChapterId = com.ATAChapter?.Id,
 				TransferRecords = com.TransferRecords.ToEntity(),
-				Model = com.Model?.ToEntity()
+				
 			};
 		}
 
@@ -254,6 +255,7 @@ namespace BusinessLayer
 				Manufacturer = com.Manufacturer,
 				PartNumber = com.PartNumber,
 				SerialNumber = com.SerialNumber,
+				ATAChapter = com.ATAChapter?.ToBlView(),
 				BaseComponentTypeId = com.BaseComponentTypeId,
 				TransferRecords = com.TransferRecords?.ToBlView(),
 				Model = com.Model?.ToBlView()
@@ -1387,7 +1389,7 @@ namespace BusinessLayer
 				HiddenRemarks = comdir.HiddenRemarks,
 				IsClosed = comdir.IsClosed,
 				MPDTaskTypeId = comdir.MPDTaskTypeId,
-				NDTType = (short)comdir.NDTType,
+				NDTType = (short)(comdir.NDTType?.ItemId ?? -1),
 				ComponentId = comdir.ComponentId,
 				ZoneArea = comdir.ZoneArea,
 				AccessDirective = comdir.AccessDirective,
@@ -1416,12 +1418,13 @@ namespace BusinessLayer
 				HiddenRemarks = comdir.HiddenRemarks,
 				IsClosed = comdir.IsClosed ?? default(bool),
 				MPDTaskTypeId = comdir.MPDTaskTypeId ?? default(int),
-				NDTType = comdir.NDTType,
+				NDTType = NDTType.GetItemById(comdir.NDTType),
 				ComponentId = comdir.ComponentId,
 				ZoneArea = comdir.ZoneArea,
 				AccessDirective = comdir.AccessDirective,
 				AAM = comdir.AAM,
-				CMM = comdir.CMM
+				CMM = comdir.CMM,
+				Component = comdir.Component?.ToBlView()
 			};
 
 		}
