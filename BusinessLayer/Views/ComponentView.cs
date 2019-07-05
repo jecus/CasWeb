@@ -171,6 +171,7 @@ namespace BusinessLayer.Views
 			}
 		}
 		public string GoodsClassString => GoodsClass != null ? GoodsClass.ToString() : "";
+
 		[JsonIgnore]
 		public ComponentStorePosition State
 		{
@@ -187,6 +188,8 @@ namespace BusinessLayer.Views
 			}
 
 		}
+
+		public string StateString => State.FullName;
 
 		public Measure MeasureView
 		{

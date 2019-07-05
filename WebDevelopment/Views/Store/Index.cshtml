@@ -34,7 +34,7 @@
                   columns.Bound(p => p.BatchNumber).Title("Batch №").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
                   columns.Bound(p => p.IdNumber).Title("ID №").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
                   columns.Bound(p => p.GoodsClass.ShortName).Title("Class").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.State.FullName).Title("State").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.StateString).Title("State").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
                   columns.Bound(p => p.Status).Title("Status").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
                   columns.Bound(p => p.Location.FullName).Title("Location").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
                   columns.Bound(p => p.Location.LocationsType.FullName).Title("Facility").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
