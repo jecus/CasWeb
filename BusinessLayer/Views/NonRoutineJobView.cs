@@ -8,13 +8,14 @@
 
 		public string Description { get; set; }
 
-		public double? ManHours { get; set; }
+		public double ManHours { get; set; }
 
-		public double? Cost { get; set; }
+		public double Cost { get; set; }
 
 		public string KitRequired { get; set; }
 
 
 		public ATAChapterView ATAChapter { get; set; }
+		public string AtaString => ATAChapter.ToString();
 	}
 }
