@@ -18,18 +18,18 @@
               .Name("Grid")
               .Columns(columns =>
               {
-                  columns.Bound(p => p.ATAChapterString).Title("ATA").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.PartNumber).Title("Part. No").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.DescriptionString).Title("Description").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.SerialNumber).Title("Serial No").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.MPDItem).Title("MPD Item").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.PositionString).Title("Pos. No").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.TransferDateString).Title("Inst. date").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.GoodsClassString).Title("Class").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200); 
-                  columns.Bound(p => p.CostOverhaul).Title("Cost overhaul").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.CostServiceable).Title("Cost serviceable").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.Remarks).Title("Remarks").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.HiddenRemarks).Title("Hidden Remarks").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.ATAChapterString).Title("ATA").Width(200);
+                  columns.Bound(p => p.PartNumber).Title("Part. No").Width(200);
+                  columns.Bound(p => p.DescriptionString).Title("Description").Width(200);
+                  columns.Bound(p => p.SerialNumber).Title("Serial No").Width(200);
+                  columns.Bound(p => p.MPDItem).Title("MPD Item").Width(200);
+                  columns.Bound(p => p.PositionString).Title("Pos. No").Width(200);
+                  columns.Bound(p => p.TransferDateString).Title("Inst. date").Width(200);
+                  columns.Bound(p => p.GoodsClassString).Title("Class").Width(200); 
+                  columns.Bound(p => p.CostOverhaul).Title("Cost overhaul").Width(200);
+                  columns.Bound(p => p.CostServiceable).Title("Cost serviceable").Width(200);
+                  columns.Bound(p => p.Remarks).Title("Remarks").Width(200);
+                  columns.Bound(p => p.HiddenRemarks).Title("Hidden Remarks").Width(200);
               })
               .ToolBar(tools => tools.Excel())
               .Excel(excel => excel
@@ -42,7 +42,7 @@
               .Reorderable(reorderable => reorderable.Columns(true))
               .Resizable(resizable => resizable.Columns(true))
               .Pageable()
-              .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+              .Filterable()
               .Sortable()
               .ClientDetailTemplateId("template")
               .Groupable()

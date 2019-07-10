@@ -16,15 +16,15 @@
               .Name("Grid")
               .Columns(columns =>
               {
-                  columns.Bound(p => p.Number).Title("Order No").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.Title).Title("Title").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.OpeningDate).Title("Opening Date").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200).ClientTemplate("#= kendo.toString(OpeningDate, \"dd.MM.yyyy\") #");
-                  columns.Bound(p => p.PublishingDate).Title("Publishing Date").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200).ClientTemplate("#= kendo.toString(PublishingDate, \"dd.MM.yyyy\") #");
-                  columns.Bound(p => p.ClosingDate).Title("Closing Date").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200).ClientTemplate("#= kendo.toString(ClosingDate, \"dd.MM.yyyy\") #");
-                  columns.Bound(p => p.Author).Title("Author").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.PublishedByUser).Title("Published By").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.CloseByUser).Title("Closed By").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.Remarks).Title("Remark").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Number).Title("Order No").Width(200);
+                  columns.Bound(p => p.Title).Title("Title").Width(200);
+                  columns.Bound(p => p.OpeningDate).Title("Opening Date").Width(200).ClientTemplate("#= kendo.toString(OpeningDate, \"dd.MM.yyyy\") #");
+                  columns.Bound(p => p.PublishingDate).Title("Publishing Date").Width(200).ClientTemplate("#= kendo.toString(PublishingDate, \"dd.MM.yyyy\") #");
+                  columns.Bound(p => p.ClosingDate).Title("Closing Date").Width(200).ClientTemplate("#= kendo.toString(ClosingDate, \"dd.MM.yyyy\") #");
+                  columns.Bound(p => p.Author).Title("Author").Width(200);
+                  columns.Bound(p => p.PublishedByUser).Title("Published By").Width(200);
+                  columns.Bound(p => p.CloseByUser).Title("Closed By").Width(200);
+                  columns.Bound(p => p.Remarks).Title("Remark").Width(200);
               })
               .ToolBar(tools => tools.Excel())
               .Excel(excel => excel
@@ -37,7 +37,7 @@
               .Reorderable(reorderable => reorderable.Columns(true))
               .Resizable(resizable => resizable.Columns(true))
               .Pageable()
-              .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+              .Filterable()
               .Sortable()
               .Groupable()
               .ColumnMenu()

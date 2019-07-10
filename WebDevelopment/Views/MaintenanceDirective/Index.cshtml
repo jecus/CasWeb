@@ -20,34 +20,34 @@
                       columns.Bound(p => p).ClientTemplate(KendoHelper.PdfButton(Url.Action("OpenPdf", "File"), new Dictionary<string, string>
                       {
                           {"TaskCardNumberId", "Task Card No" }
-                      })).Title(" ").Width(60).Sortable(false).Groupable(false).Filterable(false);
-                      columns.Bound(p => p.ScheduleItem).Title("AMP").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.TaskNumberCheck).Title("MPD Item").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.TaskCardNumber).Title("Task Card №").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.Description).Title("Description").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.ProgramString).Title("Program").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.ProgramIndicatorString).Title("Program Indicator").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.WorkType.FullName).Title("Work Type").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.MaintenanceCheckId).Title("Check").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.Zone).Title("Zone").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.Workarea).Title("Work Area").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.Access).Title("Access").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.MPDTaskNumber).Title("Doc. No").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.MaintenanceManual).Title("Maint. Manual").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.MRB).Title("MRB").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.MpdOldTaskCard).Title("Old Task Card Number").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.CriticalSystem.FullName).Title("Critical System").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.AtaString).Title("ATA Chapter").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.KitsApplicable).Title("Kit").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.NDTType.ShortName).Title("NDT").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.Skill.ShortName).Title("Skill").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.Category.ShortName).Title("Category").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.Elapsed).Title("Elapsed M.H.").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.ManHours).Title("M.H.").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.Cost).Title("Cost").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.Applicability).Title("Applicability").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.Remarks).Title("Remarks").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                      columns.Bound(p => p.HiddenRemarks).Title("Hidden remarks").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                      })).Title(" ").Width(60).Sortable(false).Groupable(false);
+                      columns.Bound(p => p.ScheduleItem).Title("AMP").Width(200);
+                      columns.Bound(p => p.TaskNumberCheck).Title("MPD Item").Width(200);
+                      columns.Bound(p => p.TaskCardNumber).Title("Task Card №").Width(200);
+                      columns.Bound(p => p.Description).Title("Description").Width(200);
+                      columns.Bound(p => p.ProgramString).Title("Program").Width(200);
+                      columns.Bound(p => p.ProgramIndicatorString).Title("Program Indicator").Width(200);
+                      columns.Bound(p => p.WorkType.FullName).Title("Work Type").Width(200);
+                      columns.Bound(p => p.MaintenanceCheckId).Title("Check").Width(200);
+                      columns.Bound(p => p.Zone).Title("Zone").Width(200);
+                      columns.Bound(p => p.Workarea).Title("Work Area").Width(200);
+                      columns.Bound(p => p.Access).Title("Access").Width(200);
+                      columns.Bound(p => p.MPDTaskNumber).Title("Doc. No").Width(200);
+                      columns.Bound(p => p.MaintenanceManual).Title("Maint. Manual").Width(200);
+                      columns.Bound(p => p.MRB).Title("MRB").Width(200);
+                      columns.Bound(p => p.MpdOldTaskCard).Title("Old Task Card Number").Width(200);
+                      columns.Bound(p => p.CriticalSystem.FullName).Title("Critical System").Width(200);
+                      columns.Bound(p => p.AtaString).Title("ATA Chapter").Width(200);
+                      columns.Bound(p => p.KitsApplicable).Title("Kit").Width(200);
+                      columns.Bound(p => p.NDTType.ShortName).Title("NDT").Width(200);
+                      columns.Bound(p => p.Skill.ShortName).Title("Skill").Width(200);
+                      columns.Bound(p => p.Category.ShortName).Title("Category").Width(200);
+                      columns.Bound(p => p.Elapsed).Title("Elapsed M.H.").Width(200);
+                      columns.Bound(p => p.ManHours).Title("M.H.").Width(200);
+                      columns.Bound(p => p.Cost).Title("Cost").Width(200);
+                      columns.Bound(p => p.Applicability).Title("Applicability").Width(200);
+                      columns.Bound(p => p.Remarks).Title("Remarks").Width(200);
+                      columns.Bound(p => p.HiddenRemarks).Title("Hidden remarks").Width(200);
                   })
                   .ToolBar(tools => tools.Excel())
                   .Excel(excel => excel
@@ -60,7 +60,7 @@
                   .Reorderable(reorderable => reorderable.Columns(true))
                   .Resizable(resizable => resizable.Columns(true))
                   .Pageable()
-                  .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                  .Filterable()
                   .Sortable()
                   .Groupable()
                   .ColumnMenu()

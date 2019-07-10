@@ -75,11 +75,11 @@
                           KendoHelper.Button(Url.Action("Index", "AircraftFlight", new { GlobalObject.AircraftId }), "atlbId", "Id", ButtonType.Open)+
                           KendoHelper.ButtonModal(Url.Action("ModalEdit", "ATLB", new { GlobalObject.AircraftId },Context.Request.Scheme), "atlbId", "Id", ButtonType.Edit, "EditAtlb")
                           //KendoHelper.ButtonModal(Url.Action("ConfirmDelete", "ATLB", new { GlobalObject.AircraftId },Context.Request.Scheme), "id", "Id", ButtonType.Delete, "Delete")
-                  ).Width(90).Title(" ").Sortable(false).Groupable(false).Filterable(false);
-                  columns.Bound(p => p.ATLBNo).Title("ATLB №").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.Pages).Title("Pages").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.Dates).Title("Date").ClientTemplate("#= kendo.toString(Dates, \"dd.MM.yyyy\") #").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.AtlbStatusString).Title("Status").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  ).Width(90).Title(" ").Sortable(false).Groupable(false);
+                  columns.Bound(p => p.ATLBNo).Title("ATLB №").Width(200);
+                  columns.Bound(p => p.Pages).Title("Pages").Width(200);
+                  columns.Bound(p => p.Dates).Title("Date").ClientTemplate("#= kendo.toString(Dates, \"dd.MM.yyyy\") #").Width(200);
+                  columns.Bound(p => p.AtlbStatusString).Title("Status").Width(200);
               })
               .ToolBar(tools => tools.Excel())
               .Excel(excel => excel
@@ -92,7 +92,7 @@
               .Reorderable(reorderable => reorderable.Columns(true))
               .Resizable(resizable => resizable.Columns(true))
               .Pageable()
-              .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+              .Filterable()
               .Sortable()
               .Groupable()
               .ColumnMenu()
