@@ -48,6 +48,7 @@
                   .ColumnMenu()
                   .DataSource(dataSource => dataSource
                       .Ajax()
+                      .Group(i => i.Add(c => c.Task.Type))
                       .PageSize(250)
                       .ServerOperation(false)
                       .Read(read => read.Action("", ""))

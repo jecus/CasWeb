@@ -2604,8 +2604,8 @@ namespace BusinessLayer
 				ATAChapter = entity.ATAChapter?.ToBlView(),
 				Title = entity.Title,
 				Description = entity.Description,
-				ManHours = entity.ManHours,
-				Cost = entity.Cost,
+				ManHours = entity.ManHours ?? default,
+				Cost = entity.Cost ?? default,
 				KitRequired = entity.KitRequired
 			};
 		}
@@ -2631,8 +2631,8 @@ namespace BusinessLayer
 				Id = view.Id,
 				IsDeleted = view.IsDeleted,
 				Name = view.Name,
-				Interval = view.Interval,
-				Notify = view.Notify,
+				//Interval = view.Interval,
+				//Notify = view.Notify,
 				ParentAircraft = view.ParentAircraft,
 				CheckTypeId = view.CheckType?.Id,
 				Cost = view.Cost,
@@ -2650,13 +2650,13 @@ namespace BusinessLayer
 				Id = entity.Id,
 				IsDeleted = entity.IsDeleted,
 				Name = entity.Name,
-				Interval = entity.Interval,
-				Notify = entity.Notify,
+				Interval = Lifelength.ConvertFromByteArray(entity.Interval),
+				Notify = Lifelength.ConvertFromByteArray(entity.Notify),
 				ParentAircraft = entity.ParentAircraft,
 				CheckType = entity.CheckType?.ToBlView(),
-				Cost = entity.Cost,
-				ManHours = entity.ManHours,
-				Schedule = entity.Schedule,
+				Cost = entity.Cost ?? default,
+				ManHours = entity.ManHours ?? default,
+				Schedule = entity.Schedule ?? default,
 				Resource = entity.Resource,
 				Grouping = entity.Grouping
 			};

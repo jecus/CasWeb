@@ -111,7 +111,7 @@ namespace BusinessLayer.Repositiry
 					if (directive.Threshold.FirstPerformanceSinceNew != null && !directive.Threshold.FirstPerformanceSinceNew.IsNullOrZero())
 						firstPerf = "s/n: " + directive.Threshold.FirstPerformanceSinceNew;
 					if (directive.Threshold.FirstPerformanceSinceEffectiveDate != null &&
-					    !directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+						!directive.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 					{
 						if (firstPerf != "") firstPerf += " or ";
 						else firstPerf = "";
@@ -245,7 +245,7 @@ namespace BusinessLayer.Repositiry
 							Description = directive.Remarks,
 							FirstPerformance = first,
 							RepeatInterval = directive.Threshold.RepeatInterval?.ToString(),
-							WorkType = "",
+							WorkType = ComponentRecordType.GetItemById(directive.DirectiveType).ToString(),
 							NDT = directive.NDTTypeString,
 							PerfDate = wpView.PerfAfter.PerformDate.ToUniversalString(),
 							MH = directive.ManHours,
@@ -260,7 +260,37 @@ namespace BusinessLayer.Repositiry
 				res.Where(w => w.WorkPackageItemType == SmartCoreType.MaintenanceCheck.ItemId).ToList();
 			if (maintCheckWprs.Count > 0)
 			{
+				var mcIds = maintCheckWprs.Select(i => i.DirectivesId);
+				var mcs = await _db.MaintenanceChecks
+					.AsNoTracking()
+					.Where(i => mcIds.Contains(i.Id))
+					.ToListAsync();
 
+				var componentDirectiveViews = mcs.ToBlView();
+				foreach (var adWpr in maintCheckWprs)
+				{
+					adWpr.WorkPakage = wpView;
+					var mc = componentDirectiveViews.FirstOrDefault(i => i.Id == adWpr.DirectivesId);
+
+					if (mc != null)
+					{
+						adWpr.Task = new WprTask()
+						{
+							Type = "Maintenance Checks",
+							AtaChapterView = "",
+							Title = "",
+							Description = mc.Name + (mc.Schedule ? " Shedule" : " Unshedule"),
+							FirstPerformance = mc.Interval.ToString(),
+							RepeatInterval = "",
+							WorkType = "",
+							NDT = "",
+							PerfDate = wpView.PerfAfter.PerformDate.ToUniversalString(),
+							MH = mc.ManHours,
+							KMH = mc.ManHours * wp.KMH,
+							Cost = mc.Cost,
+						};
+					}
+				}
 			}
 
 			var mpdWprs = res.Where(w => w.WorkPackageItemType == SmartCoreType.MaintenanceDirective.ItemId).ToList();
@@ -285,7 +315,7 @@ namespace BusinessLayer.Repositiry
 						first = "s/n: " + mpd.Threshold.FirstPerformanceSinceNew;
 					}
 					if (mpd.Threshold.FirstPerformanceSinceEffectiveDate != null &&
-					    !mpd.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
+						!mpd.Threshold.FirstPerformanceSinceEffectiveDate.IsNullOrZero())
 					{
 						if (first != "") first += " or ";
 						else
@@ -319,10 +349,42 @@ namespace BusinessLayer.Repositiry
 			var nrjWprs = res.Where(w => w.WorkPackageItemType == SmartCoreType.NonRoutineJob.ItemId).ToList();
 			if (nrjWprs.Count > 0)
 			{
+				var nrjIds = nrjWprs.Select(i => i.DirectivesId);
+				var nrjs = await _db.NonRoutineJobs
+					.AsNoTracking()
+					.Include(i => i.ATAChapter)
+					.Where(i => nrjIds.Contains(i.Id))
+					.ToListAsync();
 
+				var nrjViews = nrjs.ToBlView();
+
+				foreach (var adWpr in nrjWprs)
+				{
+					adWpr.WorkPakage = wpView;
+					var nrj = nrjViews.FirstOrDefault(i => i.Id == adWpr.DirectivesId);
+
+					if (nrj != null)
+					{
+						adWpr.Task = new WprTask()
+						{
+							Type = "NonRoutineJobs",
+							AtaChapterView = nrj.AtaString,
+							Title = nrj.Title,
+							Description = nrj.Description,
+							FirstPerformance = "",
+							RepeatInterval = "",
+							WorkType = "",
+							NDT = "",
+							PerfDate = wpView.PerfAfter.PerformDate.ToUniversalString(),
+							MH = nrj.ManHours,
+							KMH = nrj.ManHours * wp.KMH,
+							Cost = nrj.Cost,
+						};
+					}
+				}
 			}
 
-			return res;
+			return res.OrderBy(i => i.Task?.Type).ToList();
 		}
 
 		private async Task CalculateMh(WorkPackageView view)
@@ -330,62 +392,62 @@ namespace BusinessLayer.Repositiry
 			try
 			{
 				var res =  await _db.ManHourses.FromSql($@"select sum(Manhours) as ManHours 
-            from (SELECT manhours 
-                  FROM directives 
-                  where directives.itemId in (select DirectivesId 
-                                              from Cas3WorkPakageRecord
-                                              where Cas3WorkPakageRecord.IsDeleted = 0 and 
-                                                    Cas3WorkPakageRecord.WorkPackageItemType = 1 and 
-                                                    Cas3WorkPakageRecord.WorkPakageId = {view.Id})
-                  UNION ALL
-                  SELECT manhours 
-                  FROM components 
-                  where components.itemId in (select DirectivesId 
-                                              from Cas3WorkPakageRecord
-                                              where Cas3WorkPakageRecord.IsDeleted = 0 and 
-                                                    Cas3WorkPakageRecord.WorkPackageItemType = 5 and 
-                                                    Cas3WorkPakageRecord.WorkPakageId = {view.Id})
-                  UNION ALL
-                  SELECT manhours 
-                  FROM components 
-                  where components.itemId in (select DirectivesId 
-                                              from Cas3WorkPakageRecord
-                                              where Cas3WorkPakageRecord.IsDeleted = 0 and 
-                                                    Cas3WorkPakageRecord.WorkPackageItemType = 6 and 
-                                                    Cas3WorkPakageRecord.WorkPakageId = {view.Id})
-                  UNION ALL
-                  SELECT manhours 
-                  FROM componentdirectives 
-                  where componentdirectives.ItemId in (select DirectivesId 
-                                              from Cas3WorkPakageRecord
-                                              where Cas3WorkPakageRecord.IsDeleted = 0 and 
-                                                    Cas3WorkPakageRecord.WorkPackageItemType = 2 and 
-                                                    Cas3WorkPakageRecord.WorkPakageId = {view.Id})
-                  UNION ALL
-                  SELECT manhours 
-                  FROM Cas3MaintenanceCheck 
-                  where Cas3MaintenanceCheck.itemId in (select DirectivesId 
-                                              from Cas3WorkPakageRecord
-                                              where Cas3WorkPakageRecord.IsDeleted = 0 and 
-                                                    Cas3WorkPakageRecord.WorkPackageItemType = 3 and 
-                                                    Cas3WorkPakageRecord.WorkPakageId = {view.Id})
-                  UNION ALL
-                  SELECT manhours 
-                  FROM dictionaries.NonRoutineJobs 
-                  where dictionaries.NonRoutineJobs.itemId in (select DirectivesId 
-                                              from Cas3WorkPakageRecord
-                                              where Cas3WorkPakageRecord.IsDeleted = 0 and 
-                                                    Cas3WorkPakageRecord.WorkPackageItemType = 4 and 
-                                                    Cas3WorkPakageRecord.WorkPakageId = {view.Id})
+			from (SELECT manhours 
+				  FROM directives 
+				  where directives.itemId in (select DirectivesId 
+											  from Cas3WorkPakageRecord
+											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
+													Cas3WorkPakageRecord.WorkPackageItemType = 1 and 
+													Cas3WorkPakageRecord.WorkPakageId = {view.Id})
+				  UNION ALL
+				  SELECT manhours 
+				  FROM components 
+				  where components.itemId in (select DirectivesId 
+											  from Cas3WorkPakageRecord
+											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
+													Cas3WorkPakageRecord.WorkPackageItemType = 5 and 
+													Cas3WorkPakageRecord.WorkPakageId = {view.Id})
+				  UNION ALL
+				  SELECT manhours 
+				  FROM components 
+				  where components.itemId in (select DirectivesId 
+											  from Cas3WorkPakageRecord
+											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
+													Cas3WorkPakageRecord.WorkPackageItemType = 6 and 
+													Cas3WorkPakageRecord.WorkPakageId = {view.Id})
+				  UNION ALL
+				  SELECT manhours 
+				  FROM componentdirectives 
+				  where componentdirectives.ItemId in (select DirectivesId 
+											  from Cas3WorkPakageRecord
+											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
+													Cas3WorkPakageRecord.WorkPackageItemType = 2 and 
+													Cas3WorkPakageRecord.WorkPakageId = {view.Id})
+				  UNION ALL
+				  SELECT manhours 
+				  FROM Cas3MaintenanceCheck 
+				  where Cas3MaintenanceCheck.itemId in (select DirectivesId 
+											  from Cas3WorkPakageRecord
+											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
+													Cas3WorkPakageRecord.WorkPackageItemType = 3 and 
+													Cas3WorkPakageRecord.WorkPakageId = {view.Id})
+				  UNION ALL
+				  SELECT manhours 
+				  FROM dictionaries.NonRoutineJobs 
+				  where dictionaries.NonRoutineJobs.itemId in (select DirectivesId 
+											  from Cas3WorkPakageRecord
+											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
+													Cas3WorkPakageRecord.WorkPackageItemType = 4 and 
+													Cas3WorkPakageRecord.WorkPakageId = {view.Id})
 
 				  UNION ALL
-                  SELECT manhours 
-                  FROM MaintenanceDirectives
-                  where MaintenanceDirectives.itemId in (select DirectivesId 
-                                              from Cas3WorkPakageRecord
-                                              where Cas3WorkPakageRecord.IsDeleted = 0 and 
-                                                    Cas3WorkPakageRecord.WorkPackageItemType = 14 and 
-                                                    Cas3WorkPakageRecord.WorkPakageId = {view.Id})) MH").ToListAsync();
+				  SELECT manhours 
+				  FROM MaintenanceDirectives
+				  where MaintenanceDirectives.itemId in (select DirectivesId 
+											  from Cas3WorkPakageRecord
+											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
+													Cas3WorkPakageRecord.WorkPackageItemType = 14 and 
+													Cas3WorkPakageRecord.WorkPakageId = {view.Id})) MH").ToListAsync();
 
 				view.ManHours = res?.FirstOrDefault()?.ManHours ?? 0;
 			}
