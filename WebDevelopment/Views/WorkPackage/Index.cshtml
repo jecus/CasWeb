@@ -31,9 +31,9 @@
                       columns.Bound(p => p.PerformAfterString).Title("Perform After").Width(200);
                       columns.Bound(p => p.PerfAfter.PerformDate).Title("Perform Date").Width(200);
                       columns.Bound(p => p.ClosingDate).Title("Closing Date").Width(200).ClientTemplate("#= kendo.toString(ClosingDate, \"dd.MM.yyyy\") #");
-                      columns.Bound(p => p.ManHours).Title("MH").Width(200).Format("{0:n2}");
-                      columns.Bound(p => p.KMH).Title("K for MH").Width(200);
-                      columns.Bound(p => p.KMLW).Title("K * MH").Width(200);
+                      columns.Bound(p => p.ManHours).Title("MH").Width(200).Format("{0:0.00}");
+                      columns.Bound(p => p.KMH).Title("K for MH").Width(200).Format("{0:0.00}");
+                      columns.Bound(p => p.KMLW).Title("K * MH").Width(200).Format("{0:0.00}");
                       columns.Bound(p => p.WorkTimeString).Title("Work Time").Width(200);
                       columns.Bound(p => p.Station).Title("Station").Width(200);
                       columns.Bound(p => p.MaintenanceReportNo).Title("MRO").Width(200);
