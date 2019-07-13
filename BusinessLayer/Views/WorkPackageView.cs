@@ -58,7 +58,7 @@ namespace BusinessLayer.Views
 
 		public double ManHours { get; set; }
 		public double KMH { get; set; }
-		public string KMLW => (KMH * ManHours).ToString("##.##");
+		public double KMLW => (KMH * ManHours);
 
 		public double Persent { get; set; }
 

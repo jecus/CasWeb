@@ -18,11 +18,11 @@
               .Name("Grid")
               .Columns(columns =>
               {
-                  columns.Bound(p => p.ShortName).Title("ShortName").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.FullName).Title("FullName").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.Department.FullName).Title("Department").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.Level).Title("Level").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.KeyPersonelString).Title("Key Personel").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.ShortName).Title("ShortName").Width(200);
+                  columns.Bound(p => p.FullName).Title("FullName").Width(200);
+                  columns.Bound(p => p.Department.FullName).Title("Department").Width(200);
+                  columns.Bound(p => p.Level).Title("Level").Width(200);
+                  columns.Bound(p => p.KeyPersonelString).Title("Key Personel").Width(200);
               })
               .ToolBar(tools => tools.Excel())
               .Excel(excel => excel
@@ -35,7 +35,7 @@
               .Reorderable(reorderable => reorderable.Columns(true))
               .Resizable(resizable => resizable.Columns(true))
               .Pageable()
-              .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+              .Filterable()
               .Sortable()
               .Groupable()
               .ColumnMenu()

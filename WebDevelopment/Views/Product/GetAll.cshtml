@@ -18,18 +18,17 @@
               .Name("Grid")
               .Columns(columns =>
               {
-                  columns.Bound(p => p.Model).Title("Name").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.PartNumber).Title("Part Number").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.AltPartNumber).Title("Alt Part Number").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.StandardString).Title("Standard").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.Description).Title("Description").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.Reference).Title("Reference").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  
-                  columns.Bound(p => p.Code).Title("Code").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.AtaChapterString).Title("ATA").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.ComponentClassString).Title("Class").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.IsDangerousString).Title("IsDangerous").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
-                  columns.Bound(p => p.Remarks).Title("Remarks").Filterable(ftb => ftb.Cell(cell => cell.ShowOperators(false))).Width(200);
+                  columns.Bound(p => p.Model).Title("Name").Width(200);
+                  columns.Bound(p => p.PartNumber).Title("Part Number").Width(200);
+                  columns.Bound(p => p.AltPartNumber).Title("Alt Part Number").Width(200);
+                  columns.Bound(p => p.StandardString).Title("Standard").Width(200);
+                  columns.Bound(p => p.Description).Title("Description").Width(200);
+                  columns.Bound(p => p.Reference).Title("Reference").Width(200);
+                  columns.Bound(p => p.Code).Title("Code").Width(200);
+                  columns.Bound(p => p.AtaChapterString).Title("ATA").Width(200);
+                  columns.Bound(p => p.ComponentClassString).Title("Class").Width(200);
+                  columns.Bound(p => p.IsDangerousString).Title("IsDangerous").Width(200);
+                  columns.Bound(p => p.Remarks).Title("Remarks").Width(200);
                   
               })
               .ToolBar(tools => tools.Excel())
@@ -43,7 +42,7 @@
               .Reorderable(reorderable => reorderable.Columns(true))
               .Resizable(resizable => resizable.Columns(true))
               .Pageable()
-              .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+              .Filterable()
               .Sortable()
               .Groupable()
               .ColumnMenu()
