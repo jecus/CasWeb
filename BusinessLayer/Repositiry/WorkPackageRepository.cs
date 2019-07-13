@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer.Dictionaties;
@@ -7,6 +9,7 @@ using BusinessLayer.Repositiry.Interfaces;
 using BusinessLayer.Views;
 using Entity.Extentions;
 using Entity.Infrastructure;
+using Entity.Models.Calculated;
 using Entity.Models.General;
 using Microsoft.EntityFrameworkCore;
 
@@ -65,9 +68,10 @@ namespace BusinessLayer.Repositiry
 
 				var flightNum = flightNums.ToBlView();
 
+				var calc = await CalculateMh(view.Select(i => i.Id));
 				foreach (var workPackageView in view)
 				{
-					await CalculateMh(workPackageView);
+					workPackageView.ManHours = calc?.FirstOrDefault(i => i.Id == workPackageView.Id)?.ManHours ?? 0;
 					workPackageView.RegistrationNumber = aircraft.RegistrationNumber;
 					workPackageView.PerfAfter.AirportFrom = airportView.FirstOrDefault(i => i.Id == workPackageView.PerfAfter.AirportFromId);
 					workPackageView.PerfAfter.AirportTo = airportView.FirstOrDefault(i => i.Id == workPackageView.PerfAfter.AirportToId);
@@ -388,18 +392,19 @@ namespace BusinessLayer.Repositiry
 			return res.OrderBy(i => i.Task?.Type).ToList();
 		}
 
-		private async Task CalculateMh(WorkPackageView view)
+		private async Task<List<WpManHours>> CalculateMh(IEnumerable<int> ids)
 		{
 			try
 			{
-				var res =  await _db.ManHourses.FromSql($@"select sum(Manhours) as ManHours 
+				var res =  await _db.ManHourses.FromSql($@"select ItemId, 
+(select sum(Manhours) as ManHours 
 			from (SELECT manhours 
 				  FROM directives 
 				  where directives.itemId in (select DirectivesId 
 											  from Cas3WorkPakageRecord
 											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
 													Cas3WorkPakageRecord.WorkPackageItemType = 1 and 
-													Cas3WorkPakageRecord.WorkPakageId = {view.Id})
+													Cas3WorkPakageRecord.WorkPakageId = wp.ItemId)
 				  UNION ALL
 				  SELECT manhours 
 				  FROM components 
@@ -407,7 +412,7 @@ namespace BusinessLayer.Repositiry
 											  from Cas3WorkPakageRecord
 											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
 													Cas3WorkPakageRecord.WorkPackageItemType = 5 and 
-													Cas3WorkPakageRecord.WorkPakageId = {view.Id})
+													Cas3WorkPakageRecord.WorkPakageId = wp.ItemId)
 				  UNION ALL
 				  SELECT manhours 
 				  FROM components 
@@ -415,7 +420,7 @@ namespace BusinessLayer.Repositiry
 											  from Cas3WorkPakageRecord
 											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
 													Cas3WorkPakageRecord.WorkPackageItemType = 6 and 
-													Cas3WorkPakageRecord.WorkPakageId = {view.Id})
+													Cas3WorkPakageRecord.WorkPakageId = wp.ItemId)
 				  UNION ALL
 				  SELECT manhours 
 				  FROM componentdirectives 
@@ -423,7 +428,7 @@ namespace BusinessLayer.Repositiry
 											  from Cas3WorkPakageRecord
 											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
 													Cas3WorkPakageRecord.WorkPackageItemType = 2 and 
-													Cas3WorkPakageRecord.WorkPakageId = {view.Id})
+													Cas3WorkPakageRecord.WorkPakageId = wp.ItemId)
 				  UNION ALL
 				  SELECT manhours 
 				  FROM Cas3MaintenanceCheck 
@@ -431,7 +436,7 @@ namespace BusinessLayer.Repositiry
 											  from Cas3WorkPakageRecord
 											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
 													Cas3WorkPakageRecord.WorkPackageItemType = 3 and 
-													Cas3WorkPakageRecord.WorkPakageId = {view.Id})
+													Cas3WorkPakageRecord.WorkPakageId = wp.ItemId)
 				  UNION ALL
 				  SELECT manhours 
 				  FROM dictionaries.NonRoutineJobs 
@@ -439,7 +444,7 @@ namespace BusinessLayer.Repositiry
 											  from Cas3WorkPakageRecord
 											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
 													Cas3WorkPakageRecord.WorkPackageItemType = 4 and 
-													Cas3WorkPakageRecord.WorkPakageId = {view.Id})
+													Cas3WorkPakageRecord.WorkPakageId = wp.ItemId)
 
 				  UNION ALL
 				  SELECT manhours 
@@ -448,9 +453,8 @@ namespace BusinessLayer.Repositiry
 											  from Cas3WorkPakageRecord
 											  where Cas3WorkPakageRecord.IsDeleted = 0 and 
 													Cas3WorkPakageRecord.WorkPackageItemType = 14 and 
-													Cas3WorkPakageRecord.WorkPakageId = {view.Id})) MH").ToListAsync();
-
-				view.ManHours = res?.FirstOrDefault()?.ManHours ?? 0;
+													Cas3WorkPakageRecord.WorkPakageId = wp.ItemId)) MH) as MH from WorkPackages wp").Where(i => ids.Contains(i.Id)).ToListAsync();
+				return res;
 			}
 			catch (Exception e)
 			{

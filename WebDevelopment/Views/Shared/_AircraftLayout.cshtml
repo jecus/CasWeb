@@ -137,7 +137,7 @@
                         <div class="nav-list">
                             <div class="pcoded-inner-navbar main-menu">
 
-                                @foreach (var item in GlobalObject.AircraftMainMenu.Items.OrderByDescending(i => i.SubMenu.Count() > 0).ThenBy(i => i.Header).ToList())
+                                @foreach (var item in GlobalObject.AircraftMainMenu.Items.OrderBy(i => i.Order).ThenBy(i => i.Header).ToList())
                                 {
                                     <ul class="pcoded-item pcoded-left-item">
                                         @if (item.SubMenu?.Count() > 0)
