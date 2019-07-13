@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2048
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebDevelopment", "WebDevelopment\WebDevelopment.csproj", "{9050CB5A-A0A5-473C-89CE-EB53BF218F3B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entity", "Entity\Entity.csproj", "{91FEB033-7A29-48B6-AF64-BDD7C62FA6D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{724B4F0B-9A86-459D-A5D0-1D5C7026A0E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{724B4F0B-9A86-459D-A5D0-1D5C7026A0E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,20 +33,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B013EE00-415C-4C9D-BB1A-9A490F18547D}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://91.213.233.139:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = WebDevelopment\\WebDevelopment.csproj
-		SccProjectName1 = WebDevelopment
-		SccLocalPath1 = WebDevelopment
-		SccProjectUniqueName2 = Entity\\Entity.csproj
-		SccProjectName2 = Entity
-		SccLocalPath2 = Entity
-		SccProjectUniqueName3 = BusinessLayer\\BusinessLayer.csproj
-		SccProjectName3 = BusinessLayer
-		SccLocalPath3 = BusinessLayer
 	EndGlobalSection
 EndGlobal

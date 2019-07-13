@@ -15,11 +15,13 @@ namespace BusinessLayer.Repositiry
 	public class WorkPackageRepository : IWorkPackageRepository
 	{
 		private readonly IAircraftRepository _aircraftRepository;
+		private readonly IComponentRepository _componentRepository;
 		private readonly DatabaseContext _db;
 
-		public WorkPackageRepository(IAircraftRepository aircraftRepository, DatabaseContext db)
+		public WorkPackageRepository(IAircraftRepository aircraftRepository, IComponentRepository componentRepository, DatabaseContext db)
 		{
 			_aircraftRepository = aircraftRepository;
+			_componentRepository = componentRepository;
 			_db = db;
 		}
 
@@ -100,7 +102,7 @@ namespace BusinessLayer.Repositiry
 					.Include(i => i.ATAChapter)
 					.Where(i => directivesIds.Contains(i.Id))
 					.ToListAsync();
-
+				
 				var directiveView = directives.ToBlView();
 				foreach (var adWpr in adWprs)
 				{
@@ -118,12 +120,11 @@ namespace BusinessLayer.Repositiry
 						firstPerf += "s/e.d: " + directive.Threshold.FirstPerformanceSinceEffectiveDate;
 					}
 
-
 					if (directive != null)
 					{
 						adWpr.Task = new WprTask()
 						{
-							Type = "Directive",
+							Parent = directive,
 							AtaChapterView = directive.AtaString,
 							Title = $"{directive.EngineeringOrders} {directive.Title}",
 							Description = directive.Description,
@@ -159,7 +160,7 @@ namespace BusinessLayer.Repositiry
 					{
 						adWpr.Task = new WprTask()
 						{
-							Type = "Component",
+							Parent = component,
 							AtaChapterView = component.ATAChapterString,
 							Title = component.PartNumber,
 							Description = component.Description,
@@ -195,7 +196,7 @@ namespace BusinessLayer.Repositiry
 					{
 						adWpr.Task = new WprTask()
 						{
-							Type = "BaseComponent",
+							Parent = component,
 							AtaChapterView = component.ATAChapterString,
 							Title = component.PartNumber,
 							Description = component.Description,
@@ -239,7 +240,7 @@ namespace BusinessLayer.Repositiry
 					{
 						adWpr.Task = new WprTask()
 						{
-							Type = "Component Directive",
+							Parent = directive,
 							AtaChapterView = directive.Component.ATAChapterString,
 							Title = "",
 							Description = directive.Remarks,
@@ -276,7 +277,7 @@ namespace BusinessLayer.Repositiry
 					{
 						adWpr.Task = new WprTask()
 						{
-							Type = "Maintenance Checks",
+							Parent = mc,
 							AtaChapterView = "",
 							Title = "",
 							Description = mc.Name + (mc.Schedule ? " Shedule" : " Unshedule"),
@@ -329,7 +330,7 @@ namespace BusinessLayer.Repositiry
 					{
 						adWpr.Task = new WprTask()
 						{
-							Type = "Maintenance Directive",
+							Parent = mpd,
 							AtaChapterView = mpd.AtaString,
 							Title = $"{mpd.TaskCardNumber} {mpd.TaskNumberCheck} {mpd.Description}",
 							Description = mpd.Description,
@@ -367,7 +368,7 @@ namespace BusinessLayer.Repositiry
 					{
 						adWpr.Task = new WprTask()
 						{
-							Type = "NonRoutineJobs",
+							Parent = nrj,
 							AtaChapterView = nrj.AtaString,
 							Title = nrj.Title,
 							Description = nrj.Description,

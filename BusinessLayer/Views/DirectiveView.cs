@@ -81,5 +81,6 @@ namespace BusinessLayer.Views
 		public int ServiceBulletinFileID => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.SBFile)?.FileId ?? -1;
 
 		public int ADFileID => ItemFileLink.FirstOrDefault(i => i.LinkType == (int)FileLinkType.ADFile)?.FileId ?? -1;
+		public int BaseComponentId { get; set; }
 	}
 }

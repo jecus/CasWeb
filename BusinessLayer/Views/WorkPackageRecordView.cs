@@ -1,4 +1,5 @@
 ﻿using System;
+using Entity;
 
 namespace BusinessLayer.Views
 {
@@ -39,7 +40,8 @@ namespace BusinessLayer.Views
 		double MH { get; }
 		double KMH { get; }
 		double Cost { get; }
-		string Type { get; }
+		string Type { get; set; }
+		BaseView Parent { get; }
 	}
 
 	public class WprTask:IWprTask
@@ -56,5 +58,6 @@ namespace BusinessLayer.Views
 		public double KMH { get; set; }
 		public double Cost { get; set; }
 		public string Type { get; set; }
+		public BaseView Parent { get; set; }
 	}
 }

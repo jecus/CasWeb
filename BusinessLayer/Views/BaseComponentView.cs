@@ -17,6 +17,27 @@ namespace BusinessLayer.Views
 		{
 			get => BaseComponentType.GetComponentTypeById(BaseComponentTypeId);
 		}
-		
+
+		public int ParentAircraftId { get; set; }
+		public int ParentStoreId { get; set; }
+
+
+		#region Overrides of Object
+
+		public override string ToString()
+		{
+			var position = TransferRecords != null && TransferRecords.GetLast() != null
+				? TransferRecords.GetLast().Position
+				: "";
+			var res = "";
+			res += BaseComponentType.ShortName != "" ? " " + BaseComponentType.ShortName : "";
+			res += position != "" ? " " + position : "";
+			res += " S/N " + SerialNumber;
+
+
+			return res;
+		}
+
+		#endregion
 	}
 }
